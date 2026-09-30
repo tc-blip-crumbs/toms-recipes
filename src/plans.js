@@ -75,7 +75,7 @@ module.exports = [
       { title: 'Saturday 3 October Batch Cook', list: [
         'Morning. Cook the beef for 8, using about 2.7kg of steak, in the oven at 160°C for 3½ hours. Use your largest casserole, or split it between 2.',
         'While the beef cooks, make a triple batch of the red lentil curry. Leave out the chilli, chilli powder and salt, spoon out 4 small portions for Ted before the almond butter goes in, then fry the chilli and chilli powder in a little oil and stir them into the rest with the salt and almond butter.',
-        'Afternoon. Make a small batch of Ted\'s meatballs in the air fryer, using a little of the pork mince from the Bolognese packs.',
+        'Afternoon. Make Ted\'s meatballs in the air fryer, using 1 pack of the pork mince.',
         'Evening. Cool everything and freeze it. The beef goes in 4 tubs of 2 portions, the curry in 2-portion tubs with Ted\'s in small tubs, and the meatballs in 5 portions with their sauce. Make the butter beans fresh on the night you eat the beef.'
       ] },
       { title: 'Sunday 4 October Batch Cook', list: [
@@ -84,7 +84,7 @@ module.exports = [
         'Afternoon. Cool the Bolognese and freeze it in 3 tubs of 2 portions.',
         'Evening. Shred the pork. Keep 4 portions and some of the liquid in the fridge for Tuesday\'s movie night, and freeze the rest in 3 tubs of 2 portions, with any extra in a small tub for lunches.'
       ] },
-      { title: 'When the Meat Arrives', text: 'The braising steak and lardons come with the Sainsbury\'s delivery on Thursday 1 October. Pipers delivers frozen, and its earliest delivery is Friday 2 October. When it arrives, put the pork shoulder, the beef mince and the 2 packs of pork mince in the fridge to defrost for the batch cook. Freeze the 2 chickens, the 4 pork belly chunkies and the 2 packs of meatballs.' }
+      { title: 'When the Meat Arrives', text: 'The braising steak and lardons come with the Sainsbury\'s delivery on Thursday 1 October. Pipers delivers frozen, and its earliest delivery is Friday 2 October. When it arrives, put the pork shoulder, the beef mince and the 3 packs of pork mince in the fridge to defrost for the batch cook. Freeze the 2 chickens, the 4 pork belly chunkies, the 2 packs of meatballs, the sausages and the bacon.' }
     ]
   }),
   week({
