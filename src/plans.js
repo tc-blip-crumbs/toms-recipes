@@ -19,7 +19,7 @@ function week(w) {
     [r('potato-cakes', { note: 'With Granny. Made on Wednesday.' }), r('mini-pork-meatballs', { note: 'From the freezer. Defrost on Wednesday night.' })],
     [r('eggy-crumpet'), r('tomato-fusilli', w.friday ? {} : { note: 'The Bolognese is too salty for Ted.' })],
     [r('banana-oat-pancakes'), r('pea-risotto')],
-    [r('scrambled-egg-toast-avocado'), r('roast-chicken', { label: 'Roast Chicken with Mash, Carrots and Broccoli', note: 'Shared with you.', serves: 4 })]
+    [r('scrambled-egg-toast-avocado'), w.pork ? r('roast-pork-belly', { label: 'Pork Belly with Mash, Carrots and Broccoli', note: 'Shared with you.' }) : r('roast-chicken', { label: 'Roast Chicken with Mash, Carrots and Broccoli', note: 'Shared with you.', serves: 4 })]
   ];
   const adults = [
     [t('Chilli Con Carne'), t('From the freezer')],
@@ -28,7 +28,7 @@ function week(w) {
     [r('red-wine-burnt-onion-beef'), t('Beef from the freezer, butter beans in 20 minutes')],
     [w.friday || r('batalis-bolognese'), w.friday ? t('Nothing to cook') : t('From the freezer, pasta in 12 minutes')],
     [w.saturday, t(w.saturdayWhen)],
-    [r('roast-chicken', { note: 'Shared with Ted.', serves: 4 }), t('Cooked on the day')]
+    [w.pork ? r('roast-pork-belly', { note: 'Shared with Ted. One pork belly chunky each.' }) : r('roast-chicken', { note: 'Shared with Ted.', serves: 4 }), t('Cooked on the day')]
   ];
   const freezer = [
     'Sunday night. Move a tub of chilli to the fridge for Monday.',
@@ -37,7 +37,9 @@ function week(w) {
     'Wednesday night. Move a tub of beef and a portion of Ted\'s meatballs to the fridge for Thursday.'
   ];
   if (!w.friday) freezer.push('Thursday night. Move a tub of Bolognese to the fridge for Friday.');
-  freezer.push('Friday night. Move the ' + w.saturdayMeat + ' to the fridge for Saturday, and move the chicken to the fridge on Friday morning for Sunday.');
+  if (!w.pork) freezer.push('Friday morning. Move the chicken to the fridge for Sunday.');
+  freezer.push('Friday night. Move the ' + w.saturdayMeat + ' to the fridge for Saturday.');
+  if (w.pork) freezer.push('Saturday night. Move 2 pork belly chunkies to the fridge for Sunday.');
   return {
     id: w.id, start: w.id, title: w.title,
     people: [
@@ -81,12 +83,13 @@ module.exports = [
         'Afternoon. Cool the Bolognese and freeze it in 3 tubs of 2 portions.',
         'Evening. Shred the pork. Keep 4 portions and some of the liquid in the fridge for Tuesday\'s movie night, and freeze the rest in 3 tubs of 2 portions.'
       ] },
-      { title: 'When the Meat Arrives', text: 'The braising steak and lardons come with the Sainsbury\'s delivery on Thursday 1 October. The butcher\'s order needs to arrive by Saturday 3 October. Keep the steak, lardons, mince and pork shoulder in the fridge for the batch cook, and freeze the 4 chickens and whatever pork mince is left over. Defrost each chicken in the fridge from the Friday morning before its roast.' }
+      { title: 'When the Meat Arrives', text: 'The braising steak and lardons come with the Sainsbury\'s delivery on Thursday 1 October. Pipers delivers frozen, and its earliest delivery is Friday 2 October. When it arrives, put the pork shoulder, the beef mince and 3 packs of pork mince in the fridge to defrost for the batch cook. Freeze the 2 chickens, the 4 pork belly chunkies and the other 4 packs of pork mince.' }
     ]
   }),
   week({
     n: 1, id: '2026-10-12', title: 'Week of 12 October',
-    intro: 'The second of four repeating weeks. Tom is out on Wednesday and you are both out on Friday.',
+    intro: 'The second of four repeating weeks. Tom is out on Wednesday and you are both out on Friday. Sunday is pork belly in place of chicken.',
+    pork: true,
     wednesday: r('red-lentil-curry', { label: 'Red Lentil Curry for Sophie', note: 'Tom is out. One portion, with 75g of rice and a little for Ted.', serves: 1 }),
     friday: t('Out for dinner'),
     saturday: r('sausage-mash-gravy-cabbage'), saturdayWhen: '25 minutes on the night', saturdayMeat: 'sausages'
@@ -94,11 +97,13 @@ module.exports = [
   week({
     n: 0, id: '2026-10-19', title: 'Week of 19 October',
     intro: 'The third of four repeating weeks.',
+    mondayTed: r('cheese-on-toast-fingers', { note: 'Sunday was pork belly, so there is no chicken to use up.' }),
     saturday: r('pork-larb'), saturdayWhen: '20 minutes on the night', saturdayMeat: 'pork mince'
   }),
   week({
     n: 1, id: '2026-10-26', title: 'Week of 26 October',
-    intro: 'The last of four repeating weeks. This uses up the last of the batch cooking, apart from a few portions of curry.',
+    intro: 'The last of four repeating weeks. This uses up the last of the batch cooking, apart from a few portions of curry. Sunday is pork belly in place of chicken.',
+    pork: true,
     saturday: r('sausage-mash-gravy-cabbage'), saturdayWhen: '25 minutes on the night', saturdayMeat: 'sausages'
   })
 ];

@@ -353,6 +353,40 @@ module.exports = [
   notes: [{ title: 'For Ted', text: 'The teriyaki sauce is too salty for Ted. Any leftover rice makes his egg fried rice the next day.' }]
 },
 {
+  slug: 'roast-pork-belly', title: 'Roast Pork Belly with Mash, Carrots and Broccoli', short: 'Roast pork belly',
+  description: 'Thick strips of pork belly cooked slowly in the air fryer until soft, then blasted for crackling, with mash, carrots and broccoli.',
+  serves: 2, prep: 15, cook: 110, airC: 160, course: 'Dinners', cuisine: 'British', main: 'Pork', labels: ['Weekend', 'Ted can share'],
+  source: { name: 'Pipers & Co cooking instructions' },
+  groups: [
+    { name: 'For the Pork', items: [
+      { id: 'pork', qty: 2, name: 'pork belly chunky', plural: 'pork belly chunkies', prep: 'about 260g each, defrosted', scale: 'wholeUp', ref: 'pork', chip: 'pork belly' },
+      { id: 'oil', qty: 1, unit: 'tsp', name: 'olive oil', scale: 'spoon', liquid: true, ref: 'oil' },
+      { id: 'salt', phrase: 'Sea salt', scale: 'fixed', ref: 'salt', chip: 'salt' }
+    ]},
+    { name: 'For the Mash & Vegetables', items: [
+      { id: 'potatoes', qty: 600, unit: 'g', name: 'floury potatoes, such as Maris Piper', prep: 'peeled and cut into chunks', scale: 'weight', ref: 'potatoes', chip: 'potatoes' },
+      { id: 'carrots', qty: 2, name: 'carrot', plural: 'carrots', prep: 'cut into batons', scale: 'halve', ref: 'carrots' },
+      { id: 'broccoli', qty: 0.5, name: 'head of broccoli', plural: 'heads of broccoli', prep: 'cut into florets', scale: 'halve', ref: 'broccoli' },
+      { id: 'butter', qty: 25, unit: 'g', name: 'unsalted butter', scale: 'weight', ref: 'butter' },
+      { id: 'milk', qty: 50, unit: 'ml', name: 'whole milk', scale: 'weight', ref: 'milk' },
+      { id: 'apple', phrase: 'Apple sauce', prep: 'to serve', scale: 'fixed', ref: 'apple sauce', chip: 'apple sauce' }
+    ]}
+  ],
+  steps: [
+    { text: 'Pat the pork dry and score the skin with a sharp knife. Rub the skin with the oil and plenty of salt. Heat the air fryer to 160°C.', uses: ['pork', 'oil', 'salt'] },
+    { text: 'Put the pork skin side up on the crisper tray and cook it for 1 hour 30 minutes, until the fat is soft and the middle of the meat reaches 70°C.', uses: [] },
+    { text: 'Turn the air fryer up to 200°C and cook the pork for 15 to 20 minutes more, until the skin blisters into crackling. Rest it for 5 minutes.', uses: [] },
+    { text: 'While the pork cooks, boil the potatoes for 15 to 20 minutes, until soft, adding the carrots for the last 10 minutes. Steam the broccoli over the pan for the last 5 minutes.', uses: ['potatoes', 'carrots', 'broccoli'] },
+    { text: 'Drain the potatoes and mash them with the butter and milk. Spoon out Ted\'s mash before you season the rest with salt.', uses: ['butter', 'milk'] },
+    { text: 'Serve the pork with the mash, carrots, broccoli and apple sauce.', uses: ['apple'] }
+  ],
+  notes: [
+    { title: 'In the Oven', text: 'Cook the pork on a tray at 150°C for 1 hour 45 minutes, then turn the oven up to 220°C for 20 minutes, until the skin crackles.' },
+    { title: 'Defrosting', text: 'Pipers delivers the pork frozen. Defrost it in the fridge overnight and cook it within 3 days.' },
+    { title: 'For Ted', text: 'Give Ted small pieces of meat from under the skin with the fat trimmed off, because the salt sits on the skin. Serve it with his unseasoned mash and soft carrot and broccoli cut small.' }
+  ]
+},
+{
   slug: 'roast-chicken', title: 'Roast Chicken with Roast Potatoes and Carrots', short: 'Roast chicken',
   description: 'A whole chicken roasted with lemon and garlic, crisp roast potatoes, carrots, broccoli and gravy.',
   serves: 4, prep: 20, cook: 95, ovenC: 200, course: 'Dinners', cuisine: 'British', main: 'Chicken', labels: ['Weekend', 'Ted can share'],
