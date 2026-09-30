@@ -33,18 +33,18 @@ module.exports = [
       rows: [
         ['Monday', t('Chilli Con Carne'), t('Already made')],
         ['Tuesday', r('carnitas-tacos'), t('Pork cooked on Sunday, crisped in 15 minutes')],
-        ['Wednesday', r('batalis-bolognese'), t('Made on Sunday')],
+        ['Wednesday', r('hainanish-soy-poached-chicken', { note: 'Uses the second chicken with its legs taken off for Saturday. Poach it in the afternoon so it is ready by dinner.' }), t('1 hour 30 minutes of poaching, 30 minutes of work')],
         ['Thursday', r('sausage-mash-gravy-cabbage'), t('25 minutes on the night')],
         ['Friday', r('red-lentil-curry', { note: 'Shared with Ted. Cook 75g of rice for each person plus a little extra, which leaves enough for Ted\'s egg fried rice on Saturday.' }), t('Made on Sunday and frozen')],
-        ['Saturday', r('chicken-teriyaki-rice-bowls'), t('25 minutes on the night')],
+        ['Saturday', r('spanakopita-roast-chicken', { note: 'Uses the 2 legs from the second chicken, defrosted in the fridge overnight.' }), t('About 1 hour in the oven')],
         ['Sunday', r('roast-chicken', { note: 'Shared with Ted.', serves: 4 }), t('Cooked on the day')]
       ],
       boxes: [
+        { title: 'Two Whole Chickens', text: 'Buy 2 whole chickens. Roast one on Sunday 11 October. When the other arrives, take off the 2 legs and freeze them for Saturday\'s spanakopita chicken, then keep the rest of the bird in the fridge for Wednesday, or freeze it if Wednesday is more than 2 days away and defrost it in the fridge overnight. Freeze the roasting chicken too if it arrives more than 2 days before Sunday.' },
         { title: 'Sunday 4 October Batch Cook', list: [
           'Morning. Put the carnitas pork in the slow cooker on low for 8 hours.',
-          'Late morning. Start the Bolognese and leave it to simmer for 2 to 3 hours.',
-          'While the Bolognese simmers, make a double batch of the red lentil curry. Leave out the chilli, chilli powder and salt, spoon out Ted\'s portions before the almond butter goes in, then fry the chilli and chilli powder in a little oil and stir them into the rest with the salt and almond butter.',
-          'Afternoon. Cool the Bolognese and curry. Keep the Bolognese in the fridge for Wednesday and freeze the curry in portions, with Ted\'s in small tubs.',
+          'Late morning. Make a double batch of the red lentil curry. Leave out the chilli, chilli powder and salt, spoon out Ted\'s portions before the almond butter goes in, then fry the chilli and chilli powder in a little oil and stir them into the rest with the salt and almond butter.',
+          'Afternoon. Cool the curry and freeze it in portions, with Ted\'s in small tubs.',
           'Late afternoon. Shred the pork and keep the pork and its liquid in separate tubs in the fridge for Tuesday.'
         ] }
       ]

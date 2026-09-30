@@ -623,6 +623,7 @@ module.exports = [
   notes: [
     { title: 'Frozen Spinach', text: 'Frozen spinach works too. Add the blocks straight to the tray and stir them halfway through.' },
     { title: 'Timing', text: 'Chicken legs can take longer than the method says to crisp, so go by the skin and the juices.' },
+    { title: 'Legs from a Whole Chicken', text: 'The 2 legs from a whole chicken serve 2. Cut through the skin between the leg and the body, bend the leg back until the joint pops, then cut through the joint. Freeze the legs if you are not cooking them within 2 days and defrost them in the fridge overnight.' },
     { title: 'For Ted', text: 'Give Ted chicken from under the skin with some spinach and yoghurt, taken before the feta goes on.' }
   ]
 },
@@ -674,6 +675,7 @@ module.exports = [
   ],
   notes: [
     { title: 'Chicken Breasts', text: 'For 2 people, poach 2 chicken breasts in the same way, leaving them in the hot liquid for about 35 minutes.' },
+    { title: 'Without the Legs', text: 'You can take the legs off for another meal and poach the rest of the bird in the same way. There is enough breast meat for 2 with some left over, and the carcass still flavours the broth. Check the thickest part of the breast is white all the way through before serving.' },
     { title: 'Storing', text: 'Freeze spare chicken and broth together in portions. Reheat until piping hot and add the cucumber and spring onions at the end.' },
     { title: 'For Ted', text: 'Leave this one out for Ted, because the chicken poaches in soy sauce.' }
   ]
