@@ -1,0 +1,336 @@
+// Builds the static site into ../dist. Run: node build.js
+const fs = require('fs');
+const path = require('path');
+const recipes = require('./recipes.js');
+const Scale = require('./scale.js');
+const Render = require('./render.js');
+const { esc } = Render;
+
+const SITE = process.env.SITE_URL || 'https://tc-blip-crumbs.github.io/toms-recipes';
+const BASE = process.env.SITE_BASE !== undefined ? process.env.SITE_BASE : '/toms-recipes';
+const NAME = "Tom's Recipes";
+const INDEXABLE = false; // Some recipes are adapted from paid sources, so search engines are asked to skip the site.
+const COURSES = ['Dinners', 'For Ted', 'Puddings', 'Baking', 'Breakfast & Drinks', 'Basics'];
+const plans = require('./plans.js');
+const bySlug = Object.fromEntries(recipes.map(r => [r.slug, r]));
+const LABELS = ['Weeknight', 'Batch cook', 'Freezes well', 'Ted can share', 'Quick', 'Weekend', 'Vegan'];
+const FAN = '';
+const DIST = path.join(__dirname, '..', 'dist');
+const DEFAULT_SERVINGS = 2;
+
+const slugify = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+function dur(m) {
+  if (!m) return '';
+  if (m < 60) return m + ' minutes';
+  const h = Math.floor(m / 60), r = m % 60;
+  if (r === 30) return h + '½ hours';
+  return h + (h === 1 ? ' hour' : ' hours') + (r ? ' ' + r + ' minutes' : '');
+}
+const iso = m => 'PT' + (Math.floor(m / 60) ? Math.floor(m / 60) + 'H' : '') + (m % 60 ? (m % 60) + 'M' : (m ? '' : '0M'));
+const total = r => (r.prep || 0) + (r.cook || 0) + (r.rest || 0);
+
+const ICON = {
+  search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+  print: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2"/><path d="M6 14h12v7H6z"/></svg>',
+  cook: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
+  close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>'
+};
+
+function head({ title, description, canonical, extra = '', nav = 'recipes' }) {
+  return `<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(description)}">
+${INDEXABLE ? '' : '<meta name="robots" content="noindex">\n'}<link rel="canonical" href="${canonical}">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="${esc(description)}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="${canonical}">
+<meta name="theme-color" content="#f4f3ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151412" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+${extra}</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap"><a class="brand" href="/">Tom's <span>Recipes</span></a><nav class="site-nav" aria-label="Main"><a href="/"${nav === 'recipes' ? ' aria-current="page"' : ''}>Recipes</a><a href="/plans/"${nav === 'plans' ? ' aria-current="page"' : ''}>Meal Plans</a></nav></div></header>
+`;
+}
+const foot = `<footer class="site-footer"><div class="wrap"><span>${NAME}</span><span>Recipes in UK measures. Oven temperatures are for a fan oven.</span></div></footer>
+`;
+
+function facts(r) {
+  const rows = [];
+  rows.push(r.yield ? ['Makes', r.yieldShort || r.yield.replace(/^Makes /, '')] : ['Serves', '<span data-servings-count>' + (r.defaultServings || DEFAULT_SERVINGS) + '</span>']);
+  rows.push(['Prep', dur(r.prep)]);
+  if (r.rest) rows.push([r.restLabel || 'Resting', dur(r.rest)]);
+  if (r.cook) rows.push(['Cook', r.cookText || dur(r.cook)]);
+  if (r.ovenC) rows.push(['Oven', r.ovenC + '°C']);
+  if (r.airC) rows.push(['Air fryer', r.airC + '°C']);
+  return '<dl class="facts">' + rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('') + '</dl>';
+}
+
+function tagHTML(r, link) {
+  return '<ul class="tags">' + r.labels.map(l => link
+    ? `<li><a class="tag${l === 'Ted can share' ? ' ted' : ''}" href="/?label=${encodeURIComponent(l)}">${esc(l)}</a></li>`
+    : `<li><span class="tag${l === 'Ted can share' ? ' ted' : ''}">${esc(l)}</span></li>`).join('') + '</ul>';
+}
+
+function jsonLd(r) {
+  return {
+    '@context': 'https://schema.org', '@type': 'Recipe',
+    name: r.title, description: r.description, author: { '@type': 'Person', name: 'Tom Colson' },
+    recipeYield: r.yield || `${r.serves} servings`,
+    prepTime: iso(r.prep), cookTime: iso(r.cook || 0), totalTime: iso(total(r)),
+    recipeCategory: r.course, recipeCuisine: r.cuisine || undefined, keywords: [r.main, ...r.labels].join(', '),
+    recipeIngredient: r.groups.flatMap(g => g.items.map(i => Scale.lineText(i, 1).text)),
+    recipeInstructions: r.steps.map((s, n) => ({ '@type': 'HowToStep', position: n + 1, text: s.text, url: `${SITE}/recipes/${r.slug}/#step-${n + 1}` })),
+    isBasedOn: r.source && r.source.url ? r.source.url : undefined
+  };
+}
+
+function recipePage(r) {
+  const servings = r.yield ? r.serves : (r.defaultServings || DEFAULT_SERVINGS);
+  const url = `${SITE}/recipes/${r.slug}/`;
+  const courseId = 'course-' + slugify(r.course);
+  const clientData = { slug: r.slug, serves: r.serves, defaultServings: r.defaultServings || DEFAULT_SERVINGS, yield: r.yield || null, groups: r.groups, steps: r.steps };
+  const inPlans = plans.filter(p => p.people.some(pp => pp.rows.some(row => row.slice(1).some(c => c.r === r.slug))));
+  const control = r.yield
+    ? `<span class="yield">Makes ${esc(r.yieldShort || r.yield.replace(/^Makes /, ''))}</span>`
+    : `<div class="servings" role="group" aria-label="Servings"><span class="label">Serves</span>
+        <div class="stepper"><button type="button" data-servings="down" aria-label="Fewer servings">−</button><output data-servings-count aria-live="off">${servings}</output><button type="button" data-servings="up" aria-label="More servings">+</button></div></div>`;
+  return head({ title: `${r.title} | ${NAME}`, description: r.description, canonical: url,
+    extra: `<script type="application/ld+json">${JSON.stringify(jsonLd(r))}</script>\n` }) + `
+<main id="main">
+<div class="wrap recipe-head">
+  <p class="print-only print-brand">${NAME}</p>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">All recipes</a> › <a href="/#${courseId}">${esc(r.course)}</a>${r.cuisine ? ` › <a href="/?cuisine=${encodeURIComponent(r.cuisine)}">${esc(r.cuisine)}</a>` : ''}</nav>
+  <h1>${esc(r.title)}</h1>
+  <p class="desc">${esc(r.description)}</p>
+  ${facts(r)}
+  <div class="head-row">
+    ${tagHTML(r, true)}
+    <div class="actions">
+      <button type="button" class="btn primary" data-action="cook">${ICON.cook}Start cooking</button>
+      <button type="button" class="btn" data-action="print">${ICON.print}Print</button>
+    </div>
+  </div>
+</div>
+<div class="toolbar"><div class="wrap">
+  ${control}
+  <div class="tabs" role="tablist" aria-label="Recipe sections">
+    <button type="button" role="tab" data-view="ingredients" aria-selected="true" aria-controls="ingredients">Ingredients</button>
+    <button type="button" role="tab" data-view="method" aria-selected="false" aria-controls="method" tabindex="-1">Method</button>
+  </div>
+</div></div>
+<div class="wrap">
+  <p class="pan-note" id="pan-note" hidden></p>
+  <p class="visually-hidden" id="servings-live" aria-live="polite"></p>
+  <div class="columns" data-view="ingredients">
+    <section class="ingredients" id="ingredients" role="tabpanel" aria-label="Ingredients">
+      <h2>Ingredients</h2>
+      ${r.yield ? '' : `<p class="for">For <span data-servings-count>${servings}</span>. Tick things off as you gather them.</p>`}
+      <div id="ing-body">${Render.ingredientsHTML(r, servings)}</div>
+      ${r.equipment && r.equipment.length ? `<div class="equipment"><h3>You Will Need</h3><ul>${r.equipment.map(e => `<li>${esc(e)}</li>`).join('')}</ul></div>` : ''}
+    </section>
+    <section class="method" id="method" role="tabpanel" aria-label="Method">
+      <h2>Method</h2>
+      <p class="for screen-only">Tap a time to start a timer.</p>
+      <div id="method-body">${Render.methodHTML(r, servings)}</div>
+    </section>
+  </div>
+  ${r.notes.length ? `<section class="notes" aria-label="Notes">${r.notes.map(n => `<div class="note"><h3>${esc(n.title)}</h3><p>${esc(n.text)}</p></div>`).join('')}</section>` : ''}
+  ${r.source ? `<p class="source">Source: ${r.source.url ? `<a href="${esc(r.source.url)}" rel="noopener" target="_blank">${esc(r.source.name)}</a>` : esc(r.source.name)}</p>` : ''}
+  ${inPlans.length ? `<p class="source screen-only">In the meal plans for ${inPlans.map(p => `<a href="/plans/${p.id}/">${esc(p.title.replace(/^Week of /, 'the week of '))}</a>`).join(' and ')}.</p>` : ''}
+  <div class="print-only print-foot"><span>${NAME}</span><span>${SITE.replace('https://', '')}/recipes/${r.slug}</span></div>
+</div>
+</main>
+<div class="timers" id="timers" hidden aria-live="polite"></div>
+<div class="cook" id="cook" hidden role="dialog" aria-modal="true" aria-label="Cooking mode">
+  <div class="wrap"><div class="cook-top"><p class="cook-title">${esc(r.short)}</p><span class="cook-count"></span><button type="button" class="icon-btn" data-cook="close" aria-label="Close cooking mode">${ICON.close}</button></div>
+  <div class="cook-bar"><span></span></div></div>
+  <div class="cook-main"><div class="wrap cook-step" aria-live="polite"></div></div>
+  <div class="wrap cook-nav"><button type="button" data-cook="back">Back</button><button type="button" data-cook="next">Next step</button></div>
+</div>
+${foot}<script type="application/json" id="recipe-data">${JSON.stringify(clientData).replace(/</g, '\\u003c')}</script>
+<script src="/assets/scale.js"></script>
+<script src="/assets/render.js"></script>
+<script src="/assets/recipe-page.js"></script>
+</body>
+</html>
+`;
+}
+
+function card(r) {
+  const t = total(r);
+  return `<a class="card" href="/recipes/${r.slug}/" data-slug="${r.slug}">
+  <p class="eyebrow">${esc([r.cuisine, r.main].filter(Boolean).join(' · '))}</p>
+  <h3>${esc(r.title)}</h3>
+  <p class="desc">${esc(r.description)}</p>
+  <div class="meta"><span><b>${dur(t)}</b> in all</span><span>${r.yield ? esc(r.yield) : 'Serves ' + r.serves + ' as written'}</span></div>
+  ${tagHTML(r, false)}
+</a>`;
+}
+
+function indexPage() {
+  const idx = recipes.map(r => ({ slug: r.slug, title: r.title, description: r.description, course: r.course, cuisine: r.cuisine, main: r.main,
+    labels: r.labels, equipment: r.equipment || [], ingredients: r.groups.flatMap(g => g.items.map(i => i.phrase || i.name + ' ' + (i.plural || ''))) }));
+  const cuisines = [...new Set(recipes.map(r => r.cuisine).filter(Boolean))].sort();
+  const labels = LABELS.filter(l => recipes.some(r => r.labels.includes(l)));
+  const sections = COURSES.filter(c => recipes.some(r => r.course === c)).map(c => {
+    const list = recipes.filter(r => r.course === c).sort((a, b) => a.title.localeCompare(b.title));
+    return `<section class="course-section" id="course-${slugify(c)}" aria-labelledby="h-${slugify(c)}"><h2 id="h-${slugify(c)}">${esc(c)} <small>${list.length}</small></h2><div class="grid">${list.map(card).join('')}</div></section>`;
+  }).join('');
+  const az = [...recipes].sort((a, b) => a.title.localeCompare(b.title)).map(r => `<li><a href="/recipes/${r.slug}/">${esc(r.title)}</a><span>${esc(r.course)}</span></li>`).join('');
+  return head({ title: NAME, description: 'Tom\'s own recipes, written the same way every time, in UK measures, with amounts that scale.', canonical: SITE + '/' }) + `
+<main id="main" class="wrap">
+<div class="intro">
+  <h1>${NAME}</h1>
+  <p class="this-week" id="this-week" hidden><a href="/plans/"></a></p>
+  <form class="search" role="search" action="/" onsubmit="return false">
+    ${ICON.search}
+    <label for="q" class="visually-hidden">Search recipes</label>
+    <input id="q" name="q" type="search" placeholder="Search by dish or ingredient, such as lentils" autocomplete="off" enterkeyhint="search">
+    <kbd>/</kbd>
+  </form>
+  <div class="filters">
+    <div class="filter-row" role="group" aria-label="Filter by label"><span class="row-label">Good For</span>${labels.map(l => `<button type="button" class="pill" data-filter="label" data-value="${esc(l)}" aria-pressed="false">${esc(l)}</button>`).join('')}</div>
+    <div class="filter-row" role="group" aria-label="Filter by cuisine"><span class="row-label">Cuisine</span>${cuisines.map(c => `<button type="button" class="pill" data-filter="cuisine" data-value="${esc(c)}" aria-pressed="false">${esc(c)}</button>`).join('')}</div>
+  </div>
+  <div class="results-bar"><span id="result-count" aria-live="polite">${recipes.length} recipes</span><button type="button" class="link-button" data-clear hidden>Clear search and filters</button></div>
+</div>
+${sections}
+<div class="empty" id="empty" hidden><p>No recipes match that search.</p><button type="button" class="link-button" data-clear>Clear search and filters</button></div>
+<section class="az" id="az" aria-labelledby="az-h"><h2 id="az-h">A to Z</h2><ol>${az}</ol></section>
+</main>
+${foot}<script type="application/json" id="index-data">${JSON.stringify(idx).replace(/</g, '\\u003c')}</script>
+<script type="application/json" id="plans-data">${JSON.stringify(plans.map(p => ({ id: p.id, start: p.start, title: p.title })))}</script>
+<script src="/assets/index-page.js"></script>
+<script src="/assets/plan-page.js"></script>
+</body>
+</html>
+`;
+}
+
+
+// ---- Meal plans
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+function range(p) {
+  const s = new Date(p.start + 'T12:00:00Z'), e = new Date(s.getTime() + 6 * 86400000);
+  const sm = MONTHS[s.getUTCMonth()], em = MONTHS[e.getUTCMonth()];
+  return `Monday ${s.getUTCDate()}${sm === em ? '' : ' ' + sm} to Sunday ${e.getUTCDate()} ${em}`;
+}
+function cellHTML(c, person) {
+  if (c.t) return `<span class="plain">${esc(c.t)}</span>`;
+  const rec = bySlug[c.r];
+  const serves = c.serves || person.serves;
+  const href = `/recipes/${rec.slug}/` + (rec.yield ? '' : `?serves=${serves}`);
+  return `<a href="${href}">${esc(c.label || rec.title)}</a>${c.note ? `<span class="cell-note">${esc(c.note)}</span>` : ''}`;
+}
+function planPanel(p, person, i) {
+  const id = 'who-' + slugify(person.name);
+  const rows = person.rows.map(([day, ...cells]) => `<tr data-day="${day}"><th scope="row">${day}</th>${cells.map((c, n) => `<td data-label="${esc(person.columns[n])}">${cellHTML(c, person)}</td>`).join('')}</tr>`).join('');
+  const boxes = (person.boxes || []).map(b => `<div class="plan-box"><h3>${esc(b.title)}</h3>${b.text ? `<p>${esc(b.text)}</p>` : ''}${b.list ? `<ol>${b.list.map(x => `<li>${esc(x)}</li>`).join('')}</ol>` : ''}</div>`).join('');
+  const guide = person.name === 'Ted' ? `<p class="source"><a href="/plans/teds-food-guide/">Ted's Food Guide</a></p>` : '';
+  return `<section class="plan-panel" id="${id}" role="tabpanel" aria-label="${esc(person.name)}"${i ? ' hidden' : ''}>
+  ${person.intro ? `<p class="plan-intro">${esc(person.intro)}</p>` : ''}
+  <div class="plan-table-wrap"><table class="plan-table"><thead><tr><th scope="col">Day</th>${person.columns.map(c => `<th scope="col">${esc(c)}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>
+  ${boxes}${guide}
+</section>`;
+}
+function planPage(p) {
+  const multi = p.people.length > 1;
+  const tabs = multi ? `<div class="tabs plan-tabs" role="tablist" aria-label="Whose plan">${p.people.map((pp, i) => `<button type="button" role="tab" data-panel="who-${slugify(pp.name)}" aria-selected="${i === 0}"${i ? ' tabindex="-1"' : ''}>${esc(pp.name)}</button>`).join('')}</div>` : '';
+  const idx = plans.indexOf(p);
+  const older = plans[idx - 1], newer = plans[idx + 1];
+  return head({ title: `${p.title} | Meal Plans | ${NAME}`, description: `Meal plan for ${range(p)}.`, canonical: `${SITE}/plans/${p.id}/`, nav: 'plans' }) + `
+<main id="main" class="wrap plan-page" data-start="${p.start}">
+  <div class="recipe-head">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/plans/">Meal Plans</a></nav>
+    <h1>${esc(p.title)}</h1>
+    <p class="desc">${range(p)}<span class="week-badge" hidden></span></p>
+    ${tabs}
+  </div>
+  ${p.people.map((pp, i) => planPanel(p, pp, i)).join('')}
+  <nav class="week-nav" aria-label="Other weeks">${older ? `<a href="/plans/${older.id}/">← ${esc(older.title)}</a>` : '<span></span>'}${newer ? `<a href="/plans/${newer.id}/">${esc(newer.title)} →</a>` : ''}</nav>
+</main>
+${foot}<script src="/assets/plan-page.js"></script>
+</body>
+</html>
+`;
+}
+function plansIndex() {
+  const list = [...plans].reverse().map(p => `<li><a class="card plan-card" href="/plans/${p.id}/" data-start="${p.start}">
+    <p class="eyebrow"><span class="week-badge" hidden></span>${esc(p.people.map(x => x.name).join(' and ').replace(' and Tom & Sophie', ', Tom & Sophie'))}</p>
+    <h3>${esc(p.title)}</h3><p class="desc">${range(p)}</p></a></li>`).join('');
+  return head({ title: `Meal Plans | ${NAME}`, description: 'Weekly meal plans for Ted, Tom and Sophie.', canonical: `${SITE}/plans/`, nav: 'plans' }) + `
+<main id="main" class="wrap">
+  <div class="intro"><h1>Meal Plans</h1></div>
+  <ul class="grid plan-list">${list}</ul>
+  <p class="source"><a href="/plans/teds-food-guide/">Ted's Food Guide</a></p>
+</main>
+${foot}<script src="/assets/plan-page.js"></script>
+</body>
+</html>
+`;
+}
+const SAFETY = ['Cook eggs until the white and yolk are set.', 'Check fish carefully for bones before serving.', 'Cool cooked rice within an hour, keep it in the fridge and reheat it only once, until piping hot.', 'Reheat leftovers only once, until piping hot, then let them cool.', 'Cut round fruit such as blueberries so it is flat or halved.', 'Let hot food cool and test the temperature before serving.'];
+const FRUIT = [['Banana', 'Cut into strips or thick rounds.'], ['Pear', 'Peel and cut ripe pear into wedges. Steam a firm pear for 3 to 4 minutes to soften it.'], ['Blueberries', 'Squash each one flat or cut it in half.'], ['Strawberries', 'Hull them and cut them into quarters lengthways.']];
+function guidePage() {
+  return head({ title: `Ted's Food Guide | ${NAME}`, description: 'Yoghurt, fruit and food safety for Ted.', canonical: `${SITE}/plans/teds-food-guide/`, nav: 'plans' }) + `
+<main id="main" class="wrap">
+  <div class="recipe-head"><nav class="crumbs" aria-label="Breadcrumb"><a href="/plans/">Meal Plans</a></nav><h1>Ted's Food Guide</h1></div>
+  <div class="notes guide">
+    <div class="note"><h3>Yoghurt & Fruit</h3><p>Every lunch and dinner ends with 2 to 3 tablespoons of plain, full-fat Greek yoghurt and the day's fruit.</p><ul>${FRUIT.map(([n, x]) => `<li><strong>${n}.</strong> ${esc(x)}</li>`).join('')}</ul></div>
+    <div class="note"><h3>Food Safety</h3><ul>${SAFETY.map(s => `<li>${esc(s)}</li>`).join('')}</ul></div>
+  </div>
+  <p class="source">All of Ted's recipes are under <a href="/#course-for-ted">For Ted</a>.</p>
+</main>
+${foot}</body>
+</html>
+`;
+}
+
+// Write the site
+fs.rmSync(DIST, { recursive: true, force: true });
+fs.mkdirSync(path.join(DIST, 'assets'), { recursive: true });
+['site.css', 'scale.js', 'render.js', 'recipe-page.js', 'index-page.js', 'plan-page.js'].forEach(f => fs.copyFileSync(path.join(__dirname, f), path.join(DIST, 'assets', f)));
+fs.writeFileSync(path.join(DIST, 'index.html'), indexPage());
+recipes.forEach(r => {
+  fs.mkdirSync(path.join(DIST, 'recipes', r.slug), { recursive: true });
+  fs.writeFileSync(path.join(DIST, 'recipes', r.slug, 'index.html'), recipePage(r));
+});
+fs.mkdirSync(path.join(DIST, 'plans', 'teds-food-guide'), { recursive: true });
+fs.writeFileSync(path.join(DIST, 'plans', 'index.html'), plansIndex());
+fs.writeFileSync(path.join(DIST, 'plans', 'teds-food-guide', 'index.html'), guidePage());
+plans.forEach(p => { fs.mkdirSync(path.join(DIST, 'plans', p.id), { recursive: true }); fs.writeFileSync(path.join(DIST, 'plans', p.id, 'index.html'), planPage(p)); });
+fs.writeFileSync(path.join(DIST, 'favicon.svg'), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#a3321c"/><text x="32" y="44" font-family="Georgia,serif" font-size="34" text-anchor="middle" fill="#fff">T</text></svg>');
+fs.writeFileSync(path.join(DIST, '_redirects'), '/plans/2026-09-28/*  /plans/  301\n/recipes/hainanese-chicken-rice/*  /recipes/hainanish-soy-poached-chicken/  301\n/recipes/sausage-potato-traybake/*  /recipes/sausage-mash-gravy-cabbage/  301\n');
+fs.writeFileSync(path.join(DIST, 'robots.txt'), `User-agent: *\n${INDEXABLE ? 'Allow: /' : 'Allow: /'}\nSitemap: ${SITE}/sitemap.xml\n`);
+fs.writeFileSync(path.join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>${SITE}/</loc></url>\n${recipes.map(r => `<url><loc>${SITE}/recipes/${r.slug}/</loc></url>`).join('\n')}\n<url><loc>${SITE}/plans/</loc></url>\n${plans.map(p => `<url><loc>${SITE}/plans/${p.id}/</loc></url>`).join('\n')}\n</urlset>\n`);
+fs.writeFileSync(path.join(DIST, '404.html'), head({ title: 'Page not found | ' + NAME, description: 'Page not found', canonical: SITE + '/' }) +
+  `<main id="main" class="wrap intro"><h1>That page isn't here</h1><p>The recipe may have moved. <a href="/">See all recipes</a>.</p></main>${foot}</body></html>`);
+// Old addresses that now live elsewhere.
+const MOVED = { 'plans/2026-09-28': 'plans/', 'recipes/hainanese-chicken-rice': 'recipes/hainanish-soy-poached-chicken/', 'recipes/sausage-potato-traybake': 'recipes/sausage-mash-gravy-cabbage/' };
+Object.entries(MOVED).forEach(([from, to]) => {
+  fs.mkdirSync(path.join(DIST, from), { recursive: true });
+  fs.writeFileSync(path.join(DIST, from, 'index.html'), `<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>Moved</title><meta http-equiv="refresh" content="0; url=/${to}"><link rel="canonical" href="/${to}"><a href="/${to}">This page has moved.</a>`);
+});
+fs.writeFileSync(path.join(DIST, '.nojekyll'), '');
+// Point every site link at the base path the site is served from.
+(function rebase(dir) {
+  fs.readdirSync(dir, { withFileTypes: true }).forEach(d => {
+    const p = path.join(dir, d.name);
+    if (d.isDirectory()) return rebase(p);
+    if (!p.endsWith('.html')) return;
+    const html = fs.readFileSync(p, 'utf8').replace(/(href|src|action)="\/(?!\/)/g, `$1="${BASE}/`).replace(/url=\//g, `url=${BASE}/`);
+    fs.writeFileSync(p, html);
+  });
+})(DIST);
+console.log('Built ' + recipes.length + ' recipe pages into ' + DIST);
