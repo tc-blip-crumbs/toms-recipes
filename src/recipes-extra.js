@@ -395,7 +395,7 @@ module.exports = [
 },
 {
   slug: 'roast-pork-belly', title: 'Roast Pork Belly with Mash, Carrots and Broccoli', short: 'Roast pork belly',
-  description: 'Thick strips of pork belly cooked slowly in the air fryer until soft, then blasted for crackling, with mash, carrots and broccoli.',
+  description: 'Thick strips of pork belly cooked slowly in the air fryer until soft, then blasted for crackling, with mash, carrots, broccoli and cavolo nero.',
   serves: 2, prep: 15, cook: 110, airC: 160, course: 'Dinners', cuisine: 'British', main: 'Pork', labels: ['Weekend', 'Ted can share'],
   source: { name: 'Pipers & Co cooking instructions' },
   groups: [
@@ -408,6 +408,8 @@ module.exports = [
       { id: 'potatoes', qty: 600, unit: 'g', name: 'floury potatoes, such as Maris Piper', prep: 'peeled and cut into chunks', scale: 'weight', ref: 'potatoes', chip: 'potatoes' },
       { id: 'carrots', qty: 2, name: 'carrot', plural: 'carrots', prep: 'cut into batons', scale: 'halve', ref: 'carrots' },
       { id: 'broccoli', qty: 0.5, name: 'head of broccoli', plural: 'heads of broccoli', prep: 'cut into florets', scale: 'halve', ref: 'broccoli' },
+      { id: 'cavolo', qty: 100, unit: 'g', name: 'cavolo nero', prep: 'leaves stripped from the stalks and shredded', scale: 'weight', ref: 'cavolo nero' },
+      { id: 'coil', qty: 2, unit: 'tsp', name: 'olive oil', prep: 'for the cavolo nero', scale: 'spoon', liquid: true, ref: 'oil' },
       { id: 'butter', qty: 25, unit: 'g', name: 'unsalted butter', scale: 'weight', ref: 'butter' },
       { id: 'milk', qty: 50, unit: 'ml', name: 'whole milk', scale: 'weight', ref: 'milk' },
       { id: 'apple', phrase: 'Apple sauce', prep: 'to serve', scale: 'fixed', ref: 'apple sauce', chip: 'apple sauce' }
@@ -419,17 +421,18 @@ module.exports = [
     { text: 'Turn the air fryer up to 200°C and cook the pork for 15 to 20 minutes more, until the skin blisters into crackling. Rest it for 5 minutes.', uses: [] },
     { text: 'While the pork cooks, boil the potatoes for 15 to 20 minutes, until soft, adding the carrots for the last 10 minutes. Steam the broccoli over the pan for the last 5 minutes.', uses: ['potatoes', 'carrots', 'broccoli'] },
     { text: 'Drain the potatoes and mash them with the butter and milk. Spoon out Ted\'s mash before you season the rest with salt.', uses: ['butter', 'milk'] },
-    { text: 'Serve the pork with the mash, carrots, broccoli and apple sauce.', uses: ['apple'] }
+    { text: 'Heat the oil in a frying pan over a medium-high heat and cook the cavolo nero for 4 to 5 minutes, turning it often, until wilted and tender. Take out Ted\'s share, then season the rest with salt.', uses: ['cavolo', 'coil'] },
+    { text: 'Serve the pork with the mash, carrots, broccoli, cavolo nero and apple sauce.', uses: ['apple'] }
   ],
   notes: [
     { title: 'In the Oven', text: 'Cook the pork on a tray at 150°C for 1 hour 45 minutes, then turn the oven up to 220°C for 20 minutes, until the skin crackles.' },
     { title: 'Defrosting', text: 'Pipers delivers the pork frozen. Defrost it in the fridge overnight and cook it within 3 days.' },
-    { title: 'For Ted', text: 'Give Ted small pieces of meat from under the skin with the fat trimmed off, because the salt sits on the skin. Serve it with his unseasoned mash and soft carrot and broccoli cut small.' }
+    { title: 'For Ted', text: 'Give Ted small pieces of meat from under the skin with the fat trimmed off, because the salt sits on the skin. Serve it with his unseasoned mash, and soft carrot, broccoli and cavolo nero cut small.' }
   ]
 },
 {
   slug: 'roast-chicken', title: 'Roast Chicken with Roast Potatoes and Carrots', short: 'Roast chicken',
-  description: 'A whole chicken roasted with lemon and garlic, crisp roast potatoes, carrots, broccoli and gravy.',
+  description: 'A whole chicken roasted with lemon and garlic, crisp roast potatoes, carrots, broccoli, cavolo nero and gravy.',
   serves: 4, prep: 20, cook: 95, ovenC: 200, course: 'Dinners', cuisine: 'British', main: 'Chicken', labels: ['Weekend', 'Ted can share'],
   groups: [{ name: '', items: [
     { id: 'chicken', qty: 1, name: 'whole chicken', prep: 'about 1.6kg', scale: 'fixed', ref: 'chicken' },
@@ -440,6 +443,8 @@ module.exports = [
     { id: 'potatoes', qty: 1000, unit: 'g', name: 'floury potatoes, such as Maris Piper', prep: 'peeled and cut into chunks', scale: 'weight', ref: 'potatoes', chip: 'potatoes' },
     { id: 'carrots', qty: 4, name: 'carrot', plural: 'carrots', prep: 'halved lengthways', scale: 'halve', ref: 'carrots' },
     { id: 'broccoli', qty: 1, name: 'head of broccoli', plural: 'heads of broccoli', prep: 'cut into florets', scale: 'halve', ref: 'broccoli' },
+    { id: 'cavolo', qty: 200, unit: 'g', name: 'cavolo nero', prep: 'leaves stripped from the stalks and shredded', scale: 'weight', ref: 'cavolo nero' },
+    { id: 'coil', qty: 1, unit: 'tbsp', name: 'olive oil', prep: 'for the cavolo nero', scale: 'spoon', liquid: true, ref: 'oil' },
     { id: 'gravy', phrase: 'Gravy', prep: 'made from granules or your own', scale: 'fixed', ref: 'gravy', chip: 'gravy' }
   ]}],
   steps: [
@@ -447,10 +452,11 @@ module.exports = [
     { text: 'Boil the potatoes for 8 minutes. Keep a couple of pieces back for Ted and boil them until soft.', uses: ['potatoes'] },
     { text: 'Drain the rest, shake them to rough up the edges and roast them in the rest of the oil with the carrots for 50 to 60 minutes, turning once.', uses: [{ id: 'oil', part: 2 / 3 }, 'carrots'] },
     { text: 'Rest the chicken under foil for 15 minutes while you steam the broccoli and make the gravy.', uses: ['broccoli', 'gravy'] },
+    { text: 'Heat the oil in a large frying pan over a medium-high heat and cook the cavolo nero for 4 to 5 minutes, turning it often, until wilted and tender. Take out Ted\'s share, then season the rest with salt.', uses: ['cavolo', 'coil'] },
     { text: 'Carve the chicken, taking Ted\'s portion before anything goes near the gravy.', uses: [] }
   ],
   notes: [
-    { title: 'For Ted', text: 'Give Ted chicken from under the skin, because the skin carries the salt. Mash his boiled potato with a little unsalted butter and milk, and cut a carrot and some broccoli small. Serve it with no gravy.' },
+    { title: 'For Ted', text: 'Give Ted chicken from under the skin, because the skin carries the salt. Mash his boiled potato with a little unsalted butter and milk, and cut a carrot, some broccoli and his unsalted cavolo nero small. Serve it with no gravy.' },
     { title: 'Air Fryer', text: 'A whole chicken and the potatoes together need the oven. With a large air fryer, you can cook the chicken on its own at 180°C for 50 to 60 minutes, breast side down for the first half.' },
     { title: 'Smaller Chicken', text: 'A 1.3kg chicken needs about 1 hour 5 minutes at 200°C. It feeds 2 adults and Ted, with a little left for Ted the next day.' },
     { title: 'Leftovers', text: 'Keep leftover chicken in the fridge for 2 days, for sandwiches or Ted\'s meals.' }
