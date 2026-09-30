@@ -81,7 +81,7 @@ module.exports = [
         'Afternoon. Cool the Bolognese and freeze it in 3 tubs of 2 portions.',
         'Evening. Shred the pork. Keep 4 portions and some of the liquid in the fridge for Tuesday\'s movie night, and freeze the rest in 3 tubs of 2 portions.'
       ] },
-      { title: 'When the Meat Arrives', text: 'The butcher\'s order needs to arrive by Saturday 3 October. Keep the beef, pork mince, lardons and pork shoulder in the fridge for the batch cook. Freeze the 4 chickens, the sausages and whatever pork mince is left over. Defrost each chicken in the fridge from the Friday morning before its roast.' }
+      { title: 'When the Meat Arrives', text: 'The braising steak and lardons come with the Sainsbury\'s delivery on Thursday 1 October. The butcher\'s order needs to arrive by Saturday 3 October. Keep the steak, lardons, mince and pork shoulder in the fridge for the batch cook, and freeze the 4 chickens and whatever pork mince is left over. Defrost each chicken in the fridge from the Friday morning before its roast.' }
     ]
   }),
   week({
