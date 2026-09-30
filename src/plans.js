@@ -89,7 +89,7 @@ module.exports = [
       boxes: [
         { title: 'Sunday 11 October Cook', list: [
           'Morning. Cook a batch of the beef for 8, using about 2.7kg of steak, in the oven at 160°C for 3½ hours. Use your largest casserole, or split it between 2.',
-          'While the beef cooks, make Ted\'s meatballs in the air fryer. Cool them, then freeze them in 5 portions with their sauce.',
+          'While the beef cooks, make Ted\'s meatballs in the air fryer, using 250g of the pork mince from the butcher\'s order. Cool them, then freeze them in 5 portions with their sauce.',
           'Afternoon. Take out the beef, turn the oven up to 200°C and roast the chicken.',
           'Evening. Cool the beef and freeze it in 2-portion tubs. Make the butter beans fresh on the night you eat it.'
         ] },
@@ -135,7 +135,7 @@ module.exports = [
         ['Tuesday', r('carnitas-tacos'), t('From the freezer, crisped in 15 minutes')],
         ['Wednesday', r('red-wine-burnt-onion-beef'), t('Beef from the freezer, beans in 20 minutes')],
         ['Thursday', r('red-lentil-curry', { note: 'Cook 75g of rice for each person plus a little extra, which leaves enough for Ted\'s egg fried rice on Friday.' }), t('From the freezer')],
-        ['Friday', r('spicy-pork-sesame-noodles', { note: 'Makes 4 portions. Keep the pork, sauce and salad in separate tubs for Saturday.', serves: 4 }), t('35 minutes on the night')],
+        ['Friday', r('spicy-pork-sesame-noodles', { note: 'Makes 4 portions with the 800g of pork mince left after Ted\'s meatballs. Keep the pork, sauce and salad in separate tubs for Saturday.', serves: 4 }), t('35 minutes on the night')],
         ['Saturday', r('spicy-pork-sesame-noodles', { label: 'Spicy Pork Sesame Noodles, Second Night' }), t('Noodles cooked fresh in 5 minutes')],
         ['Sunday', r('roast-chicken', { note: 'Shared with Ted.', serves: 4 }), t('Cooked on the day')]
       ],
