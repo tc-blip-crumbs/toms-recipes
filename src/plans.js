@@ -44,8 +44,8 @@ module.exports = [
         { title: 'Sunday 4 October Batch Cook', list: [
           'Morning. Put the carnitas pork in the slow cooker on low for 8 hours.',
           'Late morning. Make a double batch of the red lentil curry. Leave out the chilli, chilli powder and salt, spoon out Ted\'s portions before the almond butter goes in, then fry the chilli and chilli powder in a little oil and stir them into the rest with the salt and almond butter.',
-          'Afternoon. Cool the curry and freeze it in portions, with Ted\'s in small tubs. The double batch covers Friday 9 and Friday 16 October.',
-          'Late afternoon. Shred the pork. Keep 2 portions of pork and some of its liquid in the fridge for Tuesday, and freeze 2 more portions for Tuesday 13 October.'
+          'Afternoon. Cool the curry and freeze it in portions, with Ted\'s in small tubs. Keep one of Ted\'s tubs for Friday 16 October.',
+          'Late afternoon. Shred the pork. Keep 2 portions of pork and some of its liquid in the fridge for Tuesday, and freeze the rest in 2-portion tubs for the Tuesdays that follow.'
         ] }
       ]
     }
@@ -65,7 +65,7 @@ module.exports = [
         ['Tuesday', t('At nursery'), r('spinach-omelette-wedges'), t('Banana and strawberries')],
         ['Wednesday', t('At nursery'), r('toast-cream-cheese-cucumber'), t('Blueberries and pear')],
         ['Thursday', r('lentil-carrot-fritters', { note: 'With Granny. Made on Wednesday.' }), r('mini-pork-meatballs', { note: 'Made on Sunday 11 October and frozen. Defrost on Wednesday night.' }), t('Strawberries and banana')],
-        ['Friday', r('eggy-crumpet'), r('red-lentil-curry', { label: 'Red Lentil Curry with Rice', note: 'Shared with you. Ted\'s portion comes from the freezer.' }), t('Pear and banana')],
+        ['Friday', r('eggy-crumpet'), r('red-lentil-curry', { label: 'Red Lentil Curry with Rice', note: 'Ted\'s tub from the freezer. Cook 75g of rice, which leaves enough for his egg fried rice on Saturday.' }), t('Pear and banana')],
         ['Saturday', r('banana-oat-pancakes'), r('egg-fried-rice', { note: 'Uses rice left from Friday\'s curry.' }), t('Blueberries and strawberries')],
         ['Sunday', r('scrambled-egg-toast-avocado'), r('pea-risotto'), t('Banana and pear')]
       ],
@@ -76,27 +76,28 @@ module.exports = [
     {
       name: 'Tom & Sophie', serves: 2,
       columns: ['Dinner', 'When It\'s Cooked'],
-      intro: 'The beef and Ted\'s meatballs cook on Sunday 11 October, around the roast chicken. The carnitas and curry come from last week\'s freezer.',
+      intro: 'The beef and Ted\'s meatballs cook on Sunday 11 October, around the roast chicken. The chilli and carnitas come from the freezer, and you are out on Friday.',
       rows: [
-        ['Monday', r('red-wine-burnt-onion-beef', { note: 'Serves 6, so 4 portions go in the freezer for Sunday and another week.' }), t('Beef made on Sunday, beans in 20 minutes')],
+        ['Monday', t('Chilli Con Carne'), t('From the freezer')],
         ['Tuesday', r('carnitas-tacos'), t('From the freezer, crisped in 15 minutes')],
         ['Wednesday', r('spicy-pork-sesame-noodles', { note: 'Makes 4 portions. Keep the pork, sauce and salad in separate tubs for Thursday.' }), t('35 minutes on the night')],
         ['Thursday', r('spicy-pork-sesame-noodles', { label: 'Spicy Pork Sesame Noodles, Second Night' }), t('Noodles cooked fresh in 5 minutes')],
-        ['Friday', r('red-lentil-curry', { note: 'Shared with Ted. Cook 75g of rice for each person plus a little extra, which leaves enough for Ted\'s egg fried rice on Saturday.' }), t('From the freezer')],
-        ['Saturday', r('pork-larb'), t('20 minutes on the night')],
-        ['Sunday', r('red-wine-burnt-onion-beef'), t('From the freezer, beans in 20 minutes')]
+        ['Friday', t('Out for dinner'), t('Nothing to cook')],
+        ['Saturday', r('red-wine-burnt-onion-beef', { note: 'Made on Sunday 11 October and frozen. It serves 6, which covers Saturday and Sunday with 2 portions left in the freezer.' }), t('Beef from the freezer, beans in 20 minutes')],
+        ['Sunday', r('red-wine-burnt-onion-beef'), t('Beef from the freezer, beans in 20 minutes')]
       ],
       boxes: [
         { title: 'Sunday 11 October Cook', list: [
           'Morning. Put the beef in the oven at 160°C and cook it for 3½ hours, so it comes out before the chicken goes in.',
           'While the beef cooks, make Ted\'s meatballs in the air fryer. Cool them, then freeze them in portions with their sauce.',
           'Afternoon. Take out the beef, turn the oven up to 200°C and roast the chicken.',
-          'Evening. Cool the beef. Keep 2 portions in the fridge for Monday and freeze the rest in 2-portion tubs.'
+          'Evening. Cool the beef and freeze it in 2-portion tubs. Make the butter beans fresh on the night you eat it.'
         ] },
         { title: 'Out of the Freezer', list: [
+          'Sunday night. Move a tub of chilli to the fridge for Monday.',
           'Monday night. Move a tub of carnitas pork and its liquid to the fridge for Tuesday.',
-          'Thursday night. Move 2 portions of curry and one of Ted\'s tubs to the fridge for Friday.',
-          'Saturday night. Move a tub of beef to the fridge for Sunday.'
+          'Thursday night. Move one of Ted\'s curry tubs to the fridge for Friday.',
+          'Friday night. Move 2 tubs of beef to the fridge for Saturday and Sunday.'
         ] }
       ]
     }
