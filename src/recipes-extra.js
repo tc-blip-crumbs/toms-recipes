@@ -353,6 +353,47 @@ module.exports = [
   notes: [{ title: 'For Ted', text: 'The teriyaki sauce is too salty for Ted. Any leftover rice makes his egg fried rice the next day.' }]
 },
 {
+  slug: 'gochujang-meatballs', title: 'Sticky Gochujang Meatballs with Rice', short: 'Gochujang meatballs',
+  description: 'Shop-bought beef and pork meatballs crisped in the air fryer and tossed in a sweet, spicy gochujang glaze, over rice with broccoli and cucumber.',
+  serves: 2, prep: 10, cook: 25, airC: 200, course: 'Dinners', cuisine: 'Korean', main: 'Pork', labels: ['Weeknight', 'Quick'],
+  source: { name: 'Street Smart Nutrition, by Cara Harbstreet' },
+  groups: [
+    { name: 'For the Rice', items: [
+      { id: 'rice', qty: 150, unit: 'g', name: 'jasmine rice', scale: 'weight', ref: 'rice' },
+      { id: 'water', qty: 300, unit: 'ml', name: 'cold water', prep: 'for the rice', scale: 'weight', ref: 'water' }
+    ]},
+    { name: 'For the Meatballs', items: [
+      { id: 'meatballs', qty: 500, unit: 'g', name: 'beef and pork meatballs', scale: 'weight', ref: 'meatballs' }
+    ]},
+    { name: 'For the Glaze', items: [
+      { id: 'gochujang', qty: 2, unit: 'tbsp', name: 'gochujang', scale: 'spoon', ref: 'gochujang' },
+      { id: 'honey', qty: 2, unit: 'tbsp', name: 'honey', scale: 'spoon', ref: 'honey' },
+      { id: 'vinegar', qty: 2, unit: 'tbsp', name: 'rice vinegar', scale: 'spoon', liquid: true, ref: 'rice vinegar' },
+      { id: 'soy', qty: 1, unit: 'tbsp', name: 'low-salt soy sauce', scale: 'spoon', liquid: true, ref: 'soy sauce' },
+      { id: 'sesameoil', qty: 1, unit: 'tbsp', name: 'toasted sesame oil', scale: 'spoon', liquid: true, ref: 'sesame oil' }
+    ]},
+    { name: 'To Serve', items: [
+      { id: 'broccoli', qty: 0.5, name: 'head of broccoli', plural: 'heads of broccoli', prep: 'cut into florets', scale: 'halve', ref: 'broccoli' },
+      { id: 'cucumber', qty: 0.5, name: 'cucumber', plural: 'cucumbers', prep: 'sliced', scale: 'halve', ref: 'cucumber' },
+      { id: 'onions', qty: 2, name: 'spring onion', plural: 'spring onions', prep: 'thinly sliced', scale: 'whole', ref: 'spring onions' },
+      { id: 'sesame', qty: 1, unit: 'tsp', name: 'toasted sesame seeds', scale: 'spoon', ref: 'sesame seeds' },
+      { id: 'kimchi', phrase: 'Kimchi', prep: 'to serve, optional', scale: 'fixed', ref: 'kimchi', chip: 'kimchi' }
+    ]}
+  ],
+  steps: [
+    { text: 'Put the rice and water in the Sistema rice cooker, fit both lids and microwave on full power for 10 minutes. Leave it to stand with the lids on while you cook the meatballs.', uses: ['rice', 'water'] },
+    { text: 'Heat the air fryer to 200°C. Spread the meatballs over the crisper tray and cook them for 12 to 15 minutes, turning halfway, until browned and piping hot in the middle.', uses: ['meatballs'] },
+    { text: 'Warm the gochujang, honey, rice vinegar, soy sauce and sesame oil in a small pan over a low heat for 1 minute, whisking until smooth.', uses: ['gochujang', 'honey', 'vinegar', 'soy', 'sesameoil'] },
+    { text: 'Steam the broccoli over a pan of boiling water for 4 to 5 minutes, until just tender.', uses: ['broccoli'] },
+    { text: 'Toss the meatballs in half the glaze. Serve them over the rice with the broccoli, cucumber and kimchi, then drizzle over the rest of the glaze and scatter with the spring onions and sesame seeds.', uses: ['cucumber', 'onions', 'sesame', 'kimchi'] }
+  ],
+  notes: [
+    { title: 'Spice', text: 'For a milder glaze, swap half the gochujang for more honey.' },
+    { title: 'Making Your Own Meatballs', text: 'The original recipe makes its own meatballs from beef mince, gochujang, soy sauce, ginger, garlic, egg and panko.' },
+    { title: 'For Ted', text: 'The glaze is too spicy and salty for Ted, and shop-bought meatballs are usually seasoned. Any leftover rice makes his egg fried rice the next day.' }
+  ]
+},
+{
   slug: 'roast-pork-belly', title: 'Roast Pork Belly with Mash, Carrots and Broccoli', short: 'Roast pork belly',
   description: 'Thick strips of pork belly cooked slowly in the air fryer until soft, then blasted for crackling, with mash, carrots and broccoli.',
   serves: 2, prep: 15, cook: 110, airC: 160, course: 'Dinners', cuisine: 'British', main: 'Pork', labels: ['Weekend', 'Ted can share'],
