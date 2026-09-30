@@ -78,10 +78,10 @@ module.exports = [
         'Evening. Cool everything and freeze it. The beef goes in 4 tubs of 2 portions, the curry in 2-portion tubs with Ted\'s in small tubs, and the meatballs in 5 portions with their sauce. Make the butter beans fresh on the night you eat the beef.'
       ] },
       { title: 'Sunday 4 October Batch Cook', list: [
-        'Morning. Put the carnitas pork, about 2.25kg, in the slow cooker on low for 9 to 10 hours.',
+        'Morning. Put the 2.5kg carnitas pork in the slow cooker on low for about 10 hours. It makes about 11 portions.',
         'Late morning. Make the Bolognese and leave it to simmer for 2 to 3 hours.',
         'Afternoon. Cool the Bolognese and freeze it in 3 tubs of 2 portions.',
-        'Evening. Shred the pork. Keep 4 portions and some of the liquid in the fridge for Tuesday\'s movie night, and freeze the rest in 3 tubs of 2 portions.'
+        'Evening. Shred the pork. Keep 4 portions and some of the liquid in the fridge for Tuesday\'s movie night, and freeze the rest in 3 tubs of 2 portions, with any extra in a small tub for lunches.'
       ] },
       { title: 'When the Meat Arrives', text: 'The braising steak and lardons come with the Sainsbury\'s delivery on Thursday 1 October. Pipers delivers frozen, and its earliest delivery is Friday 2 October. When it arrives, put the pork shoulder, the beef mince and 2 packs of pork mince in the fridge to defrost for the batch cook. Freeze the 2 chickens, the 4 pork belly chunkies and the other 4 packs of pork mince.' }
     ]
