@@ -411,6 +411,7 @@ module.exports = [
   notes: [
     { title: 'For Ted', text: 'Give Ted chicken from under the skin, because the skin carries the salt. Mash his boiled potato with a little unsalted butter and milk, and cut a carrot and some broccoli small. Serve it with no gravy.' },
     { title: 'Air Fryer', text: 'A whole chicken and the potatoes together need the oven. With a large air fryer, you can cook the chicken on its own at 180°C for 50 to 60 minutes, breast side down for the first half.' },
+    { title: 'Smaller Chicken', text: 'A 1.3kg chicken needs about 1 hour 5 minutes at 200°C. It feeds 2 adults and Ted, with a little left for Ted the next day.' },
     { title: 'Leftovers', text: 'Keep leftover chicken in the fridge for 2 days, for sandwiches or Ted\'s meals.' }
   ]
 },
