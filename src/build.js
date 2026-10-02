@@ -328,13 +328,20 @@ Object.entries(MOVED).forEach(([from, to]) => {
   fs.writeFileSync(path.join(DIST, from, 'index.html'), `<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>Moved</title><meta http-equiv="refresh" content="0; url=/${to}"><link rel="canonical" href="/${to}"><a href="/${to}">This page has moved.</a>`);
 });
 fs.writeFileSync(path.join(DIST, '.nojekyll'), '');
+// Give each asset a version taken from its contents, so phones fetch new scripts and styles straight away.
+const VERSIONS = {};
+fs.readdirSync(path.join(DIST, 'assets')).forEach(f => {
+  VERSIONS[f] = require('crypto').createHash('md5').update(fs.readFileSync(path.join(DIST, 'assets', f))).digest('hex').slice(0, 8);
+});
 // Point every site link at the base path the site is served from.
 (function rebase(dir) {
   fs.readdirSync(dir, { withFileTypes: true }).forEach(d => {
     const p = path.join(dir, d.name);
     if (d.isDirectory()) return rebase(p);
     if (!p.endsWith('.html')) return;
-    const html = fs.readFileSync(p, 'utf8').replace(/(href|src|action)="\/(?!\/)/g, `$1="${BASE}/`).replace(/url=\//g, `url=${BASE}/`);
+    const html = fs.readFileSync(p, 'utf8')
+      .replace(/"\/assets\/([\w.-]+)"/g, (m, f) => `"/assets/${f}?v=${VERSIONS[f] || ''}"`)
+      .replace(/(href|src|action)="\/(?!\/)/g, `$1="${BASE}/`).replace(/url=\//g, `url=${BASE}/`);
     fs.writeFileSync(p, html);
   });
 })(DIST);
