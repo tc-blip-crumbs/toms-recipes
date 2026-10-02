@@ -12,6 +12,9 @@
   var fromLink = +new URLSearchParams(location.search).get('serves');
   var servings = recipe.yield ? recipe.serves
     : (SERVINGS.indexOf(fromLink) !== -1 ? fromLink : (load() || recipe.defaultServings || 2));
+  var bstate = { mult: 1, serve: servings };
+  if (recipe.batch) servings = SERVINGS.indexOf(fromLink) !== -1 ? fromLink : (load() || 2), bstate.serve = servings;
+  function cur() { return recipe.batch ? bstate : servings; }
   var ingBox = document.getElementById('ing-body');
   var methodBox = document.getElementById('method-body');
   var countEls = document.querySelectorAll('[data-servings-count]');
@@ -28,15 +31,19 @@
 
   function render(announce) {
     var keep = ticked();
-    ingBox.innerHTML = Render.ingredientsHTML(recipe, servings);
-    methodBox.innerHTML = Render.methodHTML(recipe, servings);
+    ingBox.innerHTML = Render.ingredientsHTML(recipe, cur());
+    methodBox.innerHTML = Render.methodHTML(recipe, cur());
     keep.forEach(function (id) { var c = document.getElementById(id); if (c) c.checked = true; });
     countEls.forEach(function (el) { el.textContent = servings; });
     document.querySelectorAll('[data-servings-word]').forEach(function (el) { el.textContent = servings === 1 ? 'serving' : 'servings'; });
     if (minus) minus.disabled = SERVINGS.indexOf(servings) === 0;
     if (plus) plus.disabled = SERVINGS.indexOf(servings) === SERVINGS.length - 1;
-    if (note) { var t = Render.panNote(recipe, servings); note.textContent = t; note.hidden = !t; }
-    if (announce && live) live.textContent = 'Amounts now for ' + servings + (servings === 1 ? ' serving' : ' servings');
+    if (note) { var t = Render.panNote(recipe, cur()); note.textContent = t; note.hidden = !t; }
+    document.querySelectorAll('[data-batch-count]').forEach(function (el) { el.textContent = Math.round(recipe.serves * bstate.mult * 10) / 10; });
+    document.querySelectorAll('[data-mult]').forEach(function (b) { b.setAttribute('aria-pressed', +b.getAttribute('data-mult') === bstate.mult ? 'true' : 'false'); });
+    if (announce && live) live.textContent = recipe.batch
+      ? 'Batch now makes ' + recipe.serves * bstate.mult + ' servings, with serving parts for ' + bstate.serve
+      : 'Amounts now for ' + servings + (servings === 1 ? ' serving' : ' servings');
     if (cook.open) cook.show(cook.index);
   }
 
@@ -47,6 +54,17 @@
     save(servings);
     render(true);
   }
+  document.querySelectorAll('[data-mult]').forEach(function (b) {
+    b.addEventListener('click', function () { bstate.mult = +b.getAttribute('data-mult'); render(true); });
+  });
+  ingBox.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-serve]'); if (!b) return;
+    var i = SERVINGS.indexOf(bstate.serve) + (b.getAttribute('data-serve') === 'up' ? 1 : -1);
+    if (i < 0 || i >= SERVINGS.length) return;
+    bstate.serve = servings = SERVINGS[i];
+    save(servings);
+    render(true);
+  });
   if (minus) minus.addEventListener('click', function () { step(-1); });
   if (plus) plus.addEventListener('click', function () { step(1); });
 
@@ -182,7 +200,7 @@
       cookEl.querySelector('.cook-count').textContent = 'Step ' + (this.index + 1) + ' of ' + recipe.steps.length;
       var body = cookEl.querySelector('.cook-step');
       body.setAttribute('data-step', this.index + 1);
-      body.innerHTML = '<p>' + Render.stepTextHTML(s.text) + '</p>' + Render.chipsHTML(recipe, s, servings);
+      body.innerHTML = '<p>' + Render.stepTextHTML(s.text) + '</p>' + Render.chipsHTML(recipe, s, cur());
       cookEl.querySelector('.cook-bar span').style.width = ((this.index + 1) / recipe.steps.length * 100) + '%';
       cookEl.querySelector('[data-cook="back"]').disabled = this.index === 0;
       var next = cookEl.querySelector('[data-cook="next"]');

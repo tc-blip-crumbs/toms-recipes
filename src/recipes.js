@@ -8,28 +8,28 @@ module.exports = [
   title: 'Red Wine and Burnt Onion Beef with Creamy Parmesan Butter Beans',
   short: 'Burnt onion beef',
   description: 'Beef braised for hours in red wine with charred shallots and baby potatoes, spooned over butter beans in a Parmesan sauce.',
-  serves: 6, prep: 30, cook: 210, cookText: '3 to 3½ hours', ovenC: 160,
+  serves: 8, batch: true, prep: 30, cook: 210, cookText: '3 to 3½ hours', ovenC: 160,
   course: 'Dinners', cuisine: 'British', main: 'Beef',
   labels: ['Batch cook', 'Freezes well', 'Weekend'],
   equipment: ['A large casserole with a lid'],
   source: { name: 'Adapted from Holist', url: 'https://holisthub.substack.com' },
   groups: [
     { name: 'For the Beef', items: [
-      { id: 'beef', qty: 2000, unit: 'g', name: 'braising steak or chuck steak', prep: 'cut into 5cm chunks', scale: 'weight', ref: 'beef', chip: 'beef' },
-      { id: 'oil', qty: 2, unit: 'tbsp', name: 'olive oil', scale: 'spoon', liquid: true, ref: 'oil' },
-      { id: 'butter', qty: 15, unit: 'g', name: 'butter', scale: 'weight', ref: 'butter' },
-      { id: 'shallots', qty: 5, name: 'shallot', plural: 'shallots', prep: 'thinly sliced', scale: 'whole', ref: 'shallots' },
-      { id: 'garlic', qty: 6, name: 'garlic clove', plural: 'garlic cloves', prep: 'crushed', scale: 'whole', ref: 'garlic' },
-      { id: 'carrots', qty: 2, name: 'carrot', plural: 'carrots', size: 'medium', prep: 'cut into chunks', scale: 'halve', ref: 'carrots' },
-      { id: 'potatoes', qty: 1000, unit: 'g', name: 'baby new potatoes', prep: 'halved if large', scale: 'weight', ref: 'potatoes', chip: 'baby new potatoes' },
-      { id: 'passata', qty: 250, unit: 'ml', name: 'passata', scale: 'weight', ref: 'passata' },
-      { id: 'wine', qty: 625, unit: 'ml', name: 'red wine', scale: 'weight', ref: 'red wine' },
-      { id: 'broth', qty: 750, unit: 'ml', name: 'beef bone broth or beef stock', scale: 'weight', ref: 'bone broth', chip: 'bone broth' },
-      { id: 'rosemary', qty: 2, name: 'sprig of rosemary', plural: 'sprigs of rosemary', scale: 'whole', ref: 'rosemary' },
-      { id: 'salt', qty: 1.25, unit: 'tsp', name: 'sea salt', scale: 'spoon', ref: 'salt' },
+      { id: 'beef', qty: 2700, unit: 'g', name: 'braising steak, chuck steak or beef shin', prep: 'cut into 5cm chunks', scale: 'weight', ref: 'beef', chip: 'beef' },
+      { id: 'oil', qty: 3, unit: 'tbsp', name: 'olive oil', scale: 'spoon', liquid: true, ref: 'oil' },
+      { id: 'butter', qty: 20, unit: 'g', name: 'butter', scale: 'weight', ref: 'butter' },
+      { id: 'shallots', qty: 7, name: 'shallot', plural: 'shallots', prep: 'thinly sliced', scale: 'whole', ref: 'shallots' },
+      { id: 'garlic', qty: 8, name: 'garlic clove', plural: 'garlic cloves', prep: 'crushed', scale: 'whole', ref: 'garlic' },
+      { id: 'carrots', qty: 3, name: 'carrot', plural: 'carrots', size: 'medium', prep: 'cut into chunks', scale: 'halve', ref: 'carrots' },
+      { id: 'potatoes', qty: 1350, unit: 'g', name: 'baby new potatoes', prep: 'halved if large', scale: 'weight', ref: 'potatoes', chip: 'baby new potatoes' },
+      { id: 'passata', qty: 330, unit: 'ml', name: 'passata', scale: 'weight', ref: 'passata' },
+      { id: 'wine', qty: 850, unit: 'ml', name: 'red wine', scale: 'weight', ref: 'red wine' },
+      { id: 'broth', qty: 1000, unit: 'ml', name: 'beef bone broth or beef stock', scale: 'weight', ref: 'bone broth', chip: 'bone broth' },
+      { id: 'rosemary', qty: 3, name: 'sprig of rosemary', plural: 'sprigs of rosemary', scale: 'whole', ref: 'rosemary' },
+      { id: 'salt', qty: 1.75, unit: 'tsp', name: 'sea salt', scale: 'spoon', ref: 'salt' },
       { id: 'pepper', phrase: 'Black pepper', scale: 'fixed', ref: 'pepper', chip: 'black pepper' }
     ]},
-    { name: 'For the Butter Beans', items: [
+    { name: 'For the Butter Beans', serve: true, serves: 6, items: [
       { id: 'beans', qty: 2, unit: 'tin', tinSize: 400, name: 'butter beans', prep: 'drained', scale: 'tin', ref: 'butter beans' },
       { id: 'stock', qty: 250, unit: 'ml', name: 'chicken stock', scale: 'weight', ref: 'chicken stock' },
       { id: 'knob', phrase: 'A knob of butter', scale: 'fixed', ref: 'butter', chip: 'a knob of butter' },
@@ -60,11 +60,11 @@ module.exports = [
   title: 'Red Lentil Curry',
   short: 'Red lentil curry',
   description: 'Red lentils simmered with tomatoes, warm spices and coconut milk, made rich with almond butter.',
-  serves: 4, prep: 10, cook: 35,
+  serves: 4, batch: true, prep: 10, cook: 35,
   course: 'Dinners', cuisine: 'Indian', main: 'Lentils',
   labels: ['Batch cook', 'Freezes well', 'Ted can share', 'Weeknight', 'Vegan'],
   groups: [
-    { name: '', items: [
+    { name: 'For the Curry', items: [
       { id: 'lentils', qty: 200, unit: 'g', name: 'red lentils', scale: 'weight', ref: 'lentils' },
       { id: 'oil', qty: 1, unit: 'tbsp', name: 'vegetable oil', scale: 'spoon', liquid: true, ref: 'oil' },
       { id: 'garlic', qty: 4, name: 'garlic clove', plural: 'garlic cloves', prep: 'crushed', scale: 'whole', ref: 'garlic' },
@@ -83,7 +83,9 @@ module.exports = [
       { id: 'coconut', qty: 1, unit: 'tin', tinSize: 400, tinUnit: 'ml', name: 'coconut milk', scale: 'tin', ref: 'coconut milk' },
       { id: 'almond', qty: 3, unit: 'tbsp', name: 'almond butter', scale: 'spoon', ref: 'almond butter' },
       { id: 'lemon', qty: 0.5, name: 'small lemon', plural: 'small lemons', prep: 'juiced', scale: 'halve', ref: 'lemon', chip: 'lemon' },
-      { id: 'fcor', phrase: 'A handful of fresh coriander', prep: 'roughly chopped', scale: 'fixed', ref: 'fresh coriander', chip: 'a handful of coriander' },
+      { id: 'fcor', phrase: 'A handful of fresh coriander', prep: 'roughly chopped', scale: 'fixed', ref: 'fresh coriander', chip: 'a handful of coriander' }
+    ]},
+    { name: 'For the Rice', serve: true, serves: 4, items: [
       { id: 'rice', qty: 300, unit: 'g', name: 'jasmine rice', prep: 'or naan, to serve', scale: 'weight', ref: 'rice' },
       { id: 'ricewater', qty: 600, unit: 'ml', name: 'cold water', prep: 'for the rice', scale: 'weight', ref: 'water' }
     ]}
@@ -110,24 +112,24 @@ module.exports = [
   title: 'Carnitas Tacos',
   short: 'Carnitas tacos',
   description: 'Pork shoulder slow-cooked with orange, cumin and oregano, shredded and crisped in the air fryer for tacos.',
-  serves: 8, prep: 20, cook: 540, cookText: '8 to 10 hours', airC: 200,
+  serves: 10, batch: true, prep: 20, cook: 600, cookText: '9 to 10 hours', airC: 200,
   course: 'Dinners', cuisine: 'Mexican', main: 'Pork',
   labels: ['Batch cook', 'Freezes well', 'Weekend'],
   equipment: ['A slow cooker'],
   groups: [
-    { name: 'For the Carnitas', fixedNote: 'This part makes about 8 servings of pork, whatever number of servings you choose. Only the tacos and toppings change with the servings. Freeze the pork you do not eat in 2-serving tubs.', items: [
-      { id: 'oregano', qty: 1, unit: 'tbsp', name: 'dried oregano', scale: 'fixed', ref: 'oregano' },
-      { id: 'cumin', qty: 1, unit: 'tbsp', name: 'ground cumin', scale: 'fixed', ref: 'cumin' },
-      { id: 'chillipowder', qty: 2, unit: 'tsp', name: 'chilli powder', scale: 'fixed', ref: 'chilli powder' },
-      { id: 'salt', qty: 1, unit: 'tsp', name: 'sea salt', scale: 'fixed', ref: 'salt' },
-      { id: 'pepper', qty: 0.5, unit: 'tsp', name: 'black pepper', scale: 'fixed', ref: 'pepper' },
-      { id: 'pork', qty: 1800, unit: 'g', name: 'skinless, boneless pork shoulder', scale: 'fixed', ref: 'pork', chip: 'pork shoulder' },
-      { id: 'onion', qty: 1, name: 'onion', prep: 'chopped', scale: 'fixed', ref: 'onion' },
-      { id: 'garlic', qty: 4, name: 'garlic clove', plural: 'garlic cloves', prep: 'crushed', scale: 'fixed', ref: 'garlic' },
-      { id: 'jalapeno', qty: 1, name: 'jalapeño', prep: 'deseeded and finely chopped', scale: 'fixed', ref: 'jalapeño' },
-      { id: 'orange', qty: 1, name: 'orange', prep: 'juiced', scale: 'fixed', ref: 'orange' }
+    { name: 'For the Carnitas', items: [
+      { id: 'oregano', qty: 1.5, unit: 'tbsp', name: 'dried oregano', scale: 'spoon', ref: 'oregano' },
+      { id: 'cumin', qty: 1.5, unit: 'tbsp', name: 'ground cumin', scale: 'spoon', ref: 'cumin' },
+      { id: 'chillipowder', qty: 1, unit: 'tbsp', name: 'chilli powder', scale: 'spoon', ref: 'chilli powder' },
+      { id: 'salt', qty: 1.5, unit: 'tsp', name: 'sea salt', scale: 'spoon', ref: 'salt' },
+      { id: 'pepper', qty: 0.75, unit: 'tsp', name: 'black pepper', scale: 'spoon', ref: 'pepper' },
+      { id: 'pork', qty: 2500, unit: 'g', name: 'skinless, boneless pork shoulder', scale: 'weight', ref: 'pork', chip: 'pork shoulder' },
+      { id: 'onion', qty: 1.5, name: 'onion', plural: 'onions', prep: 'chopped', scale: 'halve', ref: 'onion' },
+      { id: 'garlic', qty: 6, name: 'garlic clove', plural: 'garlic cloves', prep: 'crushed', scale: 'whole', ref: 'garlic' },
+      { id: 'jalapeno', qty: 1.5, name: 'jalapeño', plural: 'jalapeños', prep: 'deseeded and finely chopped', scale: 'halve', ref: 'jalapeño' },
+      { id: 'orange', qty: 1.5, name: 'orange', plural: 'oranges', prep: 'juiced', scale: 'halve', ref: 'orange' }
     ]},
-    { name: 'For the Tacos', items: [
+    { name: 'For the Tacos', serve: true, serves: 8, items: [
       { id: 'tortillas', qty: 24, name: 'small flour or corn tortilla', plural: 'small flour or corn tortillas', scale: 'wholeUp', ref: 'tortillas', chip: 'tortillas' },
       { id: 'redonion', qty: 2, name: 'red onion', plural: 'red onions', prep: 'finely chopped', scale: 'halve', ref: 'red onion' },
       { id: 'coriander', qty: 30, unit: 'g', name: 'fresh coriander', prep: 'chopped', scale: 'weight', ref: 'coriander', chip: 'coriander' },
@@ -137,14 +139,14 @@ module.exports = [
   steps: [
     { text: 'Mix the oregano, cumin, chilli powder, salt and pepper in a small bowl.', uses: ['oregano', 'cumin', 'chillipowder', 'salt', 'pepper'] },
     { text: 'Trim the excess fat from the pork, leaving a thin layer. Rub the spice mix all over the pork and put it in the slow cooker.', uses: ['pork'] },
-    { text: 'Add the onion, garlic, jalapeño and orange juice. Cover and cook on low for 8 to 10 hours, or on high for 5 to 6 hours, until the pork falls apart.', uses: ['onion', 'garlic', 'jalapeno', 'orange'] },
+    { text: 'Add the onion, garlic, jalapeño and orange juice. Cover and cook on low for 9 to 10 hours, or on high for 6 hours, until the pork falls apart.', uses: ['onion', 'garlic', 'jalapeno', 'orange'] },
     { text: 'Lift the pork onto a board and shred it with two forks, keeping all the liquid in the slow cooker. If it resists, cook it for another 30 minutes.', uses: [] },
     { text: 'Heat the air fryer to 200°C. Toss the pork with a few spoonfuls of the cooking liquid and spread it over the baking pan and cook for 8 to 10 minutes, stirring halfway, until browned at the edges. Drizzle over more of the liquid before serving.', uses: [] },
     { text: 'Warm the tortillas in a dry frying pan for 20 seconds on each side.', uses: ['tortillas'] },
     { text: 'Fill the tortillas with the pork and top with the red onion and coriander. Serve with the limes for squeezing.', uses: ['redonion', 'coriander', 'limes'] }
   ],
   notes: [
-    { title: 'Joint Size', text: 'A joint of 1 to 1.5kg needs about 8 hours on low. A 2.5kg joint makes about 11 servings and needs about 10 hours. For a 2.5kg joint, use half as much again of the spices, salt, garlic and orange juice.' },
+    { title: 'Joint Size', text: 'One batch is a 2.5kg joint, which makes about 10 servings. Use the Batch buttons for other joints, such as ½× for about 1.25kg. A joint of 1 to 1.5kg needs about 8 hours on low.' },
     { title: 'Under the Grill', text: 'Spread the pork over a baking tray, pour over 250ml of the cooking liquid and grill on high for 5 to 10 minutes.' },
     { title: 'Storing', text: 'Keep the shredded pork and its liquid in separate tubs, for 3 days in the fridge or 3 months in the freezer. Crisp the pork in the air fryer with some of the liquid when you need it.' },
     { title: 'Leftovers', text: 'Use the pork in burritos, quesadillas or salads.' }
@@ -155,7 +157,7 @@ module.exports = [
   title: "Batali's Bolognese",
   short: 'Bolognese',
   description: 'A slow ragù of beef, pork and pancetta, cooked with milk and white wine for up to 3 hours.',
-  serves: 6, prep: 30, cook: 180, cookText: '2 to 3 hours',
+  serves: 6, batch: true, prep: 30, cook: 180, cookText: '2 to 3 hours',
   course: 'Dinners', cuisine: 'Italian', main: 'Beef',
   labels: ['Batch cook', 'Freezes well', 'Weekend'],
   equipment: ['A large, heavy pan'],
@@ -176,7 +178,7 @@ module.exports = [
       { id: 'milk', qty: 250, unit: 'ml', name: 'whole milk', scale: 'weight', ref: 'milk' },
       { id: 'wine', qty: 250, unit: 'ml', name: 'dry white wine, such as Sauvignon Blanc or Pinot Grigio', scale: 'weight', ref: 'wine', chip: 'dry white wine' }
     ]},
-    { name: 'To Serve', items: [
+    { name: 'To Serve', serve: true, serves: 6, items: [
       { id: 'pasta', qty: 500, unit: 'g', name: 'dried pasta, such as tagliatelle or rigatoni', scale: 'weight', ref: 'pasta', chip: 'dried pasta' },
       { id: 'parmesan', qty: 40, unit: 'g', name: 'Parmesan', prep: 'finely grated', scale: 'weight', ref: 'Parmesan' },
       { id: 'parsley', phrase: 'A small handful of parsley', prep: 'finely chopped', scale: 'fixed', ref: 'parsley', chip: 'a handful of parsley' }

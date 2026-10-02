@@ -60,6 +60,12 @@ Each recipe is written for its own number of servings. The site offers 1, 2, 3, 
 - Cooking times stay the same when the servings change. When you choose double the written servings or more, the site shows a line telling you to use a bigger pan and allow extra time for browning and reducing.
 - When an ingredient is split across steps, such as "half the onion", each step stores its own share, so the step shows the right amount at every size.
 
+**Batch recipes**
+Batch-cook recipes, such as the carnitas, burnt onion beef, Bolognese and red lentil curry, work differently, because you cook the whole batch and freeze it.
+- The recipe is written for the batch Tom actually cooks, such as one 2.5kg pork shoulder.
+- Batch buttons of ½×, 1×, 1½×, 2× and 3× scale every ingredient in the batch, including the meat. The facts row shows how many servings that batch makes.
+- The part you make fresh on the night, such as the tacos, rice, pasta or butter beans, sits in its own box with its own servings count, which opens at 2.
+
 ## 5. Meal planning
 - Plan leftovers forward. Rice cooked for one dinner, using 75g for each person and twice that weight of water in the Sistema microwave rice cooker, feeds Ted's rice dish the next day. A roast leaves chicken for the next day's meals, and batch cooking fills the freezer.
 - Each plan says where a meal's food comes from, such as "Uses rice left from Friday's curry".
@@ -73,7 +79,6 @@ Each recipe is written for its own number of servings. The site offers 1, 2, 3, 
 - Cooking mode shows one step at a time in large text and has Next and Back buttons. It turns on Keep Awake, which stops the screen sleeping, and a button in cooking mode turns it off again.
 - A Keep Screen On button beside Start Cooking does the same job outside cooking mode.
 - The site writes servings as "4 servings", in the facts row and above the ingredients.
-- When part of a recipe makes a fixed batch, such as the carnitas pork, a line under that group says how many servings it makes and that only the other parts change with the servings.
 - A time in a step, such as "10 minutes", starts a timer when you tap it.
 - The page remembers your servings choice for each recipe on your device.
 

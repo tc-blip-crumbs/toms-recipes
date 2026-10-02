@@ -68,7 +68,7 @@ const foot = `<footer class="site-footer"><div class="wrap"><span>${NAME}</span>
 
 function facts(r) {
   const rows = [];
-  rows.push(r.yield ? ['Makes', r.yieldShort || r.yield.replace(/^Makes /, '')] : ['Makes', '<span data-servings-count>' + (r.defaultServings || DEFAULT_SERVINGS) + '</span> <span data-servings-word>' + ((r.defaultServings || DEFAULT_SERVINGS) === 1 ? 'serving' : 'servings') + '</span>']);
+  rows.push(r.yield ? ['Makes', r.yieldShort || r.yield.replace(/^Makes /, '')] : r.batch ? ['Makes', '<span data-batch-count>' + r.serves + '</span> servings'] : ['Makes', '<span data-servings-count>' + (r.defaultServings || DEFAULT_SERVINGS) + '</span> <span data-servings-word>' + ((r.defaultServings || DEFAULT_SERVINGS) === 1 ? 'serving' : 'servings') + '</span>']);
   rows.push(['Prep', dur(r.prep)]);
   if (r.rest) rows.push([r.restLabel || 'Resting', dur(r.rest)]);
   if (r.cook) rows.push(['Cook', r.cookText || dur(r.cook)]);
@@ -98,11 +98,14 @@ function jsonLd(r) {
 
 function recipePage(r) {
   const servings = r.yield ? r.serves : (r.defaultServings || DEFAULT_SERVINGS);
+  const size = r.batch ? { mult: 1, serve: DEFAULT_SERVINGS } : servings;
   const url = `${SITE}/recipes/${r.slug}/`;
   const courseId = 'course-' + slugify(r.course);
-  const clientData = { slug: r.slug, serves: r.serves, defaultServings: r.defaultServings || DEFAULT_SERVINGS, yield: r.yield || null, groups: r.groups, steps: r.steps };
+  const clientData = { slug: r.slug, serves: r.serves, defaultServings: r.defaultServings || DEFAULT_SERVINGS, yield: r.yield || null, batch: !!r.batch, groups: r.groups, steps: r.steps };
   const inPlans = plans.filter(p => p.people.some(pp => pp.rows.some(row => row.slice(1).some(c => c.r === r.slug))));
-  const control = r.yield
+  const control = r.batch
+    ? `<div class="batch" role="group" aria-label="Batch size"><span class="label">Batch</span><div class="seg">${Scale.MULTS.map(m => `<button type="button" data-mult="${m}" aria-pressed="${m === 1}">${Scale.multLabel(m)}</button>`).join('')}</div></div>`
+    : r.yield
     ? `<span class="yield">Makes ${esc(r.yieldShort || r.yield.replace(/^Makes /, ''))}</span>`
     : `<div class="servings" role="group" aria-label="Servings"><span class="label">Servings</span>
         <div class="stepper"><button type="button" data-servings="down" aria-label="Fewer servings">−</button><output data-servings-count aria-live="off">${servings}</output><button type="button" data-servings="up" aria-label="More servings">+</button></div></div>`;
@@ -124,7 +127,7 @@ function recipePage(r) {
     </div>
   </div>
 </div>
-<div class="toolbar"><div class="wrap">
+<div class="toolbar${r.batch ? ' toolbar-batch' : ''}"><div class="wrap">
   ${control}
   <div class="tabs" role="tablist" aria-label="Recipe sections">
     <button type="button" role="tab" data-view="ingredients" aria-selected="true" aria-controls="ingredients">Ingredients</button>
@@ -137,14 +140,14 @@ function recipePage(r) {
   <div class="columns" data-view="ingredients">
     <section class="ingredients" id="ingredients" role="tabpanel" aria-label="Ingredients">
       <h2>Ingredients</h2>
-      ${r.yield ? '' : `<p class="for">Amounts for <span data-servings-count>${servings}</span> <span data-servings-word>${servings === 1 ? 'serving' : 'servings'}</span>. Tick things off as you gather them.</p>`}
-      <div id="ing-body">${Render.ingredientsHTML(r, servings)}</div>
+      ${r.batch ? `<p class="for">This batch makes <span data-batch-count>${r.serves}</span> servings. The serving part has its own count. Tick things off as you gather them.</p>` : r.yield ? '' : `<p class="for">Amounts for <span data-servings-count>${servings}</span> <span data-servings-word>${servings === 1 ? 'serving' : 'servings'}</span>. Tick things off as you gather them.</p>`}
+      <div id="ing-body">${Render.ingredientsHTML(r, size)}</div>
       ${r.equipment && r.equipment.length ? `<div class="equipment"><h3>You Will Need</h3><ul>${r.equipment.map(e => `<li>${esc(e)}</li>`).join('')}</ul></div>` : ''}
     </section>
     <section class="method" id="method" role="tabpanel" aria-label="Method">
       <h2>Method</h2>
       <p class="for screen-only">Tap a time to start a timer.</p>
-      <div id="method-body">${Render.methodHTML(r, servings)}</div>
+      <div id="method-body">${Render.methodHTML(r, size)}</div>
     </section>
   </div>
   ${r.notes.length ? `<section class="notes" aria-label="Notes">${r.notes.map(n => `<div class="note"><h3>${esc(n.title)}</h3><p>${esc(n.text)}</p></div>`).join('')}</section>` : ''}

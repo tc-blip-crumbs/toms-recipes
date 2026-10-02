@@ -73,13 +73,13 @@ module.exports = [
     tedSundayLunch: r('egg-fried-rice', { note: 'Uses rice left from Saturday\'s meatballs.' }),
     boxes: [
       { title: 'Saturday 3 October Batch Cook', list: [
-        'Morning. Cook the beef for 8, using about 2.7kg of steak, in the oven at 160°C for 3½ hours. Use your largest casserole, or split it between 2.',
-        'While the beef cooks, make a triple batch of the red lentil curry. Leave out the chilli, chilli powder and salt, spoon out 4 small portions for Ted before the almond butter goes in, then fry the chilli and chilli powder in a little oil and stir them into the rest with the salt and almond butter.',
+        'Morning. Cook one batch of the beef, which uses 2.7kg of shin and makes 8 servings, in the oven at 160°C for 3½ hours. Use your largest casserole, or split it between 2.',
+        'While the beef cooks, make the red lentil curry at 3× the batch. Leave out the chilli, chilli powder and salt, spoon out 4 small portions for Ted before the almond butter goes in, then fry the chilli and chilli powder in a little oil and stir them into the rest with the salt and almond butter.',
         'Afternoon. Make Ted\'s meatballs in the air fryer, using 1 pack of the pork mince.',
         'Evening. Cool everything and freeze it. The beef goes in 4 tubs of 2 portions, the curry in 2-portion tubs with Ted\'s in small tubs, and the meatballs in 5 portions with their sauce. Make the butter beans fresh on the night you eat the beef.'
       ] },
       { title: 'Sunday 4 October Batch Cook', list: [
-        'Morning. Put the 2.5kg carnitas pork in the slow cooker on low for about 10 hours. It makes about 11 portions.',
+        'Morning. Make one batch of the carnitas, which is the 2.5kg joint and makes about 10 servings. It cooks on low in the slow cooker for 9 to 10 hours.',
         'Late morning. Make the Bolognese and leave it to simmer for 2 to 3 hours.',
         'Afternoon. Cool the Bolognese and freeze it in 3 tubs of 2 portions.',
         'Evening. Shred the pork. Keep 4 portions and some of the liquid in the fridge for Tuesday\'s movie night, and freeze the rest in 3 tubs of 2 portions, with any extra in a small tub for lunches.'

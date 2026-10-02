@@ -154,6 +154,9 @@
     return amt + ' ' + (item.unit === 'tin' || item.unit === 'g' || item.unit === 'ml' || item.unit === 'tsp' || item.unit === 'tbsp' ? label : (item.chip ? label : r.name));
   }
 
-  var api = { scaleItem: scaleItem, lineText: lineText, chipText: chipText, fracText: fracText, roundMetric: roundMetric, SERVINGS: [1, 2, 3, 4, 6, 8] };
+  var MULTS = [0.5, 1, 1.5, 2, 3];
+  function multText(m) { return m === 0.5 ? 'half' : m === 1 ? 'one' : m === 1.5 ? '1½ times' : m + ' times'; }
+  function multLabel(m) { return (m === 0.5 ? '½' : m === 1.5 ? '1½' : String(m)) + '×'; }
+  var api = { MULTS: MULTS, multText: multText, multLabel: multLabel, scaleItem: scaleItem, lineText: lineText, chipText: chipText, fracText: fracText, roundMetric: roundMetric, SERVINGS: [1, 2, 3, 4, 6, 8] };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.Scale = api;
 })(this);

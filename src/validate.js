@@ -63,6 +63,8 @@ for (const r of recipes) {
     const txt = [i.name, i.prep, i.phrase].filter(Boolean).join(' ');
     BANNED.forEach(([re, w]) => { if (re.test(txt)) err(r, `${i.id}: banned wording "${w}"`); });
   }));
+  if (r.batch) r.groups.forEach(g => { if (!g.serve) g.items.forEach(i => { if (i.scale === 'fixed' && i.qty) err(r, `${i.id}: batch recipes scale every measured ingredient, so use weight, spoon, halve, whole or tin`); }); });
+  if (r.batch && r.groups.some(g => g.serve && !g.serves)) err(r, 'serving groups in a batch recipe need "serves"');
   if (r.ovenC && r.airC) err(r, 'pick one method for the steps: ovenC or airC, and put the other in a note');
   if (r.yield && r.groups.some(g => g.items.some(i => i.scale !== 'fixed'))) err(r, 'a fixed-yield recipe must have only fixed ingredients');
   const used = new Set();
