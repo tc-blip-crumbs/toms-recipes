@@ -115,9 +115,14 @@ a.tag:hover { background: var(--accent-soft); }
 .btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 10px 18px; font-weight: 600; font-size: .95rem;
   border: 1px solid var(--line); background: var(--surface); cursor: pointer; text-decoration: none; }
 .btn:hover { border-color: var(--ink); }
-.btn svg { width: 18px; height: 18px; }
+.btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+.btn { white-space: nowrap; }
 .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .btn.primary:hover { filter: brightness(1.06); }
+.btn[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.wake-pill { white-space: nowrap; flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; margin-left: auto; border: 1px solid var(--line, #ccc); background: transparent; color: inherit; border-radius: 999px; padding: 6px 12px; font: inherit; font-size: .85rem; font-weight: 600; cursor: pointer; }
+.wake-pill svg { width: 16px; height: 16px; }
+.wake-pill[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
 
 .toolbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); }
 .toolbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-block: 10px; }

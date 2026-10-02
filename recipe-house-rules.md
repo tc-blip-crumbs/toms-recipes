@@ -70,7 +70,10 @@ Each recipe is written for its own number of servings. The site offers 1, 2, 3, 
 - On a phone, each recipe has Ingredients and Method tabs, with the servings control fixed at the top.
 - Tap ingredients to tick them off as you gather them.
 - Each method step shows its ingredients as small cards with the amounts for the servings you chose.
-- Cooking mode shows one step at a time in large text, keeps the screen on, and has Next and Back buttons.
+- Cooking mode shows one step at a time in large text and has Next and Back buttons. It turns on Keep Awake, which stops the screen sleeping, and a button in cooking mode turns it off again.
+- A Keep Screen On button beside Start Cooking does the same job outside cooking mode.
+- The site writes servings as "4 servings", in the facts row and above the ingredients.
+- When part of a recipe makes a fixed batch, such as the carnitas pork, a line under that group says how many servings it makes and that only the other parts change with the servings.
 - A time in a step, such as "10 minutes", starts a timer when you tap it.
 - The page remembers your servings choice for each recipe on your device.
 

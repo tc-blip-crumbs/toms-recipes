@@ -115,7 +115,7 @@ module.exports = [
   labels: ['Batch cook', 'Freezes well', 'Weekend'],
   equipment: ['A slow cooker'],
   groups: [
-    { name: 'For the Carnitas', fixedNote: 'The pork stays the same size at every number of servings. Cook the whole joint and freeze what you don\'t use.', items: [
+    { name: 'For the Carnitas', fixedNote: 'This part makes about 8 servings of pork, whatever number of servings you choose. Only the tacos and toppings change with the servings. Freeze the pork you do not eat in 2-serving tubs.', items: [
       { id: 'oregano', qty: 1, unit: 'tbsp', name: 'dried oregano', scale: 'fixed', ref: 'oregano' },
       { id: 'cumin', qty: 1, unit: 'tbsp', name: 'ground cumin', scale: 'fixed', ref: 'cumin' },
       { id: 'chillipowder', qty: 2, unit: 'tsp', name: 'chilli powder', scale: 'fixed', ref: 'chilli powder' },
@@ -144,7 +144,7 @@ module.exports = [
     { text: 'Fill the tortillas with the pork and top with the red onion and coriander. Serve with the limes for squeezing.', uses: ['redonion', 'coriander', 'limes'] }
   ],
   notes: [
-    { title: 'Joint Size', text: 'A joint of 1 to 1.5kg needs about 8 hours on low.' },
+    { title: 'Joint Size', text: 'A joint of 1 to 1.5kg needs about 8 hours on low. A 2.5kg joint makes about 11 servings and needs about 10 hours. For a 2.5kg joint, use half as much again of the spices, salt, garlic and orange juice.' },
     { title: 'Under the Grill', text: 'Spread the pork over a baking tray, pour over 250ml of the cooking liquid and grill on high for 5 to 10 minutes.' },
     { title: 'Storing', text: 'Keep the shredded pork and its liquid in separate tubs, for 3 days in the fridge or 3 months in the freezer. Crisp the pork in the air fryer with some of the liquid when you need it.' },
     { title: 'Leftovers', text: 'Use the pork in burritos, quesadillas or salads.' }

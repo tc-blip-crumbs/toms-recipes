@@ -33,6 +33,7 @@ const ICON = {
   search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
   print: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2"/><path d="M6 14h12v7H6z"/></svg>',
   cook: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
+  screen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3" stroke-linecap="round"/></svg>',
   close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>'
 };
 
@@ -67,7 +68,7 @@ const foot = `<footer class="site-footer"><div class="wrap"><span>${NAME}</span>
 
 function facts(r) {
   const rows = [];
-  rows.push(r.yield ? ['Makes', r.yieldShort || r.yield.replace(/^Makes /, '')] : ['Serves', '<span data-servings-count>' + (r.defaultServings || DEFAULT_SERVINGS) + '</span>']);
+  rows.push(r.yield ? ['Makes', r.yieldShort || r.yield.replace(/^Makes /, '')] : ['Makes', '<span data-servings-count>' + (r.defaultServings || DEFAULT_SERVINGS) + '</span> <span data-servings-word>' + ((r.defaultServings || DEFAULT_SERVINGS) === 1 ? 'serving' : 'servings') + '</span>']);
   rows.push(['Prep', dur(r.prep)]);
   if (r.rest) rows.push([r.restLabel || 'Resting', dur(r.rest)]);
   if (r.cook) rows.push(['Cook', r.cookText || dur(r.cook)]);
@@ -103,7 +104,7 @@ function recipePage(r) {
   const inPlans = plans.filter(p => p.people.some(pp => pp.rows.some(row => row.slice(1).some(c => c.r === r.slug))));
   const control = r.yield
     ? `<span class="yield">Makes ${esc(r.yieldShort || r.yield.replace(/^Makes /, ''))}</span>`
-    : `<div class="servings" role="group" aria-label="Servings"><span class="label">Serves</span>
+    : `<div class="servings" role="group" aria-label="Servings"><span class="label">Servings</span>
         <div class="stepper"><button type="button" data-servings="down" aria-label="Fewer servings">−</button><output data-servings-count aria-live="off">${servings}</output><button type="button" data-servings="up" aria-label="More servings">+</button></div></div>`;
   return head({ title: `${r.title} | ${NAME}`, description: r.description, canonical: url,
     extra: `<script type="application/ld+json">${JSON.stringify(jsonLd(r))}</script>\n` }) + `
@@ -118,6 +119,7 @@ function recipePage(r) {
     ${tagHTML(r, true)}
     <div class="actions">
       <button type="button" class="btn primary" data-action="cook">${ICON.cook}Start cooking</button>
+      <button type="button" class="btn" data-action="wake" aria-pressed="false" hidden>${ICON.screen}<span>Keep screen on</span></button>
       <button type="button" class="btn" data-action="print">${ICON.print}Print</button>
     </div>
   </div>
@@ -135,7 +137,7 @@ function recipePage(r) {
   <div class="columns" data-view="ingredients">
     <section class="ingredients" id="ingredients" role="tabpanel" aria-label="Ingredients">
       <h2>Ingredients</h2>
-      ${r.yield ? '' : `<p class="for">For <span data-servings-count>${servings}</span>. Tick things off as you gather them.</p>`}
+      ${r.yield ? '' : `<p class="for">Amounts for <span data-servings-count>${servings}</span> <span data-servings-word>${servings === 1 ? 'serving' : 'servings'}</span>. Tick things off as you gather them.</p>`}
       <div id="ing-body">${Render.ingredientsHTML(r, servings)}</div>
       ${r.equipment && r.equipment.length ? `<div class="equipment"><h3>You Will Need</h3><ul>${r.equipment.map(e => `<li>${esc(e)}</li>`).join('')}</ul></div>` : ''}
     </section>
@@ -153,7 +155,7 @@ function recipePage(r) {
 </main>
 <div class="timers" id="timers" hidden aria-live="polite"></div>
 <div class="cook" id="cook" hidden role="dialog" aria-modal="true" aria-label="Cooking mode">
-  <div class="wrap"><div class="cook-top"><p class="cook-title">${esc(r.short)}</p><span class="cook-count"></span><button type="button" class="icon-btn" data-cook="close" aria-label="Close cooking mode">${ICON.close}</button></div>
+  <div class="wrap"><div class="cook-top"><p class="cook-title">${esc(r.short)}</p><span class="cook-count"></span><button type="button" class="wake-pill" data-action="wake" aria-pressed="false" hidden>${ICON.screen}<span>Keep awake</span></button><button type="button" class="icon-btn" data-cook="close" aria-label="Close cooking mode">${ICON.close}</button></div>
   <div class="cook-bar"><span></span></div></div>
   <div class="cook-main"><div class="wrap cook-step" aria-live="polite"></div></div>
   <div class="wrap cook-nav"><button type="button" data-cook="back">Back</button><button type="button" data-cook="next">Next step</button></div>
@@ -173,7 +175,7 @@ function card(r) {
   <p class="eyebrow">${esc([r.cuisine, r.main].filter(Boolean).join(' · '))}</p>
   <h3>${esc(r.title)}</h3>
   <p class="desc">${esc(r.description)}</p>
-  <div class="meta"><span><b>${dur(t)}</b> in all</span><span>${r.yield ? esc(r.yield) : 'Serves ' + r.serves + ' as written'}</span></div>
+  <div class="meta"><span><b>${dur(t)}</b> in all</span><span>${r.yield ? esc(r.yield) : r.serves + (r.serves === 1 ? ' serving' : ' servings') + ' as written'}</span></div>
   ${tagHTML(r, false)}
 </a>`;
 }

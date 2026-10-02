@@ -32,6 +32,7 @@
     methodBox.innerHTML = Render.methodHTML(recipe, servings);
     keep.forEach(function (id) { var c = document.getElementById(id); if (c) c.checked = true; });
     countEls.forEach(function (el) { el.textContent = servings; });
+    document.querySelectorAll('[data-servings-word]').forEach(function (el) { el.textContent = servings === 1 ? 'serving' : 'servings'; });
     if (minus) minus.disabled = SERVINGS.indexOf(servings) === 0;
     if (plus) plus.disabled = SERVINGS.indexOf(servings) === SERVINGS.length - 1;
     if (note) { var t = Render.panNote(recipe, servings); note.textContent = t; note.hidden = !t; }
@@ -141,6 +142,36 @@
     drawTimers();
   });
 
+  /* Keep the screen on: a toggle on the page and in cooking mode. Cooking mode turns it on. */
+  var wakeBtns = document.querySelectorAll('[data-action="wake"]');
+  var wake = {
+    on: false, lock: null,
+    get: function () {
+      var self = this;
+      if (!navigator.wakeLock || self.lock || document.visibilityState !== 'visible') return;
+      navigator.wakeLock.request('screen').then(function (l) {
+        self.lock = l;
+        l.addEventListener('release', function () { self.lock = null; });
+        if (!self.on) { l.release().catch(function () {}); }
+      }).catch(function () {});
+    },
+    set: function (on) {
+      this.on = on;
+      wakeBtns.forEach(function (b) {
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        var label = b.querySelector('span');
+        if (label) label.textContent = b.classList.contains('wake-pill') ? 'Keep awake' : (on ? 'Screen stays on' : 'Keep screen on');
+      });
+      if (on) this.get();
+      else if (this.lock) { this.lock.release().catch(function () {}); this.lock = null; }
+    }
+  };
+  if (navigator.wakeLock) wakeBtns.forEach(function (b) {
+    b.hidden = false;
+    b.addEventListener('click', function () { wake.set(!wake.on); });
+  });
+  document.addEventListener('visibilitychange', function () { if (wake.on && document.visibilityState === 'visible') wake.get(); });
+
   /* Cooking mode: one step at a time, large text, screen kept awake */
   var cookEl = document.getElementById('cook');
   var cook = {
@@ -164,21 +195,15 @@
       document.documentElement.classList.add('is-cooking');
       this.show(i || 0);
       cookEl.querySelector('[data-cook="next"]').focus();
-      var self = this;
-      if (navigator.wakeLock) navigator.wakeLock.request('screen').then(function (l) { self.lock = l; }).catch(function () {});
+      wake.set(true);
     },
     stop: function () {
       this.open = false;
       cookEl.hidden = true;
       document.documentElement.classList.remove('is-cooking');
-      if (this.lock) { this.lock.release().catch(function () {}); this.lock = null; }
       if (this.opener && this.opener.focus) this.opener.focus();
     }
   };
-  document.addEventListener('visibilitychange', function () {
-    if (cook.open && document.visibilityState === 'visible' && navigator.wakeLock && !cook.lock)
-      navigator.wakeLock.request('screen').then(function (l) { cook.lock = l; }).catch(function () {});
-  });
   document.querySelectorAll('[data-action="cook"]').forEach(function (b) { b.addEventListener('click', function () { cook.start(0); }); });
   cookEl.addEventListener('click', function (e) {
     var b = e.target.closest('[data-cook]'); if (!b) return;
