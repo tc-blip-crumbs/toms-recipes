@@ -42,7 +42,7 @@ const VEG_BOX = { title: 'Extra Fruit & Veg', list: [
   'Tacos. Add a tin of black beans and some sweetcorn to the filling.',
   'Bolognese. Stir a tin of green lentils into the sauce when you reheat it.',
   'Curry. Stir a handful of frozen spinach into each portion as it reheats.',
-  'Meatballs. Double the broccoli.'
+  'Larb. Add the mangetout and serve it with a bag of microwaved green beans.'
 ] };
 
 // One repeating week. "w" holds the few things that differ from week to week.
@@ -112,8 +112,8 @@ module.exports = [
     intro: 'The first of four repeating weeks. Everything from Monday to Friday is batch cooked on Saturday 3 and Sunday 4 October.',
     mondayTed: r('cheese-on-toast-fingers', { note: 'No roast the day before this week.' }),
     tuesday: r('carnitas-tacos', { note: 'Movie night with 2 guests, so this makes 4 portions.', serves: 4 }),
-    saturday: r('gochujang-meatballs', { note: 'Cook 40g more rice and 80ml more water than the recipe says, which leaves enough for Ted\'s egg fried rice on Sunday.' }), saturdayWhen: '25 minutes on the night', saturdayMeat: 'meatballs',
-    tedSundayLunch: r('egg-fried-rice', { note: 'Uses rice left from Saturday\'s meatballs.' }),
+    saturday: r('pork-larb', { note: 'Cook 40g more rice and 80ml more water than the recipe says, which leaves enough for Ted\'s egg fried rice on Sunday. Use a 500g pack of 5% fat pork mince.' }), saturdayWhen: '20 minutes on the night', saturdayMeat: 'pork mince',
+    tedSundayLunch: r('egg-fried-rice', { note: 'Uses rice left from Saturday\'s larb.' }),
     boxes: [
       { title: 'Saturday 3 October Batch Cook', list: [
         'Morning. Cook one batch of the beef, which uses 2.7kg of shin and makes 8 servings, in the oven at 160°C for 3½ hours. Use your largest casserole, or split it between 2.',
@@ -127,7 +127,7 @@ module.exports = [
         'Afternoon. Cool the Bolognese and freeze it in 3 tubs of 2 portions.',
         'Evening. Shred the pork. Keep 4 portions and some of the liquid in the fridge for Tuesday\'s movie night, and freeze the rest in 3 tubs of 2 portions, with any extra in a small tub for lunches.'
       ] },
-      { title: 'When the Meat Arrives', text: 'The braising steak and lardons come with the Sainsbury\'s delivery on Thursday 1 October. Pipers delivers frozen, and its earliest delivery is Friday 2 October. When it arrives, put the pork shoulder, the beef mince and the 3 packs of pork mince in the fridge to defrost for the batch cook. Freeze the 2 chickens, the 4 pork belly chunkies, the 2 packs of meatballs, the sausages and the bacon.' }
+      { title: 'When the Meat Arrives', text: 'The braising steak and lardons come with the Sainsbury\'s delivery on Thursday 1 October. Pipers delivers frozen, and its earliest delivery is Friday 2 October. When it arrives, put the pork shoulder, the beef mince and the 3 packs of pork mince in the fridge to defrost for the batch cook. Freeze the 2 chickens, the 4 pork belly chunkies, the 2 packs of meatballs, the sausages and the bacon. The meatballs are now spare for a treat night.' }
     ]
   }),
   week({
@@ -142,8 +142,8 @@ module.exports = [
     n: 0, id: '2026-10-19', title: 'Week of 19 October',
     intro: 'The third of four repeating weeks.',
     mondayTed: r('cheese-on-toast-fingers', { note: 'Sunday was pork belly, so there is no chicken to use up.' }),
-    saturday: r('gochujang-meatballs', { note: 'Cook 40g more rice and 80ml more water than the recipe says, which leaves enough for Ted\'s egg fried rice on Sunday.' }), saturdayWhen: '25 minutes on the night', saturdayMeat: 'meatballs',
-    tedSundayLunch: r('egg-fried-rice', { note: 'Uses rice left from Saturday\'s meatballs.' })
+    saturday: r('pork-larb', { note: 'Cook 40g more rice and 80ml more water than the recipe says, which leaves enough for Ted\'s egg fried rice on Sunday. Use a 500g pack of 5% fat pork mince.' }), saturdayWhen: '20 minutes on the night', saturdayMeat: 'pork mince',
+    tedSundayLunch: r('egg-fried-rice', { note: 'Uses rice left from Saturday\'s larb.' })
   }),
   week({
     n: 1, id: '2026-10-26', title: 'Week of 26 October',

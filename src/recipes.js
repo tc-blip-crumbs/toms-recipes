@@ -332,15 +332,19 @@ module.exports = [
   slug: 'pork-larb',
   title: 'Pork Larb',
   short: 'Pork larb',
-  description: 'Thai-style pork mince stir-fried with toasted rice, lime, fish sauce and a pile of herbs, eaten in lettuce leaves.',
+  description: 'Thai-style pork mince stir-fried with toasted rice, lime, fish sauce and a pile of herbs, eaten in lettuce leaves with jasmine rice.',
   serves: 2, prep: 10, cook: 10,
   course: 'Dinners', cuisine: 'Thai', main: 'Pork',
   labels: ['Weeknight', 'Quick'],
   equipment: ['A wok or large frying pan'],
   groups: [
-    { name: '', items: [
+    { name: 'For the Rice', items: [
+      { id: 'jrice', qty: 150, unit: 'g', name: 'jasmine rice', scale: 'weight', ref: 'jasmine rice' },
+      { id: 'water', qty: 300, unit: 'ml', name: 'cold water', prep: 'for the rice', scale: 'weight', ref: 'water' }
+    ]},
+    { name: 'For the Larb', items: [
       { id: 'oil', qty: 1, unit: 'tbsp', name: 'vegetable oil', scale: 'spoon', liquid: true, ref: 'oil' },
-      { id: 'pork', qty: 450, unit: 'g', name: 'pork mince', scale: 'weight', ref: 'pork' },
+      { id: 'pork', qty: 450, unit: 'g', name: '5% fat pork mince', scale: 'weight', ref: 'pork', chip: 'pork mince' },
       { id: 'rice', qty: 2, unit: 'tbsp', name: 'toasted rice powder', scale: 'spoon', ref: 'toasted rice', chip: 'toasted rice powder' },
       { id: 'sugar', qty: 0.5, unit: 'tsp', name: 'caster sugar', scale: 'spoon', ref: 'sugar' },
       { id: 'fish', qty: 1, unit: 'tbsp', name: 'fish sauce', scale: 'spoon', liquid: true, ref: 'fish sauce' },
@@ -355,10 +359,11 @@ module.exports = [
     ]}
   ],
   steps: [
+    { text: 'Put the jasmine rice and water in the Sistema rice cooker, fit both lids and microwave on full power for 10 minutes. Leave it to stand with the lids on while you cook the larb.', uses: ['jrice', 'water'] },
     { text: 'Heat a wok over a high heat until it smokes. Add the oil and pork and stir-fry for 5 to 6 minutes, breaking up the mince, until browned.', uses: ['oil', 'pork'] },
     { text: 'Add the toasted rice powder, sugar, fish sauce and lime juice, and the mangetout if you are using it. Stir-fry for 1 minute.', uses: ['rice', 'sugar', 'fish', 'lime', 'mangetout'] },
     { text: 'Add the chilli, shallots, spring onions, coriander and mint and stir-fry for 1 minute more.', uses: ['chilli', 'shallots', 'sponions', 'coriander', 'mint'] },
-    { text: 'Taste and add more chilli, sugar, fish sauce or lime juice if it needs it. Serve straight away with the lettuce leaves for wrapping.', uses: ['lettuce'] }
+    { text: 'Taste and add more chilli, sugar, fish sauce or lime juice if it needs it. Serve straight away with the rice and the lettuce leaves for wrapping.', uses: ['lettuce'] }
   ],
   notes: [
     { title: 'Toasted Rice Powder', text: 'Toast 2 tbsp jasmine or sticky rice in a dry frying pan over a medium heat for 5 to 8 minutes, shaking the pan, until deep golden. Let it cool and grind it to a coarse powder in a pestle and mortar.' },
