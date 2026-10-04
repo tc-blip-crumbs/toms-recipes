@@ -9,7 +9,7 @@ const FRUIT = [
 ];
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const TOM_BREAKFAST = ['Yoghurt bowl', 'Yoghurt bowl', 'Yoghurt bowl', 'Yoghurt bowl', 'Yoghurt bowl', 'Eggs, toast and bacon', 'Porridge with banana and berries'];
+const TOM_BREAKFAST = ['Yoghurt bowl', 'Yoghurt bowl', 'Yoghurt bowl', 'Yoghurt bowl', 'Yoghurt bowl', 'Eggs, toast and bacon', 'Eggs, toast and bacon'];
 function tomLunch(w) {
   const ham = !!w.mondayTed;
   return [
@@ -25,8 +25,8 @@ function tomLunch(w) {
 const TOM_BOXES = [
   { title: 'Breakfasts', list: [
     'Yoghurt bowl. 200g of 0% fat Greek yoghurt, 30g of granola, berries and a sliced banana. Weigh the granola once to see what 30g looks like.',
-    'Eggs, toast and bacon. Two poached or scrambled eggs on a slice of toast, with two rashers of bacon grilled.',
-    'Porridge. 50g of oats made with 250ml of semi-skimmed milk, with a sliced banana and berries.',
+    'Eggs, toast and bacon. Two poached eggs on a slice of toast, with two rashers of streaky bacon grilled.',
+    'Any day. Porridge made with 50g of oats and 250ml of semi-skimmed milk, with a sliced banana and berries, works in place of the yoghurt bowl.',
     'Any day. 45g of Shredded Wheat with semi-skimmed milk and a banana works in place of the yoghurt bowl.'
   ] },
   { title: 'Lunch Notes', list: [
