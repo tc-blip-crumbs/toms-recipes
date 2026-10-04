@@ -394,6 +394,42 @@ module.exports = [
   ]
 },
 {
+  slug: 'roast-chicken-caesar-sandwich', title: 'Roast Chicken Caesar Sandwich', short: 'Chicken Caesar sandwich',
+  description: 'Leftover roast chicken and kale in a light yoghurt Caesar dressing with Parmesan, made on Sunday night for two packed lunches.',
+  serves: 2, prep: 20, course: 'Lunches', cuisine: 'British', main: 'Chicken', labels: ['Quick'],
+  source: { name: 'Adapted from Mob, by Jodie Nixon' },
+  groups: [
+    { name: 'For the Filling', items: [
+      { id: 'onion', qty: 0.5, name: 'red onion', plural: 'red onions', prep: 'thinly sliced', scale: 'halve', ref: 'onion', chip: 'red onion' },
+      { id: 'lemon', qty: 0.5, name: 'lemon', plural: 'lemons', prep: 'juiced', scale: 'halve', ref: 'lemon' },
+      { id: 'season', phrase: 'Salt and black pepper', scale: 'fixed', ref: 'salt', chip: 'salt and pepper' },
+      { id: 'yoghurt', qty: 60, unit: 'g', name: '0% fat Greek yoghurt', scale: 'weight', ref: 'yoghurt', chip: 'Greek yoghurt' },
+      { id: 'garlic', qty: 0.5, name: 'garlic clove', plural: 'garlic cloves', prep: 'finely grated', scale: 'halve', ref: 'garlic' },
+      { id: 'mustard', qty: 1, unit: 'tsp', name: 'Dijon mustard', scale: 'spoon', ref: 'mustard' },
+      { id: 'kale', qty: 70, unit: 'g', name: 'kale', prep: 'tough stalks removed, finely shredded', scale: 'weight', ref: 'kale' },
+      { id: 'oil', qty: 1, unit: 'tsp', name: 'olive oil', scale: 'spoon', liquid: true, ref: 'oil' },
+      { id: 'chicken', qty: 140, unit: 'g', name: 'leftover roast chicken', prep: 'skin removed, shredded', scale: 'weight', ref: 'chicken' },
+      { id: 'parsley', phrase: 'A small handful of flat-leaf parsley', prep: 'chopped', scale: 'fixed', ref: 'parsley', chip: 'parsley' },
+      { id: 'parmesan', qty: 15, unit: 'g', name: 'Parmesan', prep: 'finely grated', scale: 'weight', ref: 'Parmesan' }
+    ]},
+    { name: 'To Serve', items: [
+      { id: 'bread', qty: 4, name: 'slice of bread', plural: 'slices of bread', scale: 'whole', ref: 'bread' }
+    ]}
+  ],
+  steps: [
+    { text: 'Put the onion in a small bowl with half the lemon juice and a pinch of salt. Leave it for 10 minutes, until slightly softened.', uses: ['onion', { id: 'lemon', part: 0.5 }, 'season'] },
+    { text: 'Mix the yoghurt, garlic, mustard and the rest of the lemon juice in a bowl, then season with salt and pepper.', uses: ['yoghurt', 'garlic', 'mustard', { id: 'lemon', part: 0.5 }] },
+    { text: 'Put the kale in a large bowl with the oil and a pinch of salt. Scrunch it with your hands for 1 minute, until it darkens and softens.', uses: ['kale', 'oil'] },
+    { text: 'Add the chicken, onion, parsley, Parmesan and dressing to the kale and mix well.', uses: ['chicken', 'parsley', 'parmesan'] },
+    { text: 'Pack the filling in a tub and keep it in the fridge for up to 3 days. Make each sandwich on the day, so the bread stays fresh.', uses: ['bread'] }
+  ],
+  notes: [
+    { title: 'Ham Weeks', text: 'When there is no roast chicken, use 140g of ham, torn into pieces, in place of the chicken.' },
+    { title: 'Calories', text: 'Each sandwich comes to about 450 to 500 calories with two slices of bread.' },
+    { title: 'For Ted', text: 'Give Ted plain chicken from the roast, because the salted kale and Parmesan make the filling too salty for him.' }
+  ]
+},
+{
   slug: 'roast-pork-belly', title: 'Roast Pork Belly with Mash, Carrots and Broccoli', short: 'Roast pork belly',
   description: 'Thick strips of pork belly cooked slowly in the air fryer until soft, then blasted for crackling, with mash, carrots, broccoli and cavolo nero.',
   serves: 2, prep: 15, cook: 110, airC: 160, course: 'Dinners', cuisine: 'British', main: 'Pork', labels: ['Weekend', 'Ted can share'],

@@ -10,7 +10,7 @@ const SITE = process.env.SITE_URL || 'https://tc-blip-crumbs.github.io/toms-reci
 const BASE = process.env.SITE_BASE !== undefined ? process.env.SITE_BASE : '/toms-recipes';
 const NAME = "Tom's Recipes";
 const INDEXABLE = false; // Some recipes are adapted from paid sources, so search engines are asked to skip the site.
-const COURSES = ['Dinners', 'For Ted', 'Puddings', 'Baking', 'Breakfast & Drinks', 'Basics'];
+const COURSES = ['Dinners', 'Lunches', 'For Ted', 'Puddings', 'Baking', 'Breakfast & Drinks', 'Basics'];
 const plans = require('./plans.js');
 const bySlug = Object.fromEntries(recipes.map(r => [r.slug, r]));
 const LABELS = ['Weeknight', 'Batch cook', 'Freezes well', 'Ted can share', 'Quick', 'Weekend', 'Vegan'];
@@ -272,7 +272,7 @@ ${foot}<script src="/assets/plan-page.js"></script>
 }
 function plansIndex() {
   const list = [...plans].reverse().map(p => `<li><a class="card plan-card" href="/plans/${p.id}/" data-start="${p.start}">
-    <p class="eyebrow"><span class="week-badge" hidden></span>${esc(p.people.map(x => x.name).join(' and ').replace(' and Tom & Sophie', ', Tom & Sophie'))}</p>
+    <p class="eyebrow"><span class="week-badge" hidden></span>${esc(p.people.map(x => x.name).join(', '))}</p>
     <h3>${esc(p.title)}</h3><p class="desc">${range(p)}</p></a></li>`).join('');
   return head({ title: `Meal Plans | ${NAME}`, description: 'Weekly meal plans for Ted, Tom and Sophie.', canonical: `${SITE}/plans/`, nav: 'plans' }) + `
 <main id="main" class="wrap">

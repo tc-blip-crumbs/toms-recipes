@@ -2,7 +2,7 @@
 const recipes = require('./recipes.js');
 const Scale = require('./scale.js');
 const LABELS = ['Batch cook', 'Freezes well', 'Ted can share', 'Weeknight', 'Weekend', 'Quick', 'Vegan'];
-const COURSES = ['Dinners', 'For Ted', 'Puddings', 'Baking', 'Breakfast & Drinks', 'Basics'];
+const COURSES = ['Dinners', 'Lunches', 'For Ted', 'Puddings', 'Baking', 'Breakfast & Drinks', 'Basics'];
 const UNITS = ['g', 'ml', 'tsp', 'tbsp', 'tin', undefined];
 const SCALES = ['weight', 'spoon', 'halve', 'whole', 'wholeUp', 'tin', 'fixed'];
 const BANNED = [

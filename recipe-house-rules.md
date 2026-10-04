@@ -69,6 +69,7 @@ Batch-cook recipes, such as the carnitas, burnt onion beef, Bolognese and red le
 ## 5. Meal planning
 - Plan leftovers forward. Rice cooked for one dinner, using 75g for each person and twice that weight of water in the Sistema microwave rice cooker, feeds Ted's rice dish the next day. A roast leaves chicken for the next day's meals, and batch cooking fills the freezer.
 - Each plan says where a meal's food comes from, such as "Uses rice left from Friday's curry".
+- Plans list Tom's breakfasts and lunches on their own tab. A meal gets a recipe page only when it has real quantities and steps, such as the roast chicken Caesar sandwich. Simple meals, such as a yoghurt bowl or beans on toast, appear in the plan as plain text with their amounts.
 - Dishes that need cold cooked rice, such as egg fried rice, go on the day after a rice dinner, never the same day.
 
 ## 6. How the site works
