@@ -52,8 +52,8 @@ function week(w) {
     w.tedMonday || [t('At nursery'), w.mondayTed || r('chicken-couscous', { note: 'Uses chicken left from Sunday\'s roast. Shred it into the couscous and warm it through until piping hot.' })],
     [t('At nursery'), r('spinach-omelette-wedges')],
     [t('At nursery'), r('red-lentil-curry', { label: 'Red Lentil Curry with Rice', note: 'Shared with you, from Ted\'s tub in the freezer.' })],
-    [r('potato-cakes', { note: 'With Granny. Made on Wednesday.' }), r('mini-pork-meatballs', { note: 'From the freezer. Defrost on Wednesday night.' })],
-    [r('eggy-crumpet'), r('tomato-fusilli', w.friday ? {} : { note: 'The Bolognese is too salty for Ted.' })],
+    [r('potato-cakes', { note: 'With Granny. Made on Wednesday.' }), r('tomato-fusilli', { note: 'With Granny. Made on Wednesday.' })],
+    [r('eggy-crumpet'), r('jacket-potato-cheddar-beans', w.friday ? {} : { note: 'The Bolognese is too salty for Ted.' })],
     [r('banana-oat-pancakes'), r('pea-risotto')],
     [w.tedSundayLunch || r('scrambled-egg-toast-avocado'), w.pork ? r('roast-pork-belly', { label: 'Pork Belly with Mash, Carrots and Broccoli', note: 'Shared with you.' }) : r('roast-chicken', { label: 'Roast Chicken with Mash, Carrots and Broccoli', note: 'Shared with you.', serves: 4 })]
   ];
@@ -70,7 +70,7 @@ function week(w) {
     'Sunday night. Move a tub of chilli to the fridge for Monday.',
     'Monday night. Move a tub of carnitas pork to the fridge for Tuesday.',
     'Tuesday night. Move the curry for Wednesday, one more portion for Tom\'s lunch on Thursday, and one of Ted\'s curry tubs to the fridge.',
-    'Wednesday night. Move a tub of beef and a portion of Ted\'s meatballs to the fridge for Thursday.'
+    'Wednesday night. Move a tub of beef to the fridge for Thursday.'
   ];
   if (!w.friday) freezer.push('Thursday night. Move a tub of Bolognese to the fridge for Friday.');
   if (!w.pork) freezer.push('Friday morning. Move the chicken to the fridge for Sunday.');
@@ -85,7 +85,7 @@ function week(w) {
         intro: 'Nursery on Monday, Tuesday and Wednesday, where Ted has lunch and tea, so he has a small supper at home. Granny on Thursday, with both meals made ahead. The same week repeats until 1 November.',
         rows: DAYS.map((d, i) => [d, ted[i][0], ted[i][1], t(fruit[i])]),
         boxes: [
-          { title: 'Thursday with Granny', text: 'Make the potato cakes on Wednesday evening and move a portion of meatballs from the freezer to the fridge. Granny can serve the potato cakes cold or warmed through. She should reheat the meatballs and their sauce until piping hot and let them cool before serving. Pack a pot of yoghurt and the cut fruit in the same bag.' }
+          { title: 'Thursday with Granny', text: 'Make the potato cakes and the fusilli on Wednesday evening and keep them in labelled tubs in the fridge. Granny can serve the potato cakes cold or warmed through. She should reheat the fusilli until piping hot with a splash of milk and let it cool before serving. Pack a pot of yoghurt and the cut fruit in the same bag.' }
         ]
       },
       {
@@ -111,7 +111,7 @@ module.exports = [
     n: 0, id: '2026-10-05', title: 'Week of 5 October',
     intro: 'The first of four repeating weeks. Everything from Monday to Friday is batch cooked on Saturday 3 and Sunday 4 October.',
     mondayTed: r('cheese-on-toast-fingers', { note: 'No roast the day before this week.' }),
-    tedMonday: [r('scrambled-egg-toast-avocado', { note: 'Home from nursery before lunch today.' }), r('mini-pork-meatballs', { label: 'Mini Pork Meatballs with Fusilli', note: 'Uses the spare portion of meatballs from the freezer. Defrost it in the microwave and reheat until piping hot.' })],
+    tedMonday: [r('scrambled-egg-toast-avocado', { note: 'Home from nursery before lunch today.' }), r('egg-fried-rice', { note: 'There is no rice from yesterday, so cook 40g of rice at lunchtime. Spread it on a plate to cool, get it into the fridge within an hour, and fry it at teatime.' })],
     tuesday: r('carnitas-tacos', { note: 'Movie night with 2 guests, so this makes 4 portions.', serves: 4 }),
     saturday: r('pork-larb', { note: 'Cook 40g more rice and 80ml more water than the recipe says, which leaves enough for Ted\'s egg fried rice on Sunday. Use a 500g pack of 5% fat pork mince.' }), saturdayWhen: '20 minutes on the night', saturdayMeat: 'pork mince',
     tedSundayLunch: r('egg-fried-rice', { note: 'Uses rice left from Saturday\'s larb.' }),
@@ -119,8 +119,7 @@ module.exports = [
       { title: 'Saturday 3 October Batch Cook', list: [
         'Morning. Cook one batch of the beef, which uses 2.7kg of shin and makes 8 servings, in the oven at 160°C for 3½ hours. Use your largest casserole, or split it between 2.',
         'While the beef cooks, make the red lentil curry at 3× the batch. Leave out the chilli, chilli powder and salt, spoon out 4 small portions for Ted before the almond butter goes in, then fry the chilli and chilli powder in a little oil and stir them into the rest with the salt and almond butter.',
-        'Afternoon. Make Ted\'s meatballs in the air fryer, using 1 pack of the pork mince.',
-        'Evening. Cool everything and freeze it. The beef goes in 4 tubs of 2 portions, the curry in 2-portion tubs with Ted\'s in small tubs, and the meatballs in 5 portions with their sauce. Make the butter beans fresh on the night you eat the beef.'
+        'Evening. Cool everything and freeze it. The beef goes in 4 tubs of 2 portions, the curry in 2-portion tubs with Ted\'s in small tubs. Make the butter beans fresh on the night you eat the beef.'
       ] },
       { title: 'Sunday 4 October Batch Cook', list: [
         'Morning. Make one batch of the carnitas, which is the 2.5kg joint and makes about 10 servings. It cooks on low in the slow cooker for 9 to 10 hours.',
