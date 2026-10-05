@@ -135,7 +135,7 @@ module.exports = [
       t('The chilli con carne that came out of the freezer for Monday dinner. It defrosted on Sunday night, so eat it today. Serve it with 75g of rice each, cooked on Monday night and cooled within an hour, and reheat both until piping hot. If the chilli is still in the freezer, leave it there and have the second portion of beef stew.', k(720, 580, '350g chilli, 230g cooked rice from 75g dry'))
     ],
     monday: [
-      r('sausage-mash-gravy-cabbage', Object.assign({ label: 'Sausage and Mash with Chipolatas', note: 'In place of the chilli. Uses the 10 chipolatas from the freezer, 5 each, in place of the Cumberland sausages. Cook them from frozen, which takes a few minutes longer, until there is no pink in the middle.' }, k(850, 760, '5 chipolatas weighing 110g cooked, 430g mash, 150g cabbage, 70ml gravy'))),
+      r('sausage-mash-gravy-cabbage', Object.assign({ label: 'Sausage and Mash with Chipolatas', note: 'In place of the chilli. Uses the 10 chipolatas from the freezer, 5 each, in place of the Cumberland sausages. Cook them from frozen, which takes a few minutes longer, until there is no pink in the middle.' }, k(875, 840, '5 chipolatas weighing 110g cooked, 430g mash, 150g cabbage, 150ml gravy'))),
       t('Chipolatas from the freezer, 35 minutes on the night')
     ],
     freezerExtra: ['Monday night. Freeze the second portion of beef stew if the chilli is in the fridge for Tuesday lunch.'],
