@@ -52,6 +52,7 @@ ${INDEXABLE ? '' : '<meta name="robots" content="noindex">\n'}<link rel="canonic
 <meta property="og:url" content="${canonical}">
 <meta name="theme-color" content="#f4f3ef" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#151412" media="(prefers-color-scheme: dark)">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,7 +61,8 @@ ${INDEXABLE ? '' : '<meta name="robots" content="noindex">\n'}<link rel="canonic
 ${extra}</head>
 <body>
 <a class="visually-hidden" href="#main">Skip to content</a>
-<header class="site-header"><div class="wrap"><a class="brand" href="/">Tom's <span>Recipes</span></a><nav class="site-nav" aria-label="Main"><a href="/"${nav === 'recipes' ? ' aria-current="page"' : ''}>Recipes</a><a href="/plans/"${nav === 'plans' ? ' aria-current="page"' : ''}>Meal Plans</a></nav></div></header>
+<header class="site-header"><div class="wrap"><a class="brand" href="/">Tom's <span>Recipes</span></a><nav class="site-nav" aria-label="Main"><a href="/"${nav === 'recipes' ? ' aria-current="page"' : ''}>Recipes</a><a href="/plans/"${nav === 'plans' ? ' aria-current="page"' : ''}>Meal Plans</a><button type="button" class="theme-btn" id="theme-btn" aria-label="Colour theme">Auto</button></nav></div></header>
+<script>(function(){var b=document.getElementById("theme-btn"),r=document.documentElement,o=["auto","light","dark"],n={auto:"Auto",light:"Light",dark:"Dark"};function g(){try{return localStorage.getItem("theme")||"auto"}catch(e){return"auto"}}function s(v){if(v==="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",v);try{localStorage.setItem("theme",v)}catch(e){}b.textContent=n[v];b.setAttribute("aria-label","Colour theme: "+n[v]+". Tap to change.")}s(g());b.addEventListener("click",function(){s(o[(o.indexOf(g())+1)%3])})})();</script>
 `;
 }
 const foot = `<footer class="site-footer"><div class="wrap"><span>${NAME}</span><span>Recipes in UK measures. Oven temperatures are for a fan oven.</span></div></footer>

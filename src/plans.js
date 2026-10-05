@@ -65,7 +65,7 @@ function week(w) {
       ? [r('red-lentil-curry', { note: 'Moved from Wednesday this week.' }), t('From the freezer')]
       : [r('red-wine-burnt-onion-beef', { note: 'Box about a third of Tom\'s portion before you sit down, for his lunch on Friday.' }), t('Beef from the freezer, butter beans in 20 minutes')],
     w.beefFriday
-      ? [r('red-wine-burnt-onion-beef', { note: 'Moved from Thursday this week, in place of the Bolognese.' }), t('Beef from the freezer, butter beans in 20 minutes')]
+      ? (w.fridayAdults || [r('red-wine-burnt-onion-beef', { note: 'Moved from Thursday this week, in place of the Bolognese.' }), t('Beef from the freezer, butter beans in 20 minutes')])
       : [w.friday || r('batalis-bolognese'), w.friday ? t('Nothing to cook') : t('From the freezer, pasta in 12 minutes')],
     [w.saturday, t(w.saturdayWhen)],
     [w.pork ? r('roast-pork-belly', { note: 'Shared with Ted. One pork belly chunky each.' }) : r('roast-chicken', { note: 'Shared with Ted. Keep about 140g of chicken for Tom\'s sandwiches and a little for Ted\'s couscous.', serves: 4 }), t('Cooked on the day')]
@@ -76,7 +76,7 @@ function week(w) {
     w.beefFriday ? 'Tuesday night. Move one of Ted\'s curry tubs to the fridge for Wednesday.' : 'Tuesday night. Move the curry for Wednesday, one more portion for Tom\'s lunch on Thursday, and one of Ted\'s curry tubs to the fridge.',
     w.beefFriday ? 'Wednesday night. Move 2 portions of curry to the fridge for Thursday.' : 'Wednesday night. Move a tub of beef to the fridge for Thursday.'
   ];
-  if (w.beefFriday) freezer.push('Thursday night. Move a tub of beef to the fridge for Friday, and Tom\'s frozen rice for Friday lunch.');
+  if (w.beefFriday) freezer.push(w.fridayAdults ? 'Thursday night. Move Tom\'s frozen rice to the fridge for Friday lunch.' : 'Thursday night. Move a tub of beef to the fridge for Friday, and Tom\'s frozen rice for Friday lunch.');
   if (!w.friday && !w.beefFriday) freezer.push('Thursday night. Move a tub of Bolognese to the fridge for Friday.');
   if (!w.pork) freezer.push('Friday morning. Move the chicken to the fridge for Sunday.');
   freezer.push('Friday night. Move the ' + w.saturdayMeat + ' to the fridge for Saturday.');
@@ -117,6 +117,7 @@ module.exports = [
     intro: 'The first of four repeating weeks. Everything from Monday to Friday is batch cooked on Saturday 3 and Sunday 4 October.',
     mondayTed: r('cheese-on-toast-fingers', { note: 'No roast the day before this week.' }),
     beefFriday: true,
+    fridayAdults: [t('Tom is out. Sophie has fish fingers.'), t('About 15 minutes in the air fryer')],
     wednesday: r('hainanish-soy-poached-chicken', { note: 'Uses a whole chicken from the freezer, moved to the fridge on Monday night. It makes about 6 portions. Box 2 portions with rice and broth for Tom\'s lunches on Thursday and Friday, and freeze the rest with some broth. Freeze Friday\'s rice as soon as it has cooled, because cooked rice keeps only a day in the fridge.', serves: 4 }),
     wednesdayWhen: '1 hour 30 minutes of poaching, 30 minutes of work',
     tedMonday: [r('scrambled-egg-toast-avocado', { note: 'Home from nursery before lunch today.' }), r('egg-fried-rice', { note: 'There is no rice from yesterday, so cook 40g of rice at lunchtime. Spread it on a plate to cool, get it into the fridge within an hour, and fry it at teatime.' })],

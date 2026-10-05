@@ -247,7 +247,7 @@ a.tag:hover { background: var(--accent-soft); }
 @media print {
   :root { --ink: #111; --muted: #555; --line: #d8d4cb; --accent: #a3321c; --surface: #fff; --bg: #fff; --chip: #f1eee8; color-scheme: light; }
   body { background: #fff; color: #111; font-size: 10pt; line-height: 1.45; }
-  .site-header, .toolbar, .actions, .crumbs, .site-footer, .timers, .cook, .chips, .tags, .pan-note, .screen-only, .serve-ctl .stepper button { display: none !important; }
+  .site-header, .theme-btn, .toolbar, .actions, .crumbs, .site-footer, .timers, .cook, .chips, .tags, .pan-note, .screen-only, .serve-ctl .stepper button { display: none !important; }
   .print-only { display: block; }
   .wrap { max-width: none; padding: 0; }
   .recipe-head { padding: 0 0 8pt; }
@@ -291,6 +291,8 @@ a.tag:hover { background: var(--accent-soft); }
 .site-nav { display: flex; gap: 4px; }
 .site-nav a { text-decoration: none; font-weight: 600; font-size: .95rem; color: var(--muted); padding: 7px 12px; border-radius: 999px; }
 .site-nav a:hover { color: var(--ink); background: var(--chip); }
+.theme-btn { border: 1px solid var(--line); background: none; color: var(--muted); font: inherit; font-weight: 600; font-size: .85rem; padding: 6px 11px; border-radius: 999px; cursor: pointer; }
+.theme-btn:hover { color: var(--ink); background: var(--chip); }
 .site-nav a[aria-current="page"] { color: var(--ink); background: var(--chip); }
 .this-week { margin: 18px 0 4px; }
 .this-week a { display: inline-flex; gap: 8px; align-items: center; font-weight: 700; color: var(--accent); text-decoration: none; background: var(--accent-soft); padding: 9px 16px; border-radius: 999px; }
