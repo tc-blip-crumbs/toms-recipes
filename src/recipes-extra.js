@@ -424,7 +424,6 @@ module.exports = [
     { text: 'Pack the filling in a tub and keep it in the fridge for up to 3 days. Make each sandwich on the day, so the bread stays fresh.', uses: ['bread'] }
   ],
   notes: [
-    { title: 'Ham Weeks', text: 'When there is no roast chicken, use 140g of ham, torn into pieces, in place of the chicken.' },
     { title: 'Calories', text: 'Each sandwich comes to about 450 to 500 calories with two slices of bread.' },
     { title: 'For Ted', text: 'Give Ted plain chicken from the roast, because the salted cavolo nero and Parmesan make the filling too salty for him.' }
   ]
