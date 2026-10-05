@@ -17,7 +17,7 @@ function tomLunch(w) {
     r('roast-chicken-caesar-sandwich', { label: ham ? 'Ham Caesar Sandwich, Second Lunch' : 'Chicken Caesar Sandwich, Second Lunch' }),
     t('Jacket potato with half a jar of Bold Bean baked beans and 20g of cheddar, or with cottage cheese and ham. A piece of fruit.'),
     t('A portion of red lentil curry from the freezer, with a handful of frozen spinach stirred in. A slice of toast if you are still hungry.'),
-    t('A small tub of Thursday\'s beef, potatoes and carrots, with a slice of toast and a piece of fruit.'),
+    w.beefFriday ? t('Thursday\'s spare chicken breast, sliced, with a tub of the rice and broth. Reheat until piping hot. A piece of fruit.') : t('A small tub of Thursday\'s beef, potatoes and carrots, with a slice of toast and a piece of fruit.'),
     t('An omelette made with 3 eggs, ham and 30g of cheddar, with cherry tomatoes cooked in the pan and a slice of toast.'),
     t('Beans on toast with a poached egg.')
   ];
@@ -61,8 +61,12 @@ function week(w) {
     [t('Chilli Con Carne'), t('From the freezer')],
     [w.tuesday || r('carnitas-tacos'), t('From the freezer, crisped in 15 minutes')],
     [w.wednesday || r('red-lentil-curry', { note: 'Shared with Ted. Cook 75g of rice for each of you and a little for Ted.' }), t('From the freezer')],
-    [r('red-wine-burnt-onion-beef', { note: 'Box about a third of Tom\'s portion before you sit down, for his lunch on Friday.' }), t('Beef from the freezer, butter beans in 20 minutes')],
-    [w.friday || r('batalis-bolognese'), w.friday ? t('Nothing to cook') : t('From the freezer, pasta in 12 minutes')],
+    w.beefFriday
+      ? [r('hainanish-soy-poached-chicken', { note: 'Use 3 chicken breasts in place of the whole chicken, following the Chicken Breasts note. The third breast, with some rice and broth, is Tom\'s lunch on Friday.' }), t('35 minutes of poaching, 30 minutes of work')]
+      : [r('red-wine-burnt-onion-beef', { note: 'Box about a third of Tom\'s portion before you sit down, for his lunch on Friday.' }), t('Beef from the freezer, butter beans in 20 minutes')],
+    w.beefFriday
+      ? [r('red-wine-burnt-onion-beef', { note: 'Moved from Thursday this week, in place of the Bolognese.' }), t('Beef from the freezer, butter beans in 20 minutes')]
+      : [w.friday || r('batalis-bolognese'), w.friday ? t('Nothing to cook') : t('From the freezer, pasta in 12 minutes')],
     [w.saturday, t(w.saturdayWhen)],
     [w.pork ? r('roast-pork-belly', { note: 'Shared with Ted. One pork belly chunky each.' }) : r('roast-chicken', { note: 'Shared with Ted. Keep about 140g of chicken for Tom\'s sandwiches and a little for Ted\'s couscous.', serves: 4 }), t('Cooked on the day')]
   ];
@@ -70,9 +74,9 @@ function week(w) {
     'Sunday night. Move a tub of chilli to the fridge for Monday.',
     'Monday night. Move a tub of carnitas pork to the fridge for Tuesday.',
     'Tuesday night. Move the curry for Wednesday, one more portion for Tom\'s lunch on Thursday, and one of Ted\'s curry tubs to the fridge.',
-    'Wednesday night. Move a tub of beef to the fridge for Thursday.'
+    w.beefFriday ? 'Thursday night. Move a tub of beef to the fridge for Friday.' : 'Wednesday night. Move a tub of beef to the fridge for Thursday.'
   ];
-  if (!w.friday) freezer.push('Thursday night. Move a tub of Bolognese to the fridge for Friday.');
+  if (!w.friday && !w.beefFriday) freezer.push('Thursday night. Move a tub of Bolognese to the fridge for Friday.');
   if (!w.pork) freezer.push('Friday morning. Move the chicken to the fridge for Sunday.');
   freezer.push('Friday night. Move the ' + w.saturdayMeat + ' to the fridge for Saturday.');
   if (w.pork) freezer.push('Saturday night. Move 2 pork belly chunkies to the fridge for Sunday.');
@@ -111,6 +115,7 @@ module.exports = [
     n: 0, id: '2026-10-05', title: 'Week of 5 October',
     intro: 'The first of four repeating weeks. Everything from Monday to Friday is batch cooked on Saturday 3 and Sunday 4 October.',
     mondayTed: r('cheese-on-toast-fingers', { note: 'No roast the day before this week.' }),
+    beefFriday: true,
     tedMonday: [r('scrambled-egg-toast-avocado', { note: 'Home from nursery before lunch today.' }), r('egg-fried-rice', { note: 'There is no rice from yesterday, so cook 40g of rice at lunchtime. Spread it on a plate to cool, get it into the fridge within an hour, and fry it at teatime.' })],
     tuesday: r('carnitas-tacos', { note: 'Movie night with 2 guests, so this makes 4 portions.', serves: 4 }),
     saturday: r('pork-larb', { note: 'Cook 40g more rice and 80ml more water than the recipe says, which leaves enough for Ted\'s egg fried rice on Sunday. Use a 500g pack of 5% fat pork mince.' }), saturdayWhen: '20 minutes on the night', saturdayMeat: 'pork mince',
