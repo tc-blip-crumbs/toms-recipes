@@ -233,16 +233,26 @@ function range(p) {
   const sm = MONTHS[s.getUTCMonth()], em = MONTHS[e.getUTCMonth()];
   return `Monday ${s.getUTCDate()}${sm === em ? '' : ' ' + sm} to Sunday ${e.getUTCDate()} ${em}`;
 }
+function kcalHTML(c) {
+  if (c.kcal === undefined) return '';
+  return `<span class="cell-kcal">About ${c.kcal.toLocaleString('en-GB')} kcal · ${c.g}g a person</span><span class="cell-portion">${esc(c.parts)}</span>`;
+}
 function cellHTML(c, person) {
-  if (c.t) return `<span class="plain">${esc(c.t)}</span>`;
+  if (c.t) return `<span class="plain">${esc(c.t)}</span>${kcalHTML(c)}`;
   const rec = bySlug[c.r];
   const serves = c.serves || person.serves;
   const href = `/recipes/${rec.slug}/` + (rec.yield ? '' : `?serves=${serves}`);
-  return `<a href="${href}">${esc(c.label || rec.title)}</a>${c.note ? `<span class="cell-note">${esc(c.note)}</span>` : ''}`;
+  return `<a href="${href}">${esc(c.label || rec.title)}</a>${c.note ? `<span class="cell-note">${esc(c.note)}</span>` : ''}${kcalHTML(c)}`;
 }
 function planPanel(p, person, i) {
   const id = 'who-' + slugify(person.name);
-  const rows = person.rows.map(([day, ...cells]) => `<tr data-day="${day}"><th scope="row">${day}</th>${cells.map((c, n) => `<td data-label="${esc(person.columns[n])}">${cellHTML(c, person)}</td>`).join('')}</tr>`).join('');
+  const dayKcal = cells => {
+    if (!person.dayTotal) return '';
+    const meals = cells.slice(0, 3);
+    if (meals.some(c => c.kcal === undefined || c.noTotal)) return '';
+    return `<span class="day-kcal">${meals.reduce((n, c) => n + c.kcal, 0).toLocaleString('en-GB')} kcal</span>`;
+  };
+  const rows = person.rows.map(([day, ...cells]) => `<tr data-day="${day}"><th scope="row">${day}${dayKcal(cells)}</th>${cells.map((c, n) => `<td data-label="${esc(person.columns[n])}">${cellHTML(c, person)}</td>`).join('')}</tr>`).join('');
   const boxes = (person.boxes || []).map(b => `<div class="plan-box"><h3>${esc(b.title)}</h3>${b.text ? `<p>${esc(b.text)}</p>` : ''}${b.list ? `<ol>${b.list.map(x => `<li>${esc(x)}</li>`).join('')}</ol>` : ''}</div>`).join('');
   const guide = person.name === 'Ted' ? `<p class="source"><a href="/plans/teds-food-guide/">Ted's Food Guide</a></p>` : '';
   return `<section class="plan-panel" id="${id}" role="tabpanel" aria-label="${esc(person.name)}"${i ? ' hidden' : ''}>

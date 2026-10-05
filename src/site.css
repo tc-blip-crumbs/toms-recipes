@@ -316,6 +316,9 @@ a.tag:hover { background: var(--accent-soft); }
 .plan-table a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 .plan-table .plain { color: var(--muted); }
 .cell-note { display: block; font-size: .85rem; color: var(--muted); margin-top: 2px; }
+.cell-kcal { display: block; font-size: .8rem; font-weight: 700; color: var(--accent); margin-top: 6px; }
+.cell-portion { display: block; font-size: .8rem; color: var(--muted); }
+.day-kcal { display: block; font-size: .78rem; font-weight: 600; color: var(--muted); margin-top: 4px; }
 .plan-table tr.is-today { background: var(--accent-soft); }
 .today-tag { display: block; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-top: 2px; }
 .plan-box { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
