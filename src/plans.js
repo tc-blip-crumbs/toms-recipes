@@ -62,7 +62,7 @@ function week(w) {
     [w.tuesday || r('carnitas-tacos'), t('From the freezer, crisped in 15 minutes')],
     [w.wednesday || r('red-lentil-curry', { note: 'Shared with Ted. Cook 75g of rice for each of you and a little for Ted.' }), t('From the freezer')],
     w.beefFriday
-      ? [r('hainanish-soy-poached-chicken', { note: 'Use 3 chicken breasts in place of the whole chicken, following the Chicken Breasts note. The third breast, with some rice and broth, is Tom\'s lunch on Friday.' }), t('35 minutes of poaching, 30 minutes of work')]
+      ? [r('hainanish-soy-poached-chicken', { note: 'Use 3 chicken breasts in place of the whole chicken, following the Chicken Breasts note. The third breast, with some rice and broth, is Tom\'s lunch on Friday.', serves: 3 }), t('35 minutes of poaching, 30 minutes of work')]
       : [r('red-wine-burnt-onion-beef', { note: 'Box about a third of Tom\'s portion before you sit down, for his lunch on Friday.' }), t('Beef from the freezer, butter beans in 20 minutes')],
     w.beefFriday
       ? [r('red-wine-burnt-onion-beef', { note: 'Moved from Thursday this week, in place of the Bolognese.' }), t('Beef from the freezer, butter beans in 20 minutes')]
