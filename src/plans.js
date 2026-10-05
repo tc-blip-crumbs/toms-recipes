@@ -49,7 +49,7 @@ const VEG_BOX = { title: 'Extra Fruit & Veg', list: [
 function week(w) {
   const fruit = FRUIT[w.n % 2];
   const ted = [
-    [t('At nursery'), w.mondayTed || r('chicken-couscous', { note: 'Uses chicken left from Sunday\'s roast. Shred it into the couscous and warm it through until piping hot.' })],
+    w.tedMonday || [t('At nursery'), w.mondayTed || r('chicken-couscous', { note: 'Uses chicken left from Sunday\'s roast. Shred it into the couscous and warm it through until piping hot.' })],
     [t('At nursery'), r('spinach-omelette-wedges')],
     [t('At nursery'), r('red-lentil-curry', { label: 'Red Lentil Curry with Rice', note: 'Shared with you, from Ted\'s tub in the freezer.' })],
     [r('potato-cakes', { note: 'With Granny. Made on Wednesday.' }), r('mini-pork-meatballs', { note: 'From the freezer. Defrost on Wednesday night.' })],
@@ -111,6 +111,7 @@ module.exports = [
     n: 0, id: '2026-10-05', title: 'Week of 5 October',
     intro: 'The first of four repeating weeks. Everything from Monday to Friday is batch cooked on Saturday 3 and Sunday 4 October.',
     mondayTed: r('cheese-on-toast-fingers', { note: 'No roast the day before this week.' }),
+    tedMonday: [r('scrambled-egg-toast-avocado', { note: 'Home from nursery before lunch today.' }), r('mini-pork-meatballs', { label: 'Mini Pork Meatballs with Fusilli', note: 'Uses the spare portion of meatballs from the freezer. Defrost it in the microwave and reheat until piping hot.' })],
     tuesday: r('carnitas-tacos', { note: 'Movie night with 2 guests, so this makes 4 portions.', serves: 4 }),
     saturday: r('pork-larb', { note: 'Cook 40g more rice and 80ml more water than the recipe says, which leaves enough for Ted\'s egg fried rice on Sunday. Use a 500g pack of 5% fat pork mince.' }), saturdayWhen: '20 minutes on the night', saturdayMeat: 'pork mince',
     tedSundayLunch: r('egg-fried-rice', { note: 'Uses rice left from Saturday\'s larb.' }),
