@@ -131,7 +131,7 @@ module.exports = [
     mondayTed: r('cheese-on-toast-fingers', { note: 'No roast the day before this week.' }),
     beefFriday: true,
     monTueLunch: [
-      t('Leftover beef stew from the batch cook.', k(790, 550, '550g beef stew')),
+      t('Leftover beef stew from the batch cook, with a Veetee microwave pouch of jasmine rice.', k(670, 450, '250g beef stew, 200g rice')),
       t('The chilli con carne that came out of the freezer for Monday dinner. It defrosted on Sunday night, so eat it today. Serve it with 75g of rice each, cooked on Monday night and cooled within an hour, and reheat both until piping hot. If the chilli is still in the freezer, leave it there and have the second portion of beef stew.', k(720, 580, '350g chilli, 230g cooked rice from 75g dry'))
     ],
     monday: [
