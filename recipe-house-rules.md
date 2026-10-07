@@ -4,7 +4,7 @@
 1. Title, in UK spelling, with "and" in place of "&".
 2. One sentence saying what the dish is.
 3. A line of facts. Serves, preparation time, cooking time, oven temperature if the oven is used.
-4. Labels from a fixed list, such as Batch cook, Freezes well, Ted can share, Weeknight, Weekend. The site shows only Ted can share and Freezes well.
+4. Labels from a fixed list, such as Batch cook, Freezes well, Ted can share, Weeknight, Weekend. The labels stay in the recipe data, and the site no longer shows them.
 5. Equipment, only when the recipe needs something beyond pans and a baking tray, such as a slow cooker or a 23 x 33cm tin.
 6. Ingredients, in the order you use them. Recipes with separate parts get group headings such as "For the beef" and "For the beans".
 7. Method, as numbered steps. Each step shows the ingredients it uses.

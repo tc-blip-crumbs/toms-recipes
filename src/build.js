@@ -23,7 +23,7 @@ function artImg(slug, alt, sizes, eager) {
   const a = `/assets/illustrations/${slug}`;
   return `<img src="${a}-400.webp" srcset="${a}-400.webp 400w, ${a}-800.webp 800w" sizes="${sizes}" width="400" height="400" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy" decoding="async"'}>`;
 }
-const LABELS = ['Ted can share', 'Freezes well']; // Only these labels show on the site.
+const LABELS = []; // Labels stay in the recipe data but no longer show on the site.
 const FAN = '';
 const DIST = path.join(__dirname, '..', 'dist');
 const DEFAULT_SERVINGS = 2;
@@ -90,6 +90,7 @@ function facts(r) {
 }
 
 function tagHTML(r, link) {
+  if (!r.labels.some(l => LABELS.includes(l))) return '';
   return '<ul class="tags">' + r.labels.filter(l => LABELS.includes(l)).map(l => link
     ? `<li><a class="tag${l === 'Ted can share' ? ' ted' : ''}" href="/?q=${encodeURIComponent(l)}">${esc(l)}</a></li>`
     : `<li><span class="tag${l === 'Ted can share' ? ' ted' : ''}">${esc(l)}</span></li>`).join('') + '</ul>';
