@@ -31,7 +31,7 @@ const EGGS = t('Eggs, toast and bacon', k(375, 175, '2 eggs, 1 slice of toast we
 const TOM_BREAKFAST = [YOG, YOG, YOG, YOG, YOG, EGGS, EGGS];
 const BOLOGNESE_LUNCH = k(900, 465, '320g sauce, 145g cooked pasta from 60g dry' + FRUIT_NOTE);
 // const CHICKEN_POT = 'Uses a whole chicken from the freezer, moved to the fridge on Monday night. It feeds the 2 of you tonight, and everything left goes into Thursday\'s soup, so keep the leftover chicken and about 1 litre of the poaching broth.';
-const SOUP = t('Chicken and sweetcorn soup', Object.assign({ note: 'Made on Wednesday night.' }, k(330, 350, '')));
+const SOUP = r('chicken-sweetcorn-soup', Object.assign({ note: 'Made on Wednesday night.', serves: 2 }, k(385, 400, '')));
 const CHICKEN_LUNCH = k(650, 480, '150g chicken, 200g cooked rice, 130ml broth' + FRUIT_NOTE);
 function tomLunch(w) {
   return [
@@ -54,7 +54,7 @@ const TOM_BOXES = [
   { title: 'Lunch Notes', list: [
     'Jacket potato. Prick the potato and microwave it at work for 8 to 10 minutes, then heat the beans for 1 to 2 minutes.',
     'Friday. Buy 2 pots of Sainsbury\'s Petits Pois & Crème Fraîche soup in the weekly shop.',
-    'Soup day. Thursday\'s soup uses the chicken and broth left from Wednesday dinner. Buy a tin of sweetcorn and the other soup ingredients in the weekly shop.',
+    'Soup day. Thursday\'s soup uses the chicken and broth left from Wednesday dinner. Buy 2 corn on the cob and the other soup ingredients in the weekly shop.',
     'Fruit. Pack a piece of fruit, such as an apple, a pear or a satsuma, with every weekday lunch.'
   ] },
   { title: 'Daily Target', text: 'About 1,900 calories a day for Tom, including about 250 for snacks.' }

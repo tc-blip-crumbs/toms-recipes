@@ -796,5 +796,48 @@ module.exports = [
     { title: 'Storing', text: 'Freeze spare chicken and broth together in portions. Reheat until piping hot and add the cucumber and spring onions at the end.' },
     { title: 'For Ted', text: 'Leave this one out for Ted, because the chicken poaches in soy sauce.' }
   ]
+},
+{
+  slug: 'chicken-sweetcorn-soup', title: 'Chicken and Sweetcorn Soup', short: 'Chicken and sweetcorn soup',
+  description: 'Leftover soy-poached chicken and fresh corn in a light broth, thickened with cornflour and finished with ribbons of egg, made on Wednesday night for two packed lunches.',
+  serves: 2, prep: 15, cook: 45, course: 'Lunches', cuisine: 'Chinese', main: 'Chicken', labels: ['Weeknight'],
+  source: { name: 'Adapted from Lose Weight for Good, by Tom Kerridge' },
+  groups: [
+    { name: 'For the Corn', items: [
+      { id: 'corn', qty: 2, name: 'corn on the cob', plural: 'corn on the cob', prep: 'about 200g each', scale: 'whole', ref: 'corn', chip: 'corn on the cob' },
+      { id: 'water', phrase: 'Cold water', prep: 'to cover', scale: 'fixed', ref: 'water', chip: 'water' }
+    ]},
+    { name: 'For the Soup', items: [
+      { id: 'vegoil', qty: 0.75, unit: 'tsp', name: 'vegetable oil', scale: 'spoon', liquid: true, ref: 'oil' },
+      { id: 'sesoil', qty: 0.75, unit: 'tsp', name: 'sesame oil', scale: 'spoon', liquid: true, ref: 'sesame oil' },
+      { id: 'onion', qty: 1, name: 'medium onion', plural: 'medium onions', prep: 'finely chopped', scale: 'halve', ref: 'onion', chip: 'onion' },
+      { id: 'garlic', qty: 1, name: 'garlic clove', plural: 'garlic cloves', prep: 'finely chopped', scale: 'whole', ref: 'garlic' },
+      { id: 'ginger', qty: 1, name: '2.5cm piece of fresh ginger', plural: '2.5cm pieces of fresh ginger', prep: 'finely grated', scale: 'halve', ref: 'ginger', chip: 'ginger' },
+      { id: 'broth', qty: 250, unit: 'ml', name: 'broth left from the soy poached chicken', scale: 'weight', ref: 'broth', chip: 'poaching broth' },
+      { id: 'cornwater', qty: 250, unit: 'ml', name: 'corn cooking water', scale: 'weight', ref: 'corn cooking water' },
+      { id: 'chicken', qty: 250, unit: 'g', name: 'leftover soy poached chicken', prep: 'skin removed, shredded', scale: 'weight', ref: 'chicken' },
+      { id: 'cornflour', qty: 1, unit: 'tbsp', name: 'cornflour', scale: 'spoon', ref: 'cornflour' },
+      { id: 'cold', qty: 1, unit: 'tbsp', name: 'cold water', scale: 'spoon', liquid: true, ref: 'water', chip: 'cold water' },
+      { id: 'soy', qty: 1.5, unit: 'tsp', name: 'light soy sauce', prep: 'to taste', scale: 'spoon', liquid: true, ref: 'soy sauce' },
+      { id: 'pepper', phrase: 'A pinch of ground white pepper', scale: 'fixed', ref: 'white pepper', chip: 'white pepper' },
+      { id: 'salt', phrase: 'Flaky sea salt', prep: 'to taste', scale: 'fixed', ref: 'salt', chip: 'sea salt' },
+      { id: 'egg', qty: 1, name: 'large egg', plural: 'large eggs', prep: 'lightly beaten', scale: 'whole', ref: 'egg' },
+      { id: 'sonions', qty: 2, name: 'spring onion', plural: 'spring onions', prep: 'finely sliced at an angle', scale: 'whole', ref: 'spring onions' }
+    ]}
+  ],
+  steps: [
+    { text: 'Put the corn on the cob in a large saucepan and cover it with the cold water. Bring it to the boil over a high heat, then simmer over a medium-low heat for 20 to 25 minutes, until the kernels are tender. Leave the cobs to cool in the water.', uses: ['corn', 'water'] },
+    { text: 'Lift out the cobs and keep 250ml of the corn cooking water. Stand each cob on its end and cut down the sides with a sharp knife to take off the kernels.', uses: [] },
+    { text: 'Heat the vegetable oil and sesame oil in a large non-stick saucepan over a high heat, then fry the onion for 5 minutes, until soft, adding a splash of water if it sticks. Add the garlic and ginger and fry for 2 minutes more, until fragrant.', uses: ['vegoil', 'sesoil', 'onion', 'garlic', 'ginger'] },
+    { text: 'Pour in the broth and the corn cooking water and bring to a simmer over a medium heat. Add the chicken and the corn kernels and simmer for 5 minutes, until the chicken is piping hot.', uses: ['broth', 'cornwater', 'chicken'] },
+    { text: 'Mix the cornflour with the cold water to a smooth paste, stir it into the soup and cook for 1 to 2 minutes, stirring, until the soup thickens slightly. Taste the soup before you season it with the soy sauce, white pepper and sea salt, because the broth is already salty.', uses: ['cornflour', 'cold', 'soy', 'pepper', 'salt'] },
+    { text: 'Pour in the egg in a thin stream, stirring all the time, for about 30 seconds, until it sets in thin strands. Stir in half the spring onions and scatter the rest over the soup.', uses: ['egg', 'sonions'] }
+  ],
+  notes: [
+    { title: 'Saving Time', text: 'Boil the corn while the chicken poaches on Wednesday, so the soup takes about 15 minutes after dinner.' },
+    { title: 'Storing', text: 'Cool the soup within an hour and keep it in the fridge for up to 2 days. Reheat it once, until piping hot.' },
+    { title: 'Calories', text: 'About 385 calories a serving.' },
+    { title: 'For Ted', text: 'Leave this one out for Ted, because the broth has soy sauce in it.' }
+  ]
 }
 ];
