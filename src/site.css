@@ -365,3 +365,12 @@ a.tag:hover { background: var(--accent-soft); }
   .site-header .wrap { gap: 8px; }
   .site-nav a { padding: 6px 7px; font-size: .85rem; }
 }
+
+/* Sainsbury's shop button page */
+.shop-page .lede { font-size: 1.1rem; color: var(--muted); max-width: 46rem; }
+.shop-page .shop-step { margin: 20px 0; }
+.shop-page .shop-step h2 { font-size: 1.15rem; margin: 0 0 8px; }
+.shop-page .shop-step ol { padding-left: 1.3em; }
+.shop-page .shop-step li { margin: 8px 0; }
+.shop-bookmarklet { display: inline-block; margin: 12px 0 4px; padding: 12px 20px; background: #f06c00; color: #fff !important; font-weight: 700; border-radius: 999px; text-decoration: none !important; cursor: grab; box-shadow: 0 3px 10px rgba(240,108,0,.35); }
+.shop-page > h2 { margin-top: 32px; }

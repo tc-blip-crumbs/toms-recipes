@@ -290,7 +290,7 @@ function plansIndex() {
 <main id="main" class="wrap">
   <div class="intro"><h1>Meal Plans</h1></div>
   <ul class="grid plan-list">${list}</ul>
-  <p class="source"><a href="/plans/teds-food-guide/">Ted's Food Guide</a></p>
+  <p class="source"><a href="/plans/teds-food-guide/">Ted's Food Guide</a> · <a href="/shop/">Sainsbury's Shop Button</a></p>
 </main>
 ${foot}<script src="/assets/plan-page.js"></script>
 </body>
@@ -314,6 +314,49 @@ ${foot}</body>
 `;
 }
 
+// ---- Sainsbury's shop button
+function shopPage() {
+  const shop = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'shop', 'list.json'), 'utf8'));
+  const code = fs.readFileSync(path.join(__dirname, '..', 'shop', 'shop-button.js'), 'utf8')
+    .replace(/^\/\*[\s\S]*?\*\/\s*/, '')
+    .replace('__LIST__', JSON.stringify(shop.items.map(i => ({ sku: i.sku, qty: i.qty, name: i.name }))));
+  const bookmarklet = 'javascript:' + encodeURIComponent(code);
+  const units = shop.items.reduce((n, i) => n + i.qty, 0);
+  return head({ title: `Sainsbury's Shop Button | ${NAME}`, description: 'One click fills the Sainsbury\'s trolley with the week\'s shop.', canonical: `${SITE}/shop/`, nav: 'plans' }) + `
+<main id="main" class="wrap shop-page">
+  <div class="recipe-head"><nav class="crumbs" aria-label="Breadcrumb"><a href="/plans/">Meal Plans</a></nav><h1>Sainsbury's Shop Button</h1>
+  <p class="lede">One click puts the whole list below into your Sainsbury's trolley in about 10 seconds. You then check the trolley, choose a slot and pay as usual.</p></div>
+
+  <div class="note shop-step"><h2>Set It Up Once, on Your Computer</h2>
+  <ol>
+    <li>Open this page in Chrome on your computer.</li>
+    <li>Show the bookmarks bar, the strip under the address bar. On a Mac press Cmd, Shift and B together. On Windows press Ctrl, Shift and B.</li>
+    <li>Drag this orange button up onto the bookmarks bar, and let go.<br><a class="shop-bookmarklet" href="${bookmarklet}" onclick="alert('Drag this button onto your bookmarks bar. Clicking it here does nothing.');return false;">🛒 Fill Sainsbury's trolley</a></li>
+    <li>Check that "🛒 Fill Sainsbury's trolley" now appears on the bar.</li>
+  </ol></div>
+
+  <div class="note shop-step"><h2>Each Week</h2>
+  <ol>
+    <li>Go to sainsburys.co.uk and check that you are signed in.</li>
+    <li>Click "🛒 Fill Sainsbury's trolley" on your bookmarks bar.</li>
+    <li>If a box says it is opening a page to start from, wait for the new page to load, then click the button again.</li>
+    <li>Wait about 10 seconds. An orange box in the top right says how many items went in, and lists anything Sainsbury's would not add, such as items out of stock.</li>
+    <li>Click "Open my trolley" in the box. Check the trolley, change anything you want, choose a delivery slot and pay.</li>
+  </ol>
+  <p>The button adds to whatever is already in your trolley, so empty the trolley first if you want only this list. It never checks out or pays.</p></div>
+
+  <div class="note shop-step"><h2>If It Stops Working</h2>
+  <p>Sainsbury's changes its website from time to time. If the box says Sainsbury's "did not respond in the usual way", ask Claude to look at the shop button.</p></div>
+
+  <h2>${esc(shop.title)}</h2>
+  <p>${shop.items.length} lines, ${units} items.</p>
+  <div class="plan-table-wrap"><table class="plan-table"><thead><tr><th scope="col">Item</th><th scope="col">Qty</th></tr></thead><tbody>${shop.items.map(i => `<tr><td>${esc(i.name)}</td><td>${i.qty}</td></tr>`).join('')}</tbody></table></div>
+</main>
+${foot}</body>
+</html>
+`;
+}
+
 // Write the site
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.mkdirSync(path.join(DIST, 'assets'), { recursive: true });
@@ -326,6 +369,8 @@ recipes.forEach(r => {
 fs.mkdirSync(path.join(DIST, 'plans', 'teds-food-guide'), { recursive: true });
 fs.writeFileSync(path.join(DIST, 'plans', 'index.html'), plansIndex());
 fs.writeFileSync(path.join(DIST, 'plans', 'teds-food-guide', 'index.html'), guidePage());
+fs.mkdirSync(path.join(DIST, 'shop'), { recursive: true });
+fs.writeFileSync(path.join(DIST, 'shop', 'index.html'), shopPage());
 plans.forEach(p => { fs.mkdirSync(path.join(DIST, 'plans', p.id), { recursive: true }); fs.writeFileSync(path.join(DIST, 'plans', p.id, 'index.html'), planPage(p)); });
 fs.writeFileSync(path.join(DIST, 'favicon.svg'), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#a3321c"/><text x="32" y="44" font-family="Georgia,serif" font-size="34" text-anchor="middle" fill="#fff">T</text></svg>');
 fs.writeFileSync(path.join(DIST, '_redirects'), '/plans/2026-09-28/*  /plans/  301\n/recipes/hainanese-chicken-rice/*  /recipes/hainanish-soy-poached-chicken/  301\n/recipes/sausage-potato-traybake/*  /recipes/sausage-mash-gravy-cabbage/  301\n');
