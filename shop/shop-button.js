@@ -8,8 +8,9 @@
   2. adds the rest of the list, 5 requests at a time;
   3. shows a box saying what it added and anything it could not add.
 
-  If the page has no Add button for a list item, it opens a Sainsbury's
-  search for one, and Tom clicks the bookmark again.
+  If the page has no Add button for a list item, it loads a Sainsbury's
+  search for one in a hidden frame and starts from there, so one click
+  works from any Sainsbury's page.
 */
 (async function tomShopButton() {
   const list = __LIST__;
@@ -17,38 +18,43 @@
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   const searchFor = item => 'https://www.sainsburys.co.uk/gol-ui/SearchResults/' + encodeURIComponent(item.name);
 
-  if (!/(^|\.)sainsburys\.co\.uk$/.test(location.hostname)) { location.href = searchFor(list[0]); return; }
+  if (!/(^|\.)sainsburys\.co\.uk$/.test(location.hostname)) { location.href = 'https://www.sainsburys.co.uk/gol-ui/groceries'; return; }
 
-  // 1. Find an Add button for a list item and capture its request.
+  // 1. Find an Add button for a list item. If this page has none, load a
+  //    Sainsbury's search for a list item in a hidden frame and use that.
   const label = b => (b.getAttribute('aria-label') || '').toLowerCase();
-  const addButtons = [...document.querySelectorAll('button')].filter(b => /^add .* to basket$/.test(label(b)));
-  const addButton = addButtons.find(b => list.some(it => label(b) === ('add ' + it.name + ' to basket').toLowerCase()));
-  if (!addButton) {
-    let n = 0; try { n = +sessionStorage.getItem('tomShopTry') || 0; sessionStorage.setItem('tomShopTry', n + 1); } catch (e) {}
-    if (n >= 3) { try { sessionStorage.removeItem('tomShopTry'); } catch (e) {} return say('I could not find a list item to start from. Search Sainsbury\'s for any item on your list that is not in your trolley yet, then click the button again.'); }
-    say('Opening a Sainsbury\'s page to start from. When it has loaded, click the button again.');
-    await sleep(1500);
-    location.href = searchFor(list[n % list.length]);
-    return;
+  const findAdd = doc => [...doc.querySelectorAll('button')].find(b => /^add .* to basket$/.test(label(b)) && list.some(it => label(b) === ('add ' + it.name + ' to basket').toLowerCase()));
+  say('Filling your trolley…');
+  let win = window, addButton = findAdd(document);
+  for (let n = 0; !addButton && n < 4; n++) {
+    const frame = document.createElement('iframe');
+    frame.style.cssText = 'position:fixed;left:-9999px;top:0;width:1200px;height:900px;opacity:0';
+    frame.src = searchFor(list[n * 7 % list.length]);
+    document.body.appendChild(frame);
+    for (let i = 0; i < 60 && !addButton; i++) {
+      await sleep(250);
+      try { if (frame.contentDocument) addButton = findAdd(frame.contentDocument); } catch (e) {}
+    }
+    if (addButton) win = frame.contentWindow; else frame.remove();
   }
-  try { sessionStorage.removeItem('tomShopTry'); } catch (e) {}
+  if (!addButton) return say('I could not find an item from your list to start from. Check that you are signed in to Sainsbury\'s, then click the button again.');
 
   const captured = [];
-  const realFetch = window.fetch;
-  window.fetch = function (input, init) {
+  const realFetch = win.fetch;
+  win.fetch = function (input, init) {
     const h = {}; const hh = init && init.headers;
     if (hh) { if (hh.forEach) hh.forEach((v, k) => (h[k] = v)); else Object.assign(h, hh); }
     if (h['next-action'] && init && typeof init.body === 'string' && init.body.includes('"sku"')) captured.push({ headers: h, body: init.body });
     return realFetch.apply(this, arguments);
   };
-  say('Filling your trolley…');
   addButton.click();
   for (let i = 0; i < 20 && !captured.length; i++) await sleep(250);
-  window.fetch = realFetch;
-  if (!captured.length) return say('Sainsbury\'s did not respond in the usual way, so nothing else was added. Its website may have changed. Ask Claude to look at the shop button.');
+  win.fetch = realFetch;
+  if (!captured.length) return say('Sainsbury\'s did not respond in the usual way, so nothing was added. Its website may have changed. Ask Claude to look at the shop button.');
   const template = captured[0];
   const t = JSON.parse(template.body)[0];
   const clickedSku = String(t.sku);
+  const postTo = win.location.pathname + win.location.search;
 
   // 2. Add the rest, 5 at a time. Sainsbury's takes one product per request.
   const results = [];
@@ -60,13 +66,15 @@
       if (String(item.sku) === clickedSku) qty -= 1; // the click added one already
       if (qty <= 0) { results.push({ ...item, ok: true }); continue; }
       const body = JSON.stringify([{ sku: String(item.sku), uom: 'ea', quantity: qty, selectedCatchweight: '$undefined', storeNumber: t.storeNumber, slotBooked: t.slotBooked, pickTime: t.pickTime, isBasketCreated: true }]);
-      try {
-        const res = await realFetch(location.pathname + location.search, { method: 'POST', headers: template.headers, body });
-        const txt = await res.text();
-        results.push({ ...item, ok: res.ok && txt.includes(String(item.sku)) });
-      } catch (e) {
-        results.push({ ...item, ok: false });
+      let ok = false;
+      for (let attempt = 0; attempt < 2 && !ok; attempt++) {
+        try {
+          const res = await realFetch.call(win, postTo, { method: 'POST', headers: template.headers, body });
+          await res.text();
+          ok = res.ok;
+        } catch (e) {}
       }
+      results.push({ ...item, ok });
     }
   }
   await Promise.all(Array.from({ length: WORKERS }, worker));

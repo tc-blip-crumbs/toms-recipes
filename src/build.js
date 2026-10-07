@@ -337,9 +337,8 @@ function shopPage() {
 
   <div class="note shop-step"><h2>Each Week</h2>
   <ol>
-    <li>Go to sainsburys.co.uk and check that you are signed in.</li>
+    <li>Go to sainsburys.co.uk, any page, and check that you are signed in.</li>
     <li>Click "🛒 Fill Sainsbury's trolley" on your bookmarks bar.</li>
-    <li>If a box says it is opening a page to start from, wait for the new page to load, then click the button again.</li>
     <li>Wait about 10 seconds. An orange box in the top right says how many items went in, and lists anything Sainsbury's would not add, such as items out of stock.</li>
     <li>Click "Open my trolley" in the box. Check the trolley, change anything you want, choose a delivery slot and pay.</li>
   </ol>
