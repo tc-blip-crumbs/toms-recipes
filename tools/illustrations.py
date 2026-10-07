@@ -18,7 +18,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'illustrations', 'originals')
 OUT = os.path.join(ROOT, 'illustrations', 'web')
 MARGIN = 0.05            # empty space on each side, as a share of the square
-CREAM = (246, 240, 226)  # matches --art-bg in site.css
+CREAM = (235, 224, 199)  # matches --art-bg in site.css
 
 def square(im):
     im = im.convert('RGBA')

@@ -13,6 +13,16 @@ const INDEXABLE = false; // Some recipes are adapted from paid sources, so searc
 const COURSES = ['Dinners', 'Lunches', 'For Ted', 'Puddings', 'Baking', 'Breakfast & Drinks', 'Basics'];
 const plans = require('./plans.js');
 const bySlug = Object.fromEntries(recipes.map(r => [r.slug, r]));
+
+// ---- Illustrations. Prepared by tools/illustrations.py into illustrations/web.
+const ART_DIR = path.join(__dirname, '..', 'illustrations', 'web');
+const ART = Object.fromEntries(Object.entries(JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'illustrations', 'illustrations.json'), 'utf8')))
+  .filter(([slug]) => fs.existsSync(path.join(ART_DIR, slug + '-400.webp'))));
+const PLATE = '<svg class="art-plate" viewBox="0 0 120 120" aria-hidden="true"><ellipse cx="60" cy="60" rx="46" ry="46" fill="none" stroke="currentColor" stroke-width="2"/><ellipse cx="60" cy="60" rx="32" ry="32" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".6"/></svg>';
+function artImg(slug, alt, sizes, eager) {
+  const a = `/assets/illustrations/${slug}`;
+  return `<img src="${a}-400.webp" srcset="${a}-400.webp 400w, ${a}-800.webp 800w" sizes="${sizes}" width="400" height="400" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy" decoding="async"'}>`;
+}
 const LABELS = ['Weeknight', 'Batch cook', 'Freezes well', 'Ted can share', 'Quick', 'Weekend', 'Vegan'];
 const FAN = '';
 const DIST = path.join(__dirname, '..', 'dist');
@@ -112,11 +122,12 @@ function recipePage(r) {
     : `<div class="servings" role="group" aria-label="Servings"><span class="label">Servings</span>
         <div class="stepper"><button type="button" data-servings="down" aria-label="Fewer servings">−</button><output data-servings-count aria-live="off">${servings}</output><button type="button" data-servings="up" aria-label="More servings">+</button></div></div>`;
   return head({ title: `${r.title} | ${NAME}`, description: r.description, canonical: url,
-    extra: `<script type="application/ld+json">${JSON.stringify(jsonLd(r))}</script>\n` }) + `
+    extra: (ART[r.slug] ? `<meta property="og:image" content="${SITE}/assets/illustrations/${r.slug}-share.jpg">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n<meta name="twitter:card" content="summary_large_image">\n` : '') + `<script type="application/ld+json">${JSON.stringify(jsonLd(r))}</script>\n` }) + `
 <main id="main">
-<div class="wrap recipe-head">
+<div class="wrap recipe-head${ART[r.slug] ? ' has-art' : ''}">
   <p class="print-only print-brand">${NAME}</p>
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">All recipes</a> › <a href="/#${courseId}">${esc(r.course)}</a>${r.cuisine ? ` › <a href="/?cuisine=${encodeURIComponent(r.cuisine)}">${esc(r.cuisine)}</a>` : ''}</nav>
+  ${ART[r.slug] ? `<figure class="head-art">${artImg(r.slug, ART[r.slug], '(min-width: 900px) 320px, 180px', true)}</figure>` : ''}
   <h1>${esc(r.title)}</h1>
   <p class="desc">${esc(r.description)}</p>
   ${facts(r)}
@@ -177,6 +188,7 @@ ${foot}<script type="application/json" id="recipe-data">${JSON.stringify(clientD
 function card(r) {
   const t = total(r);
   return `<a class="card" href="/recipes/${r.slug}/" data-slug="${r.slug}">
+  <div class="card-art${ART[r.slug] ? '' : ' is-empty'}">${ART[r.slug] ? artImg(r.slug, '', '(min-width: 700px) 220px, 60vw') : PLATE}</div>
   <p class="eyebrow">${esc([r.cuisine, r.main].filter(Boolean).join(' · '))}</p>
   <h3>${esc(r.title)}</h3>
   <p class="desc">${esc(r.description)}</p>
@@ -360,6 +372,8 @@ ${foot}</body>
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.mkdirSync(path.join(DIST, 'assets'), { recursive: true });
 ['site.css', 'scale.js', 'render.js', 'recipe-page.js', 'index-page.js', 'plan-page.js'].forEach(f => fs.copyFileSync(path.join(__dirname, f), path.join(DIST, 'assets', f)));
+fs.mkdirSync(path.join(DIST, 'assets', 'illustrations'), { recursive: true });
+fs.readdirSync(ART_DIR).forEach(f => fs.copyFileSync(path.join(ART_DIR, f), path.join(DIST, 'assets', 'illustrations', f)));
 fs.writeFileSync(path.join(DIST, 'index.html'), indexPage());
 recipes.forEach(r => {
   fs.mkdirSync(path.join(DIST, 'recipes', r.slug), { recursive: true });
@@ -386,7 +400,7 @@ Object.entries(MOVED).forEach(([from, to]) => {
 fs.writeFileSync(path.join(DIST, '.nojekyll'), '');
 // Give each asset a version taken from its contents, so phones fetch new scripts and styles straight away.
 const VERSIONS = {};
-fs.readdirSync(path.join(DIST, 'assets')).forEach(f => {
+fs.readdirSync(path.join(DIST, 'assets'), { withFileTypes: true }).filter(d => d.isFile()).map(d => d.name).forEach(f => {
   VERSIONS[f] = require('crypto').createHash('md5').update(fs.readFileSync(path.join(DIST, 'assets', f))).digest('hex').slice(0, 8);
 });
 // Point every site link at the base path the site is served from.
@@ -397,7 +411,7 @@ fs.readdirSync(path.join(DIST, 'assets')).forEach(f => {
     if (!p.endsWith('.html')) return;
     const html = fs.readFileSync(p, 'utf8')
       .replace(/"\/assets\/([\w.-]+)"/g, (m, f) => `"/assets/${f}?v=${VERSIONS[f] || ''}"`)
-      .replace(/(href|src|action)="\/(?!\/)/g, `$1="${BASE}/`).replace(/url=\//g, `url=${BASE}/`);
+      .replace(/(href|src|action)="\/(?!\/)/g, `$1="${BASE}/`).replace(/srcset="([^"]+)"/g, (m, v) => `srcset="${v.replace(/(^|, )\/(?!\/)/g, `$1${BASE}/`)}"`).replace(/url=\//g, `url=${BASE}/`);
     fs.writeFileSync(p, html);
   });
 })(DIST);
