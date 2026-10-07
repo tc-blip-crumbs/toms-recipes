@@ -207,7 +207,7 @@ module.exports = [
   short: 'Focaccia',
   description: 'A soft, oily focaccia with a crisp base, made with a stand mixer and two rises.',
   yield: 'Makes 1 tray, 23 x 33cm', yieldShort: '1 tray', serves: 8, prep: 20, rest: 135, restLabel: 'Rising', cook: 25, ovenC: 200,
-  course: 'Baking', cuisine: 'Italian', main: 'Bread',
+  course: 'Bakes', cuisine: 'Italian', main: 'Bread',
   labels: ['Weekend', 'Vegan'],
   equipment: ['A stand mixer with a dough hook', 'A 23 x 33cm baking tin'],
   groups: [
@@ -242,7 +242,7 @@ module.exports = [
   short: 'Banana and oat smoothie',
   description: 'A thick breakfast smoothie of frozen banana, oats and peanut butter with cinnamon.',
   serves: 1, prep: 5, cook: 0,
-  course: 'Breakfast & Drinks', cuisine: '', main: 'Banana',
+  course: 'Breakfasts & Drinks', cuisine: '', main: 'Banana',
   labels: ['Quick', 'Vegan'],
   equipment: ['A blender'],
   groups: [

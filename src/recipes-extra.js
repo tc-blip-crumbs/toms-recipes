@@ -1,5 +1,5 @@
 // Ted's meals and the dinners from the meal plans. Same house rules as recipes.js.
-const TED = 'For Ted';
+const TED = 'Toddler Meals';
 
 module.exports = [
 {

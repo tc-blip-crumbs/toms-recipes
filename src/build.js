@@ -10,7 +10,7 @@ const SITE = process.env.SITE_URL || 'https://tc-blip-crumbs.github.io/toms-reci
 const BASE = process.env.SITE_BASE !== undefined ? process.env.SITE_BASE : '/toms-recipes';
 const NAME = "Tom's Recipes";
 const INDEXABLE = false; // Some recipes are adapted from paid sources, so search engines are asked to skip the site.
-const COURSES = ['Dinners', 'Lunches', 'For Ted', 'Puddings', 'Baking', 'Breakfast & Drinks', 'Basics'];
+const COURSES = ['Dinners', 'Lunches', 'Toddler Meals', 'Puddings', 'Bakes', 'Breakfasts & Drinks', 'Basics'];
 const plans = require('./plans.js');
 const bySlug = Object.fromEntries(recipes.map(r => [r.slug, r]));
 
@@ -23,7 +23,7 @@ function artImg(slug, alt, sizes, eager) {
   const a = `/assets/illustrations/${slug}`;
   return `<img src="${a}-400.webp" srcset="${a}-400.webp 400w, ${a}-800.webp 800w" sizes="${sizes}" width="400" height="400" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy" decoding="async"'}>`;
 }
-const LABELS = ['Weeknight', 'Batch cook', 'Freezes well', 'Ted can share', 'Quick', 'Weekend', 'Vegan'];
+const LABELS = ['Ted can share', 'Freezes well']; // Only these labels show on the site.
 const FAN = '';
 const DIST = path.join(__dirname, '..', 'dist');
 const DEFAULT_SERVINGS = 2;
@@ -90,8 +90,8 @@ function facts(r) {
 }
 
 function tagHTML(r, link) {
-  return '<ul class="tags">' + r.labels.map(l => link
-    ? `<li><a class="tag${l === 'Ted can share' ? ' ted' : ''}" href="/?label=${encodeURIComponent(l)}">${esc(l)}</a></li>`
+  return '<ul class="tags">' + r.labels.filter(l => LABELS.includes(l)).map(l => link
+    ? `<li><a class="tag${l === 'Ted can share' ? ' ted' : ''}" href="/?q=${encodeURIComponent(l)}">${esc(l)}</a></li>`
     : `<li><span class="tag${l === 'Ted can share' ? ' ted' : ''}">${esc(l)}</span></li>`).join('') + '</ul>';
 }
 
@@ -126,7 +126,7 @@ function recipePage(r) {
 <main id="main">
 <div class="wrap recipe-head${ART[r.slug] ? ' has-art' : ''}">
   <p class="print-only print-brand">${NAME}</p>
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">All recipes</a> › <a href="/#${courseId}">${esc(r.course)}</a>${r.cuisine ? ` › <a href="/?cuisine=${encodeURIComponent(r.cuisine)}">${esc(r.cuisine)}</a>` : ''}</nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">All recipes</a> › <a href="/#${courseId}">${esc(r.course)}</a></nav>
   ${ART[r.slug] ? `<figure class="head-art">${artImg(r.slug, ART[r.slug], '(min-width: 900px) 320px, 180px', true)}</figure>` : ''}
   <h1>${esc(r.title)}</h1>
   <p class="desc">${esc(r.description)}</p>
@@ -189,7 +189,7 @@ function card(r) {
   const t = total(r);
   return `<a class="card" href="/recipes/${r.slug}/" data-slug="${r.slug}">
   <div class="card-art${ART[r.slug] ? '' : ' is-empty'}">${ART[r.slug] ? artImg(r.slug, '', '(min-width: 700px) 220px, 60vw') : PLATE}</div>
-  <p class="eyebrow">${esc([r.cuisine, r.main].filter(Boolean).join(' · '))}</p>
+  <p class="eyebrow">${esc(r.main)}</p>
   <h3>${esc(r.title)}</h3>
   <p class="desc">${esc(r.description)}</p>
   <div class="meta"><span><b>${dur(t)}</b> in all</span><span>${r.yield ? esc(r.yield) : r.serves + (r.serves === 1 ? ' serving' : ' servings') + ' as written'}</span></div>
@@ -200,11 +200,11 @@ function card(r) {
 function indexPage() {
   const idx = recipes.map(r => ({ slug: r.slug, title: r.title, description: r.description, course: r.course, cuisine: r.cuisine, main: r.main,
     labels: r.labels, equipment: r.equipment || [], ingredients: r.groups.flatMap(g => g.items.map(i => i.phrase || i.name + ' ' + (i.plural || ''))) }));
-  const cuisines = [...new Set(recipes.map(r => r.cuisine).filter(Boolean))].sort();
-  const labels = LABELS.filter(l => recipes.some(r => r.labels.includes(l)));
-  const sections = COURSES.filter(c => recipes.some(r => r.course === c)).map(c => {
-    const list = recipes.filter(r => r.course === c).sort((a, b) => a.title.localeCompare(b.title));
-    return `<section class="course-section" id="course-${slugify(c)}" aria-labelledby="h-${slugify(c)}"><h2 id="h-${slugify(c)}">${esc(c)} <small>${list.length}</small></h2><div class="grid">${list.map(card).join('')}</div></section>`;
+    const sections = COURSES.filter(c => recipes.some(r => r.course === c)).map(c => {
+    const all = recipes.filter(r => r.course === c).sort((a, b) => a.title.localeCompare(b.title));
+    const list = all.filter(r => !r.other), others = all.filter(r => r.other);
+    const more = others.length ? `<details class="others" data-others><summary>Other ${esc(c)} <small>${others.length}</small></summary><div class="grid">${others.map(card).join('')}</div></details>` : '';
+    return `<section class="course-section" id="course-${slugify(c)}" aria-labelledby="h-${slugify(c)}"><h2 id="h-${slugify(c)}">${esc(c)} <small>${list.length}</small></h2><div class="grid main-grid">${list.map(card).join('')}</div>${more}</section>`;
   }).join('');
   const az = [...recipes].sort((a, b) => a.title.localeCompare(b.title)).map(r => `<li><a href="/recipes/${r.slug}/">${esc(r.title)}</a><span>${esc(r.course)}</span></li>`).join('');
   return head({ title: NAME, description: 'Tom\'s own recipes, written the same way every time, in UK measures, with amounts that scale.', canonical: SITE + '/' }) + `
@@ -218,14 +218,10 @@ function indexPage() {
     <input id="q" name="q" type="search" placeholder="Search by dish or ingredient, such as lentils" autocomplete="off" enterkeyhint="search">
     <kbd>/</kbd>
   </form>
-  <div class="filters">
-    <div class="filter-row" role="group" aria-label="Filter by label"><span class="row-label">Good For</span>${labels.map(l => `<button type="button" class="pill" data-filter="label" data-value="${esc(l)}" aria-pressed="false">${esc(l)}</button>`).join('')}</div>
-    <div class="filter-row" role="group" aria-label="Filter by cuisine"><span class="row-label">Cuisine</span>${cuisines.map(c => `<button type="button" class="pill" data-filter="cuisine" data-value="${esc(c)}" aria-pressed="false">${esc(c)}</button>`).join('')}</div>
-  </div>
-  <div class="results-bar"><span id="result-count" aria-live="polite">${recipes.length} recipes</span><button type="button" class="link-button" data-clear hidden>Clear search and filters</button></div>
+  <div class="results-bar"><span id="result-count" aria-live="polite">${recipes.length} recipes</span><button type="button" class="link-button" data-clear hidden>Clear search</button></div>
 </div>
 ${sections}
-<div class="empty" id="empty" hidden><p>No recipes match that search.</p><button type="button" class="link-button" data-clear>Clear search and filters</button></div>
+<div class="empty" id="empty" hidden><p>No recipes match that search.</p><button type="button" class="link-button" data-clear>Clear search</button></div>
 <section class="az" id="az" aria-labelledby="az-h"><h2 id="az-h">A to Z</h2><ol>${az}</ol></section>
 </main>
 ${foot}<script type="application/json" id="index-data">${JSON.stringify(idx).replace(/</g, '\\u003c')}</script>
@@ -319,7 +315,7 @@ function guidePage() {
     <div class="note"><h3>Yoghurt & Fruit</h3><p>Every lunch and dinner ends with 2 to 3 tablespoons of plain, full-fat Greek yoghurt and the day's fruit.</p><ul>${FRUIT.map(([n, x]) => `<li><strong>${n}.</strong> ${esc(x)}</li>`).join('')}</ul></div>
     <div class="note"><h3>Food Safety</h3><ul>${SAFETY.map(s => `<li>${esc(s)}</li>`).join('')}</ul></div>
   </div>
-  <p class="source">All of Ted's recipes are under <a href="/#course-for-ted">For Ted</a>.</p>
+  <p class="source">All of Ted's recipes are under <a href="/#course-toddler-meals">Toddler Meals</a>.</p>
 </main>
 ${foot}</body>
 </html>

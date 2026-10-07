@@ -4,7 +4,7 @@
 1. Title, in UK spelling, with "and" in place of "&".
 2. One sentence saying what the dish is.
 3. A line of facts. Serves, preparation time, cooking time, oven temperature if the oven is used.
-4. Labels from a fixed list, such as Batch cook, Freezes well, Ted can share, Weeknight, Weekend.
+4. Labels from a fixed list, such as Batch cook, Freezes well, Ted can share, Weeknight, Weekend. The site shows only Ted can share and Freezes well.
 5. Equipment, only when the recipe needs something beyond pans and a baking tray, such as a slow cooker or a 23 x 33cm tin.
 6. Ingredients, in the order you use them. Recipes with separate parts get group headings such as "For the beef" and "For the beans".
 7. Method, as numbered steps. Each step shows the ingredients it uses.
@@ -24,7 +24,8 @@
 - Vague amounts are allowed only from a fixed list, such as a pinch, a handful, a squeeze and "to taste".
 
 ## 3. Words
-- Subheadings use title case and "&" in place of "and", such as "Breakfast & Drinks", "For the Butter Beans" and "Good Additions". This covers course names, ingredient group headings, note headings and page labels. Short words such as "the", "for", "of" and "to" stay lower case unless they come first. Recipe titles, descriptions and method steps keep "and".
+- Course names are plural nouns for a kind of dish, so every heading on the home page follows the same pattern. Dinners, Lunches, Toddler Meals, Puddings, Bakes, Breakfasts & Drinks, Basics. A recipe marked as an other recipe sits in a closed list at the foot of its course, headed "Other" and the course name, such as "Other Dinners".
+- Subheadings use title case and "&" in place of "and", such as "Breakfasts & Drinks", "For the Butter Beans" and "Good Additions". This covers course names, ingredient group headings, note headings and page labels. Short words such as "the", "for", "of" and "to" stay lower case unless they come first. Recipe titles, descriptions and method steps keep "and".
 - UK names only, from a glossary the site checks against. Coriander, spring onions, courgette, aubergine, plain flour, caster sugar, double cream, tomato purée, passata, beef mince, braising steak, baby new potatoes, stock, cornflour, bicarbonate of soda, grill, hob, frying pan, casserole, baking tray and cling film.
 - UK spelling, such as chilli, yoghurt, flavour, caramelise and colour.
 - Ingredient lines follow one pattern. Amount, then the ingredient, then a comma and how to prepare it, such as "2 garlic cloves, crushed".
