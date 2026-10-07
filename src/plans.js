@@ -29,16 +29,17 @@ const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
 const YOG = t('Yoghurt bowl', k(385, 430, '200g yoghurt, 30g granola, 80g berries, 1 banana'));
 const EGGS = t('Eggs, toast and bacon', k(375, 175, '2 eggs, 1 slice of toast weighing 40g, 2 rashers of streaky bacon'));
 const TOM_BREAKFAST = [YOG, YOG, YOG, YOG, YOG, EGGS, EGGS];
-const SOUP = t('Soup day. A whole 600g pot each of Sainsbury\'s Moroccan Style Chicken & Chickpea soup, heated in the microwave until piping hot. A piece of fruit.', k(450, 600, '600g soup, 1.4g salt' + FRUIT_NOTE));
+const SOUP = t('Soup day. A whole 600g pot each of Sainsbury\'s Moroccan Style Chicken & Chickpea soup, heated in the microwave until piping hot. A piece of fruit. Leave a third pot in the fridge for Sophie\'s mum.', k(450, 600, '600g soup, 1.4g salt' + FRUIT_NOTE));
 const CARNITAS_LUNCH = t('The spare tub of carnitas from the freezer, shared, with 2 small tortillas each and a bag of salad leaves. Reheat the pork until piping hot. A piece of fruit.', k(585, 260, '150g pork, 2 small tortillas weighing 60g, 50g salad' + FRUIT_NOTE));
 const BOLOGNESE_LUNCH = k(900, 465, '320g sauce, 145g cooked pasta from 60g dry' + FRUIT_NOTE);
+const CURRY_LUNCH = t('A portion each of red lentil curry from the freezer, with a handful of frozen spinach stirred in. A slice of toast if you are still hungry.', k(520, 380, '350g curry, 30g spinach. A slice of toast adds 95 kcal'));
 const CHICKEN_LUNCH = k(650, 480, '150g chicken, 200g cooked rice, 130ml broth' + FRUIT_NOTE);
 function tomLunch(w) {
   return [
     w.monTueLunch ? w.monTueLunch[0] : r('roast-chicken-caesar-sandwich', { label: 'Roast Chicken Caesar Sandwich', note: 'Make the filling on Sunday night with chicken from the roast.', serves: 2 }),
-    w.keepTuesdayLunch ? w.monTueLunch[1] : SOUP,
+    w.keepTuesdayLunch ? w.monTueLunch[1] : CURRY_LUNCH,
     t('Jacket potato with half a jar of Bold Bean baked beans and 20g of cheddar each, or with cottage cheese and ham. A piece of fruit.', k(490, 470, '250g potato, 200g beans, 20g cheddar' + FRUIT_NOTE)),
-    w.thursdayLunch ? w.thursdayLunch : w.beefFriday ? t('A portion each of Wednesday\'s soy-poached chicken, with a tub of the rice and broth. Reheat until piping hot. A piece of fruit.', CHICKEN_LUNCH) : t('A portion each of red lentil curry from the freezer, with a handful of frozen spinach stirred in. A slice of toast if you are still hungry.', k(520, 380, '350g curry, 30g spinach. A slice of toast adds 95 kcal')),
+    w.thursdayLunch ? w.thursdayLunch : w.beefFriday ? t('A portion each of Wednesday\'s soy-poached chicken, with a tub of the rice and broth. Reheat until piping hot. A piece of fruit.', CHICKEN_LUNCH) : SOUP,
     w.beefFriday ? t('The last of Wednesday\'s soy-poached chicken, with the frozen rice and some broth. Reheat until piping hot. A piece of fruit.', CHICKEN_LUNCH) : (w.fridayLunch || CARNITAS_LUNCH),
     t('An omelette made with 3 eggs, ham and 30g of cheddar each, with cherry tomatoes cooked in the pan and a slice of toast.', k(550, 360, '3 eggs, 40g ham, 30g cheddar, 100g tomatoes, 1 slice of toast weighing 40g')),
     t('Beans on toast with a poached egg.', k(425, 330, '200g beans, 2 slices of toast weighing 80g, 1 egg'))
@@ -53,8 +54,8 @@ const TOM_BOXES = [
   ] },
   { title: 'Lunch Notes', list: [
     'Jacket potato. Prick the potato and microwave it at work for 8 to 10 minutes, then heat the beans for 1 to 2 minutes.',
-    'Curry. Two extra portions come out of the freezer on Tuesday night with Wednesday\'s dinner. Reheat them until piping hot.',
-    'Soup day. Buy 2 pots of Sainsbury\'s Moroccan Style Chicken & Chickpea soup in the weekly shop for Tuesday lunch.',
+    'Curry. Two portions come out of the freezer on Monday night for Tuesday lunch. Reheat them until piping hot.',
+    'Soup day. Buy 3 pots of Sainsbury\'s Moroccan Style Chicken & Chickpea soup in the weekly shop for Thursday lunch, one each for you, Sophie and Sophie\'s mum.',
     'Fruit. Pack a piece of fruit, such as an apple, a pear or a satsuma, with every weekday lunch.'
   ] },
   { title: 'Daily Target', text: 'For Tom, about 1,900 calories a day, which is the NHS figure for men losing weight. That is about 400 for breakfast, 500 for lunch, 750 for dinner and 250 for snacks, mostly fruit.' },
@@ -95,8 +96,8 @@ function week(w) {
   ];
   const freezer = (w.freezerExtra || []).concat([
     'Sunday night. Move a tub of chilli to the fridge for Monday.',
-    w.beefFriday ? 'Monday night. Move a tub of carnitas pork to the fridge for Tuesday, and a whole chicken for Wednesday.' : 'Monday night. Move a tub of carnitas pork to the fridge for Tuesday.',
-    w.beefFriday ? 'Tuesday night. Move one of Ted\'s curry tubs to the fridge for Wednesday.' : 'Tuesday night. Move the curry for Wednesday, two more portions for your lunches on Thursday, and one of Ted\'s curry tubs to the fridge.',
+    w.beefFriday ? 'Monday night. Move a tub of carnitas pork to the fridge for Tuesday, and a whole chicken for Wednesday.' : 'Monday night. Move a tub of carnitas pork to the fridge for Tuesday, and 2 portions of curry for your lunches on Tuesday.',
+    w.beefFriday ? 'Tuesday night. Move one of Ted\'s curry tubs to the fridge for Wednesday.' : 'Tuesday night. Move the curry for Wednesday and one of Ted\'s curry tubs to the fridge.',
     w.beefFriday ? 'Wednesday night. Move 2 portions of curry to the fridge for Thursday.' : 'Wednesday night. Move a tub of beef to the fridge for Thursday.'
   ]);
   if (w.beefFriday) freezer.push(w.fridayAdults ? 'Thursday night. Move the frozen rice to the fridge for Friday lunch.' : 'Thursday night. Move a tub of beef to the fridge for Friday, and the frozen rice for Friday lunch.');
@@ -115,7 +116,7 @@ function week(w) {
         intro: 'Nursery on Monday, Tuesday and Wednesday, where Ted has lunch and tea, so he has a small supper at home. Granny on Thursday, with both meals made ahead. The same week repeats until 1 November.',
         rows: DAYS.map((d, i) => [d, ted[i][0], ted[i][1], t(fruit[i])]),
         boxes: [
-          { title: 'Thursday with Granny', text: 'Make the potato cakes and the fusilli on Wednesday evening and keep them in labelled tubs in the fridge. Granny can serve the potato cakes cold or warmed through. She should reheat the fusilli until piping hot with a splash of milk and let it cool before serving. Pack a pot of yoghurt and the cut fruit in the same bag.' }
+          { title: 'Thursday with Granny', text: 'Make the potato cakes and the fusilli on Wednesday evening and keep them in labelled tubs in the fridge. Granny can serve the potato cakes cold or warmed through. She should reheat the fusilli until piping hot with a splash of milk and let it cool before serving. Pack a pot of yoghurt and the cut fruit in the same bag. Granny\'s own lunch is in the fridge. On soup days it is a pot of soup.' }
         ]
       },
       {
@@ -149,7 +150,7 @@ module.exports = [
     fridayAdults: [t('Tom is out. Sophie has fish fingers.', Object.assign(k(290, 140, '5 fish fingers'), { noTotal: true })), t('About 15 minutes in the air fryer')],
     wednesday: r('hainanish-soy-poached-chicken', { note: 'Uses a whole chicken from the freezer, moved to the fridge on Monday night. It makes about 6 portions. Keep 2 portions of chicken and about 1 litre of the poaching broth for Thursday\'s soup, and box 2 with rice and broth for your lunches on Friday. Freeze Friday\'s rice as soon as it has cooled, because cooked rice keeps only a day in the fridge.', serves: 6 }),
     wednesdayWhen: '1 hour 30 minutes of poaching, 30 minutes of work',
-    thursdayLunch: t('Chicken and sweetcorn soup, from Tom Kerridge\'s Lose Weight for Good, page 70. Make it on Wednesday night with the leftover soy-poached chicken and the poaching broth in place of chicken stock, then split it into 2 tubs. Take the skin off the chicken and use about 100g each, and measure the sesame oil with a spoon. Reheat until piping hot. A piece of fruit.', k(410, 500, '500g soup with 100g chicken' + FRUIT_NOTE)),
+    thursdayLunch: t('Chicken and sweetcorn soup, from Tom Kerridge\'s Lose Weight for Good, page 70. Make it on Wednesday night with the leftover soy-poached chicken and the poaching broth in place of chicken stock, then split it into 3 tubs, one for Sophie\'s mum. Make one and a half times the recipe, topping up the broth with chicken stock if you run short. Take the skin off the chicken and use about 100g each, and measure the sesame oil with a spoon. Reheat until piping hot. A piece of fruit.', k(410, 500, '500g soup with 100g chicken' + FRUIT_NOTE)),
     tedMonday: [r('scrambled-egg-toast-avocado', { note: 'Home from nursery before lunch today.' }), r('egg-fried-rice', { note: 'There is no rice from yesterday, so cook 40g of rice at lunchtime. Spread it on a plate to cool, get it into the fridge within an hour, and fry it at teatime.' })],
     tuesday: r('carnitas-tacos', { note: 'Movie night with 2 guests, so this makes 4 portions.', serves: 4 }),
     saturday: r('pork-larb', { note: 'Cook 40g more rice and 80ml more water than the recipe says, which leaves enough for Ted\'s egg fried rice on Sunday. Use a 500g pack of 5% fat pork mince.' }), saturdayWhen: '20 minutes on the night', saturdayMeat: 'pork mince',
