@@ -25,20 +25,22 @@
   const label = b => (b.getAttribute('aria-label') || '').toLowerCase();
   const findAdd = doc => [...doc.querySelectorAll('button')].find(b => /^add .* to basket$/.test(label(b)) && list.some(it => label(b) === ('add ' + it.name + ' to basket').toLowerCase()));
   say('Filling your trolley…');
-  let win = window, addButton = findAdd(document);
+  let win = window, frame = null, addButton = findAdd(document);
   for (let n = 0; !addButton && n < 4; n++) {
-    const frame = document.createElement('iframe');
+    frame = document.createElement('iframe');
     frame.style.cssText = 'position:fixed;left:-9999px;top:0;width:1200px;height:900px;opacity:0';
     frame.src = searchFor(list[n * 7 % list.length]);
     document.body.appendChild(frame);
-    for (let i = 0; i < 60 && !addButton; i++) {
+    for (let i = 0; i < 80 && !addButton; i++) {
       await sleep(250);
-      try { if (frame.contentDocument) addButton = findAdd(frame.contentDocument); } catch (e) {}
+      try { const d = frame.contentDocument; if (d && d.readyState === 'complete') addButton = findAdd(d); } catch (e) {}
     }
-    if (addButton) win = frame.contentWindow; else frame.remove();
+    if (addButton) win = frame.contentWindow; else { frame.remove(); frame = null; }
   }
   if (!addButton) return say('I could not find an item from your list to start from. Check that you are signed in to Sainsbury\'s, then click the button again.');
 
+  // Watch the page's requests, then click Add. Sainsbury's page needs a
+  // moment after loading before its buttons respond, so try a few times.
   const captured = [];
   const realFetch = win.fetch;
   win.fetch = function (input, init) {
@@ -47,10 +49,14 @@
     if (h['next-action'] && init && typeof init.body === 'string' && init.body.includes('"sku"')) captured.push({ headers: h, body: init.body });
     return realFetch.apply(this, arguments);
   };
-  addButton.click();
-  for (let i = 0; i < 20 && !captured.length; i++) await sleep(250);
+  if (frame) await sleep(2500);
+  for (let tries = 0; tries < 4 && !captured.length; tries++) {
+    const btn = findAdd(win.document) || addButton;
+    btn.click();
+    for (let i = 0; i < 12 && !captured.length; i++) await sleep(250);
+  }
   win.fetch = realFetch;
-  if (!captured.length) return say('Sainsbury\'s did not respond in the usual way, so nothing was added. Its website may have changed. Ask Claude to look at the shop button.');
+  if (!captured.length) { if (frame) frame.remove(); return say('Sainsbury\'s did not respond in the usual way, so nothing was added. Its website may have changed. Ask Claude to look at the shop button.'); }
   const template = captured[0];
   const t = JSON.parse(template.body)[0];
   const clickedSku = String(t.sku);
@@ -80,6 +86,7 @@
   await Promise.all(Array.from({ length: WORKERS }, worker));
 
   // 3. Report.
+  if (frame) frame.remove();
   const failed = results.filter(r => !r.ok);
   return say('Done. Added ' + (results.length - failed.length) + ' of ' + results.length + ' items to your trolley.' +
     (failed.length ? '\n\nCould not add these, so add them yourself or pick a substitute:\n' + failed.map(f => '— ' + f.name).join('\n') : '') +
