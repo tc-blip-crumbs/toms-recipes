@@ -4,7 +4,7 @@
   Run it on a Sainsbury's search results page while signed in. It:
   1. clicks the page's own Add button on the first product, and copies the
      current "next-action" ID, store number and delivery slot from that request;
-  2. adds every item on the list, about a second apart, using the same request;
+  2. adds every item on the list, 5 requests at a time, using the same request;
   3. shows a summary of what it added and anything that failed.
 
   The list is read from localStorage key "tomShopList" as
@@ -13,7 +13,6 @@
 */
 (async function tomShopButton() {
   const LIST_KEY = 'tomShopList';
-  const GAP_MS = 900;
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   const list = JSON.parse(localStorage.getItem(LIST_KEY) || '[]');
   if (!list.length) return say('No shopping list found.');
@@ -39,23 +38,28 @@
   const t = JSON.parse(template.body)[0];
   const clickedSku = String(t.sku);
 
-  // 2. Add the list.
+  // 2. Add the list, 5 requests at a time. Sainsbury's takes one product per request.
+  const WORKERS = 5;
   const results = [];
-  for (const item of list) {
-    let qty = item.qty;
-    if (String(item.sku) === clickedSku) qty -= 1; // the click already added one
-    if (qty <= 0) { results.push({ ...item, ok: true, note: 'added by the first click' }); continue; }
-    const body = JSON.stringify([{ sku: String(item.sku), uom: 'ea', quantity: qty, selectedCatchweight: '$undefined', storeNumber: t.storeNumber, slotBooked: t.slotBooked, pickTime: t.pickTime, isBasketCreated: true }]);
-    try {
-      const res = await realFetch(location.pathname + location.search, { method: 'POST', headers: template.headers, body });
-      const txt = await res.text();
-      const ok = res.ok && txt.includes(String(item.sku));
-      results.push({ ...item, ok, note: ok ? '' : 'status ' + res.status });
-    } catch (e) {
-      results.push({ ...item, ok: false, note: e.message });
+  const queue = list.slice();
+  async function worker() {
+    while (queue.length) {
+      const item = queue.shift();
+      let qty = item.qty;
+      if (String(item.sku) === clickedSku) qty -= 1; // the click already added one
+      if (qty <= 0) { results.push({ ...item, ok: true, note: 'added by the first click' }); continue; }
+      const body = JSON.stringify([{ sku: String(item.sku), uom: 'ea', quantity: qty, selectedCatchweight: '$undefined', storeNumber: t.storeNumber, slotBooked: t.slotBooked, pickTime: t.pickTime, isBasketCreated: true }]);
+      try {
+        const res = await realFetch(location.pathname + location.search, { method: 'POST', headers: template.headers, body });
+        const txt = await res.text();
+        const ok = res.ok && txt.includes(String(item.sku));
+        results.push({ ...item, ok, note: ok ? '' : 'status ' + res.status });
+      } catch (e) {
+        results.push({ ...item, ok: false, note: e.message });
+      }
     }
-    await sleep(GAP_MS);
   }
+  await Promise.all(Array.from({ length: WORKERS }, worker));
 
   // 3. Report.
   const failed = results.filter(r => !r.ok);
