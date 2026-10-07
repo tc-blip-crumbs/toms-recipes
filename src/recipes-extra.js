@@ -618,7 +618,7 @@ module.exports = [
       { id: 'paste', qty: 2, unit: 'tbsp', name: 'Thai yellow curry paste', scale: 'spoon', ref: 'curry paste' },
       { id: 'coconut', qty: 1, unit: 'tin', tinSize: 400, tinUnit: 'ml', name: 'full-fat coconut milk', scale: 'tin', ref: 'coconut milk' },
       { id: 'water', qty: 400, unit: 'ml', name: 'water', scale: 'weight', ref: 'water' },
-      { id: 'lime', qty: 1, name: 'lime', plural: 'limes', prep: 'juiced', scale: 'halve', ref: 'lime juice', chip: 'lime juice' },
+      { id: 'lime', qty: 1, name: 'lime', plural: 'limes', prep: 'juiced', scale: 'halve', ref: 'lime juice', chip: 'juice of {}' },
       { id: 'sugar', qty: 0.5, unit: 'tsp', name: 'sugar', scale: 'spoon', ref: 'sugar' }
     ]},
     { name: 'For the Rice', items: [
@@ -628,7 +628,7 @@ module.exports = [
     { name: 'To Serve', items: [
       { id: 'chillioil', qty: 4, unit: 'tsp', name: 'chilli oil', scale: 'spoon', ref: 'chilli oil' },
       { id: 'onions', qty: 25, unit: 'g', name: 'crispy fried onions', scale: 'weight', ref: 'crispy onions', chip: 'crispy onions' },
-      { id: 'wedges', qty: 1, name: 'lime', plural: 'limes', prep: 'cut into wedges', scale: 'halve', ref: 'lime wedge', chip: 'lime wedges' }
+      { id: 'wedges', qty: 1, name: 'lime', plural: 'limes', prep: 'cut into wedges', scale: 'halve', ref: 'lime wedge', chip: '{}, in wedges' }
     ]}
   ],
   steps: [
@@ -724,7 +724,7 @@ module.exports = [
     ]},
     { name: 'To Serve', items: [
       { id: 'feta', qty: 150, unit: 'g', name: 'feta', scale: 'weight', ref: 'feta' },
-      { id: 'wedges', qty: 1, name: 'lemon', plural: 'lemons', prep: 'cut into wedges', scale: 'halve', ref: 'lemon wedges', chip: 'lemon wedges' }
+      { id: 'wedges', qty: 1, name: 'lemon', plural: 'lemons', prep: 'cut into wedges', scale: 'halve', ref: 'lemon wedges', chip: '{}, in wedges' }
     ]}
   ],
   steps: [
@@ -771,7 +771,7 @@ module.exports = [
       { id: 'rice', qty: 400, unit: 'g', name: 'sushi rice', scale: 'weight', ref: 'rice' },
       { id: 'rsalt', qty: 1, unit: 'tsp', name: 'salt', scale: 'spoon', ref: 'salt' },
       { id: 'rsugar', qty: 2, unit: 'tsp', name: 'sugar', scale: 'spoon', ref: 'sugar' },
-      { id: 'rvinegar', qty: 3, unit: 'tsp', name: 'rice vinegar', scale: 'spoon', liquid: true, ref: 'rice vinegar' },
+      { id: 'rvinegar', qty: 1, unit: 'tbsp', name: 'rice vinegar', scale: 'spoon', liquid: true, ref: 'rice vinegar' },
       { id: 'liquid', qty: 480, unit: 'ml', name: 'chicken cooking liquid', prep: 'from the pot', scale: 'weight', ref: 'cooking liquid' }
     ]},
     { name: 'To Serve', items: [
@@ -812,7 +812,7 @@ module.exports = [
       { id: 'sesoil', qty: 0.75, unit: 'tsp', name: 'sesame oil', scale: 'spoon', liquid: true, ref: 'sesame oil' },
       { id: 'onion', qty: 1, name: 'medium onion', plural: 'medium onions', prep: 'finely chopped', scale: 'halve', ref: 'onion', chip: 'onion' },
       { id: 'garlic', qty: 1, name: 'garlic clove', plural: 'garlic cloves', prep: 'finely chopped', scale: 'whole', ref: 'garlic' },
-      { id: 'ginger', qty: 1, name: '2.5cm piece of fresh ginger', plural: '2.5cm pieces of fresh ginger', prep: 'finely grated', scale: 'halve', ref: 'ginger', chip: 'ginger' },
+      { id: 'ginger', qty: 15, unit: 'g', name: 'fresh ginger', prep: 'about a 2.5cm piece, finely grated', scale: 'weight', ref: 'ginger', chip: 'ginger' },
       { id: 'broth', qty: 250, unit: 'ml', name: 'broth left from the soy poached chicken', scale: 'weight', ref: 'broth', chip: 'poaching broth' },
       { id: 'cornwater', qty: 250, unit: 'ml', name: 'corn cooking water', scale: 'weight', ref: 'corn cooking water' },
       { id: 'chicken', qty: 250, unit: 'g', name: 'leftover soy poached chicken', prep: 'skin removed, shredded', scale: 'weight', ref: 'chicken' },

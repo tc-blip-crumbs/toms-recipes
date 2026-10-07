@@ -151,7 +151,11 @@
     var label = item.chip || r.name;
     if (item.unit === 'tin' && r.tinNote) return (r.about ? 'about ' : '') + r.amount + ' ' + label;
     var amt = (r.about ? 'about ' : '') + r.amount;
-    return amt + ' ' + (item.unit === 'tin' || item.unit === 'g' || item.unit === 'ml' || item.unit === 'tsp' || item.unit === 'tbsp' ? label : (item.chip ? label : r.name));
+    if (item.unit === 'tin' || item.unit === 'g' || item.unit === 'ml' || item.unit === 'tsp' || item.unit === 'tbsp') return amt + ' ' + label;
+    // Counted things use the full name, which changes to the plural with the amount.
+    // A chip containing {} wraps it, such as 'zest of {}' giving 'zest of 2 limes'.
+    var counted = amt + ' ' + r.name;
+    return item.chip && item.chip.indexOf('{}') >= 0 ? item.chip.replace('{}', counted) : counted;
   }
 
   var MULTS = [0.5, 1, 1.5, 2, 3];

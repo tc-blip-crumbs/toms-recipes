@@ -282,8 +282,8 @@ module.exports = [
       { id: 'suet', qty: 125, unit: 'g', name: 'shredded suet', scale: 'fixed', ref: 'suet' },
       { id: 'currants', qty: 180, unit: 'g', name: 'currants', scale: 'fixed', ref: 'currants' },
       { id: 'sugar', qty: 80, unit: 'g', name: 'caster sugar', scale: 'fixed', ref: 'sugar' },
-      { id: 'lemon', qty: 1, name: 'lemon', prep: 'finely zested', scale: 'fixed', ref: 'lemon', chip: 'lemon zest' },
-      { id: 'orange', qty: 1, name: 'orange', size: 'small', prep: 'finely zested', scale: 'fixed', ref: 'orange', chip: 'orange zest' },
+      { id: 'lemon', qty: 1, name: 'lemon', prep: 'finely zested', scale: 'fixed', ref: 'lemon', chip: 'zest of {}' },
+      { id: 'orange', qty: 1, name: 'orange', size: 'small', prep: 'finely zested', scale: 'fixed', ref: 'orange', chip: 'zest of {}' },
       { id: 'milk', qty: 150, unit: 'ml', name: 'whole milk', prep: 'plus 2 to 3 tbsp if needed', scale: 'fixed', ref: 'milk' },
       { id: 'custard', phrase: 'Custard', prep: 'to serve', scale: 'fixed', ref: 'custard', chip: 'custard' }
     ]}
@@ -313,7 +313,7 @@ module.exports = [
       { id: 'cream', qty: 500, unit: 'ml', name: 'double cream', scale: 'weight', ref: 'cream' },
       { id: 'sugar', qty: 140, unit: 'g', name: 'caster sugar', scale: 'weight', ref: 'sugar' },
       { id: 'juice', qty: 115, unit: 'ml', name: 'lime juice', scale: 'weight', ref: 'lime juice', chip: 'lime juice' },
-      { id: 'zest', qty: 2.5, name: 'lime', plural: 'limes', prep: 'finely zested', scale: 'halve', ref: 'zest', chip: 'lime zest' },
+      { id: 'zest', qty: 2.5, name: 'lime', plural: 'limes', prep: 'finely zested', scale: 'halve', ref: 'zest', chip: 'zest of {}' },
       { id: 'raspberries', phrase: 'A handful of raspberries', scale: 'fixed', ref: 'raspberries', chip: 'raspberries' }
     ]}
   ],
