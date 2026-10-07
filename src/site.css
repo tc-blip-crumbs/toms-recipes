@@ -322,13 +322,15 @@ a.tag:hover { background: var(--accent-soft); }
 .plan-table { width: 100%; border-collapse: collapse; font-size: .97rem; }
 .plan-table th, .plan-table td { text-align: left; vertical-align: top; padding: 13px 16px; border-bottom: 1px solid var(--line); }
 .plan-table thead th { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 700; white-space: nowrap; }
-.plan-table tbody th { color: var(--accent); font-weight: 700; white-space: nowrap; width: 1%; }
+.plan-table tbody th { color: var(--ink); font-weight: 700; white-space: nowrap; width: 1%; }
 .plan-table tbody tr:last-child > * { border-bottom: 0; }
 .plan-table a { font-weight: 600; text-decoration: underline; text-decoration-color: var(--line); text-decoration-thickness: 2px; text-underline-offset: 4px; }
-.plan-table a:hover { color: var(--accent); text-decoration-color: var(--accent); }
-.plan-table .plain { color: var(--muted); }
+.plan-table a:hover { text-decoration-color: var(--ink); }
+.plan-table .plain { color: var(--ink); font-weight: 600; }
 .cell-note { display: block; font-size: .85rem; color: var(--muted); margin-top: 2px; }
-.cell-kcal { display: block; font-size: .8rem; font-weight: 700; color: var(--accent); margin-top: 6px; }
+.cell-kcal { display: block; font-size: .8rem; color: var(--muted); margin-top: 4px; font-variant-numeric: tabular-nums; }
+.jobs { margin: 0; padding: 0 0 0 1.1em; font-size: .88rem; color: var(--muted); }
+.jobs li + li { margin-top: 4px; }
 .cell-portion { display: block; font-size: .8rem; color: var(--muted); }
 .day-kcal { display: block; font-size: .78rem; font-weight: 600; color: var(--muted); margin-top: 4px; }
 .plan-table tr.is-today { background: var(--accent-soft); }

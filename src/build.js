@@ -244,10 +244,11 @@ function range(p) {
 }
 function kcalHTML(c) {
   if (c.kcal === undefined) return '';
-  return `<span class="cell-kcal">About ${c.kcal.toLocaleString('en-GB')} kcal · ${c.g}g a person</span><span class="cell-portion">${esc(c.parts)}</span>`;
+  return `<span class="cell-kcal">${c.kcal.toLocaleString('en-GB')} kcal</span>`;
 }
 function cellHTML(c, person) {
-  if (c.t) return `<span class="plain">${esc(c.t)}</span>${kcalHTML(c)}`;
+  if (c.jobs) return c.jobs.length ? `<ul class="jobs">${c.jobs.map(j => `<li>${esc(j)}</li>`).join('')}</ul>` : '';
+  if (c.t) return `<span class="plain">${esc(c.t)}</span>${c.note ? `<span class="cell-note">${esc(c.note)}</span>` : ''}${kcalHTML(c)}`;
   const rec = bySlug[c.r];
   const serves = c.serves || person.serves;
   const href = `/recipes/${rec.slug}/` + (rec.yield ? '' : `?serves=${serves}`);

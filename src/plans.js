@@ -30,18 +30,18 @@ const YOG = t('Yoghurt bowl', k(385, 430, '200g yoghurt, 30g granola, 80g berrie
 const EGGS = t('Eggs, toast and bacon', k(375, 175, '2 eggs, 1 slice of toast weighing 40g, 2 rashers of streaky bacon'));
 const TOM_BREAKFAST = [YOG, YOG, YOG, YOG, YOG, EGGS, EGGS];
 const BOLOGNESE_LUNCH = k(900, 465, '320g sauce, 145g cooked pasta from 60g dry' + FRUIT_NOTE);
-const CHICKEN_POT = 'Uses a whole chicken from the freezer, moved to the fridge on Monday night. It feeds the 2 of you tonight, and everything left goes into Thursday\'s soup, so keep the leftover chicken and about 1 litre of the poaching broth.';
-const SOUP = t('Soup day. Chicken and sweetcorn soup, from Tom Kerridge\'s Lose Weight for Good, page 70. Make it on Wednesday night with the leftover soy-poached chicken and the poaching broth in place of chicken stock, then split it into 3 tubs, one for Sophie\'s mum. Take the skin off the chicken and share it between the tubs, and measure the sesame oil with a spoon. Reheat until piping hot. A piece of fruit.', k(330, 350, '350g soup with about 70g chicken' + FRUIT_NOTE));
+// const CHICKEN_POT = 'Uses a whole chicken from the freezer, moved to the fridge on Monday night. It feeds the 2 of you tonight, and everything left goes into Thursday\'s soup, so keep the leftover chicken and about 1 litre of the poaching broth.';
+const SOUP = t('Chicken and sweetcorn soup', Object.assign({ note: 'Made on Wednesday night.' }, k(330, 350, '')));
 const CHICKEN_LUNCH = k(650, 480, '150g chicken, 200g cooked rice, 130ml broth' + FRUIT_NOTE);
 function tomLunch(w) {
   return [
-    w.monTueLunch ? w.monTueLunch[0] : r('roast-chicken-caesar-sandwich', { label: 'Roast Chicken Caesar Sandwich', note: 'Make the filling on Sunday night with chicken from the roast. It covers Monday and Tuesday for you both.', serves: 4 }),
-    w.monTueLunch ? w.monTueLunch[1] : r('roast-chicken-caesar-sandwich', { label: 'Chicken Caesar Sandwich, Second Lunch', serves: 4 }),
-    t('Jacket potato with half a jar of Bold Bean baked beans and 20g of cheddar each, or with cottage cheese and ham. A piece of fruit.', k(490, 470, '250g potato, 200g beans, 20g cheddar' + FRUIT_NOTE)),
+    w.monTueLunch ? w.monTueLunch[0] : r('roast-chicken-caesar-sandwich', { label: 'Roast Chicken Caesar Sandwich', serves: 4 }),
+    w.monTueLunch ? w.monTueLunch[1] : r('roast-chicken-caesar-sandwich', { label: 'Roast Chicken Caesar Sandwich', serves: 4 }),
+    t('Jacket potato with beans and cheddar', k(490, 470, '250g potato, 200g beans, 20g cheddar' + FRUIT_NOTE)),
     SOUP,
-    t('A 400g pot each of Sainsbury\'s Petits Pois & Crème Fraîche soup, heated in the microwave until piping hot. A piece of fruit.', k(260, 400, '400g soup, 1.6g salt' + FRUIT_NOTE)),
-    t('An omelette made with 3 eggs, ham and 30g of cheddar each, with cherry tomatoes cooked in the pan and a slice of toast.', k(550, 360, '3 eggs, 40g ham, 30g cheddar, 100g tomatoes, 1 slice of toast weighing 40g')),
-    t('Beans on toast with a poached egg.', k(425, 330, '200g beans, 2 slices of toast weighing 80g, 1 egg'))
+    t('Pea and crème fraîche soup', Object.assign({ note: 'Sainsbury\'s, one pot each.' }, k(260, 400, ''))),
+    t('Ham and cheese omelette with tomatoes', k(550, 360, '3 eggs, 40g ham, 30g cheddar, 100g tomatoes, 1 slice of toast weighing 40g')),
+    t('Beans on toast with a poached egg', k(425, 330, '200g beans, 2 slices of toast weighing 80g, 1 egg'))
   ];
 }
 const TOM_BOXES = [
@@ -57,8 +57,7 @@ const TOM_BOXES = [
     'Soup day. Thursday\'s soup uses the chicken and broth left from Wednesday dinner. Buy a tin of sweetcorn and the other soup ingredients in the weekly shop.',
     'Fruit. Pack a piece of fruit, such as an apple, a pear or a satsuma, with every weekday lunch.'
   ] },
-  { title: 'Daily Target', text: 'For Tom, about 1,900 calories a day, which is the NHS figure for men losing weight. That is about 400 for breakfast, 500 for lunch, 750 for dinner and 250 for snacks, mostly fruit.' },
-  { title: 'Calories & Portions', text: 'Each meal shows the calories for one person and what one person\'s plate should weigh. Weigh the plate once or twice to learn what the portion looks like. The figure beside each day adds up breakfast, lunch and dinner, and leaves out snacks and extra vegetables. The calories are estimates from standard figures for each ingredient, so treat them as a guide to within about 10%.' }
+  { title: 'Daily Target', text: 'About 1,900 calories a day for Tom, including about 250 for snacks.' }
 ];
 const VEG_BOX = { title: 'Extra Fruit & Veg', list: [
   'Every night. About 80g each of frozen peas, green beans, broccoli or edamame, microwaved for 3 to 4 minutes.',
@@ -72,54 +71,50 @@ const VEG_BOX = { title: 'Extra Fruit & Veg', list: [
 function week(w) {
   const fruit = FRUIT[w.n % 2];
   const ted = [
-    w.tedMonday || [t('At nursery'), w.mondayTed || r('chicken-couscous', { note: 'Uses chicken left from Sunday\'s roast. Shred it into the couscous and warm it through until piping hot.' })],
+    w.tedMonday || [t('At nursery'), w.mondayTed || r('chicken-couscous', { note: 'Chicken from Sunday.' })],
     [t('At nursery'), r('spinach-omelette-wedges')],
-    [t('At nursery'), r('red-lentil-curry', { label: 'Red Lentil Curry with Rice', note: 'From Ted\'s tub in the freezer.' })],
-    [r('potato-cakes', { note: 'With Granny. Made on Wednesday.' }), r('tomato-fusilli', { note: 'With Granny. Made on Wednesday.' })],
+    [t('At nursery'), r('red-lentil-curry', { label: 'Red Lentil Curry with Rice', note: 'From the freezer.' })],
+    [r('potato-cakes', { note: 'With Granny.' }), r('tomato-fusilli', { note: 'With Granny.' })],
     [r('eggy-crumpet'), r('jacket-potato-cheddar-beans')],
     [r('banana-oat-pancakes'), r('pea-risotto')],
     [w.tedSundayLunch || r('scrambled-egg-toast-avocado'), w.pork ? r('roast-pork-belly', { label: 'Pork Belly with Mash, Carrots and Broccoli', note: 'Shared with you.' }) : r('roast-chicken', { label: 'Roast Chicken with Mash, Carrots and Broccoli', note: 'Shared with you.', serves: 4 })]
   ];
   const adults = [
-    w.monday || [t('Chilli Con Carne', k(720, 580, '350g chilli, 230g cooked rice from 75g dry')), t('From the freezer')],
-    [w.tuesday || r('carnitas-tacos'), t('From the freezer, crisped in 15 minutes')],
-    [r('hainanish-soy-poached-chicken', { note: (w.wednesdayNote ? w.wednesdayNote + ' ' : '') + CHICKEN_POT, serves: 2 }), t('1 hour 30 minutes of poaching, 30 minutes of work')],
-    [r('red-lentil-curry', { note: 'Cook 75g of rice for each of you.' }), t('From the freezer')],
-    w.fridayAdults || [r('red-wine-burnt-onion-beef'), t('Beef from the freezer, butter beans in 20 minutes')],
-    [w.saturday, t(w.saturdayWhen)],
-    [w.pork ? r('roast-pork-belly', { note: 'Shared with Ted. One pork belly chunky each.' }) : r('roast-chicken', { note: 'Shared with Ted. Keep about 250g of chicken for your sandwiches on Monday and Tuesday and a little for Ted\'s couscous.', serves: 4 }), t('Cooked on the day')]
+    w.monday || [t('Chilli con carne', Object.assign({ note: 'From the freezer.' }, k(720, 580, '')))],
+    [w.tuesday || r('carnitas-tacos', { note: 'From the freezer.' })],
+    [r('hainanish-soy-poached-chicken', { note: (w.wednesdayNote ? w.wednesdayNote + ' ' : '') + 'Keep the leftovers for the soup.', serves: 2 })],
+    [r('red-lentil-curry', { note: 'From the freezer.' })],
+    w.fridayAdults || [r('red-wine-burnt-onion-beef', { note: 'Beef from the freezer.' })],
+    [w.saturday],
+    [w.pork ? r('roast-pork-belly', { note: 'Shared with Ted.' }) : r('roast-chicken', { note: 'Shared with Ted. Keep 250g for sandwiches.', serves: 4 })]
   ];
-  const freezer = (w.freezerExtra || []).concat([
-    'Sunday night. Move a tub of chilli to the fridge for Monday.',
-    'Monday night. Move a tub of carnitas pork to the fridge for Tuesday, and a whole chicken for Wednesday.',
-    'Tuesday night. Move one of Ted\'s curry tubs to the fridge for Wednesday.',
-    'Wednesday night. Move 2 portions of curry to the fridge for Thursday.'
-  ]);
-  if (!w.fridayAdults) freezer.push('Thursday night. Move a tub of beef to the fridge for Friday.');
-  if (!w.pork) freezer.push('Friday morning. Move the chicken to the fridge for Sunday.');
-  freezer.push('Friday night. Move the ' + w.saturdayMeat + ' to the fridge for Saturday.');
-  if (w.pork) freezer.push('Saturday night. Move 2 pork belly chunkies to the fridge for Sunday.');
-  const ORDER = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  freezer.sort((x, y) => ORDER.indexOf(x.split(' ')[0]) - ORDER.indexOf(y.split(' ')[0]));
+  // Jobs for each day, done on that day. Each one is a short command.
+  const jobs = { Sunday: ['Move a tub of chilli to the fridge.'], Monday: ['Move a tub of carnitas pork and the whole chicken to the fridge.'], Tuesday: ['Move a tub of Ted\'s curry to the fridge.'],
+    Wednesday: ['Make the chicken soup.', 'Make Ted\'s potato cakes and fusilli for Granny.', 'Move 2 portions of curry to the fridge.'], Thursday: [], Friday: [], Saturday: [] };
+  if (!w.fridayAdults) jobs.Thursday.push('Move a tub of beef to the fridge.');
+  if (!w.pork) jobs.Friday.push('Move the chicken to the fridge.');
+  jobs.Friday.push('Move the ' + w.saturdayMeat + ' to the fridge.');
+  if (w.pork) jobs.Saturday.push('Move 2 pork belly chunkies to the fridge.');
+  (w.jobs || []).forEach(([d, x]) => jobs[d].push(x));
   return {
     id: w.id, start: w.id, title: w.title,
     people: [
       {
         name: 'Ted', serves: 1,
         columns: ['Lunch', 'Dinner or Supper', 'Fruit'],
-        intro: 'Nursery on Monday, Tuesday and Wednesday, where Ted has lunch and tea, so he has a small supper at home. Granny on Thursday, with both meals made ahead. The same week repeats until 1 November.',
+        intro: 'Nursery on Monday to Wednesday, so a small supper at home. Granny on Thursday.',
         rows: DAYS.map((d, i) => [d, ted[i][0], ted[i][1], t(fruit[i])]),
         boxes: [
-          { title: 'Thursday with Granny', text: 'Make the potato cakes and the fusilli on Wednesday evening and keep them in labelled tubs in the fridge. Granny can serve the potato cakes cold or warmed through. She should reheat the fusilli until piping hot with a splash of milk and let it cool before serving. Pack a pot of yoghurt and the cut fruit in the same bag. Granny\'s own lunch is in the fridge. On soup days it is a pot of soup.' }
+          { title: 'Thursday with Granny', text: 'Potato cakes cold or warmed through. Reheat the fusilli until piping hot with a splash of milk, then let it cool. Pack a yoghurt and the fruit.' }
         ]
       },
       {
         name: 'Tom & Sophie', serves: 2,
-        columns: ['Breakfast', 'Lunch', 'Dinner', 'When It\'s Cooked'],
-        intro: w.intro + ' Weekday lunches are packed for the coworking space, which has a microwave and a toaster.',
-        rows: DAYS.map((d, i) => [d, TOM_BREAKFAST[i], withK(tomLunch(w)[i]), withK(adults[i][0]), adults[i][1]]),
+        columns: ['Breakfast', 'Lunch', 'Dinner', 'Jobs'],
+        intro: w.intro,
+        rows: DAYS.map((d, i) => [d, TOM_BREAKFAST[i], withK(tomLunch(w)[i]), withK(adults[i][0]), { jobs: jobs[d] }]),
         dayTotal: true,
-        boxes: (w.boxes || []).concat([{ title: 'Out of the Freezer', list: freezer }, VEG_BOX], TOM_BOXES)
+        boxes: (w.boxes || []).concat([VEG_BOX], TOM_BOXES)
       }
     ]
   };
@@ -128,22 +123,21 @@ function week(w) {
 module.exports = [
   week({
     n: 0, id: '2026-10-05', title: 'Week of 5 October',
-    intro: 'The first of four repeating weeks. The batch cooking on Saturday 3 and Sunday 4 October covers the freezer meals. Every week has soy-poached chicken on Wednesday, soup from its leftovers on Thursday lunch, the lentil curry on Thursday and the beef on Friday.',
-    mondayTed: r('cheese-on-toast-fingers', { note: 'No roast the day before this week.' }),
+    intro: 'The first of four repeating weeks.',
+    mondayTed: r('cheese-on-toast-fingers'),
     monTueLunch: [
-      t('Leftover beef stew from the batch cook, with a Veetee microwave pouch of jasmine rice.', k(670, 450, '250g beef stew, 200g rice')),
-      t('The chilli con carne that came out of the freezer for Monday dinner. It defrosted on Sunday night, so eat it today. Serve it with 75g of rice each, cooked on Monday night and cooled within an hour, and reheat both until piping hot. If the chilli is still in the freezer, leave it there and have the second portion of beef stew.', k(720, 580, '350g chilli, 230g cooked rice from 75g dry'))
+      t('Beef stew with a rice pouch', k(670, 450, '')),
+      t('Chilli con carne with rice', k(720, 580, ''))
     ],
     monday: [
-      r('sausage-mash-gravy-cabbage', Object.assign({ label: 'Sausage and Mash with Chipolatas', note: 'In place of the chilli. Uses the 10 chipolatas from the freezer, 5 each, in place of the Cumberland sausages. Cook them from frozen, which takes a few minutes longer, until there is no pink in the middle.' }, k(875, 840, '5 chipolatas weighing 110g cooked, 430g mash, 150g cabbage, 150ml gravy'))),
-      t('Chipolatas from the freezer, 35 minutes on the night')
+      r('sausage-mash-gravy-cabbage', Object.assign({ label: 'Sausage and Mash', note: 'Chipolatas from the freezer, cooked from frozen.' }, k(875, 840, '')))
     ],
-    freezerExtra: ['Monday night. Freeze the second portion of beef stew if the chilli is in the fridge for Tuesday lunch.'],
-    fridayAdults: [t('Tom is out. Sophie has fish fingers.', Object.assign(k(290, 140, '5 fish fingers'), { noTotal: true })), t('About 15 minutes in the air fryer')],
-    tedMonday: [r('scrambled-egg-toast-avocado', { note: 'Home from nursery before lunch today.' }), r('egg-fried-rice', { note: 'There is no rice from yesterday, so cook 40g of rice at lunchtime. Spread it on a plate to cool, get it into the fridge within an hour, and fry it at teatime.' })],
-    tuesday: r('carnitas-tacos', { note: 'Movie night with 2 guests, so this makes 4 portions.', serves: 4 }),
-    saturday: r('pork-larb', { note: 'Cook 40g more rice and 80ml more water than the recipe says, which leaves enough for Ted\'s egg fried rice on Sunday. Use a 500g pack of 5% fat pork mince.' }), saturdayWhen: '20 minutes on the night', saturdayMeat: 'pork mince',
-    tedSundayLunch: r('egg-fried-rice', { note: 'Uses rice left from Saturday\'s larb.' }),
+    
+    fridayAdults: [t('Fish fingers for Sophie', Object.assign(k(290, 140, ''), { note: 'Tom is out.', noTotal: true }))],
+    tedMonday: [r('scrambled-egg-toast-avocado', { note: 'Home from nursery.' }), r('egg-fried-rice', { note: 'Cook 40g of rice at lunchtime.' })],
+    tuesday: r('carnitas-tacos', { note: 'Movie night, 4 portions.', serves: 4 }),
+    saturday: r('pork-larb', { note: 'Cook 40g extra rice for Ted.' }), saturdayMeat: 'pork mince',
+    tedSundayLunch: r('egg-fried-rice', { note: 'Rice from Saturday.' }),
     boxes: [
       { title: 'Saturday 3 October Batch Cook', list: [
         'Morning. Cook one batch of the beef, which uses 2.7kg of shin and makes 8 servings, in the oven at 160°C for 3½ hours. Use your largest casserole, or split it between 2.',
@@ -161,25 +155,25 @@ module.exports = [
   }),
   week({
     n: 1, id: '2026-10-12', title: 'Week of 12 October',
-    intro: 'The second of four repeating weeks. Tom is out on Wednesday and you are both out on Friday. Sunday is pork belly in place of chicken.',
+    intro: 'The second of four repeating weeks.',
     pork: true,
-    wednesdayNote: 'Tom is out, so Tom\'s share of the chicken goes into Thursday\'s soup.',
-    fridayAdults: [t('Out for dinner', { noTotal: true }), t('Nothing to cook')],
-    saturday: r('sausage-mash-gravy-cabbage', { note: 'Buy 6 Cumberland sausages in an earlier shop and freeze them, because the freezer sausages went on Monday 5 October.' }), saturdayWhen: '25 minutes on the night', saturdayMeat: 'sausages'
+    wednesdayNote: 'Tom is out.',
+    fridayAdults: [t('Out for dinner', { noTotal: true })],
+    saturday: r('sausage-mash-gravy-cabbage'), saturdayMeat: 'sausages'
   }),
   week({
     n: 0, id: '2026-10-19', title: 'Week of 19 October',
     intro: 'The third of four repeating weeks.',
-    monTueLunch: [t('A tub of Bolognese from the freezer, shared, with 60g of pasta each. A piece of fruit.', BOLOGNESE_LUNCH), t('The second spare tub of Bolognese, with 60g of pasta each. A piece of fruit.', BOLOGNESE_LUNCH)],
-    freezerExtra: ['Sunday night. Also move a tub of Bolognese to the fridge for Monday lunch.', 'Monday night. Also move the second tub of Bolognese to the fridge for Tuesday lunch.'],
-    mondayTed: r('cheese-on-toast-fingers', { note: 'Sunday was pork belly, so there is no chicken to use up.' }),
-    saturday: r('pork-larb', { note: 'Cook 40g more rice and 80ml more water than the recipe says, which leaves enough for Ted\'s egg fried rice on Sunday. Use a 500g pack of 5% fat pork mince.' }), saturdayWhen: '20 minutes on the night', saturdayMeat: 'pork mince',
-    tedSundayLunch: r('egg-fried-rice', { note: 'Uses rice left from Saturday\'s larb.' })
+    monTueLunch: [t('Bolognese with pasta', BOLOGNESE_LUNCH), t('Bolognese with pasta', BOLOGNESE_LUNCH)],
+    jobs: [['Sunday', 'Move a tub of Bolognese to the fridge.'], ['Monday', 'Move a tub of Bolognese to the fridge.']],
+    mondayTed: r('cheese-on-toast-fingers'),
+    saturday: r('pork-larb', { note: 'Cook 40g extra rice for Ted.' }), saturdayMeat: 'pork mince',
+    tedSundayLunch: r('egg-fried-rice', { note: 'Rice from Saturday.' })
   }),
   week({
     n: 1, id: '2026-10-26', title: 'Week of 26 October',
-    intro: 'The last of four repeating weeks. This uses up the last of the chilli and carnitas. Sunday is pork belly in place of chicken.',
+    intro: 'The last of four repeating weeks.',
     pork: true,
-    saturday: r('sausage-mash-gravy-cabbage', { note: 'Buy 6 Cumberland sausages in an earlier shop and freeze them, because the freezer sausages went on Monday 5 October.' }), saturdayWhen: '25 minutes on the night', saturdayMeat: 'sausages'
+    saturday: r('sausage-mash-gravy-cabbage'), saturdayMeat: 'sausages'
   })
 ];

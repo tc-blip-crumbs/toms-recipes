@@ -94,3 +94,10 @@ Batch-cook recipes, such as the carnitas, burnt onion beef, Bolognese and red le
 
 ## 8. Keeping to the rules
 Each recipe is stored as one structured data file. Before each publish, a checking script I run rejects any recipe that breaks a rule. It looks for banned units and words, an ingredient never used in the method, a step naming something missing from the list, a missing scaling type, and a missing oven temperature when a step mentions the oven.
+
+## 5. Meal plans
+- Less is more. Every line on a plan earns its place, and anything you can find on the recipe page stays there.
+- A meal shows the dish name, linked when it has a recipe, and one short line at most, such as "From the freezer" or "Movie night, 4 portions".
+- Jobs go in the Jobs column on the day you do them, as short commands, such as "Move the chicken to the fridge".
+- Calories show as a number only, such as "720 kcal". Plate weights stay off the plan.
+- Red marks today and nothing else. Day names, meals and calories stay black or grey, and every meal looks the same whether or not it has a recipe.
