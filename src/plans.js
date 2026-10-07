@@ -39,7 +39,7 @@ function tomLunch(w) {
     w.monTueLunch ? w.monTueLunch[1] : r('roast-chicken-caesar-sandwich', { label: 'Chicken Caesar Sandwich, Second Lunch', serves: 4 }),
     t('Jacket potato with half a jar of Bold Bean baked beans and 20g of cheddar each, or with cottage cheese and ham. A piece of fruit.', k(490, 470, '250g potato, 200g beans, 20g cheddar' + FRUIT_NOTE)),
     SOUP,
-    t('Tuna sandwich. A 145g tin of tuna each, drained and mixed with 1 tbsp of light mayonnaise, on 2 slices of wholemeal bread with salad leaves. A piece of fruit.', k(430, 265, '110g tuna, 15g mayonnaise, 2 slices of bread weighing 80g, 60g salad' + FRUIT_NOTE)),
+    t('A 400g pot each of Sainsbury\'s Petits Pois & Crème Fraîche soup, heated in the microwave until piping hot. A piece of fruit.', k(260, 400, '400g soup, 1.6g salt' + FRUIT_NOTE)),
     t('An omelette made with 3 eggs, ham and 30g of cheddar each, with cherry tomatoes cooked in the pan and a slice of toast.', k(550, 360, '3 eggs, 40g ham, 30g cheddar, 100g tomatoes, 1 slice of toast weighing 40g')),
     t('Beans on toast with a poached egg.', k(425, 330, '200g beans, 2 slices of toast weighing 80g, 1 egg'))
   ];
@@ -53,7 +53,7 @@ const TOM_BOXES = [
   ] },
   { title: 'Lunch Notes', list: [
     'Jacket potato. Prick the potato and microwave it at work for 8 to 10 minutes, then heat the beans for 1 to 2 minutes.',
-    'Friday. Buy 2 tins of tuna, a small wholemeal loaf and a bag of salad leaves in the weekly shop.',
+    'Friday. Buy 2 pots of Sainsbury\'s Petits Pois & Crème Fraîche soup in the weekly shop.',
     'Soup day. Thursday\'s soup uses the chicken and broth left from Wednesday dinner. Buy a tin of sweetcorn and the other soup ingredients in the weekly shop.',
     'Fruit. Pack a piece of fruit, such as an apple, a pear or a satsuma, with every weekday lunch.'
   ] },
