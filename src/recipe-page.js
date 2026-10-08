@@ -242,6 +242,20 @@
     if (Math.abs(dx) > 60) cook.show(cook.index + (dx < 0 ? 1 : -1));
   });
 
+  /* Share: the phone's share menu, or a copied link on a computer. The link keeps the servings you chose. */
+  document.querySelectorAll('[data-action="share"]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var url = location.origin + location.pathname + (recipe.yield || recipe.batch ? '' : '?serves=' + servings);
+      var title = document.querySelector('h1').textContent;
+      if (navigator.share) { navigator.share({ title: title, url: url }).catch(function () {}); return; }
+      var label = b.querySelector('span');
+      (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function () {
+        label.textContent = 'Link copied';
+        setTimeout(function () { label.textContent = 'Share'; }, 2000);
+      }).catch(function () { prompt('Copy this link', url); });
+    });
+  });
+
   document.querySelectorAll('[data-action="print"]').forEach(function (b) { b.addEventListener('click', function () { window.print(); }); });
 
   render(false);
