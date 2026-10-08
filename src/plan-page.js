@@ -48,19 +48,12 @@
   });
   if (tabs.length && location.hash && document.getElementById(location.hash.slice(1))) show(location.hash.slice(1));
 
-  var data = document.getElementById('plans-data');
-  var banner = document.getElementById('this-week');
-  if (data && banner) {
-    var plans = JSON.parse(data.textContent);
-    var pick = plans.filter(function (p) { return weekOffset(p.start) === 0; })[0]
-      || plans.filter(function (p) { return weekOffset(p.start) < 0; }).sort(function (a, b) { return a.start < b.start ? -1 : 1; })[0];
-    if (pick) {
-      var a = banner.querySelector('a');
-      var brand = document.querySelector('.brand');
-      var base = brand ? brand.getAttribute('href').replace(/\/$/, '') : '';
-      a.href = base + '/plans/' + pick.id + '/';
-      a.textContent = (weekOffset(pick.start) === 0 ? 'This week’s meal plan' : 'Next week’s meal plan') + ' →';
-      banner.hidden = false;
-    }
+  // This week's plan opens on today's meals. Monday is already at the top.
+  function goToday() {
+    var rows = Array.prototype.filter.call(document.querySelectorAll('tr.is-today'), function (tr) { return !tr.closest('[hidden]'); });
+    if (rows[0] && rows[0].getAttribute('data-day') !== 'Monday') rows[0].scrollIntoView({ block: 'start' });
   }
+  goToday();
+  tabs.forEach(function (t) { t.addEventListener('click', goToday); });
+
 })();

@@ -75,7 +75,10 @@ Batch-cook recipes, such as the carnitas, burnt onion beef, Bolognese and red le
 
 ## 6. How the site works
 - The recipe list has search and a row of course links. Each card shows the picture, the name and the total time. Phones show two cards to a row.
-- Recipe and plan pages have a bar fixed at the top with a back arrow. Going back returns you to the same place in the list.
+- Tom and Sophie use it on iPhones, opened full screen from the home screen icon. Every change is checked at iPhone size before it goes live.
+- On a phone, Recipes and Meal Plans buttons sit along the bottom. Meal Plans opens this week's plan, scrolled to today.
+- Recipe and plan pages have a bar fixed at the top with a back arrow at the left. Going back returns you to the same place in the list.
+- The site holds only the recipes Tom and Sophie cook, and only the features they use.
 - On a phone, the ingredients start on the first screen. Each recipe has Ingredients and Method tabs, with the servings control in the fixed bar. Tablets and computers show the ingredients beside the method.
 - Tap ingredients to tick them off as you gather them.
 - Each method step shows its ingredients as small cards with the amounts for the servings you chose.

@@ -147,13 +147,17 @@ a.tag:hover { background: var(--accent-soft); }
   padding: 8px 12px 8px 6px; margin-left: -6px; border-radius: 999px; }
 .back:hover { background: var(--chip); }
 .back svg { width: 20px; height: 20px; }
-.plan-bar { margin-inline: calc(var(--gutter) * -1); margin-bottom: 18px; }
-.plan-bar .bar-in { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px var(--gutter); }
-.plan-bar .plan-tabs { margin: 0; }
-.bar-title { font-weight: 600; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.toolbar .wrap > .back + * { margin-right: auto; }
+/* Full screen from the home screen. A strip the colour of the page sits behind the phone's clock. */
+:root { --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px); --bar: 0px; }
+body.has-bar { --bar: 53px; }
+body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: var(--safe-top); background: var(--bg); z-index: 100; }
+.site-header { padding-top: var(--safe-top); }
+.appbar { position: sticky; top: var(--safe-top); z-index: 30; background: var(--bg); border-bottom: 1px solid var(--line); }
+.appbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 52px; }
+.appbar .plan-tabs { margin: 0; }
+.tabbar { display: none; }
 
-.toolbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); }
+.toolbar { position: sticky; top: calc(var(--safe-top) + var(--bar)); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); }
 .toolbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-block: 10px; }
 .servings { display: flex; align-items: center; gap: 10px; }
 .servings .label { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
@@ -180,7 +184,7 @@ a.tag:hover { background: var(--accent-soft); }
 .columns { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: clamp(28px, 4vw, 48px); padding-block: 28px 16px; align-items: start; }
 .columns h2 { font: 400 1.6rem/1.2 var(--display); margin: 0 0 4px; }
 .for { margin: 0 0 14px; color: var(--muted); font-size: .92rem; }
-.ingredients { position: sticky; top: 76px; max-height: calc(100vh - 96px); overflow: auto; padding-right: 6px; }
+.ingredients { position: sticky; top: calc(var(--safe-top) + var(--bar) + 76px); max-height: calc(100vh - var(--bar) - 96px); overflow: auto; padding-right: 6px; }
 .ing-group + .ing-group { margin-top: 20px; }
 .ing-group h3 { font: 700 .78rem var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; }
 .group-note { margin: 0 0 8px; font-size: .88rem; color: var(--muted); }
@@ -199,7 +203,7 @@ a.tag:hover { background: var(--accent-soft); }
 .equipment ul { margin: 0; padding-left: 1.1em; }
 
 .steps { list-style: none; margin: 8px 0 0; padding: 0; }
-.step { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 80px; }
+.step { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--safe-top) + var(--bar) + 80px); }
 .step:first-child { padding-top: 6px; }
 .step-num { font: 400 1.6rem/1.1 var(--display); color: var(--muted); }
 .step-body p { margin: 0; max-width: 64ch; }
@@ -267,8 +271,6 @@ a.tag:hover { background: var(--accent-soft); }
   .actions .btn { flex: 1; justify-content: center; }
   .actions .btn.icon-only { flex: none; width: 46px; padding: 0; height: 46px; }
   .btn.icon-only span { display: none; }
-  .back span { display: none; }
-  .back { padding: 8px; }
   .recipe-head { padding-block: 16px 14px; }
   .recipe-head h1 { font-size: 2rem; margin-bottom: 8px; }
   .recipe-head .desc { font-size: 1rem; margin-bottom: 12px; }
@@ -276,7 +278,6 @@ a.tag:hover { background: var(--accent-soft); }
   .facts div { border-right: 0; margin-right: 0; padding: 8px 0; }
   .facts dt, .facts dd { white-space: nowrap; }
   .facts dd { font-size: .95rem; }
-  .plan-bar .back span { display: inline; }
   .step { grid-template-columns: 30px minmax(0, 1fr); gap: 10px; }
   .az ol { columns: 1; }
 }
@@ -363,6 +364,7 @@ a.tag:hover { background: var(--accent-soft); }
 .cell-portion { display: block; font-size: .8rem; color: var(--muted); }
 .day-kcal { display: block; font-size: .78rem; font-weight: 600; color: var(--muted); margin-top: 4px; }
 .plan-table tr.is-today { background: var(--accent-soft); }
+.plan-table tbody tr { scroll-margin-top: calc(var(--safe-top) + var(--bar) + 12px); }
 .today-tag { display: block; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-top: 2px; }
 .plan-box { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
 .plan-box h3 { font: 400 1.3rem var(--display); margin: 0 0 8px; }
@@ -441,3 +443,18 @@ a.tag:hover { background: var(--accent-soft); }
 }
 @media (prefers-reduced-motion: reduce) { .card:hover .card-art img { transform: none; } }
 @media print { .head-art, .card-art { display: none !important; } .recipe-head.has-art { display: block; } }
+
+/* Phones: Recipes and Meal Plans buttons along the bottom, and the back arrow at the top left. */
+@media (max-width: 699px) {
+  .has-bar .site-header { display: none; }
+  .site-nav a { display: none; }
+  .tabbar { display: grid; grid-template-columns: 1fr 1fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+    background: var(--bg); border-top: 1px solid var(--line); padding-bottom: var(--safe-bottom); }
+  .tabbar a { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 0 6px; text-decoration: none; font-size: .72rem; font-weight: 600; color: var(--muted); }
+  .tabbar a[aria-current="page"] { color: var(--ink); }
+  .tabbar svg { width: 24px; height: 24px; }
+  body { padding-bottom: calc(58px + var(--safe-bottom)); }
+  .timers { bottom: calc(70px + var(--safe-bottom)); }
+  .site-footer .wrap { padding-bottom: 20px; }
+}
+@media print { .tabbar, .appbar { display: none !important; } }

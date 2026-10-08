@@ -45,10 +45,13 @@ const ICON = {
   cook: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
   screen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3" stroke-linecap="round"/></svg>',
   back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
+  book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg>',
+  calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4" stroke-linecap="round"/></svg>',
   close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>'
 };
 
-function head({ title, description, canonical, extra = '', nav = 'recipes' }) {
+const PLAN_WEEKS = JSON.stringify(plans.map(p => [p.id, p.start]));
+function head({ title, description, canonical, extra = '', nav = 'recipes', bar = '' }) {
   return `<!doctype html>
 <html lang="en-GB">
 <head>
@@ -68,18 +71,23 @@ ${INDEXABLE ? '' : '<meta name="robots" content="noindex">\n'}<link rel="canonic
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="apple-mobile-web-app-title" content="Recipes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/assets/site.css">
 ${extra}</head>
-<body>
+<body${bar ? ' class="has-bar"' : ''}>
 <a class="visually-hidden" href="#main">Skip to content</a>
-<header class="site-header"><div class="wrap"><a class="brand" href="/">Tom's <span>Recipes</span></a><nav class="site-nav" aria-label="Main"><a href="/"${nav === 'recipes' ? ' aria-current="page"' : ''}>Recipes</a><a href="/plans/"${nav === 'plans' ? ' aria-current="page"' : ''}>Meal Plans</a><button type="button" class="theme-btn" id="theme-btn" aria-label="Colour theme"></button></nav></div></header>
+<header class="site-header"><div class="wrap"><a class="brand" href="/">Tom's <span>Recipes</span></a><nav class="site-nav" aria-label="Main"><a href="/"${nav === 'recipes' ? ' aria-current="page"' : ''}>Recipes</a><a href="/plans/" data-this-week${nav === 'plans' ? ' aria-current="page"' : ''}>Meal Plans</a><button type="button" class="theme-btn" id="theme-btn" aria-label="Colour theme"></button></nav></div></header>
 <script>(function(){var b=document.getElementById("theme-btn"),r=document.documentElement,o=["auto","light","dark"],n={auto:"Auto",light:"Light",dark:"Dark"},ic={auto:"<svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true'><circle cx='12' cy='12' r='8' fill='none' stroke='currentColor' stroke-width='2'/><path d='M12 4a8 8 0 0 1 0 16z' fill='currentColor'/></svg>",light:"<svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round'><circle cx='12' cy='12' r='4'/><path d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4'/></svg>",dark:"<svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true'><path d='M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z' fill='currentColor'/></svg>"};function g(){try{return localStorage.getItem("theme")||"auto"}catch(e){return"auto"}}function s(v){if(v==="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",v);try{localStorage.setItem("theme",v)}catch(e){}b.innerHTML=ic[v];b.title="Theme: "+n[v];b.setAttribute("aria-label","Colour theme: "+n[v]+". Tap to change.")}s(g());b.addEventListener("click",function(){s(o[(o.indexOf(g())+1)%3])})})();</script>
-`;
+<nav class="tabbar" aria-label="Sections"><a href="/"${nav === 'recipes' ? ' aria-current="page"' : ''}>${ICON.book}<span>Recipes</span></a><a href="/plans/" data-this-week${nav === 'plans' ? ' aria-current="page"' : ''}>${ICON.calendar}<span>Meal Plans</span></a></nav>
+${bar}`;
 }
 const foot = `<footer class="site-footer"><div class="wrap"><span>${NAME}</span><span>Recipes in UK measures. Oven temperatures are for a fan oven.</span></div></footer>
+<script>(function(){var w=${PLAN_WEEKS},d=new Date(),t=new Date(d.getFullYear(),d.getMonth(),d.getDate()),pick=null;w.forEach(function(x){var p=x[1].split("-"),s=new Date(+p[0],+p[1]-1,+p[2]),n=(t-s)/864e5;if(n>=0&&n<7)pick=x[0]});if(!pick){var f=w.filter(function(x){return new Date(x[1]+"T00:00")>t});if(f.length)pick=f[0][0]}if(pick)document.querySelectorAll("[data-this-week]").forEach(function(a){a.href=a.getAttribute("href")+pick+"/"})})();</script>
 <script>(function(){var r;try{r=document.referrer&&new URL(document.referrer)}catch(e){}if(!r||r.origin!==location.origin||r.pathname===location.pathname||history.length<2)return;document.querySelectorAll("[data-back]").forEach(function(a){if(r.pathname.indexOf("/recipes/")>-1){a.setAttribute("aria-label","Back");a.querySelector("span").textContent="Back"}else if(/plans.[0-9]/.test(r.pathname)&&location.pathname.indexOf("/plans/")<0){a.setAttribute("aria-label","Back to the meal plan");a.querySelector("span").textContent="Meal Plan"}a.addEventListener("click",function(e){e.preventDefault();history.back()})})})();</script>
 `;
 
@@ -128,6 +136,7 @@ function recipePage(r) {
     : `<div class="servings" role="group" aria-label="Servings"><span class="label">Servings</span>
         <div class="stepper"><button type="button" data-servings="down" aria-label="Fewer servings">−</button><output data-servings-count aria-live="off">${servings}</output><button type="button" data-servings="up" aria-label="More servings">+</button></div></div>`;
   return head({ title: `${r.title} | ${NAME}`, description: r.description, canonical: url,
+    bar: `<div class="appbar"><div class="wrap"><a class="back" href="/#${courseId}" data-back aria-label="Back to ${esc(r.course)}">${ICON.back}<span>${esc(r.course)}</span></a></div></div>`,
     extra: (ART[r.slug] ? `<meta property="og:image" content="${SITE}/assets/illustrations/${r.slug}-share.jpg">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n<meta name="twitter:card" content="summary_large_image">\n` : '') + `<script type="application/ld+json">${JSON.stringify(jsonLd(r))}</script>\n` }) + `
 <main id="main">
 <div class="wrap recipe-head${ART[r.slug] ? ' has-art' : ''}">
@@ -145,7 +154,6 @@ function recipePage(r) {
   </div>
 </div>
 <div class="toolbar${r.batch ? ' toolbar-batch' : ''}"><div class="wrap">
-  <a class="back" href="/#${courseId}" data-back aria-label="Back to ${esc(r.course)}">${ICON.back}<span>${esc(r.course)}</span></a>
   ${control}
   <div class="tabs" role="tablist" aria-label="Recipe sections">
     <button type="button" role="tab" data-view="ingredients" aria-selected="true" aria-controls="ingredients">Ingredients</button>
@@ -213,7 +221,6 @@ function indexPage() {
 <main id="main" class="wrap">
 <div class="intro">
   <h1>${NAME}</h1>
-  <p class="this-week" id="this-week" hidden><a href="/plans/"></a></p>
   <form class="search" role="search" action="/" onsubmit="return false">
     ${ICON.search}
     <label for="q" class="visually-hidden">Search recipes</label>
@@ -228,7 +235,6 @@ ${sections}
 <section class="az" id="az" aria-labelledby="az-h"><h2 id="az-h">A to Z</h2><ol>${az}</ol></section>
 </main>
 ${foot}<script type="application/json" id="index-data">${JSON.stringify(idx).replace(/</g, '\\u003c')}</script>
-<script type="application/json" id="plans-data">${JSON.stringify(plans.map(p => ({ id: p.id, start: p.start, title: p.title })))}</script>
 <script src="/assets/index-page.js"></script>
 <script src="/assets/plan-page.js"></script>
 </body>
@@ -278,17 +284,13 @@ function planPage(p) {
   const tabs = multi ? `<div class="tabs plan-tabs" role="tablist" aria-label="Whose plan">${p.people.map((pp, i) => `<button type="button" role="tab" data-panel="who-${slugify(pp.name)}" aria-selected="${i === 0}"${i ? ' tabindex="-1"' : ''}>${esc(pp.name)}</button>`).join('')}</div>` : '';
   const idx = plans.indexOf(p);
   const older = plans[idx - 1], newer = plans[idx + 1];
-  return head({ title: `${p.title} | Meal Plans | ${NAME}`, description: `Meal plan for ${range(p)}.`, canonical: `${SITE}/plans/${p.id}/`, nav: 'plans' }) + `
+  return head({ title: `${p.title} | Meal Plans | ${NAME}`, description: `Meal plan for ${range(p)}.`, canonical: `${SITE}/plans/${p.id}/`, nav: 'plans',
+    bar: `<div class="appbar"><div class="wrap"><a class="back" href="/plans/" data-back aria-label="Back to Meal Plans">${ICON.back}<span>Meal Plans</span></a>${tabs}</div></div>` }) + `
 <main id="main" class="wrap plan-page" data-start="${p.start}">
   <div class="recipe-head">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/plans/">Meal Plans</a></nav>
     <h1>${esc(p.title)}</h1>
     <p class="desc">${range(p)}<span class="week-badge" hidden></span></p>
   </div>
-  <div class="toolbar plan-bar"><div class="bar-in">
-    <a class="back" href="/plans/" data-back aria-label="Back to Meal Plans">${ICON.back}<span>Meal Plans</span></a>
-    ${tabs || `<span class="bar-title">${esc(p.title)}</span>`}
-  </div></div>
   ${p.people.map((pp, i) => planPanel(p, pp, i)).join('')}
   <nav class="week-nav" aria-label="Other weeks">${older ? `<a href="/plans/${older.id}/">← ${esc(older.title)}</a>` : '<span></span>'}${newer ? `<a href="/plans/${newer.id}/">${esc(newer.title)} →</a>` : ''}</nav>
 </main>
@@ -315,9 +317,9 @@ ${foot}<script src="/assets/plan-page.js"></script>
 const SAFETY = ['Cook eggs until the white and yolk are set.', 'Check fish carefully for bones before serving.', 'Cool cooked rice within an hour, keep it in the fridge and reheat it only once, until piping hot.', 'Reheat leftovers only once, until piping hot, then let them cool.', 'Cut round fruit such as blueberries so it is flat or halved.', 'Let hot food cool and test the temperature before serving.'];
 const FRUIT = [['Banana', 'Cut into strips or thick rounds.'], ['Pear', 'Peel and cut ripe pear into wedges. Steam a firm pear for 3 to 4 minutes to soften it.'], ['Blueberries', 'Squash each one flat or cut it in half.'], ['Strawberries', 'Hull them and cut them into quarters lengthways.']];
 function guidePage() {
-  return head({ title: `Ted's Food Guide | ${NAME}`, description: 'Yoghurt, fruit and food safety for Ted.', canonical: `${SITE}/plans/teds-food-guide/`, nav: 'plans' }) + `
+  return head({ title: `Ted's Food Guide | ${NAME}`, description: 'Yoghurt, fruit and food safety for Ted.', canonical: `${SITE}/plans/teds-food-guide/`, nav: 'plans', bar: `<div class="appbar"><div class="wrap"><a class="back" href="/plans/" data-back aria-label="Back to Meal Plans">${ICON.back}<span>Meal Plans</span></a></div></div>` }) + `
 <main id="main" class="wrap">
-  <div class="recipe-head"><nav class="crumbs" aria-label="Breadcrumb"><a href="/plans/">Meal Plans</a></nav><h1>Ted's Food Guide</h1></div>
+  <div class="recipe-head"><h1>Ted's Food Guide</h1></div>
   <div class="notes guide">
     <div class="note"><h3>Yoghurt & Fruit</h3><p>Every lunch and dinner ends with 2 to 3 tablespoons of plain, full-fat Greek yoghurt and the day's fruit.</p><ul>${FRUIT.map(([n, x]) => `<li><strong>${n}.</strong> ${esc(x)}</li>`).join('')}</ul></div>
     <div class="note"><h3>Food Safety</h3><ul>${SAFETY.map(s => `<li>${esc(s)}</li>`).join('')}</ul></div>
@@ -337,9 +339,9 @@ function shopPage() {
     .replace('__LIST__', JSON.stringify(shop.items.map(i => ({ sku: i.sku, qty: i.qty, name: i.name }))));
   const bookmarklet = 'javascript:' + encodeURIComponent(code);
   const units = shop.items.reduce((n, i) => n + i.qty, 0);
-  return head({ title: `Sainsbury's Shop Button | ${NAME}`, description: 'One click fills the Sainsbury\'s trolley with the week\'s shop.', canonical: `${SITE}/shop/`, nav: 'plans' }) + `
+  return head({ title: `Sainsbury's Shop Button | ${NAME}`, description: 'One click fills the Sainsbury\'s trolley with the week\'s shop.', canonical: `${SITE}/shop/`, nav: 'plans', bar: `<div class="appbar"><div class="wrap"><a class="back" href="/plans/" data-back aria-label="Back to Meal Plans">${ICON.back}<span>Meal Plans</span></a></div></div>` }) + `
 <main id="main" class="wrap shop-page">
-  <div class="recipe-head"><nav class="crumbs" aria-label="Breadcrumb"><a href="/plans/">Meal Plans</a></nav><h1>Sainsbury's Shop Button</h1>
+  <div class="recipe-head"><h1>Sainsbury's Shop Button</h1>
   <p class="lede">One click puts the whole list below into your Sainsbury's trolley in about 10 seconds. You then check the trolley, choose a slot and pay as usual.</p></div>
 
   <div class="note shop-step"><h2>Set It Up Once, on Your Computer</h2>
