@@ -272,8 +272,9 @@ a.tag:hover { background: var(--accent-soft); }
   .recipe-head { padding-block: 16px 14px; }
   .recipe-head h1 { font-size: 2rem; margin-bottom: 8px; }
   .recipe-head .desc { font-size: 1rem; margin-bottom: 12px; }
-  .facts { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); margin-bottom: 14px; }
-  .facts div { border-right: 0; margin-right: 0; padding: 8px 8px 8px 0; }
+  .facts { display: flex; flex-wrap: wrap; column-gap: 22px; margin-bottom: 14px; }
+  .facts div { border-right: 0; margin-right: 0; padding: 8px 0; }
+  .facts dt, .facts dd { white-space: nowrap; }
   .facts dd { font-size: .95rem; }
   .plan-bar .back span { display: inline; }
   .step { grid-template-columns: 30px minmax(0, 1fr); gap: 10px; }
@@ -415,14 +416,15 @@ a.tag:hover { background: var(--accent-soft); }
 
 /* Illustrations. Every card has a cream band at 4:3, with the dish centred in it,
    or a plain plate outline until the recipe has its illustration. */
-.card-art { margin: -18px -20px 6px; aspect-ratio: 4 / 3; background: var(--art-bg); border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+.card-art { position: relative; margin: -18px -20px 6px; aspect-ratio: 4 / 3; background: var(--art-bg); border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
   display: grid; place-items: center; overflow: hidden; }
-.card-art img { height: 86%; width: auto; aspect-ratio: 1; object-fit: contain; transition: transform .25s; }
+/* The picture is placed on all four sides, so Safari sizes it to the band. A percentage height alone left Safari showing it at full size, cut off. */
+.card-art img { position: absolute; inset: 0; margin: auto; width: 82%; height: 82%; object-fit: contain; transition: transform .25s; }
 @media (max-width: 699px) { .card-art { aspect-ratio: 1; margin: 0 -12px 4px; } }
 .card:hover .card-art img { transform: scale(1.04) rotate(-1deg); }
 .card-art .art-plate { width: 42%; color: var(--art-line); }
 .recipe-head.has-art .head-art { margin: 0 auto 16px; width: 180px; aspect-ratio: 1; border-radius: 50%; background: var(--art-bg); display: grid; place-items: center; }
-.recipe-head.has-art .head-art img { width: 92%; height: auto; }
+.recipe-head.has-art .head-art img { width: 92%; height: 92%; object-fit: contain; }
 @media (min-width: 900px) {
   .recipe-head.has-art { display: grid; grid-template-columns: minmax(0, 1fr) 320px; column-gap: 48px; align-items: start; }
   .recipe-head.has-art > * { grid-column: 1; }
