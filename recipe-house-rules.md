@@ -85,7 +85,7 @@ Batch-cook recipes, such as the carnitas, burnt onion beef, Bolognese and red le
 - Cooking mode shows one step at a time in large text and has Next and Back buttons. It keeps the screen awake while it is open.
 - A time in a step, such as "10 minutes", starts a timer when you tap it. Several timers can run at once, each named by its step, and they keep time while the phone is locked.
 - The page remembers your servings choice for each recipe on your device.
-- Share sends a link to the recipe at the servings you chose. In WhatsApp or Messages the link shows the illustration, the name and the description.
+- Share sends the recipe as text, at the servings you chose, with no link to the site. It leaves out the calorie and Ted notes.
 
 ## 6a. Design
 - Less is more. Nothing goes on a page that the cook does not use.

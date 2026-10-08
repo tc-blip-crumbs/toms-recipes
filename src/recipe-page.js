@@ -242,17 +242,35 @@
     if (Math.abs(dx) > 60) cook.show(cook.index + (dx < 0 ? 1 : -1));
   });
 
-  /* Share: the phone's share menu, or a copied link on a computer. The link keeps the servings you chose. */
+  /* Share sends the recipe itself as text, at the servings you chose, with no link to the site. */
+  function recipeText() {
+    var t = function (el) { return el.textContent.replace(/\s+/g, ' ').trim(); };
+    var lines = [t(document.querySelector('h1')), ''];
+    lines.push(Array.prototype.map.call(document.querySelectorAll('.facts > div'), function (d) {
+      return t(d.querySelector('dt')).replace(/^./, function (c) { return c.toUpperCase(); }).replace(/^(\w)(\w*)$/, function (m, a, b) { return a + b.toLowerCase(); }) + ' ' + t(d.querySelector('dd')) + (/^oven$/i.test(t(d.querySelector('dt'))) ? ' fan' : '');
+    }).join(' · '), '', 'Ingredients');
+    document.querySelectorAll('#ing-body .ing-group').forEach(function (g) {
+      var h = g.querySelector('h3');
+      if (h) lines.push('', t(h));
+      g.querySelectorAll('.ing-text').forEach(function (i) { lines.push('— ' + t(i)); });
+    });
+    lines.push('', 'Method');
+    recipe.steps.forEach(function (st, n) { lines.push((n + 1) + '. ' + st.text); });
+    document.querySelectorAll('.notes .note').forEach(function (n) {
+      var h = t(n.querySelector('h3'));
+      if (!/^(calories|for ted)$/i.test(h)) lines.push('', h, t(n.querySelector('p')));
+    });
+    return lines.join('\n');
+  }
   document.querySelectorAll('[data-action="share"]').forEach(function (b) {
     b.addEventListener('click', function () {
-      var url = location.origin + location.pathname + (recipe.yield || recipe.batch ? '' : '?serves=' + servings);
-      var title = document.querySelector('h1').textContent;
-      if (navigator.share) { navigator.share({ title: title, url: url }).catch(function () {}); return; }
+      var text = recipeText();
+      if (navigator.share) { navigator.share({ text: text }).catch(function () {}); return; }
       var label = b.querySelector('span');
-      (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function () {
-        label.textContent = 'Link copied';
+      (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(function () {
+        label.textContent = 'Recipe copied';
         setTimeout(function () { label.textContent = 'Share'; }, 2000);
-      }).catch(function () { prompt('Copy this link', url); });
+      }).catch(function () {});
     });
   });
 
