@@ -125,6 +125,8 @@
     // "about" marks measured amounts that rounding moved by more than 15%. Counted things are never marked.
     var measured = item.unit === 'g' || item.unit === 'ml' || item.unit === 'tsp' || item.unit === 'tbsp';
     var about = measured && exact && shown ? Math.abs(shown - exact) / exact > 0.15 : false;
+    // Spoon amounts under a teaspoon are a pinch either way, so they are never marked.
+    if ((item.unit === 'tsp' && shown < 1) || (item.unit === 'tbsp' && shown < 1 / 3)) about = false;
     return { amount: amount, name: name, prep: item.prep || '', about: about, exact: exact, shown: shown };
   }
 

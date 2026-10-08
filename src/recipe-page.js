@@ -118,8 +118,12 @@
     var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
     return (h ? h + ':' + String(m).padStart(2, '0') : m) + ':' + String(sec).padStart(2, '0');
   }
+  var tkey = 'timers:' + recipe.slug;
+  function keepTimers() { try { sessionStorage.setItem(tkey, JSON.stringify(timers)); } catch (e) {} }
+  try { timers = JSON.parse(sessionStorage.getItem(tkey)) || []; } catch (e) { timers = []; }
   var baseTitle = document.title;
   function drawTimers() {
+    keepTimers();
     timerBar.hidden = timers.length === 0;
     var running = timers.filter(function (t) { return !t.paused && !t.rang; }).sort(function (a, b) { return a.end - b.end; })[0];
     var doneT = timers.some(function (t) { return t.rang; });
@@ -140,6 +144,9 @@
     });
     drawTimers();
   }, 500);
+  // Timers count from their end time, so they stay right when the phone has been locked.
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible' && timers.length) drawTimers(); });
+  if (timers.length) drawTimers();
   timerBar.addEventListener('click', function (e) {
     var b = e.target.closest('button'); if (!b) return;
     var t = timers[+b.getAttribute('data-i')]; if (!t) return;
@@ -160,8 +167,7 @@
     drawTimers();
   });
 
-  /* Keep the screen on: a toggle on the page and in cooking mode. Cooking mode turns it on. */
-  var wakeBtns = document.querySelectorAll('[data-action="wake"]');
+  /* Cooking mode keeps the screen awake, and asks again when the phone comes back from the lock screen. */
   var wake = {
     on: false, lock: null,
     get: function () {
@@ -170,24 +176,15 @@
       navigator.wakeLock.request('screen').then(function (l) {
         self.lock = l;
         l.addEventListener('release', function () { self.lock = null; });
-        if (!self.on) { l.release().catch(function () {}); }
+        if (!self.on) l.release().catch(function () {});
       }).catch(function () {});
     },
     set: function (on) {
       this.on = on;
-      wakeBtns.forEach(function (b) {
-        b.setAttribute('aria-pressed', on ? 'true' : 'false');
-        var label = b.querySelector('span');
-        if (label) label.textContent = b.classList.contains('wake-pill') ? 'Keep awake' : (on ? 'Screen stays on' : 'Keep screen on');
-      });
       if (on) this.get();
       else if (this.lock) { this.lock.release().catch(function () {}); this.lock = null; }
     }
   };
-  if (navigator.wakeLock) wakeBtns.forEach(function (b) {
-    b.hidden = false;
-    b.addEventListener('click', function () { wake.set(!wake.on); });
-  });
   document.addEventListener('visibilitychange', function () { if (wake.on && document.visibilityState === 'visible') wake.get(); });
 
   /* Cooking mode: one step at a time, large text, screen kept awake */
@@ -219,6 +216,7 @@
       this.open = false;
       cookEl.hidden = true;
       document.documentElement.classList.remove('is-cooking');
+      wake.set(false);
       if (this.opener && this.opener.focus) this.opener.focus();
     }
   };

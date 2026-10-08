@@ -79,4 +79,11 @@
 
   readURL();
   apply();
+  // Coming back from a recipe returns to the same place in the list.
+  try {
+    var nav = performance.getEntriesByType('navigation')[0];
+    var y = +sessionStorage.getItem('index-scroll');
+    if (nav && nav.type === 'back_forward' && y) requestAnimationFrame(function () { window.scrollTo(0, y); });
+  } catch (e) {}
+  window.addEventListener('pagehide', function () { try { sessionStorage.setItem('index-scroll', String(window.scrollY)); } catch (e) {} });
 })();

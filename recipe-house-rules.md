@@ -74,15 +74,20 @@ Batch-cook recipes, such as the carnitas, burnt onion beef, Bolognese and red le
 - Dishes that need cold cooked rice, such as egg fried rice, go on the day after a rice dinner, never the same day.
 
 ## 6. How the site works
-- A recipe list with search and the labels as filters.
-- On a phone, each recipe has Ingredients and Method tabs, with the servings control fixed at the top.
+- The recipe list has search and a row of course links. Each card shows the picture, the name and the total time. Phones show two cards to a row.
+- Recipe and plan pages have a bar fixed at the top with a back arrow. Going back returns you to the same place in the list.
+- On a phone, the ingredients start on the first screen. Each recipe has Ingredients and Method tabs, with the servings control in the fixed bar. Tablets and computers show the ingredients beside the method.
 - Tap ingredients to tick them off as you gather them.
 - Each method step shows its ingredients as small cards with the amounts for the servings you chose.
-- Cooking mode shows one step at a time in large text and has Next and Back buttons. It turns on Keep Awake, which stops the screen sleeping, and a button in cooking mode turns it off again.
-- A Keep Screen On button beside Start Cooking does the same job outside cooking mode.
-- The site writes servings as "4 servings", in the facts row and above the ingredients.
-- A time in a step, such as "10 minutes", starts a timer when you tap it.
+- Cooking mode shows one step at a time in large text and has Next and Back buttons. It keeps the screen awake while it is open.
+- A time in a step, such as "10 minutes", starts a timer when you tap it. Several timers can run at once, each named by its step, and they keep time while the phone is locked.
 - The page remembers your servings choice for each recipe on your device.
+
+## 6a. Design
+- Less is more. Nothing goes on a page that the cook does not use.
+- Red marks the logo, the main button on a page, and today. Everything else is black or grey.
+- Headings use the serif face. Small headings, such as ingredient groups and notes, are grey capitals.
+- "About" marks a measured amount that rounding moved by more than 15%, except spoon amounts under a teaspoon.
 
 ## 7. The printout
 - A4, fitted to one page where the recipe allows.

@@ -404,7 +404,7 @@ module.exports = [
       { id: 'lemon', qty: 0.5, name: 'lemon', plural: 'lemons', prep: 'juiced', scale: 'halve', ref: 'lemon' },
       { id: 'season', phrase: 'Salt and black pepper', scale: 'fixed', ref: 'salt', chip: 'salt and pepper' },
       { id: 'yoghurt', qty: 60, unit: 'g', name: '0% fat Greek yoghurt', scale: 'weight', ref: 'yoghurt', chip: 'Greek yoghurt' },
-      { id: 'garlic', qty: 0.5, name: 'garlic clove', plural: 'garlic cloves', prep: 'finely grated', scale: 'halve', ref: 'garlic' },
+      { id: 'garlic', qty: 0.5, name: 'garlic clove', plural: 'garlic cloves', prep: 'finely grated', scale: 'whole', ref: 'garlic' },
       { id: 'mustard', qty: 1, unit: 'tsp', name: 'Dijon mustard', scale: 'spoon', ref: 'mustard' },
       { id: 'kale', qty: 70, unit: 'g', name: 'cavolo nero or kale', prep: 'stalks removed, very finely shredded', scale: 'weight', ref: 'cavolo nero', chip: 'cavolo nero' },
       { id: 'oil', qty: 1, unit: 'tsp', name: 'olive oil', scale: 'spoon', liquid: true, ref: 'oil' },
@@ -804,7 +804,7 @@ module.exports = [
   source: { name: 'Adapted from Lose Weight for Good, by Tom Kerridge' },
   groups: [
     { name: 'For the Corn', items: [
-      { id: 'corn', qty: 2, name: 'corn on the cob', plural: 'corn on the cob', prep: 'about 200g each', scale: 'whole', ref: 'corn', chip: 'corn on the cob' },
+      { id: 'corn', qty: 2, name: 'corn cob', plural: 'corn cobs', prep: 'about 200g each', scale: 'whole', ref: 'corn' },
       { id: 'water', phrase: 'Cold water', prep: 'to cover', scale: 'fixed', ref: 'water', chip: 'water' }
     ]},
     { name: 'For the Soup', items: [
@@ -812,7 +812,7 @@ module.exports = [
       { id: 'sesoil', qty: 0.75, unit: 'tsp', name: 'sesame oil', scale: 'spoon', liquid: true, ref: 'sesame oil' },
       { id: 'onion', qty: 1, name: 'medium onion', plural: 'medium onions', prep: 'finely chopped', scale: 'halve', ref: 'onion', chip: 'onion' },
       { id: 'garlic', qty: 1, name: 'garlic clove', plural: 'garlic cloves', prep: 'finely chopped', scale: 'whole', ref: 'garlic' },
-      { id: 'ginger', qty: 15, unit: 'g', name: 'fresh ginger', prep: 'about a 2.5cm piece, finely grated', scale: 'weight', ref: 'ginger', chip: 'ginger' },
+      { id: 'ginger', qty: 15, unit: 'g', name: 'fresh ginger', prep: 'finely grated', scale: 'weight', ref: 'ginger', chip: 'ginger' },
       { id: 'broth', qty: 250, unit: 'ml', name: 'broth left from the soy poached chicken', scale: 'weight', ref: 'broth', chip: 'poaching broth' },
       { id: 'cornwater', qty: 250, unit: 'ml', name: 'corn cooking water', scale: 'weight', ref: 'corn cooking water' },
       { id: 'chicken', qty: 250, unit: 'g', name: 'leftover soy poached chicken', prep: 'skin removed, shredded', scale: 'weight', ref: 'chicken' },
@@ -826,8 +826,8 @@ module.exports = [
     ]}
   ],
   steps: [
-    { text: 'Put the corn on the cob in a large saucepan and cover it with the cold water. Bring it to the boil over a high heat, then simmer over a medium-low heat for 20 to 25 minutes, until the kernels are tender. Leave the cobs to cool in the water.', uses: ['corn', 'water'] },
-    { text: 'Lift out the cobs and keep 250ml of the corn cooking water. Stand each cob on its end and cut down the sides with a sharp knife to take off the kernels.', uses: [] },
+    { text: 'Put the corn cobs in a large saucepan and cover it with the cold water. Bring it to the boil over a high heat, then simmer over a medium-low heat for 20 to 25 minutes, until the kernels are tender. Leave the cobs to cool in the water.', uses: ['corn', 'water'] },
+    { text: 'Lift out the cobs and keep some of the corn cooking water for the soup. Stand each cob on its end and cut down the sides with a sharp knife to take off the kernels.', uses: ['cornwater'] },
     { text: 'Heat the vegetable oil and sesame oil in a large non-stick saucepan over a high heat, then fry the onion for 5 minutes, until soft, adding a splash of water if it sticks. Add the garlic and ginger and fry for 2 minutes more, until fragrant.', uses: ['vegoil', 'sesoil', 'onion', 'garlic', 'ginger'] },
     { text: 'Pour in the broth and the corn cooking water and bring to a simmer over a medium heat. Add the chicken and the corn kernels and simmer for 5 minutes, until the chicken is piping hot.', uses: ['broth', 'cornwater', 'chicken'] },
     { text: 'Mix the cornflour with the cold water to a smooth paste, stir it into the soup and cook for 1 to 2 minutes, stirring, until the soup thickens slightly. Taste the soup before you season it with the soy sauce, white pepper and sea salt, because the broth is already salty.', uses: ['cornflour', 'cold', 'soy', 'pepper', 'salt'] },

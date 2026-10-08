@@ -54,7 +54,7 @@ const TOM_BOXES = [
   { title: 'Lunch Notes', list: [
     'Jacket potato. Prick the potato and microwave it at work for 8 to 10 minutes, then heat the beans for 1 to 2 minutes.',
     'Friday. Buy 2 pots of Sainsbury\'s Petits Pois & Crème Fraîche soup in the weekly shop.',
-    'Soup day. Thursday\'s soup uses the chicken and broth left from Wednesday dinner. Buy 2 corn on the cob and the other soup ingredients in the weekly shop.',
+    'Soup day. Thursday\'s soup uses the chicken and broth left from Wednesday dinner. Buy 2 corn cobs and the other soup ingredients in the weekly shop.',
     'Fruit. Pack a piece of fruit, such as an apple, a pear or a satsuma, with every weekday lunch.'
   ] },
   { title: 'Daily Target', text: 'About 1,900 calories a day for Tom, including about 250 for snacks.' }

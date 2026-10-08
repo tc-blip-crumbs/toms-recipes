@@ -44,6 +44,7 @@ const ICON = {
   print: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2"/><path d="M6 14h12v7H6z"/></svg>',
   cook: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
   screen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3" stroke-linecap="round"/></svg>',
+  back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
   close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>'
 };
 
@@ -76,6 +77,7 @@ ${extra}</head>
 `;
 }
 const foot = `<footer class="site-footer"><div class="wrap"><span>${NAME}</span><span>Recipes in UK measures. Oven temperatures are for a fan oven.</span></div></footer>
+<script>(function(){var r;try{r=document.referrer&&new URL(document.referrer)}catch(e){}if(!r||r.origin!==location.origin||r.pathname===location.pathname||history.length<2)return;document.querySelectorAll("[data-back]").forEach(function(a){if(r.pathname.indexOf("/recipes/")>-1){a.setAttribute("aria-label","Back");a.querySelector("span").textContent="Back"}else if(/plans.[0-9]/.test(r.pathname)&&location.pathname.indexOf("/plans/")<0){a.setAttribute("aria-label","Back to the meal plan");a.querySelector("span").textContent="Meal Plan"}a.addEventListener("click",function(e){e.preventDefault();history.back()})})})();</script>
 `;
 
 function facts(r) {
@@ -117,7 +119,7 @@ function recipePage(r) {
   const clientData = { slug: r.slug, serves: r.serves, defaultServings: r.defaultServings || DEFAULT_SERVINGS, yield: r.yield || null, batch: !!r.batch, groups: r.groups, steps: r.steps };
   const inPlans = plans.filter(p => p.people.some(pp => pp.rows.some(row => row.slice(1).some(c => c.r === r.slug))));
   const control = r.batch
-    ? `<div class="batch" role="group" aria-label="Batch size"><span class="label">Batch</span><div class="seg">${Scale.MULTS.map(m => `<button type="button" data-mult="${m}" aria-pressed="${m === 1}">${Scale.multLabel(m)}</button>`).join('')}</div></div>`
+    ? `<div class="batch" role="group" aria-label="Batch size"><span class="label">Make</span><div class="seg">${Scale.MULTS.map(m => `<button type="button" data-mult="${m}" aria-pressed="${m === 1}">${Scale.multLabel(m)}</button>`).join('')}</div></div>`
     : r.yield
     ? `<span class="yield">Makes ${esc(r.yieldShort || r.yield.replace(/^Makes /, ''))}</span>`
     : `<div class="servings" role="group" aria-label="Servings"><span class="label">Servings</span>
@@ -127,7 +129,6 @@ function recipePage(r) {
 <main id="main">
 <div class="wrap recipe-head${ART[r.slug] ? ' has-art' : ''}">
   <p class="print-only print-brand">${NAME}</p>
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">All recipes</a> › <a href="/#${courseId}">${esc(r.course)}</a></nav>
   ${ART[r.slug] ? `<figure class="head-art">${artImg(r.slug, ART[r.slug], '(min-width: 900px) 320px, 180px', true)}</figure>` : ''}
   <h1>${esc(r.title)}</h1>
   <p class="desc">${esc(r.description)}</p>
@@ -136,12 +137,12 @@ function recipePage(r) {
     ${tagHTML(r, true)}
     <div class="actions">
       <button type="button" class="btn primary" data-action="cook">${ICON.cook}Start cooking</button>
-      <button type="button" class="btn" data-action="wake" aria-pressed="false" hidden>${ICON.screen}<span>Keep screen on</span></button>
-      <button type="button" class="btn" data-action="print">${ICON.print}Print</button>
+      <button type="button" class="btn icon-only" data-action="print" aria-label="Print">${ICON.print}<span>Print</span></button>
     </div>
   </div>
 </div>
 <div class="toolbar${r.batch ? ' toolbar-batch' : ''}"><div class="wrap">
+  <a class="back" href="/#${courseId}" data-back aria-label="Back to ${esc(r.course)}">${ICON.back}<span>${esc(r.course)}</span></a>
   ${control}
   <div class="tabs" role="tablist" aria-label="Recipe sections">
     <button type="button" role="tab" data-view="ingredients" aria-selected="true" aria-controls="ingredients">Ingredients</button>
@@ -154,7 +155,7 @@ function recipePage(r) {
   <div class="columns" data-view="ingredients">
     <section class="ingredients" id="ingredients" role="tabpanel" aria-label="Ingredients">
       <h2>Ingredients</h2>
-      ${r.batch ? `<p class="for">This batch makes <span data-batch-count>${r.serves}</span> servings. The serving part has its own count. Tick things off as you gather them.</p>` : r.yield ? '' : `<p class="for">Amounts for <span data-servings-count>${servings}</span> <span data-servings-word>${servings === 1 ? 'serving' : 'servings'}</span>. Tick things off as you gather them.</p>`}
+      ${r.batch ? `<p class="for">This batch makes <span data-batch-count>${r.serves}</span> servings.</p>` : ''}
       <div id="ing-body">${Render.ingredientsHTML(r, size)}</div>
       ${r.equipment && r.equipment.length ? `<div class="equipment"><h3>You Will Need</h3><ul>${r.equipment.map(e => `<li>${esc(e)}</li>`).join('')}</ul></div>` : ''}
     </section>
@@ -172,7 +173,7 @@ function recipePage(r) {
 </main>
 <div class="timers" id="timers" hidden aria-live="polite"></div>
 <div class="cook" id="cook" hidden role="dialog" aria-modal="true" aria-label="Cooking mode">
-  <div class="wrap"><div class="cook-top"><p class="cook-title">${esc(r.short)}</p><span class="cook-count"></span><button type="button" class="wake-pill" data-action="wake" aria-pressed="false" hidden>${ICON.screen}<span>Keep awake</span></button><button type="button" class="icon-btn" data-cook="close" aria-label="Close cooking mode">${ICON.close}</button></div>
+  <div class="wrap"><div class="cook-top"><p class="cook-title">${esc(r.short)}</p><span class="cook-count"></span><button type="button" class="icon-btn" data-cook="close" aria-label="Close cooking mode">${ICON.close}</button></div>
   <div class="cook-bar"><span></span></div></div>
   <div class="cook-main"><div class="wrap cook-step" aria-live="polite"></div></div>
   <div class="wrap cook-nav"><button type="button" data-cook="back">Back</button><button type="button" data-cook="next">Next step</button></div>
@@ -189,12 +190,9 @@ ${foot}<script type="application/json" id="recipe-data">${JSON.stringify(clientD
 function card(r) {
   const t = total(r);
   return `<a class="card" href="/recipes/${r.slug}/" data-slug="${r.slug}">
-  <div class="card-art${ART[r.slug] ? '' : ' is-empty'}">${ART[r.slug] ? artImg(r.slug, '', '(min-width: 700px) 220px, 60vw') : PLATE}</div>
-  <p class="eyebrow">${esc(r.main)}</p>
+  <div class="card-art${ART[r.slug] ? '' : ' is-empty'}">${ART[r.slug] ? artImg(r.slug, '', '(min-width: 700px) 220px, 45vw') : PLATE}</div>
   <h3>${esc(r.title)}</h3>
-  <p class="desc">${esc(r.description)}</p>
-  <div class="meta"><span><b>${dur(t)}</b> in all</span><span>${r.yield ? esc(r.yield) : r.serves + (r.serves === 1 ? ' serving' : ' servings') + ' as written'}</span></div>
-  ${tagHTML(r, false)}
+  <p class="meta">${dur(t)}</p>
 </a>`;
 }
 
@@ -216,9 +214,10 @@ function indexPage() {
   <form class="search" role="search" action="/" onsubmit="return false">
     ${ICON.search}
     <label for="q" class="visually-hidden">Search recipes</label>
-    <input id="q" name="q" type="search" placeholder="Search by dish or ingredient, such as lentils" autocomplete="off" enterkeyhint="search">
+    <input id="q" name="q" type="search" placeholder="Search recipes or ingredients" autocomplete="off" enterkeyhint="search">
     <kbd>/</kbd>
   </form>
+  <nav class="jump" aria-label="Courses">${COURSES.filter(c => recipes.some(r => r.course === c)).map(c => `<a href="#course-${slugify(c)}">${esc(c)}</a>`).join('')}</nav>
   <div class="results-bar"><span id="result-count" aria-live="polite">${recipes.length} recipes</span><button type="button" class="link-button" data-clear hidden>Clear search</button></div>
 </div>
 ${sections}
@@ -282,8 +281,11 @@ function planPage(p) {
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/plans/">Meal Plans</a></nav>
     <h1>${esc(p.title)}</h1>
     <p class="desc">${range(p)}<span class="week-badge" hidden></span></p>
-    ${tabs}
   </div>
+  <div class="toolbar plan-bar"><div class="bar-in">
+    <a class="back" href="/plans/" data-back aria-label="Back to Meal Plans">${ICON.back}<span>Meal Plans</span></a>
+    ${tabs || `<span class="bar-title">${esc(p.title)}</span>`}
+  </div></div>
   ${p.people.map((pp, i) => planPanel(p, pp, i)).join('')}
   <nav class="week-nav" aria-label="Other weeks">${older ? `<a href="/plans/${older.id}/">← ${esc(older.title)}</a>` : '<span></span>'}${newer ? `<a href="/plans/${newer.id}/">${esc(newer.title)} →</a>` : ''}</nav>
 </main>
