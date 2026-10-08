@@ -65,6 +65,9 @@ ${INDEXABLE ? '' : '<meta name="robots" content="noindex">\n'}<link rel="canonic
 <meta name="theme-color" content="#151412" media="(prefers-color-scheme: dark)">
 <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Recipes">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600;700&display=swap">
@@ -385,6 +388,9 @@ fs.writeFileSync(path.join(DIST, 'plans', 'teds-food-guide', 'index.html'), guid
 fs.mkdirSync(path.join(DIST, 'shop'), { recursive: true });
 fs.writeFileSync(path.join(DIST, 'shop', 'index.html'), shopPage());
 plans.forEach(p => { fs.mkdirSync(path.join(DIST, 'plans', p.id), { recursive: true }); fs.writeFileSync(path.join(DIST, 'plans', p.id, 'index.html'), planPage(p)); });
+fs.readdirSync(path.join(__dirname, '..', 'icons')).forEach(f => fs.copyFileSync(path.join(__dirname, '..', 'icons', f), path.join(DIST, f)));
+fs.writeFileSync(path.join(DIST, 'manifest.webmanifest'), JSON.stringify({ name: NAME, short_name: 'Recipes', start_url: BASE + '/', scope: BASE + '/', display: 'browser', background_color: '#f4f3ef', theme_color: '#f4f3ef',
+  icons: [{ src: BASE + '/icon-192.png', sizes: '192x192', type: 'image/png' }, { src: BASE + '/icon-512.png', sizes: '512x512', type: 'image/png' }, { src: BASE + '/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }] }));
 fs.writeFileSync(path.join(DIST, 'favicon.svg'), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#a3321c"/><text x="32" y="44" font-family="Georgia,serif" font-size="34" text-anchor="middle" fill="#fff">T</text></svg>');
 fs.writeFileSync(path.join(DIST, '_redirects'), '/plans/2026-09-28/*  /plans/  301\n/recipes/hainanese-chicken-rice/*  /recipes/hainanish-soy-poached-chicken/  301\n/recipes/sausage-potato-traybake/*  /recipes/sausage-mash-gravy-cabbage/  301\n');
 fs.writeFileSync(path.join(DIST, 'robots.txt'), `User-agent: *\n${INDEXABLE ? 'Allow: /' : 'Allow: /'}\nSitemap: ${SITE}/sitemap.xml\n`);
