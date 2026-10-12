@@ -29,9 +29,9 @@ const YOG = t('Yoghurt bowl', k(280, 310, '200g yoghurt, 30g granola, 80g berrie
 const EGGS = t('Eggs, toast and bacon', k(375, 175, '2 eggs, 1 slice of toast weighing 40g, 2 rashers of streaky bacon'));
 const TOM_BREAKFAST = [YOG, YOG, YOG, YOG, YOG, EGGS, EGGS];
 // Tom's fruit for each day, Monday to Sunday. Weekday berries are in the yoghurt bowl.
-const SATS = 'An apple with lunch. 2 satsumas at 4pm.', PLUMS = 'An apple with lunch. 2 plums at 4pm.';
+const SATS = 'An apple with lunch. 2 satsumas at 4pm.', BANANA = 'An apple with lunch. A banana at 4pm.';
 const TOM_FRUIT = [
-  t(SATS, { kcal: 125 }), t(PLUMS, { kcal: 135 }), t(SATS, { kcal: 125 }), t(PLUMS, { kcal: 135 }), t(SATS, { kcal: 125 }),
+  t(SATS, { kcal: 125 }), t(BANANA, { kcal: 180 }), t(SATS, { kcal: 125 }), t(BANANA, { kcal: 180 }), t(SATS, { kcal: 125 }),
   t('80g berries with breakfast. An apple with lunch. 2 satsumas at 4pm.', { kcal: 155 }),
   t('80g berries with breakfast. An apple with lunch. 2 satsumas at 4pm.', { kcal: 155 })
 ];
