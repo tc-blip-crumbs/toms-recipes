@@ -4,7 +4,6 @@ const r = (slug, extra) => Object.assign({ r: slug }, extra || {});
 const t = (text, extra) => Object.assign({ t: text }, extra || {});
 // Calories and plate weight for one adult. kcal is an estimate, g is the weight of one plate, parts says what makes up that weight.
 const k = (kcal, g, parts) => ({ kcal, g, parts });
-const FRUIT_NOTE = ', and a piece of fruit';
 const KCAL = {
   'red-wine-burnt-onion-beef': k(900, 640, '550g beef stew, 90g butter beans'),
   'carnitas-tacos': k(720, 290, '150g pork, 3 small tortillas weighing 90g, 50g onion, coriander and lime'),
@@ -26,18 +25,25 @@ const FRUIT = [
 ];
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const YOG = t('Yoghurt bowl', k(385, 430, '200g yoghurt, 30g granola, 80g berries, 1 banana'));
+const YOG = t('Yoghurt bowl', k(280, 310, '200g yoghurt, 30g granola, 80g berries'));
 const EGGS = t('Eggs, toast and bacon', k(375, 175, '2 eggs, 1 slice of toast weighing 40g, 2 rashers of streaky bacon'));
 const TOM_BREAKFAST = [YOG, YOG, YOG, YOG, YOG, EGGS, EGGS];
-const BOLOGNESE_LUNCH = k(900, 465, '320g sauce, 145g cooked pasta from 60g dry' + FRUIT_NOTE);
+// Tom's fruit for each day, Monday to Sunday. Weekday berries are in the yoghurt bowl.
+const SATS = 'An apple with lunch. 2 satsumas at 4pm.', PLUMS = 'An apple with lunch. 2 plums at 4pm.';
+const TOM_FRUIT = [
+  t(SATS, { kcal: 125 }), t(PLUMS, { kcal: 135 }), t(SATS, { kcal: 125 }), t(PLUMS, { kcal: 135 }), t(SATS, { kcal: 125 }),
+  t('80g berries with breakfast. An apple with lunch. 2 satsumas at 4pm.', { kcal: 155 }),
+  t('80g berries with breakfast. An apple with lunch. 2 satsumas at 4pm.', { kcal: 155 })
+];
+const BOLOGNESE_LUNCH = k(840, 465, '320g sauce, 145g cooked pasta from 60g dry');
 // const CHICKEN_POT = 'Uses a whole chicken from the freezer, moved to the fridge on Monday night. It feeds the 2 of you tonight, and everything left goes into Thursday\'s soup, so keep the leftover chicken and about 1 litre of the poaching broth.';
 const SOUP = r('chicken-sweetcorn-soup', Object.assign({ note: 'Made on Wednesday night.', serves: 2 }, k(385, 400, '')));
-const CHICKEN_LUNCH = k(650, 480, '150g chicken, 200g cooked rice, 130ml broth' + FRUIT_NOTE);
+const CHICKEN_LUNCH = k(590, 480, '150g chicken, 200g cooked rice, 130ml broth');
 function tomLunch(w) {
   return [
     w.monTueLunch ? w.monTueLunch[0] : r('roast-chicken-caesar-sandwich', { label: 'Roast Chicken Caesar Sandwich', serves: 4 }),
     w.monTueLunch ? w.monTueLunch[1] : r('roast-chicken-caesar-sandwich', { label: 'Roast Chicken Caesar Sandwich', serves: 4 }),
-    t('Jacket potato with beans and cheddar', k(490, 470, '250g potato, 200g beans, 20g cheddar' + FRUIT_NOTE)),
+    t('Jacket potato with beans and cheddar', k(430, 470, '250g potato, 200g beans, 20g cheddar')),
     SOUP,
     t('Pea and crème fraîche soup', Object.assign({ note: 'Sainsbury\'s, one pot each.' }, k(260, 400, ''))),
     t('Ham and cheese omelette with tomatoes', k(550, 360, '3 eggs, 40g ham, 30g cheddar, 100g tomatoes, 1 slice of toast weighing 40g')),
@@ -46,18 +52,18 @@ function tomLunch(w) {
 }
 const TOM_BOXES = [
   { title: 'Breakfasts', list: [
-    'Yoghurt bowl. 200g of 0% fat Greek yoghurt, 30g of granola, berries and a sliced banana. Weigh the granola once to see what 30g looks like.',
+    'Yoghurt bowl. 200g of 0% fat Greek yoghurt, 30g of granola and 80g of berries. Weigh the granola and the berries once to see what 30g and 80g look like.',
     'Eggs, toast and bacon. Two poached eggs on a slice of toast, with two rashers of streaky bacon grilled.',
-    'Any day. Porridge made with 50g of oats and 250ml of semi-skimmed milk, with a sliced banana and berries, works in place of the yoghurt bowl.',
-    'Any day. 45g of Shredded Wheat with semi-skimmed milk and a banana works in place of the yoghurt bowl.'
+    'Any day. Porridge made with 50g of oats and 250ml of semi-skimmed milk, with 80g of berries, works in place of the yoghurt bowl.',
+    'Any day. 45g of Shredded Wheat with semi-skimmed milk and 80g of berries works in place of the yoghurt bowl.'
   ] },
   { title: 'Lunch Notes', list: [
     'Jacket potato. Prick the potato and microwave it at work for 8 to 10 minutes, then heat the beans for 1 to 2 minutes.',
     'Friday. Buy 2 pots of Sainsbury\'s Petits Pois & Crème Fraîche soup in the weekly shop.',
     'Soup day. Thursday\'s soup uses the chicken and broth left from Wednesday dinner. Buy 2 corn cobs and the other soup ingredients in the weekly shop.',
-    'Fruit. Pack a piece of fruit, such as an apple, a pear or a satsuma, with every weekday lunch.'
+    'Fruit. Take the apples, satsumas and plums from the fruit at work. Buy about 560g of berries a week, such as blueberries and raspberries, and 2 apples and 4 satsumas for the weekend.'
   ] },
-  { title: 'Daily Target', text: 'About 1,900 calories a day for Tom, including about 250 for snacks.' }
+  { title: 'Daily Target', text: 'About 1,900 calories a day for Tom. The total for each day includes the fruit, so any other snack goes on top.' }
 ];
 const VEG_BOX = { title: 'Extra Fruit & Veg', list: [
   'Every night. About 80g each of frozen peas, green beans, broccoli or edamame, microwaved for 3 to 4 minutes.',
@@ -110,9 +116,9 @@ function week(w) {
       },
       {
         name: 'Tom & Sophie', serves: 2,
-        columns: ['Breakfast', 'Lunch', 'Dinner', 'Jobs'],
+        columns: ['Breakfast', 'Lunch', 'Dinner', 'Fruit', 'Jobs'],
         intro: w.intro,
-        rows: DAYS.map((d, i) => [d, TOM_BREAKFAST[i], withK(tomLunch(w)[i]), withK(adults[i][0]), { jobs: jobs[d] }]),
+        rows: DAYS.map((d, i) => [d, TOM_BREAKFAST[i], withK(tomLunch(w)[i]), withK(adults[i][0]), TOM_FRUIT[i], { jobs: jobs[d] }]),
         dayTotal: true,
         boxes: (w.boxes || []).concat([VEG_BOX], TOM_BOXES)
       }

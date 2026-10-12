@@ -269,7 +269,7 @@ function planPanel(p, person, i) {
   const id = 'who-' + slugify(person.name);
   const dayKcal = cells => {
     if (!person.dayTotal) return '';
-    const meals = cells.slice(0, 3);
+    const meals = cells.filter(c => !c.jobs);
     if (meals.some(c => c.kcal === undefined || c.noTotal)) return '';
     return `<span class="day-kcal">${meals.reduce((n, c) => n + c.kcal, 0).toLocaleString('en-GB')} kcal</span>`;
   };
