@@ -112,7 +112,7 @@ function week(w) {
         name: 'Tom & Sophie', serves: 2,
         columns: ['Breakfast', 'Lunch', 'Dinner', 'Jobs'],
         intro: w.intro,
-        rows: DAYS.map((d, i) => [d, TOM_BREAKFAST[i], withK(tomLunch(w)[i]), withK(adults[i][0]), { jobs: jobs[d] }]),
+        rows: DAYS.map((d, i) => [d, (w.breakfast && w.breakfast[i]) || TOM_BREAKFAST[i], withK(tomLunch(w)[i]), withK(adults[i][0]), { jobs: jobs[d] }]),
         dayTotal: true,
         boxes: (w.boxes || []).concat([VEG_BOX], TOM_BOXES)
       }
@@ -157,6 +157,7 @@ module.exports = [
     monTueLunch: [t('Lunch out', { note: 'No chicken left from Sunday.', noTotal: true }), t('Bolognese with pasta', BOLOGNESE_LUNCH)],
     jobs: [['Monday', 'Move a tub of Bolognese to the fridge.']],
     mondayTed: r('cheese-on-toast-fingers'),
+    breakfast: { 0: t('Jordans Country Crisp granola') },
     wednesdayNote: 'Tom is out.',
     fridayAdults: [t('Out for dinner', { noTotal: true })],
     saturday: r('sausage-mash-gravy-cabbage'), saturdayMeat: 'sausages'
