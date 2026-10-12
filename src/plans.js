@@ -61,7 +61,7 @@ const TOM_BOXES = [
     'Jacket potato. Prick the potato and microwave it at work for 8 to 10 minutes, then heat the beans for 1 to 2 minutes.',
     'Friday. Buy 2 pots of Sainsbury\'s Petits Pois & Crème Fraîche soup in the weekly shop.',
     'Soup day. Thursday\'s soup uses the chicken and broth left from Wednesday dinner. Buy 2 corn cobs and the other soup ingredients in the weekly shop.',
-    'Fruit. Take the apples, satsumas and plums from the fruit at work. Buy about 560g of berries a week, such as blueberries and raspberries, and 2 apples and 4 satsumas for the weekend.'
+    'Fruit. Take the apples, satsumas and bananas from the fruit at work. Buy about 560g of berries a week, such as blueberries and raspberries, and 2 apples and 4 satsumas for the weekend.'
   ] },
   { title: 'Daily Target', text: 'About 1,900 calories a day for Tom. The total for each day includes the fruit, so any other snack goes on top.' }
 ];
