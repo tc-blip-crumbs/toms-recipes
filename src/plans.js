@@ -25,45 +25,54 @@ const FRUIT = [
 ];
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const YOG = t('Yoghurt bowl', k(280, 310, '200g yoghurt, 30g granola, 80g berries'));
-const EGGS = t('Eggs, toast and bacon', k(375, 175, '2 eggs, 1 slice of toast weighing 40g, 2 rashers of streaky bacon'));
-const TOM_BREAKFAST = [YOG, YOG, YOG, YOG, YOG, EGGS, EGGS];
-// Tom's fruit for each day, Monday to Sunday. Weekday berries are in the yoghurt bowl.
-const SATS = 'An apple with lunch. 2 satsumas at 4pm.', BANANA = 'An apple with lunch. A banana at 4pm.';
+const YOG = t('Yoghurt bowl', k(370, 320, '200g yoghurt, 20g granola, 80g berries, 15g walnuts, 1 tbsp ground flaxseed'));
+const PORRIDGE = t('Porridge', k(440, 390, '40g oats, 250ml semi-skimmed milk, 80g berries, 15g walnuts, 1 tbsp ground flaxseed'));
+const EGGS = t('Eggs, sourdough toast and bacon', k(375, 175, '2 eggs, 1 slice of sourdough toast weighing 40g, 2 rashers of streaky bacon'));
+const EGGS_VEG = t('Eggs on sourdough toast with mushrooms and tomatoes', k(300, 280, '2 eggs, 1 slice of sourdough toast weighing 40g, 100g mushrooms, 100g tomatoes'));
+const TOM_BREAKFAST = [YOG, PORRIDGE, YOG, PORRIDGE, YOG, EGGS, EGGS_VEG];
+// Tom's fruit and nuts for each day, Monday to Sunday. Weekday berries are in the breakfast.
+const NUTS = ' 20g almonds at 4pm.';
+const SATS = 'An apple with lunch. 2 satsumas and' + NUTS, BANANA = 'An apple with lunch. A banana and' + NUTS;
+const WEEKEND = '80g berries with breakfast. An apple with lunch. 2 satsumas and' + NUTS;
 const TOM_FRUIT = [
-  t(SATS, { kcal: 125 }), t(BANANA, { kcal: 180 }), t(SATS, { kcal: 125 }), t(BANANA, { kcal: 180 }), t(SATS, { kcal: 125 }),
-  t('80g berries with breakfast. An apple with lunch. 2 satsumas at 4pm.', { kcal: 155 }),
-  t('80g berries with breakfast. An apple with lunch. 2 satsumas at 4pm.', { kcal: 155 })
+  t(SATS, { kcal: 245 }), t(BANANA, { kcal: 300 }), t(SATS, { kcal: 245 }), t(BANANA, { kcal: 300 }), t(SATS, { kcal: 245 }),
+  t(WEEKEND, { kcal: 275 }), t(WEEKEND, { kcal: 275 })
 ];
-const BOLOGNESE_LUNCH = k(840, 465, '320g sauce, 145g cooked pasta from 60g dry');
+const BOLOGNESE_LUNCH = k(650, 365, '220g sauce, 145g cooked wholewheat pasta from 60g dry');
 // const CHICKEN_POT = 'Uses a whole chicken from the freezer, moved to the fridge on Monday night. It feeds the 2 of you tonight, and everything left goes into Thursday\'s soup, so keep the leftover chicken and about 1 litre of the poaching broth.';
 const SOUP = r('chicken-sweetcorn-soup', Object.assign({ note: 'Made on Wednesday night.', serves: 2 }, k(385, 400, '')));
-const CHICKEN_LUNCH = k(590, 480, '150g chicken, 200g cooked rice, 130ml broth');
+const CHICKEN_LUNCH = k(590, 480, '150g chicken, 200g cooked brown rice, 130ml broth');
 function tomLunch(w) {
   return [
-    w.monTueLunch ? w.monTueLunch[0] : r('roast-chicken-caesar-sandwich', { label: 'Roast Chicken Caesar Sandwich', serves: 4 }),
-    w.monTueLunch ? w.monTueLunch[1] : r('roast-chicken-caesar-sandwich', { label: 'Roast Chicken Caesar Sandwich', serves: 4 }),
-    t('Jacket potato with beans and cheddar', k(430, 470, '250g potato, 200g beans, 20g cheddar')),
+    w.monTueLunch ? w.monTueLunch[0] : r('roast-chicken-caesar-sandwich', { label: 'Roast Chicken Caesar Sandwich', note: 'On sourdough or seeded bread.', serves: 4 }),
+    w.monTueLunch ? w.monTueLunch[1] : r('roast-chicken-caesar-sandwich', { label: 'Roast Chicken Caesar Sandwich', note: 'On sourdough or seeded bread.', serves: 4 }),
+    t('Jacket potato with beans and cheddar', k(430, 470, '250g potato, 200g reduced-salt beans, 20g cheddar')),
     SOUP,
     t('Pea and crème fraîche soup', Object.assign({ note: 'Sainsbury\'s, one pot each.' }, k(260, 400, ''))),
-    t('Ham and cheese omelette with tomatoes', k(550, 360, '3 eggs, 40g ham, 30g cheddar, 100g tomatoes, 1 slice of toast weighing 40g')),
-    t('Beans on toast with a poached egg', k(425, 330, '200g beans, 2 slices of toast weighing 80g, 1 egg'))
+    t('Ham and cheese omelette with tomatoes', k(550, 360, '3 eggs, 40g ham, 30g cheddar, 100g tomatoes, 1 slice of sourdough toast weighing 40g')),
+    t('Beans on toast with a poached egg', k(425, 330, '200g reduced-salt beans, 2 slices of seeded toast weighing 80g, 1 egg'))
   ];
 }
 const TOM_BOXES = [
   { title: 'Breakfasts', list: [
-    'Yoghurt bowl. 200g of 0% fat Greek yoghurt, 30g of granola and 80g of berries. Weigh the granola and the berries once to see what 30g and 80g look like.',
-    'Eggs, toast and bacon. Two poached eggs on a slice of toast, with two rashers of streaky bacon grilled.',
-    'Any day. Porridge made with 50g of oats and 250ml of semi-skimmed milk, with 80g of berries, works in place of the yoghurt bowl.',
-    'Any day. 45g of Shredded Wheat with semi-skimmed milk and 80g of berries works in place of the yoghurt bowl.'
+    'Yoghurt bowl. 200g of 0% fat Greek yoghurt, 20g of granola, 80g of berries, 15g of chopped walnuts and a tablespoon of ground flaxseed. Weigh the granola, berries and walnuts once to see what each looks like.',
+    'Porridge. 40g of porridge oats and 250ml of semi-skimmed milk in a large bowl, microwaved at work for 2 minutes, stirred, then 1 minute more. Top it with the berries, walnuts and flaxseed.',
+    'Saturday. Two poached eggs on a slice of sourdough toast, with two rashers of streaky bacon grilled.',
+    'Sunday. Two poached eggs on a slice of sourdough toast, with 100g of mushrooms fried in a spray of oil and 100g of tomatoes, halved and grilled.'
+  ] },
+  { title: 'Wholegrains', list: [
+    'Rice. Use brown basmati for every rice dish, at 75g each. Cook it in the Sistema with 2½ times its weight of water for about 20 minutes, then leave it to stand for 5 minutes.',
+    'Pasta. Use wholewheat pasta for the Bolognese.',
+    'Bread. Use sourdough or seeded bread for all toast and sandwiches.'
   ] },
   { title: 'Lunch Notes', list: [
     'Jacket potato. Prick the potato and microwave it at work for 8 to 10 minutes, then heat the beans for 1 to 2 minutes.',
+    'Beans. Buy the reduced salt and sugar baked beans.',
     'Friday. Buy 2 pots of Sainsbury\'s Petits Pois & Crème Fraîche soup in the weekly shop.',
     'Soup day. Thursday\'s soup uses the chicken and broth left from Wednesday dinner. Buy 2 corn cobs and the other soup ingredients in the weekly shop.',
-    'Fruit. Take the apples, satsumas and bananas from the fruit at work. Buy about 560g of berries a week, such as blueberries and raspberries, and 2 apples and 4 satsumas for the weekend.'
+    'Fruit and nuts. Take the apples, satsumas and bananas from the fruit at work. Buy about 560g of berries a week, such as blueberries and raspberries, 2 apples and 4 satsumas for the weekend, and 140g of almonds, 105g of walnuts and a bag of ground flaxseed.'
   ] },
-  { title: 'Daily Target', text: 'About 1,900 calories a day for Tom. The total for each day includes the fruit, so any other snack goes on top.' }
+  { title: 'Daily Target', text: 'About 1,900 calories a day for Tom. The total for each day includes the fruit and nuts, so any other snack goes on top.' }
 ];
 const VEG_BOX = { title: 'Extra Fruit & Veg', list: [
   'Every night. About 80g each of frozen peas, green beans, broccoli or edamame, microwaved for 3 to 4 minutes.',
@@ -116,7 +125,7 @@ function week(w) {
       },
       {
         name: 'Tom & Sophie', serves: 2,
-        columns: ['Breakfast', 'Lunch', 'Dinner', 'Fruit', 'Jobs'],
+        columns: ['Breakfast', 'Lunch', 'Dinner', 'Fruit and Nuts', 'Jobs'],
         intro: w.intro,
         rows: DAYS.map((d, i) => [d, TOM_BREAKFAST[i], withK(tomLunch(w)[i]), withK(adults[i][0]), TOM_FRUIT[i], { jobs: jobs[d] }]),
         dayTotal: true,
@@ -160,7 +169,7 @@ module.exports = [
   }),
   week({
     n: 1, id: '2026-10-12', title: 'Week of 12 October',
-    monTueLunch: [t('Lunch out', { note: 'No chicken left from Sunday.', noTotal: true }), t('Bolognese with pasta', BOLOGNESE_LUNCH)],
+    monTueLunch: [t('Lunch out', { note: 'No chicken left from Sunday.', noTotal: true }), t('Bolognese with wholewheat pasta', BOLOGNESE_LUNCH)],
     jobs: [['Monday', 'Move a tub of Bolognese to the fridge.']],
     mondayTed: r('cheese-on-toast-fingers'),
     wednesdayNote: 'Tom is out.',
@@ -169,7 +178,7 @@ module.exports = [
   }),
   week({
     n: 0, id: '2026-10-19', title: 'Week of 19 October',
-    monTueLunch: [t('Bolognese with pasta', BOLOGNESE_LUNCH), t('Bolognese with pasta', BOLOGNESE_LUNCH)],
+    monTueLunch: [t('Bolognese with wholewheat pasta', BOLOGNESE_LUNCH), t('Bolognese with wholewheat pasta', BOLOGNESE_LUNCH)],
     jobs: [['Sunday', 'Move a tub of Bolognese to the fridge.'], ['Monday', 'Move a tub of Bolognese to the fridge.']],
     saturday: r('pork-larb', { note: 'Cook 40g extra rice for Ted.' }), saturdayMeat: 'pork mince',
     tedSundayLunch: r('egg-fried-rice', { note: 'Rice from Saturday.' })
