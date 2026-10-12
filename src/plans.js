@@ -155,8 +155,10 @@ module.exports = [
   }),
   week({
     n: 1, id: '2026-10-12', title: 'Week of 12 October',
-    intro: 'The second of four repeating weeks.',
-    pork: true,
+    intro: 'The second of four repeating weeks. The pork belly went on Sunday 11 October with friends, so this Sunday is roast chicken, using the chicken left from 11 October.',
+    monTueLunch: [t('Lunch out', { note: 'No chicken left from Sunday.', noTotal: true }), t('Bolognese with pasta', BOLOGNESE_LUNCH)],
+    jobs: [['Monday', 'Move a tub of Bolognese to the fridge.']],
+    mondayTed: r('cheese-on-toast-fingers'),
     wednesdayNote: 'Tom is out.',
     fridayAdults: [t('Out for dinner', { noTotal: true })],
     saturday: r('sausage-mash-gravy-cabbage'), saturdayMeat: 'sausages'
@@ -166,13 +168,12 @@ module.exports = [
     intro: 'The third of four repeating weeks.',
     monTueLunch: [t('Bolognese with pasta', BOLOGNESE_LUNCH), t('Bolognese with pasta', BOLOGNESE_LUNCH)],
     jobs: [['Sunday', 'Move a tub of Bolognese to the fridge.'], ['Monday', 'Move a tub of Bolognese to the fridge.']],
-    mondayTed: r('cheese-on-toast-fingers'),
     saturday: r('pork-larb', { note: 'Cook 40g extra rice for Ted.' }), saturdayMeat: 'pork mince',
     tedSundayLunch: r('egg-fried-rice', { note: 'Rice from Saturday.' })
   }),
   week({
     n: 1, id: '2026-10-26', title: 'Week of 26 October',
-    intro: 'The last of four repeating weeks.',
+    intro: 'The last of four repeating weeks. Buy 2 pork belly chunkies in the next Pipers order for Sunday 1 November.',
     pork: true,
     saturday: r('sausage-mash-gravy-cabbage'), saturdayMeat: 'sausages'
   })
