@@ -13,6 +13,7 @@ const KCAL = {
   'roast-chicken': k(700, 600, '150g chicken, 230g potatoes, 170g vegetables, 50ml gravy'),
   'roast-pork-belly': k(1050, 700, '1 pork belly chunky weighing about 170g cooked, 330g mash, 200g vegetables'),
   'sausage-mash-gravy-cabbage': k(950, 790, '3 Cumberland sausages weighing 145g cooked, 430g mash, 150g cabbage, 70ml gravy'),
+  'chicken-mushroom-butter-bean-casserole': k(680, 520, '1 chicken breast weighing about 130g cooked, 120g butter beans, 270g mushrooms, spinach and sauce'),
   'hainanish-soy-poached-chicken': k(650, 440, '150g chicken, 200g cooked rice from 65g dry, 60g cucumber and spring onion, 30g sauce'),
   'roast-chicken-caesar-sandwich': k(390, 245, '2 slices of bread weighing 80g, 70g chicken, 95g filling')
 };
@@ -69,7 +70,7 @@ const TOM_BOXES = [
     'Jacket potato. Prick the potato and microwave it at work for 8 to 10 minutes, then heat the beans for 1 to 2 minutes.',
     'Beans. Buy the reduced salt and sugar baked beans.',
     'Friday. Buy 2 pots of Sainsbury\'s Petits Pois & Crème Fraîche soup in the weekly shop.',
-    'Soup day. Thursday\'s soup uses the chicken and broth left from Wednesday dinner. Buy 2 corn cobs and the other soup ingredients in the weekly shop.',
+    'Soup day. Thursday\'s soup uses the chicken legs and stock from Wednesday\'s casserole. Buy 2 corn cobs and the other soup ingredients in the weekly shop.',
     'Fruit and nuts. Take the apples, satsumas and bananas from the fruit at work. Buy about 560g of berries a week, such as blueberries and raspberries, 2 apples and 4 satsumas for the weekend, and 140g of almonds, 105g of walnuts and a bag of ground flaxseed.'
   ] },
   { title: 'Daily Target', text: 'About 1,900 calories a day for Tom. The total for each day includes the fruit and nuts, so any other snack goes on top.' }
@@ -97,7 +98,7 @@ function week(w) {
   const adults = [
     w.monday || [t('Chilli con carne', Object.assign({ note: 'From the freezer.' }, k(720, 580, '')))],
     [w.tuesday || r('carnitas-tacos', { note: 'From the freezer.' })],
-    [r('hainanish-soy-poached-chicken', { note: (w.wednesdayNote ? w.wednesdayNote + ' ' : '') + 'Keep the leftovers for the soup.', serves: 2 })],
+    [r('chicken-mushroom-butter-bean-casserole', { note: (w.wednesdayNote ? w.wednesdayNote + ' ' : '') + 'Keep the legs and stock for the soup.', serves: 2 })],
     [r('red-lentil-curry', { note: 'From the freezer.' })],
     w.fridayAdults || [r('red-wine-burnt-onion-beef', { note: 'Beef from the freezer.' })],
     [w.saturday],

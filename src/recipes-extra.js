@@ -745,7 +745,57 @@ module.exports = [
   ]
 },
 {
-  slug: 'hainanish-soy-poached-chicken', title: 'Hainan(ish) Soy Poached Chicken', short: 'Soy poached chicken',
+  slug: 'chicken-mushroom-butter-bean-casserole', title: 'Chicken and Mushroom Casserole with Butter Beans', short: 'Chicken and mushroom casserole',
+  description: 'A whole chicken baked in pieces with mushrooms, butter beans, white wine and tarragon, finished with spinach and half-fat crème fraîche, with the legs and a stock kept for Thursday\'s soup.',
+  serves: 2, prep: 20, cook: 60, ovenC: 180, course: 'Dinners', cuisine: 'French', main: 'Chicken', labels: ['Weeknight'],
+  source: { name: 'Adapted from Tom\'s saved recipes' },
+  equipment: ['A large casserole with a lid that can go in the oven'],
+  groups: [
+    { name: 'For the Chicken', fixedNote: 'The chicken stays the same at every number of servings. The breasts are dinner for 2, and the legs and carcass make Thursday\'s soup.', items: [
+      { id: 'chicken', qty: 1, name: 'whole chicken', prep: 'about 1.5kg, cut into 2 breasts and 2 legs', scale: 'fixed', ref: 'chicken' }
+    ]},
+    { name: 'For the Casserole', items: [
+      { id: 'oil', qty: 1, unit: 'tbsp', name: 'olive oil', scale: 'spoon', liquid: true, ref: 'oil' },
+      { id: 'mushrooms', qty: 300, unit: 'g', name: 'mushrooms', prep: 'thickly sliced', scale: 'weight', ref: 'mushrooms' },
+      { id: 'butter', qty: 15, unit: 'g', name: 'butter', scale: 'weight', ref: 'butter' },
+      { id: 'garlic', qty: 2, name: 'garlic clove', plural: 'garlic cloves', prep: 'thinly sliced', scale: 'whole', ref: 'garlic' },
+      { id: 'vinegar', qty: 2, unit: 'tbsp', name: 'white wine vinegar', scale: 'spoon', liquid: true, ref: 'vinegar' },
+      { id: 'wine', qty: 150, unit: 'ml', name: 'white wine', scale: 'weight', ref: 'white wine' },
+      { id: 'stock', qty: 150, unit: 'ml', name: 'low-salt chicken stock', scale: 'weight', ref: 'chicken stock' },
+      { id: 'beans', qty: 1, unit: 'tin', tinSize: 400, name: 'butter beans', prep: 'drained', scale: 'tin', ref: 'butter beans' },
+      { id: 'tarragon', qty: 2, unit: 'tbsp', name: 'fresh tarragon', prep: 'chopped', scale: 'spoon', ref: 'tarragon' },
+      { id: 'spinach', qty: 200, unit: 'g', name: 'spinach', scale: 'weight', ref: 'spinach' },
+      { id: 'cremefraiche', qty: 100, unit: 'ml', name: 'half-fat crème fraîche', scale: 'weight', ref: 'crème fraîche' },
+      { id: 'parsley', qty: 2, unit: 'tbsp', name: 'fresh parsley', prep: 'chopped', scale: 'spoon', ref: 'parsley' },
+      { id: 'pepper', phrase: 'Black pepper', prep: 'to taste', scale: 'fixed', ref: 'pepper', chip: 'black pepper' }
+    ]},
+    { name: 'For the Soup Stock', fixedNote: 'The stock stays the same at every number of servings.', items: [
+      { id: 'onion', qty: 1, name: 'onion', plural: 'onions', prep: 'halved', scale: 'fixed', ref: 'onion' },
+      { id: 'water', qty: 750, unit: 'ml', name: 'cold water', scale: 'fixed', ref: 'water' }
+    ]}
+  ],
+  steps: [
+    { text: 'Heat the oven to 180°C. Put the chicken carcass in a large saucepan with the onion and cold water, bring it to the boil over a high heat, then simmer over a low heat for 45 minutes while you make the casserole.', uses: ['chicken', 'onion', 'water'] },
+    { text: 'Heat the olive oil in the casserole over a medium-high heat and fry the mushrooms for 8 to 10 minutes, until browned. Add the butter and garlic, turn the heat to low and cook for 2 minutes, until the garlic is pale golden, then lift the mushrooms and garlic onto a plate.', uses: ['oil', 'mushrooms', 'butter', 'garlic'] },
+    { text: 'Turn the heat to medium-high and fry the chicken breasts and legs, skin side down first, for 3 minutes on each side, until golden. Lift them onto a separate plate.', uses: [] },
+    { text: 'Pour the white wine vinegar into the casserole and scrape up the browned bits from the bottom. Add the white wine and boil for 3 to 4 minutes, until it has reduced by half.', uses: ['vinegar', 'wine'] },
+    { text: 'Add the low-salt chicken stock and boil for 3 minutes, until it has reduced by about a third, then stir in the butter beans.', uses: ['stock', 'beans'] },
+    { text: 'Return the mushrooms, garlic and chicken legs to the casserole, put the lid on and bake for 20 minutes.', uses: [] },
+    { text: 'Add the chicken breasts, put the lid back on and bake for 20 minutes more, until the thickest part of each breast is white all the way through and the juices from the legs run clear.', uses: [] },
+    { text: 'Lift out the chicken and set the legs aside to cool for Thursday\'s soup. Stir the tarragon and spinach into the beans and cook over a medium heat for 5 minutes, until the spinach has wilted, then stir in the crème fraîche.', uses: ['tarragon', 'spinach', 'cremefraiche'] },
+    { text: 'Slice the chicken breasts and lay them on the beans. Season with black pepper and scatter over the parsley.', uses: ['pepper', 'parsley'] },
+    { text: 'Strain the stock from the saucepan into a jug, then cool it.', uses: [] }
+  ],
+  notes: [
+    { title: 'Thursday\'s Soup', text: 'Cool the chicken legs and the stock within an hour and keep them in the fridge. Take the meat off the legs for the chicken and sweetcorn soup, which uses 250g of chicken and 250ml of the stock.' },
+    { title: 'Good Additions', text: 'Soak 15g of dried porcini in 100ml of boiling water for 10 minutes and add them, with their soaking liquid, when you return the mushrooms to the casserole.' },
+    { title: 'Storing', text: 'Keep leftovers in the fridge for up to 2 days and reheat them once, until piping hot. Freeze any stock the soup does not use.' },
+    { title: 'Calories', text: 'About 680 calories a serving.' },
+    { title: 'For Ted', text: 'Leave this one out for Ted, because the sauce has wine in it.' }
+  ]
+},
+{
+  slug: 'hainanish-soy-poached-chicken', title: 'Hainan(ish) Soy Poached Chicken', short: 'Soy poached chicken', other: true,
   description: 'A whole chicken gently poached in soy, ginger and garlic, served in its broth over seasoned rice with a creamy sesame sauce.',
   serves: 6, prep: 20, rest: 90, restLabel: 'Poaching', cook: 30, course: 'Dinners', cuisine: 'Singaporean', main: 'Chicken', labels: ['Weekend', 'Freezes well'],
   source: { name: 'Mob, by Ben Lippett', url: 'https://www.mob.co.uk/recipes/soy-poached-chicken-sesame-sauce' },
@@ -799,7 +849,7 @@ module.exports = [
 },
 {
   slug: 'chicken-sweetcorn-soup', title: 'Chicken and Sweetcorn Soup', short: 'Chicken and sweetcorn soup',
-  description: 'Leftover soy-poached chicken and fresh corn in a light broth, thickened with cornflour and finished with ribbons of egg, made on Wednesday night for two packed lunches.',
+  description: 'Chicken from Wednesday\'s casserole and fresh corn in a light broth, thickened with cornflour and finished with ribbons of egg, made on Wednesday night for two packed lunches.',
   serves: 2, prep: 15, cook: 45, course: 'Lunches', cuisine: 'Chinese', main: 'Chicken', labels: ['Weeknight'],
   source: { name: 'Adapted from Lose Weight for Good, by Tom Kerridge' },
   groups: [
@@ -813,9 +863,9 @@ module.exports = [
       { id: 'onion', qty: 1, name: 'medium onion', plural: 'medium onions', prep: 'finely chopped', scale: 'halve', ref: 'onion', chip: 'onion' },
       { id: 'garlic', qty: 1, name: 'garlic clove', plural: 'garlic cloves', prep: 'finely chopped', scale: 'whole', ref: 'garlic' },
       { id: 'ginger', qty: 15, unit: 'g', name: 'fresh ginger', prep: 'finely grated', scale: 'weight', ref: 'ginger', chip: 'ginger' },
-      { id: 'broth', qty: 250, unit: 'ml', name: 'broth left from the soy poached chicken', scale: 'weight', ref: 'broth', chip: 'poaching broth' },
+      { id: 'broth', qty: 250, unit: 'ml', name: 'chicken stock from the casserole', scale: 'weight', ref: 'chicken stock', chip: 'chicken stock' },
       { id: 'cornwater', qty: 250, unit: 'ml', name: 'corn cooking water', scale: 'weight', ref: 'corn cooking water' },
-      { id: 'chicken', qty: 250, unit: 'g', name: 'leftover soy poached chicken', prep: 'skin removed, shredded', scale: 'weight', ref: 'chicken' },
+      { id: 'chicken', qty: 250, unit: 'g', name: 'chicken leg meat from the casserole', prep: 'skin removed, shredded', scale: 'weight', ref: 'chicken' },
       { id: 'cornflour', qty: 1, unit: 'tbsp', name: 'cornflour', scale: 'spoon', ref: 'cornflour' },
       { id: 'cold', qty: 1, unit: 'tbsp', name: 'cold water', scale: 'spoon', liquid: true, ref: 'water', chip: 'cold water' },
       { id: 'soy', qty: 1.5, unit: 'tsp', name: 'light soy sauce', prep: 'to taste', scale: 'spoon', liquid: true, ref: 'soy sauce' },
@@ -829,15 +879,15 @@ module.exports = [
     { text: 'Put the corn cobs in a large saucepan and cover it with the cold water. Bring it to the boil over a high heat, then simmer over a medium-low heat for 20 to 25 minutes, until the kernels are tender. Leave the cobs to cool in the water.', uses: ['corn', 'water'] },
     { text: 'Lift out the cobs and keep some of the corn cooking water for the soup. Stand each cob on its end and cut down the sides with a sharp knife to take off the kernels.', uses: ['cornwater'] },
     { text: 'Heat the vegetable oil and sesame oil in a large non-stick saucepan over a high heat, then fry the onion for 5 minutes, until soft, adding a splash of water if it sticks. Add the garlic and ginger and fry for 2 minutes more, until fragrant.', uses: ['vegoil', 'sesoil', 'onion', 'garlic', 'ginger'] },
-    { text: 'Pour in the broth and the corn cooking water and bring to a simmer over a medium heat. Add the chicken and the corn kernels and simmer for 5 minutes, until the chicken is piping hot.', uses: ['broth', 'cornwater', 'chicken'] },
-    { text: 'Mix the cornflour with the cold water to a smooth paste, stir it into the soup and cook for 1 to 2 minutes, stirring, until the soup thickens slightly. Taste the soup before you season it with the soy sauce, white pepper and sea salt, because the broth is already salty.', uses: ['cornflour', 'cold', 'soy', 'pepper', 'salt'] },
+    { text: 'Pour in the chicken stock and the corn cooking water and bring to a simmer over a medium heat. Add the chicken and the corn kernels and simmer for 5 minutes, until the chicken is piping hot.', uses: ['broth', 'cornwater', 'chicken'] },
+    { text: 'Mix the cornflour with the cold water to a smooth paste, stir it into the soup and cook for 1 to 2 minutes, stirring, until the soup thickens slightly. Taste the soup before you season it with the soy sauce, white pepper and sea salt, and add as little salt as you can.', uses: ['cornflour', 'cold', 'soy', 'pepper', 'salt'] },
     { text: 'Pour in the egg in a thin stream, stirring all the time, for about 30 seconds, until it sets in thin strands. Stir in half the spring onions and scatter the rest over the soup.', uses: ['egg', 'sonions'] }
   ],
   notes: [
-    { title: 'Saving Time', text: 'Boil the corn while the chicken poaches on Wednesday, so the soup takes about 15 minutes after dinner.' },
+    { title: 'Saving Time', text: 'Boil the corn while the casserole bakes on Wednesday, so the soup takes about 15 minutes after dinner.' },
     { title: 'Storing', text: 'Cool the soup within an hour and keep it in the fridge for up to 2 days. Reheat it once, until piping hot.' },
     { title: 'Calories', text: 'About 385 calories a serving.' },
-    { title: 'For Ted', text: 'Leave this one out for Ted, because the broth has soy sauce in it.' }
+    { title: 'For Ted', text: 'Leave this one out for Ted, because the soup has soy sauce in it.' }
   ]
 }
 ];
