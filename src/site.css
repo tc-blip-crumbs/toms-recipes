@@ -448,7 +448,7 @@ body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 
 @media (max-width: 699px) {
   .has-bar .site-header { display: none; }
   .site-nav a { display: none; }
-  .tabbar { display: grid; grid-template-columns: 1fr 1fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+  .tabbar { display: grid; grid-template-columns: 1fr 1fr 1fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
     background: var(--bg); border-top: 1px solid var(--line); padding-bottom: var(--safe-bottom); }
   .tabbar a { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 0 6px; text-decoration: none; font-size: .72rem; font-weight: 600; color: var(--muted); }
   .tabbar a[aria-current="page"] { color: var(--ink); }
@@ -458,3 +458,21 @@ body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 
   .site-footer .wrap { padding-bottom: 20px; }
 }
 @media print { .tabbar, .appbar { display: none !important; } }
+
+/* Food diary */
+.diary-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.diary-lock-btn { font: 600 .85rem var(--body); color: var(--muted); background: none; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.diary-form { display: grid; gap: 10px; max-width: 320px; margin: 8px 0 40px; }
+.diary-form label { font-weight: 600; }
+.diary-form input { font: 1rem var(--body); padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); }
+.diary-form button { font: 600 1rem var(--body); padding: 12px 14px; border: 0; border-radius: 10px; background: var(--ink); color: var(--bg); cursor: pointer; }
+.diary-msg { margin: 0; color: var(--muted); min-height: 1.4em; }
+.diary-day { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin: 0 0 16px; }
+.diary-day h2 { font-size: 1.15rem; margin: 0 0 10px; display: flex; align-items: center; gap: 10px; }
+.diary-day.is-today .week-badge { display: inline-block; }
+.diary-list { list-style: none; margin: 0; padding: 0; }
+.diary-list li { display: grid; grid-template-columns: 90px 1fr auto; gap: 4px 12px; padding: 8px 0; border-top: 1px solid var(--line); align-items: baseline; }
+.diary-list li:first-child { border-top: 0; }
+.diary-meal { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.diary-item .cell-note { display: block; }
+.diary-total { margin: 10px 0 0; padding-top: 10px; border-top: 1px solid var(--line); font-weight: 600; text-align: right; }

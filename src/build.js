@@ -46,6 +46,7 @@ const ICON = {
   screen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3" stroke-linecap="round"/></svg>',
   back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
   book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg>',
+  diary: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2.5" width="15" height="19" rx="2.5"/><path d="M9 7.5h7M9 11.5h7M9 15.5h4" stroke-linecap="round"/></svg>',
   calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4" stroke-linecap="round"/></svg>',
   share: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7.5 7.5 12 3l4.5 4.5"/><path d="M5 11v8.5A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V11"/></svg>',
   close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>'
@@ -82,9 +83,9 @@ ${INDEXABLE ? '' : '<meta name="robots" content="noindex">\n'}<link rel="canonic
 ${extra}</head>
 <body${bar ? ' class="has-bar"' : ''}>
 <a class="visually-hidden" href="#main">Skip to content</a>
-<header class="site-header"><div class="wrap"><a class="brand" href="/">Tom's <span>Recipes</span></a><nav class="site-nav" aria-label="Main"><a href="/"${nav === 'recipes' ? ' aria-current="page"' : ''}>Recipes</a><a href="/plans/" data-this-week${nav === 'plans' ? ' aria-current="page"' : ''}>Meal Plans</a><button type="button" class="theme-btn" id="theme-btn" aria-label="Colour theme"></button></nav></div></header>
+<header class="site-header"><div class="wrap"><a class="brand" href="/">Tom's <span>Recipes</span></a><nav class="site-nav" aria-label="Main"><a href="/"${nav === 'recipes' ? ' aria-current="page"' : ''}>Recipes</a><a href="/plans/" data-this-week${nav === 'plans' ? ' aria-current="page"' : ''}>Meal Plans</a><a href="/diary/"${nav === 'diary' ? ' aria-current="page"' : ''}>Diary</a><button type="button" class="theme-btn" id="theme-btn" aria-label="Colour theme"></button></nav></div></header>
 <script>(function(){var b=document.getElementById("theme-btn"),r=document.documentElement,o=["auto","light","dark"],n={auto:"Auto",light:"Light",dark:"Dark"},ic={auto:"<svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true'><circle cx='12' cy='12' r='8' fill='none' stroke='currentColor' stroke-width='2'/><path d='M12 4a8 8 0 0 1 0 16z' fill='currentColor'/></svg>",light:"<svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round'><circle cx='12' cy='12' r='4'/><path d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4'/></svg>",dark:"<svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true'><path d='M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z' fill='currentColor'/></svg>"};function g(){try{return localStorage.getItem("theme")||"auto"}catch(e){return"auto"}}function s(v){if(v==="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",v);try{localStorage.setItem("theme",v)}catch(e){}b.innerHTML=ic[v];b.title="Theme: "+n[v];b.setAttribute("aria-label","Colour theme: "+n[v]+". Tap to change.")}s(g());b.addEventListener("click",function(){s(o[(o.indexOf(g())+1)%3])})})();</script>
-<nav class="tabbar" aria-label="Sections"><a href="/"${nav === 'recipes' ? ' aria-current="page"' : ''}>${ICON.book}<span>Recipes</span></a><a href="/plans/" data-this-week${nav === 'plans' ? ' aria-current="page"' : ''}>${ICON.calendar}<span>Meal Plans</span></a></nav>
+<nav class="tabbar" aria-label="Sections"><a href="/"${nav === 'recipes' ? ' aria-current="page"' : ''}>${ICON.book}<span>Recipes</span></a><a href="/plans/" data-this-week${nav === 'plans' ? ' aria-current="page"' : ''}>${ICON.calendar}<span>Meal Plans</span></a><a href="/diary/"${nav === 'diary' ? ' aria-current="page"' : ''}>${ICON.diary}<span>Diary</span></a></nav>
 ${bar}`;
 }
 const foot = `<footer class="site-footer"><div class="wrap"><span>${NAME}</span><span>Recipes in UK measures. Oven temperatures are for a fan oven.</span></div></footer>
@@ -334,6 +335,23 @@ ${foot}</body>
 }
 
 // ---- Sainsbury's shop button
+function diaryPage() {
+  const enc = fs.readFileSync(path.join(__dirname, 'diary.enc.json'), 'utf8').trim();
+  return head({ title: `Food Diary | ${NAME}`, description: 'Food diary.', canonical: `${SITE}/diary/`, nav: 'diary', extra: '<meta name="robots" content="noindex">\n' }) + `
+<main id="main" class="wrap diary-page">
+  <div class="intro diary-head"><h1>Food Diary</h1><button type="button" class="diary-lock-btn" id="diary-lock-btn">Lock</button></div>
+  <form class="diary-form" id="diary-lock" hidden>
+    <label for="diary-pw">Password</label>
+    <input id="diary-pw" name="password" type="password" autocomplete="current-password" required>
+    <button type="submit">Unlock</button>
+    <p class="diary-msg" aria-live="polite"></p>
+  </form>
+  <div id="diary" hidden><div id="diary-days"></div></div>
+</main>
+<script type="application/json" id="diary-data">${enc}</script>
+${foot}<script src="/assets/diary-page.js"></script>
+</body></html>`;
+}
 function shopPage() {
   const shop = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'shop', 'list.json'), 'utf8'));
   const code = fs.readFileSync(path.join(__dirname, '..', 'shop', 'shop-button.js'), 'utf8')
@@ -378,7 +396,7 @@ ${foot}</body>
 // Write the site
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.mkdirSync(path.join(DIST, 'assets'), { recursive: true });
-['site.css', 'scale.js', 'render.js', 'recipe-page.js', 'index-page.js', 'plan-page.js'].forEach(f => fs.copyFileSync(path.join(__dirname, f), path.join(DIST, 'assets', f)));
+['site.css', 'scale.js', 'render.js', 'recipe-page.js', 'index-page.js', 'plan-page.js', 'diary-page.js'].forEach(f => fs.copyFileSync(path.join(__dirname, f), path.join(DIST, 'assets', f)));
 fs.mkdirSync(path.join(DIST, 'assets', 'illustrations'), { recursive: true });
 fs.readdirSync(ART_DIR).forEach(f => fs.copyFileSync(path.join(ART_DIR, f), path.join(DIST, 'assets', 'illustrations', f)));
 fs.writeFileSync(path.join(DIST, 'index.html'), indexPage());
@@ -389,6 +407,8 @@ recipes.forEach(r => {
 fs.mkdirSync(path.join(DIST, 'plans', 'teds-food-guide'), { recursive: true });
 fs.writeFileSync(path.join(DIST, 'plans', 'index.html'), plansIndex());
 fs.writeFileSync(path.join(DIST, 'plans', 'teds-food-guide', 'index.html'), guidePage());
+fs.mkdirSync(path.join(DIST, 'diary'), { recursive: true });
+fs.writeFileSync(path.join(DIST, 'diary', 'index.html'), diaryPage());
 fs.mkdirSync(path.join(DIST, 'shop'), { recursive: true });
 fs.writeFileSync(path.join(DIST, 'shop', 'index.html'), shopPage());
 plans.forEach(p => { fs.mkdirSync(path.join(DIST, 'plans', p.id), { recursive: true }); fs.writeFileSync(path.join(DIST, 'plans', p.id, 'index.html'), planPage(p)); });
