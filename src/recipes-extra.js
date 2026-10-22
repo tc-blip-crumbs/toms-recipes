@@ -848,6 +848,50 @@ module.exports = [
   ]
 },
 {
+  slug: 'sweet-potato-coconut-chilli-soup', title: 'Sweet Potato, Coconut and Chilli Soup', short: 'Sweet potato soup',
+  description: 'A smooth sweet potato soup with ginger, lemongrass, coconut milk and lime, finished with fried red chilli.',
+  serves: 4, prep: 15, cook: 35, course: 'Lunches', cuisine: 'Thai', main: 'Vegetables', labels: ['Batch cook', 'Freezes well', 'Ted can share', 'Vegan'],
+  source: { name: 'Based on Sainsbury\'s Taste the Difference Sweet Potato, Coconut and Chilli Soup', url: 'https://www.sainsburys.co.uk/groceries/product/sainsburys-sweet-potato-coconut-chilli-soup-taste-the-difference-600g' },
+  equipment: ['A stick blender'],
+  groups: [
+    { name: 'For the Soup', items: [
+      { id: 'oil', qty: 1, unit: 'tbsp', name: 'rapeseed oil', scale: 'spoon', liquid: true, ref: 'oil' },
+      { id: 'onion', qty: 1, name: 'medium onion', plural: 'medium onions', prep: 'chopped', scale: 'halve', ref: 'onion' },
+      { id: 'carrot', qty: 1, name: 'medium carrot', plural: 'medium carrots', prep: 'peeled and chopped', scale: 'halve', ref: 'carrot' },
+      { id: 'garlic', qty: 2, name: 'garlic clove', plural: 'garlic cloves', prep: 'crushed', scale: 'whole', ref: 'garlic' },
+      { id: 'ginger', qty: 15, unit: 'g', name: 'fresh ginger', prep: 'finely grated', scale: 'weight', ref: 'ginger', chip: 'ginger' },
+      { id: 'lemongrass', qty: 1, name: 'lemongrass stalk', plural: 'lemongrass stalks', prep: 'outer layer removed, bashed', scale: 'whole', ref: 'lemongrass' },
+      { id: 'gcoriander', qty: 1, unit: 'tsp', name: 'ground coriander', scale: 'spoon', ref: 'ground coriander' },
+      { id: 'sweetpotato', qty: 400, unit: 'g', name: 'sweet potato', prep: 'peeled and cut into 2cm chunks', scale: 'weight', ref: 'sweet potato' },
+      { id: 'potato', qty: 150, unit: 'g', name: 'potato', prep: 'peeled and cut into 2cm chunks', scale: 'weight', ref: 'potato' },
+      { id: 'stock', qty: 700, unit: 'ml', name: 'low-salt vegetable stock', scale: 'weight', ref: 'vegetable stock' },
+      { id: 'coconut', qty: 100, unit: 'ml', name: 'coconut milk', scale: 'weight', ref: 'coconut milk' }
+    ]},
+    { name: 'To Finish', items: [
+      { id: 'lime', qty: 1, name: 'lime', plural: 'limes', prep: 'juiced', scale: 'halve', ref: 'lime' },
+      { id: 'pepper', phrase: 'A pinch of ground white pepper', scale: 'fixed', ref: 'white pepper', chip: 'white pepper' },
+      { id: 'salt', qty: 0.5, unit: 'tsp', name: 'salt', prep: 'to taste', scale: 'spoon', ref: 'salt' },
+      { id: 'coil', qty: 1, unit: 'tsp', name: 'rapeseed oil', scale: 'spoon', liquid: true, ref: 'oil', chip: 'oil for the chilli' },
+      { id: 'chilli', qty: 1, name: 'red chilli', plural: 'red chillies', prep: 'finely chopped', scale: 'whole', ref: 'chilli' },
+      { id: 'coriander', phrase: 'A handful of coriander', prep: 'chopped', scale: 'fixed', ref: 'coriander', chip: 'a handful of coriander' }
+    ]}
+  ],
+  steps: [
+    { text: 'Heat the rapeseed oil in a large saucepan over a medium heat. Fry the onion and carrot for 8 minutes, until soft but not browned.', uses: ['oil', 'onion', 'carrot'] },
+    { text: 'Add the garlic, ginger, lemongrass and ground coriander and fry for 1 minute, until fragrant.', uses: ['garlic', 'ginger', 'lemongrass', 'gcoriander'] },
+    { text: 'Add the sweet potato, potato and low-salt vegetable stock. Bring to the boil over a high heat, then simmer over a medium-low heat with the lid half on for 20 minutes, until the potato breaks up when you press it with a spoon.', uses: ['sweetpotato', 'potato', 'stock'] },
+    { text: 'Lift out the lemongrass. Stir in the coconut milk and blend the soup with a stick blender until smooth, adding a splash of water if it is too thick.', uses: ['coconut'] },
+    { text: 'Spoon Ted\'s portion into a small bowl and leave it to cool. Stir the lime, white pepper and salt into the rest of the soup.', uses: ['lime', 'pepper', 'salt'] },
+    { text: 'Heat the rapeseed oil in a small frying pan over a medium heat and fry the red chilli for 1 minute, until it sizzles. Stir it into the soup with the coriander.', uses: ['coil', 'chilli', 'coriander'] }
+  ],
+  notes: [
+    { title: 'Storing', text: 'Cool the soup within an hour and freeze it in single portions for up to 3 months. Defrost it in the fridge overnight and reheat it once, until piping hot.' },
+    { title: 'For Lunch', text: 'The soup has little protein, so have it with 2 boiled eggs or some leftover chicken to keep you full.' },
+    { title: 'Calories', text: 'About 210 calories a bowl of 300g.' },
+    { title: 'For Ted', text: 'Take Ted\'s portion out before the lime, salt and chilli go in, and cool it until warm. Freeze his portions in small tubs.' }
+  ]
+},
+{
   slug: 'chicken-sweetcorn-soup', title: 'Chicken and Sweetcorn Soup', short: 'Chicken and sweetcorn soup',
   description: 'Chicken from Wednesday\'s casserole and fresh corn in a light broth, thickened with cornflour and finished with ribbons of egg, made on Wednesday night for two packed lunches.',
   serves: 2, prep: 15, cook: 45, course: 'Lunches', cuisine: 'Chinese', main: 'Chicken', labels: ['Weeknight'],
