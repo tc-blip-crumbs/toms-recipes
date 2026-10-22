@@ -850,7 +850,7 @@ module.exports = [
 {
   slug: 'sweet-potato-coconut-chilli-soup', title: 'Sweet Potato, Coconut and Chilli Soup', short: 'Sweet potato soup',
   description: 'A smooth sweet potato soup with ginger, lemongrass, coconut milk and lime, finished with fried red chilli.',
-  serves: 4, prep: 15, cook: 35, course: 'Lunches', cuisine: 'Thai', main: 'Vegetables', labels: ['Batch cook', 'Freezes well', 'Ted can share', 'Vegan'],
+  serves: 4, prep: 15, cook: 35, course: 'Lunches', cuisine: 'Thai', main: 'Vegetables', labels: ['Batch cook', 'Freezes well', 'Vegan'],
   source: { name: 'Based on Sainsbury\'s Taste the Difference Sweet Potato, Coconut and Chilli Soup', url: 'https://www.sainsburys.co.uk/groceries/product/sainsburys-sweet-potato-coconut-chilli-soup-taste-the-difference-600g' },
   equipment: ['A stick blender'],
   groups: [
@@ -881,14 +881,13 @@ module.exports = [
     { text: 'Add the garlic, ginger, lemongrass and ground coriander and fry for 1 minute, until fragrant.', uses: ['garlic', 'ginger', 'lemongrass', 'gcoriander'] },
     { text: 'Add the sweet potato, potato and low-salt vegetable stock. Bring to the boil over a high heat, then simmer over a medium-low heat with the lid half on for 20 minutes, until the potato breaks up when you press it with a spoon.', uses: ['sweetpotato', 'potato', 'stock'] },
     { text: 'Lift out the lemongrass. Stir in the coconut milk and blend the soup with a stick blender until smooth, adding a splash of water if it is too thick.', uses: ['coconut'] },
-    { text: 'Spoon Ted\'s portion into a small bowl and leave it to cool. Stir the lime, white pepper and salt into the rest of the soup.', uses: ['lime', 'pepper', 'salt'] },
+    { text: 'Stir the lime, white pepper and salt into the soup.', uses: ['lime', 'pepper', 'salt'] },
     { text: 'Heat the rapeseed oil in a small frying pan over a medium heat and fry the red chilli for 1 minute, until it sizzles. Stir it into the soup with the coriander.', uses: ['coil', 'chilli', 'coriander'] }
   ],
   notes: [
     { title: 'Storing', text: 'Cool the soup within an hour and freeze it in single portions for up to 3 months. Defrost it in the fridge overnight and reheat it once, until piping hot.' },
     { title: 'For Lunch', text: 'The soup has little protein, so have it with 2 boiled eggs or some leftover chicken to keep you full.' },
-    { title: 'Calories', text: 'About 210 calories a bowl of 300g.' },
-    { title: 'For Ted', text: 'Take Ted\'s portion out before the lime, salt and chilli go in, and cool it until warm. Freeze his portions in small tubs.' }
+    { title: 'Calories', text: 'About 210 calories a bowl of 300g.' }
   ]
 },
 {
