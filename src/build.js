@@ -337,7 +337,7 @@ ${foot}</body>
 
 // ---- Sainsbury's shop button
 function cookbooksPage() {
-  return head({ title: `Cookbooks | ${NAME}`, description: 'Every recipe in Tom\'s cookbooks, with the book and page.', canonical: `${SITE}/cookbooks/`, nav: 'cookbooks' }) + `
+  return head({ title: `Cookbooks | ${NAME}`, description: 'Every recipe in Tom\'s cookbooks, with the book and page.', canonical: `${SITE}/cookbooks/`, nav: 'cookbooks', extra: '<link rel="preload" id="cb-data" href="/assets/cookbooks.json" as="fetch" crossorigin>\n' }) + `
 <main id="main" class="wrap cookbooks-page">
 <div class="intro">
   <h1>Cookbooks</h1>

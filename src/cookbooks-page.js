@@ -85,7 +85,7 @@
   clear.forEach(function (b) { b.addEventListener('click', function () { q.value = ''; bookSel.value = ''; shown = 40; apply(); q.focus(); }); });
   document.addEventListener('keydown', function (e) { if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); } });
 
-  fetch('/assets/cookbooks.json').then(function (r) { return r.json(); }).then(function (d) {
+  fetch(document.getElementById('cb-data').href).then(function (r) { return r.json(); }).then(function (d) {
     books = d.books;
     recipes = d.recipes.map(function (x) { return { t: x[0], p: x[1], b: x[2], c: x[3], i: x[4], tw: words(x[0]), iw: words(x[4]), cw: words(x[3]) }; });
     var opts = books.map(function (b, n) { return [b[0], n]; }).sort(function (a, b) { return a[0].localeCompare(b[0]); });
