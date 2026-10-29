@@ -932,5 +932,39 @@ module.exports = [
     { title: 'Calories', text: 'About 385 calories a serving.' },
     { title: 'For Ted', text: 'Leave this one out for Ted, because the soup has soy sauce in it.' }
   ]
+},
+{
+  slug: 'pesto-tagliatelle-lime-garlic-chicken', title: 'Pesto Tagliatelle with Lime and Garlic Chicken', short: 'Pesto tagliatelle',
+  description: 'Chicken marinated in lime, garlic and chilli, stir-fried and tossed with fresh tagliatelle in double cream and green pesto.',
+  serves: 4, prep: 35, cook: 10, course: 'Dinners', cuisine: 'Italian', main: 'Chicken', labels: ['Weeknight'],
+  source: { name: 'Meg Pickard, meish dot org', url: 'https://web.archive.org/web/20100625233449/http://meish.org/2003/02/06/pesto-tagliatelle-with-lime-and-garlic-chicken/' },
+  groups: [
+    { name: 'For the Chicken', items: [
+      { id: 'chicken', qty: 3, name: 'chicken breast', plural: 'chicken breasts', prep: 'cut into bite-sized pieces', scale: 'wholeUp', ref: 'chicken' },
+      { id: 'lime', qty: 1, name: 'lime', plural: 'limes', prep: 'zested and juiced', scale: 'halve', ref: 'lime' },
+      { id: 'garlic', qty: 4, unit: 'tsp', name: 'garlic paste', scale: 'spoon', ref: 'garlic paste' },
+      { id: 'flakes', qty: 0.5, unit: 'tsp', name: 'chilli flakes', scale: 'spoon', ref: 'chilli flakes' },
+      { id: 'parsley', qty: 1, unit: 'tsp', name: 'dried parsley', scale: 'spoon', ref: 'parsley' },
+      { id: 'oil', qty: 1, unit: 'tbsp', name: 'olive oil', scale: 'spoon', liquid: true, ref: 'olive oil' }
+    ]},
+    { name: 'For the Pasta', items: [
+      { id: 'salt', phrase: 'A pinch of salt', prep: 'for the pasta water', scale: 'fixed', ref: 'salt', chip: 'salt' },
+      { id: 'pasta', qty: 500, unit: 'g', name: 'fresh tagliatelle', scale: 'weight', ref: 'tagliatelle' },
+      { id: 'cream', qty: 300, unit: 'ml', name: 'double cream', scale: 'weight', ref: 'double cream' },
+      { id: 'pesto', qty: 2, unit: 'tsp', name: 'green pesto', scale: 'spoon', ref: 'pesto' }
+    ]}
+  ],
+  steps: [
+    { text: 'Mix the chicken with the lime zest and juice, garlic paste, chilli flakes, dried parsley and olive oil in a bowl. Cover with cling film and leave in the fridge for 20 to 30 minutes.', uses: ['chicken', 'lime', 'garlic', 'flakes', 'parsley', 'oil'] },
+    { text: 'Heat a large frying pan or wok over a high heat. Stir-fry the chicken with its marinade for 8 to 10 minutes, until golden and white all the way through.', uses: [] },
+    { text: 'For the last 3 minutes of frying, cook the tagliatelle in a large pan of boiling water with the salt, until tender.', uses: ['pasta', 'salt'] },
+    { text: 'Pour the double cream over the base of a large serving dish and stir in the pesto until it is evenly green.', uses: ['cream', 'pesto'] },
+    { text: 'Drain the tagliatelle into the dish and toss it through the cream. Stir in the chicken and serve straight away.', uses: [] }
+  ],
+  notes: [
+    { title: 'Parsley', text: 'Use 1 tbsp of chopped fresh parsley in place of the dried, or leave it out.' },
+    { title: 'Storing', text: 'Eat it fresh, because the cream sauce thickens as it cools. Keep leftovers in the fridge for up to 2 days and reheat them once in a pan with a splash of water, until piping hot.' },
+    { title: 'Calories', text: 'About 890 calories a serving.' }
+  ]
 }
 ];
