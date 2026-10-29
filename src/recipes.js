@@ -154,7 +154,7 @@ module.exports = [
 },
 {
   slug: 'batalis-bolognese',
-  title: "Batali's Bolognese",
+  title: 'Spaghetti Bolognese',
   short: 'Bolognese',
   description: 'A slow ragù of beef, pork and pancetta, cooked with milk and white wine for up to 3 hours.',
   serves: 6, batch: true, prep: 30, cook: 180, cookText: '2 to 3 hours',
@@ -179,7 +179,7 @@ module.exports = [
       { id: 'wine', qty: 250, unit: 'ml', name: 'dry white wine, such as Sauvignon Blanc or Pinot Grigio', scale: 'weight', ref: 'wine', chip: 'dry white wine' }
     ]},
     { name: 'To Serve', serve: true, serves: 6, items: [
-      { id: 'pasta', qty: 500, unit: 'g', name: 'dried pasta, such as tagliatelle or rigatoni', scale: 'weight', ref: 'pasta', chip: 'dried pasta' },
+      { id: 'pasta', qty: 500, unit: 'g', name: 'dried spaghetti', scale: 'weight', ref: 'pasta', chip: 'spaghetti' },
       { id: 'parmesan', qty: 40, unit: 'g', name: 'Parmesan', prep: 'finely grated', scale: 'weight', ref: 'Parmesan' },
       { id: 'parsley', phrase: 'A small handful of parsley', prep: 'finely chopped', scale: 'fixed', ref: 'parsley', chip: 'a handful of parsley' }
     ]}
