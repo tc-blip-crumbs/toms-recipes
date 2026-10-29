@@ -179,7 +179,7 @@ module.exports = [
       { id: 'wine', qty: 250, unit: 'ml', name: 'dry white wine, such as Sauvignon Blanc or Pinot Grigio', scale: 'weight', ref: 'wine', chip: 'dry white wine' }
     ]},
     { name: 'To Serve', serve: true, serves: 6, items: [
-      { id: 'pasta', qty: 500, unit: 'g', name: 'dried spaghetti', scale: 'weight', ref: 'pasta', chip: 'spaghetti' },
+      { id: 'pasta', qty: 500, unit: 'g', name: 'dried spaghetti', scale: 'weight', ref: 'spaghetti', chip: 'spaghetti' },
       { id: 'parmesan', qty: 40, unit: 'g', name: 'Parmesan', prep: 'finely grated', scale: 'weight', ref: 'Parmesan' },
       { id: 'parsley', phrase: 'A small handful of parsley', prep: 'finely chopped', scale: 'fixed', ref: 'parsley', chip: 'a handful of parsley' }
     ]}
@@ -192,8 +192,8 @@ module.exports = [
     { text: 'Pour in the milk and cook for 2 to 3 minutes, then add the wine and bring to the boil.', uses: ['milk', 'wine'] },
     { text: 'Turn the heat to low and simmer uncovered for 2 to 3 hours, stirring now and then. Add 60ml of water whenever the ragù looks dry.', uses: [] },
     { text: 'Season the ragù with salt to taste and take the pan off the heat.', uses: [] },
-    { text: 'Bring a large pan of salted water to the boil and cook the pasta for 3 minutes less than the packet says. Drain it, keeping a mugful of the cooking water.', uses: ['pasta'] },
-    { text: 'For each serving, heat about 175ml of the ragù in a frying pan over a medium-high heat. Add the pasta and a splash of the cooking water and toss for 2 to 3 minutes, until the pasta is just cooked, adding more water as needed.', uses: [] },
+    { text: 'Bring a large pan of salted water to the boil and cook the spaghetti for 3 minutes less than the packet says. Drain it, keeping a mugful of the cooking water.', uses: ['pasta'] },
+    { text: 'For each serving, heat about 175ml of the ragù in a frying pan over a medium-high heat. Add the spaghetti and a splash of the cooking water and toss for 2 to 3 minutes, until the spaghetti is just cooked, adding more water as needed.', uses: [] },
     { text: 'Serve topped with the parsley and plenty of Parmesan.', uses: ['parsley', 'parmesan'] }
   ],
   notes: [
