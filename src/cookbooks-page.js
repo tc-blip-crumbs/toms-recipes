@@ -11,25 +11,34 @@
   var clear = document.querySelectorAll('[data-clear]');
   var books = [], recipes = [], shown = 40;
 
-  // Words that mean the same thing in a recipe search.
+  // search:start
+  // Words that mean the same thing in a recipe search, including short names and American terms.
   var SAME = [
-    ['spaghetti', 'linguine', 'pasta', 'tagliatelle', 'pappardelle', 'fettuccine', 'bucatini'],
-    ['mince', 'minced', 'ground'],
-    ['courgette', 'zucchini'], ['aubergine', 'eggplant'], ['coriander', 'cilantro'],
-    ['prawn', 'shrimp'], ['chilli', 'chili'], ['spring onion', 'scallion']
+    ['spaghetti', 'spag', 'linguine', 'pasta', 'tagliatelle', 'pappardelle', 'fettuccine', 'bucatini'],
+    ['bolognese', 'bol', 'bolognaise', 'ragu'],
+    ['macaroni', 'mac'], ['lasagne', 'lasagna'], ['dal', 'dhal', 'daal', 'dahl'],
+    ['mince', 'minced', 'ground'], ['courgette', 'zucchini'], ['aubergine', 'eggplant'],
+    ['coriander', 'cilantro'], ['prawn', 'shrimp'], ['chilli', 'chili'], ['scallion', 'spring onion'],
+    ['grill', 'broil', 'broiled', 'grilled'], ['biscuit', 'cookie'], ['bbq', 'barbecue', 'barbecued']
   ];
-  function norm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim(); }
-  function stem(w) { if (w.length > 4 && /ies$/.test(w)) return w.slice(0, -3) + 'y'; if (w.length > 4 && /(ches|shes|oes)$/.test(w)) return w.slice(0, -2); if (w.length > 3 && /s$/.test(w) && !/ss$/.test(w)) return w.slice(0, -1); return w; }
-  function words(s) { return norm(s).split(' ').filter(Boolean).map(stem); }
-  function alts(w) { for (var i = 0; i < SAME.length; i++) { var g = SAME[i].map(stem); if (g.indexOf(w) !== -1) return g; } return [w]; }
-  function has(tokens, w) { for (var i = 0; i < tokens.length; i++) { if (tokens[i] === w || (w.length > 3 && tokens[i].indexOf(w) === 0)) return true; } return false; }
+  var SIDE = ['sauce', 'glaze', 'rub', 'marinade', 'dressing', 'stock', 'gravy', 'fat', 'butter', 'seasoning', 'salt', 'paste', 'jus', 'brine', 'spice', 'mayonnaise', 'relish', 'salsa', 'dip', 'accompaniment', 'powder', 'oil', 'vinegar'];
+  var STOP = { and: 1, with: 1, the: 1, of: 1, a: 1, an: 1, in: 1, on: 1, for: 1, or: 1, to: 1, my: 1, n: 1 };
+  function norm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, '').replace(/[^a-z0-9]+/g, ' ').trim(); }
+  function stem(w) { if (w.length > 4 && /ies$/.test(w)) return w.slice(0, -3) + 'y'; if (w.length > 4 && /ie$/.test(w)) return w.slice(0, -2) + 'y'; if (w.length > 4 && /(ches|shes|oes)$/.test(w)) return w.slice(0, -2); if (w.length > 3 && /s$/.test(w) && !/ss$/.test(w)) return w.slice(0, -1); return w; }
+  function words(s) { return norm(s).split(' ').filter(function (w) { return w && !STOP[w]; }).map(stem); }
+  var ALT = {};
+  SAME.forEach(function (g) { var st = []; g.forEach(function (w) { words(w).forEach(function (x) { st.push(x); }); }); st.forEach(function (w) { ALT[w] = st; }); });
+  // The first word of each group is the usual name, so "spag" counts spaghetti as a full match and linguine as a near one.
+  function alts(w) { return ALT[w] || [w]; }
+  // A token matches the same word, or a longer form of it such as stew and stewed. Short words must match exactly.
+  function has(tokens, w) { for (var i = 0; i < tokens.length; i++) { var t = tokens[i]; if (t === w || (w.length >= 5 && t.length - w.length <= 3 && t.indexOf(w) === 0)) return true; } return false; }
 
   function score(r, qw) {
     var all = 0, total = 0;
     for (var i = 0; i < qw.length; i++) {
       var a = alts(qw[i]), best = 0;
       for (var j = 0; j < a.length; j++) {
-        var exact = a[j] === qw[i] ? 1 : 0.6;
+        var exact = a[j] === qw[i] || (j === 0 && a.length > 1) ? 1 : 0.8;
         if (has(r.tw, a[j])) best = Math.max(best, 3 * exact);
         else if (has(r.iw, a[j])) best = Math.max(best, 1.5 * exact);
         else if (has(r.cw, a[j])) best = Math.max(best, 1 * exact);
@@ -37,13 +46,22 @@
       if (best > 0) all++;
       total += best;
     }
+    // The whole search inside the title, such as "roast potatoes", ranks above the same words scattered.
+    var phrase = qw.join(' ');
+    if (qw.length > 1 && (' ' + r.tw.join(' ') + ' ').indexOf(' ' + phrase) !== -1) total += 2;
+    if (r.tw.join(' ') === phrase) total += 1;
+    // Sauces, rubs and stocks sink below whole dishes unless the search asks for them.
+    for (var k = 0; k < SIDE.length; k++) { if (r.tw.indexOf(SIDE[k]) !== -1 && qw.indexOf(SIDE[k]) === -1) { total -= 1.5; break; } }
+    if (r.p) total += 0.1;
     return { all: all === qw.length, matched: all, total: total };
   }
+  function rank(a, b) { return b[0] - a[0] || a[1].t.length - b[1].t.length || a[1].t.localeCompare(b[1].t); }
+  // search:end
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function item(r) {
     var b = books[r.b];
-    return '<li class="cb-item"><div class="cb-top"><h3>' + esc(r.t) + '</h3>' + (r.p ? '<span class="cb-page">p. ' + esc(r.p) + '</span>' : '') + '</div>' +
+    return '<li class="cb-item"><div class="cb-top"><h3>' + esc(r.t) + '</h3>' + (r.p ? '<span class="cb-page">p. ' + esc(r.p) + '</span>' : '<span class="cb-page cb-nopage">Not paged</span>') + '</div>' +
       '<p class="cb-book"><b>' + esc(b[0]) + '</b>' + (b[1] ? ' · ' + esc(b[1]) : '') + '</p>' +
       (r.i ? '<p class="cb-ing">' + esc(r.i.split('; ').join(', ')) + '</p>' : '') +
       (r.c ? '<p class="cb-cat">' + esc(r.c.split('; ').slice(0, 4).join(' · ')) + '</p>' : '') + '</li>';
@@ -61,9 +79,8 @@
     var hits = [], near = [];
     if (qw.length) {
       pool.forEach(function (r) { var s = score(r, qw); if (s.all) hits.push([s.total, r]); else if (qw.length > 1 && s.matched >= qw.length - 1 && s.total >= 3) near.push([s.total, r]); });
-      var by = function (a, b) { return b[0] - a[0] || a[1].t.localeCompare(b[1].t); };
-      hits.sort(by); near.sort(by);
-      hits = hits.map(function (x) { return x[1]; }); near = near.slice(0, 30).map(function (x) { return x[1]; });
+      hits.sort(rank); near.sort(rank);
+      hits = hits.map(function (x) { return x[1]; }); near = hits.length >= 10 ? [] : near.slice(0, 20).map(function (x) { return x[1]; });
     } else {
       hits = bk < 0 ? [] : pool.slice().sort(function (a, b) { return (parseInt(a.p, 10) || 0) - (parseInt(b.p, 10) || 0); });
     }

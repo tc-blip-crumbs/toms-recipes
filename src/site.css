@@ -493,3 +493,4 @@ body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 
 .cb-more { margin-top: 22px; font: 600 .95rem var(--body); padding: 10px 20px; border: 1px solid var(--line); border-radius: 999px; background: none; color: var(--ink); cursor: pointer; }
 .cb-close { margin-top: 40px; }
 .cb-close h2 { margin: 0; font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.cb-nopage { color: var(--muted); font-weight: 500; font-size: .85rem; }

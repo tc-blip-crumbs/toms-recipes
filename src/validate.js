@@ -112,3 +112,4 @@ plansList.forEach(p => p.people.forEach(pp => pp.rows.forEach(row => {
 })));
 if (errors.length) { console.error(errors.join('\n')); console.error(`\n${errors.length} rule(s) broken.`); process.exit(1); }
 console.log(`All ${recipes.length} recipes pass the house rules.`);
+require('./cookbooks-test.js');
