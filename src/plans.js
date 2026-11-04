@@ -148,13 +148,12 @@ const TED_NOV = {
       ['Tuesday', r('potato-cakes', { note: 'At nursery, with carrots.' }), r('egg-fried-rice', { note: 'With carrots.' }), t('Mango and pear')],
       ['Wednesday', t('Pasta with tomato sauce', { note: 'At nursery, with carrots.' }), t('Chicken nuggets, sweet potato mash and carrots', { note: 'Air fry the nuggets from frozen.' }), t('Strawberries and banana')],
       ['Thursday', r('potato-cakes', { note: 'With Granny, with carrots.' }), t('Pasta with tomato sauce', { note: 'With Granny.' }), t('Raspberries and pear')],
-      ['Friday', r('banana-oat-pancakes'), t('Jacket potato with cheddar and carrots'), t('Mango and blueberries')],
+      ['Friday', r('banana-oat-pancakes'), t('Mash with cheddar and carrots', { note: 'Shop-bought frozen mash, heated on the day.' }), t('Mango and blueberries')],
       ['Saturday', t('Pasta with tomato sauce and carrots'), r('egg-fried-rice', { note: 'With carrots.' }), t('Banana and strawberries')],
       ['Sunday', t('Scrambled eggs on toast and carrots', { note: 'Fresh.' }), t('Your roast potatoes or mash, carrots and a little chicken', { note: 'Fresh.' }), t('Raspberries and pear')]
     ],
     boxes: [
       { title: 'Friday 6 November Batch Cook', list: [
-        'Jacket potato for 1 tub, with butter and cheddar and no beans.',
         '6 potato cakes, frozen in 3 bags of 2.',
         'Sweet potato mash for 1 tub.',
         '4 tubs of fusilli, 40g dry each. 1 with cream and cheddar for Monday, 3 with tomato sauce.',
@@ -167,7 +166,7 @@ const TED_NOV = {
         'Monday. 2 potato cakes and 1 tub of rice.',
         'Tuesday. 1 tub of pasta and the mash.',
         'Wednesday. 2 potato cakes and 1 tub of pasta.',
-        'Thursday. The pancakes and the jacket potato.',
+        'Thursday. The pancakes.',
         'Friday. 1 tub of pasta and 1 tub of rice.'
       ] },
       { title: 'New Food', list: [
