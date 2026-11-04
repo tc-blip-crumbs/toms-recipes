@@ -318,8 +318,8 @@ ${foot}<script src="/assets/plan-page.js"></script>
 </html>
 `;
 }
-const SAFETY = ['Cook eggs until the white and yolk are set.', 'Check fish carefully for bones before serving.', 'Cool cooked rice within an hour, keep it in the fridge and reheat it only once, until piping hot.', 'Reheat leftovers only once, until piping hot, then let them cool.', 'Cut round fruit such as blueberries so it is flat or halved.', 'Let hot food cool and test the temperature before serving.'];
-const FRUIT = [['Banana', 'Cut into strips or thick rounds.'], ['Pear', 'Peel and cut ripe pear into wedges. Steam a firm pear for 3 to 4 minutes to soften it.'], ['Blueberries', 'Squash each one flat or cut it in half.'], ['Strawberries', 'Hull them and cut them into quarters lengthways.']];
+const SAFETY = ['Cook eggs until the white and yolk are set.', 'Check fish carefully for bones before serving.', 'Cool cooked rice within an hour. Keep it in the fridge for no more than 24 hours, or freeze it. Reheat it only once, until steaming hot.', 'Reheat leftovers only once, until piping hot, then let them cool.', 'Cut round fruit such as blueberries so it is flat or halved.', 'Let hot food cool and test the temperature before serving.'];
+const FRUIT = [['Banana', 'Cut into strips or thick rounds.'], ['Pear', 'Peel and cut ripe pear into wedges. Steam a firm pear for 3 to 4 minutes to soften it.'], ['Blueberries', 'Squash each one flat or cut it in half.'], ['Strawberries', 'Hull them and cut them into quarters lengthways.'], ['Mango', 'Peel ripe mango and cut it into strips.'], ['Raspberries', 'Squash each one lightly or cut it in half.']];
 function guidePage() {
   return head({ title: `Ted's Food Guide | ${NAME}`, description: 'Yoghurt, fruit and food safety for Ted.', canonical: `${SITE}/plans/teds-food-guide/`, nav: 'plans', bar: `<div class="appbar"><div class="wrap"><a class="back" href="/plans/" data-back aria-label="Back to Meal Plans">${ICON.back}<span>Meal Plans</span></a></div></div>` }) + `
 <main id="main" class="wrap">

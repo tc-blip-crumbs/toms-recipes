@@ -136,6 +136,56 @@ function week(w) {
   };
 }
 
+// Ted's plan built around the foods he eats, mostly from a Friday batch cook. Tom and Sophie's plan is not included this week.
+const TED_NOV = {
+  id: '2026-11-09', start: '2026-11-09', title: 'Week of 9 November',
+  people: [{
+    name: 'Ted', serves: 1,
+    columns: ['Lunch', 'Dinner or Supper', 'Fruit'],
+    intro: 'From the freezer unless the note says fresh. One soft broccoli floret beside supper every day. Carrots are cooked from frozen.',
+    rows: [
+      ['Monday', r('tomato-fusilli', { note: 'At nursery, with carrots.' }), t('Scrambled eggs, potato cakes and carrots', { note: 'Eggs fresh.' }), t('Banana and blueberries')],
+      ['Tuesday', r('potato-cakes', { note: 'At nursery, with carrots.' }), r('egg-fried-rice', { note: 'With carrots.' }), t('Mango and pear')],
+      ['Wednesday', t('Pasta with tomato sauce', { note: 'At nursery, with carrots.' }), t('Chicken nuggets, sweet potato mash and carrots', { note: 'Air fry the nuggets from frozen.' }), t('Strawberries and banana')],
+      ['Thursday', r('potato-cakes', { note: 'With Granny, with carrots.' }), t('Pasta with tomato sauce', { note: 'With Granny.' }), t('Raspberries and pear')],
+      ['Friday', r('banana-oat-pancakes'), t('Jacket potato with cheddar and carrots'), t('Mango and blueberries')],
+      ['Saturday', t('Pasta with tomato sauce and carrots'), r('egg-fried-rice', { note: 'With carrots.' }), t('Banana and strawberries')],
+      ['Sunday', t('Scrambled eggs on toast and carrots', { note: 'Fresh.' }), t('Your roast potatoes or mash, carrots and a little chicken', { note: 'Fresh.' }), t('Raspberries and pear')]
+    ],
+    boxes: [
+      { title: 'Friday 6 November Batch Cook', list: [
+        'Jacket potato for 1 tub, with butter and cheddar and no beans.',
+        '6 potato cakes, frozen in 3 bags of 2.',
+        'Sweet potato mash for 1 tub.',
+        '4 tubs of fusilli, 40g dry each. 1 with cream and cheddar for Monday, 3 with tomato sauce.',
+        '2 tubs of egg fried rice. Cook the rice from dry and fry it straight away, so that defrosting and reheating it next week is its only reheat.',
+        '1 tub of banana and oat pancakes.',
+        'Cool everything within an hour, then freeze it.'
+      ] },
+      { title: 'Move to the Fridge the Night Before', list: [
+        'Sunday. Monday\'s fusilli and 2 potato cakes.',
+        'Monday. 2 potato cakes and 1 tub of rice.',
+        'Tuesday. 1 tub of pasta and the mash.',
+        'Wednesday. 2 potato cakes and 1 tub of pasta.',
+        'Thursday. The pancakes and the jacket potato.',
+        'Friday. 1 tub of pasta and 1 tub of rice.'
+      ] },
+      { title: 'New Food', list: [
+        'Weeks 1 and 2. Soft broccoli beside his carrots.',
+        'Weeks 3 and 4. Red lentils mixed into a little tomato sauce, with pasta.',
+        'Weeks 5 and 6. A very small, soft turkey meatball in tomato sauce, with pasta.',
+        'Weeks 7 and 8. A small piece of fish finger beside his nuggets.'
+      ] },
+      { title: 'Offering It', list: [
+        'Put a teaspoon of the new food on his plate at the start of the meal, beside a normal portion of food he likes.',
+        'Say nothing about it, and eat some yourself.',
+        'If he refuses it, leave it on the edge of the plate. Keep his liked food on the plate and fetch nothing else.',
+        'Clear the plate when he stops, and give him his yoghurt and fruit as usual.'
+      ] }
+    ]
+  }]
+};
+
 module.exports = [
   week({
     n: 0, id: '2026-10-05', title: 'Week of 5 October',
@@ -188,5 +238,6 @@ module.exports = [
     n: 1, id: '2026-10-26', title: 'Week of 26 October',
     pork: true,
     saturday: r('sausage-mash-gravy-cabbage'), saturdayMeat: 'sausages'
-  })
+  }),
+  TED_NOV
 ];
