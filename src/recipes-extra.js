@@ -897,5 +897,43 @@ module.exports = [
     { title: 'Storing', text: 'Eat it fresh, because the cream sauce thickens as it cools. Keep leftovers in the fridge for up to 2 days and reheat them once in a pan with a splash of water, until piping hot.' },
     { title: 'Calories', text: 'About 890 calories a serving.' }
   ]
+},
+{
+  slug: 'crispy-chicken-thighs-butter-beans', title: 'Crispy Chicken Thighs with Butter Beans and Spinach', short: 'Chicken thighs and butter beans',
+  description: 'Bone-in chicken thighs seared until crisp, then baked on a bed of butter beans, spinach, garlic and tarragon in white wine.',
+  serves: 4, prep: 5, cook: 25, ovenC: 170, course: 'Dinners', cuisine: 'American', main: 'Chicken', labels: ['Weeknight', 'Quick'],
+  source: { name: 'Adapted from Well Seasoned Studio, by Ari Laing', url: 'https://www.wellseasonedstudio.com/crispy-chicken-thighs-with-butter-beans/' },
+  equipment: ['A large, deep ovenproof frying pan'],
+  groups: [
+    { name: 'For the Chicken', items: [
+      { id: 'chicken', qty: 4, name: 'bone-in, skin-on chicken thigh', plural: 'bone-in, skin-on chicken thighs', scale: 'wholeUp', ref: 'chicken' },
+      { id: 'salt', qty: 0.5, unit: 'tsp', name: 'fine salt', scale: 'spoon', ref: 'salt' },
+      { id: 'pepper', phrase: 'Black pepper', prep: 'to taste', scale: 'fixed', ref: 'pepper', chip: 'black pepper' },
+      { id: 'oil', qty: 2, unit: 'tbsp', name: 'olive oil', scale: 'spoon', liquid: true, ref: 'olive oil' }
+    ]},
+    { name: 'For the Butter Beans', items: [
+      { id: 'beans', qty: 2, unit: 'tin', tinSize: 400, name: 'butter beans', prep: 'drained and rinsed', scale: 'tin', ref: 'butter beans' },
+      { id: 'garlic', qty: 4, name: 'garlic clove', plural: 'garlic cloves', prep: 'crushed', scale: 'whole', ref: 'garlic' },
+      { id: 'tarragon', qty: 4, name: 'sprig of fresh tarragon', plural: 'sprigs of fresh tarragon', scale: 'whole', ref: 'tarragon' },
+      { id: 'wine', qty: 100, unit: 'ml', name: 'dry white wine', scale: 'weight', ref: 'white wine' },
+      { id: 'spinach', qty: 250, unit: 'g', name: 'baby spinach', scale: 'weight', ref: 'spinach' }
+    ]}
+  ],
+  steps: [
+    { text: 'Heat the oven to 170°C. Pat the chicken thighs dry, then season both sides with the salt and black pepper.', uses: ['chicken', 'salt', 'pepper'] },
+    { text: 'Heat the olive oil in the frying pan over a medium-high heat. Fry the chicken skin side down for 4 to 6 minutes, until the skin is golden and lifts easily from the pan.', uses: ['oil'] },
+    { text: 'Turn the chicken and fry for 2 to 3 minutes more, until browned, then lift it onto a plate.', uses: [] },
+    { text: 'Add the butter beans, garlic and tarragon to the pan and stir for 1 minute, until the garlic smells fragrant.', uses: ['beans', 'garlic', 'tarragon'] },
+    { text: 'Pour in the white wine and scrape up the browned bits from the bottom of the pan. Stir in the spinach and cook for 1 to 2 minutes, until it starts to wilt.', uses: ['wine', 'spinach'] },
+    { text: 'Set the chicken on top of the beans and spinach, skin side up, with any juices from the plate.', uses: [] },
+    { text: 'Bake for 10 to 15 minutes, until the thickest part of each thigh reaches 75°C and the juices run clear. Remove the tarragon sprigs and serve straight away.', uses: [] }
+  ],
+  notes: [
+    { title: 'Lighter Version', text: 'Use skinless thighs, or lift the skin off before eating, to cut most of the saturated fat. The beans and spinach taste as good without the crisp skin.' },
+    { title: 'Without Wine', text: 'Use 100ml of low-salt chicken stock in place of the white wine.' },
+    { title: 'Other Beans', text: 'Cannellini beans work in place of butter beans.' },
+    { title: 'Storing', text: 'Keep leftovers in the fridge for up to 2 days and reheat them once, until piping hot. Warm the chicken gently in a frying pan and the beans and spinach separately.' },
+    { title: 'Calories', text: 'About 720 calories a serving with the skin on.' }
+  ]
 }
 ];
