@@ -250,9 +250,9 @@ ${foot}<script type="application/json" id="index-data">${JSON.stringify(idx).rep
 // ---- Meal plans
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 function range(p) {
-  const s = new Date(p.start + 'T12:00:00Z'), e = new Date(s.getTime() + 6 * 86400000);
+  const s = new Date(p.start + 'T12:00:00Z'), e = new Date(s.getTime() + (p.weekdays ? 4 : 6) * 86400000);
   const sm = MONTHS[s.getUTCMonth()], em = MONTHS[e.getUTCMonth()];
-  return `Monday ${s.getUTCDate()}${sm === em ? '' : ' ' + sm} to Sunday ${e.getUTCDate()} ${em}`;
+  return `Monday ${s.getUTCDate()}${sm === em ? '' : ' ' + sm} to ${p.weekdays ? 'Friday' : 'Sunday'} ${e.getUTCDate()} ${em}`;
 }
 function kcalHTML(c) {
   if (c.kcal === undefined) return '';

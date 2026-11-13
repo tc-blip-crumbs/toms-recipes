@@ -15,7 +15,10 @@ const KCAL = {
   'sausage-mash-gravy-cabbage': k(950, 790, '3 Cumberland sausages weighing 145g cooked, 430g mash, 150g cabbage, 70ml gravy'),
   'chicken-mushroom-butter-bean-casserole': k(680, 520, '1 chicken breast weighing about 130g cooked, 120g butter beans, 270g mushrooms, spinach and sauce'),
   'hainanish-soy-poached-chicken': k(650, 440, '150g chicken, 200g cooked rice from 65g dry, 60g cucumber and spring onion, 30g sauce'),
-  'roast-chicken-caesar-sandwich': k(390, 245, '2 slices of bread weighing 80g, 70g chicken, 95g filling')
+  'roast-chicken-caesar-sandwich': k(390, 245, '2 slices of bread weighing 80g, 70g chicken, 95g filling'),
+  'crispy-chicken-thighs-butter-beans': k(720, 420, '1 bone-in thigh weighing about 150g, 120g butter beans, 60g spinach, 90g sauce'),
+  'chicken-vegetable-egg-fried-rice': k(710, 560, '230g cooked rice from 75g dry, 125g chicken, 150g carrot, courgette and green beans, 55g egg'),
+  'curried-coconut-chicken-rice': k(850, 650, '230g cooked rice from 75g dry, 2 thighs weighing about 170g cooked, 250g broth and onions')
 };
 // Adds the calorie figures to a recipe meal unless the meal sets its own.
 const withK = c => (c.r && KCAL[c.r] && c.kcal === undefined ? Object.assign({}, KCAL[c.r], c) : c);
@@ -185,6 +188,42 @@ const TED_NOV = {
   }]
 };
 
+// Weekdays only. Tom and Sophie and Ted for Monday to Friday.
+const NOV16 = {
+  id: '2026-11-16', start: '2026-11-16', weekdays: true, title: 'Week of 16 November',
+  people: [
+    {
+      name: 'Ted', serves: 1,
+      columns: ['Lunch', 'Dinner or Supper', 'Fruit'],
+      intro: 'Nursery on Monday to Wednesday, so a small supper at home. Granny on Thursday.',
+      rows: [
+        ['Monday', t('At nursery'), t('A little chilli con carne with rice', { note: 'From your tub. Stir in plain yoghurt to cool it.' }), t(FRUIT[0][0])],
+        ['Tuesday', t('At nursery'), t('A little carnitas pork with a soft tortilla, avocado and cucumber', { note: 'From your tub.' }), t(FRUIT[0][1])],
+        ['Wednesday', t('At nursery'), r('egg-fried-rice', { note: 'Cook 40g of dry rice with your rice. Leave out the soy sauce.' }), t(FRUIT[0][2])],
+        ['Thursday', r('chicken-sweet-potato-mash', { note: 'With Granny. Made on Wednesday evening.' }), r('tomato-fusilli', { note: 'With Granny. Made on Wednesday evening.' }), t(FRUIT[0][3])],
+        ['Friday', r('eggy-crumpet'), t('A little curried coconut chicken and rice', { note: 'Take his portion before the chilli oil goes on.' }), t(FRUIT[0][4])]
+      ],
+      boxes: [
+        { title: 'Thursday with Granny', text: 'Reheat the chicken mash and the fusilli until piping hot, then let them cool. Pack a yoghurt and the fruit.' }
+      ]
+    },
+    {
+      name: 'Tom & Sophie', serves: 2,
+      columns: ['Breakfast', 'Lunch', 'Dinner', 'Fruit and Nuts', 'Jobs'],
+      intro: 'Monday to Friday. On Sunday, move a tub of chilli to the fridge and keep 250g of the roast chicken for Monday and Tuesday\'s sandwiches.',
+      rows: [
+        ['Monday', YOG, withK(tomLunch({})[0]), t('Chilli con carne', Object.assign({ note: 'From the freezer, reheated in the oven.' }, k(720, 580, '350g chilli, 230g cooked rice from 75g dry'))), TOM_FRUIT[0], { jobs: ['Move a tub of carnitas to the fridge.'] }],
+        ['Tuesday', PORRIDGE, withK(tomLunch({})[1]), withK(r('carnitas-tacos', { note: 'From the freezer.' })), TOM_FRUIT[1], { jobs: [] }],
+        ['Wednesday', YOG, withK(tomLunch({})[2]), withK(r('chicken-vegetable-egg-fried-rice', { note: 'Cook and cool the rice in the morning, with 40g extra for Ted.' })), TOM_FRUIT[2], { jobs: ['Cook the rice and cool it.', 'Make Ted\'s chicken sweet potato mash and tomato fusilli for Granny.'] }],
+        ['Thursday', PORRIDGE, t('Beans on toast with a poached egg', k(425, 330, '200g reduced-salt beans, 2 slices of seeded toast weighing 80g, 1 egg')), withK(r('crispy-chicken-thighs-butter-beans', { note: 'Straight into the oven.' })), TOM_FRUIT[3], { jobs: [] }],
+        ['Friday', YOG, t('Pea and crème fraîche soup', Object.assign({ note: 'Sainsbury\'s, one pot each.' }, k(260, 400, ''))), withK(r('curried-coconut-chicken-rice', { note: 'Set aside Ted\'s portion before the chilli oil goes on.', serves: 2 })), TOM_FRUIT[4], { jobs: [] }]
+      ],
+      dayTotal: true,
+      boxes: [Object.assign({}, TOM_BOXES[0], { list: TOM_BOXES[0].list.slice(0, 2) }), TOM_BOXES[1], TOM_BOXES[3]]
+    }
+  ]
+};
+
 module.exports = [
   week({
     n: 0, id: '2026-10-05', title: 'Week of 5 October',
@@ -238,5 +277,6 @@ module.exports = [
     pork: true,
     saturday: r('sausage-mash-gravy-cabbage'), saturdayMeat: 'sausages'
   }),
-  TED_NOV
+  TED_NOV,
+  NOV16
 ];
