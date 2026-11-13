@@ -209,16 +209,15 @@ const NOV16 = {
     },
     {
       name: 'Tom & Sophie', serves: 2,
-      columns: ['Breakfast', 'Lunch', 'Dinner', 'Fruit and Nuts', 'Jobs'],
-      intro: 'Monday to Friday. On Sunday, move a tub of chilli to the fridge and keep 250g of the roast chicken for Monday and Tuesday\'s sandwiches.',
+      columns: ['Breakfast', 'Dinner', 'Fruit and Nuts', 'Jobs'],
+      intro: 'Dinners for Monday to Friday. Buy 2 whole chickens. On Sunday, joint chicken 1 into 2 breasts and 2 legs and freeze them. Joint chicken 2 into a crown and 2 legs, roast the crown with Sunday\'s dinner and freeze the legs. Also move a tub of chilli to the fridge.',
       rows: [
-        ['Monday', YOG, withK(tomLunch({})[0]), t('Chilli con carne', Object.assign({ note: 'From the freezer, reheated in the oven.' }, k(720, 580, '350g chilli, 230g cooked rice from 75g dry'))), TOM_FRUIT[0], { jobs: ['Move a tub of carnitas to the fridge.'] }],
-        ['Tuesday', PORRIDGE, withK(tomLunch({})[1]), withK(r('carnitas-tacos', { note: 'From the freezer.' })), TOM_FRUIT[1], { jobs: [] }],
-        ['Wednesday', YOG, withK(tomLunch({})[2]), withK(r('chicken-vegetable-egg-fried-rice', { note: 'Cook and cool the rice in the morning, with 40g extra for Ted.' })), TOM_FRUIT[2], { jobs: ['Cook the rice and cool it.', 'Make Ted\'s chicken sweet potato mash and tomato fusilli for Granny.'] }],
-        ['Thursday', PORRIDGE, t('Beans on toast with a poached egg', k(425, 330, '200g reduced-salt beans, 2 slices of seeded toast weighing 80g, 1 egg')), withK(r('crispy-chicken-thighs-butter-beans', { note: 'Straight into the oven.' })), TOM_FRUIT[3], { jobs: [] }],
-        ['Friday', YOG, t('Pea and crème fraîche soup', Object.assign({ note: 'Sainsbury\'s, one pot each.' }, k(260, 400, ''))), withK(r('curried-coconut-chicken-rice', { note: 'Set aside Ted\'s portion before the chilli oil goes on.', serves: 2 })), TOM_FRUIT[4], { jobs: [] }]
+        ['Monday', YOG, t('Chilli con carne', Object.assign({ note: 'From the freezer, reheated in the oven.' }, k(720, 580, '350g chilli, 230g cooked rice from 75g dry'))), TOM_FRUIT[0], { jobs: ['Move a tub of carnitas to the fridge.'] }],
+        ['Tuesday', PORRIDGE, withK(r('carnitas-tacos', { note: 'From the freezer.' })), TOM_FRUIT[1], { jobs: ['Move chicken 1\'s breasts to the fridge.'] }],
+        ['Wednesday', YOG, withK(r('chicken-vegetable-egg-fried-rice', { note: 'Use the 2 breasts from chicken 1. Cook and cool the rice in the morning, with 40g extra for Ted.' })), TOM_FRUIT[2], { jobs: ['Cook the rice and cool it.', 'Make Ted\'s chicken sweet potato mash and tomato fusilli for Granny.', 'Move chicken 1\'s legs to the fridge.'] }],
+        ['Thursday', PORRIDGE, withK(r('crispy-chicken-thighs-butter-beans', { note: 'Use the 2 thighs from chicken 1, straight into the oven. Keep the drumsticks for Ted.' })), TOM_FRUIT[3], { jobs: ['Move chicken 2\'s legs to the fridge.'] }],
+        ['Friday', YOG, withK(r('curried-coconut-chicken-rice', { note: 'Use the legs from chicken 2, boned. Set aside Ted\'s portion before the chilli oil goes on.', serves: 2 })), TOM_FRUIT[4], { jobs: [] }]
       ],
-      dayTotal: true,
       boxes: [Object.assign({}, TOM_BOXES[0], { list: TOM_BOXES[0].list.slice(0, 2) }), TOM_BOXES[1], TOM_BOXES[3]]
     }
   ]
