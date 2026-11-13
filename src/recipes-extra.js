@@ -938,7 +938,7 @@ module.exports = [
 },
 {
   slug: 'chicken-vegetable-egg-fried-rice', title: 'Chicken and Vegetable Egg Fried Rice', short: 'Chicken fried rice',
-  description: 'Chicken, carrot, red pepper and green beans stir-fried over a very high heat with egg and rice, finished with a soy and sesame sauce.',
+  description: 'Chicken, carrot, courgette and green beans stir-fried over a very high heat with egg and rice, finished with a soy and sesame sauce.',
   serves: 2, prep: 15, cook: 15, course: 'Dinners', cuisine: 'Chinese', main: 'Chicken', labels: ['Weeknight', 'Quick'],
   source: { name: 'Method from Sam' },
   equipment: ['A Sistema microwave rice cooker, 2.6 litres', 'A wok or a large frying pan'],
@@ -959,7 +959,7 @@ module.exports = [
     { name: 'For the Wok', items: [
       { id: 'chicken', qty: 250, unit: 'g', name: 'chicken breast', prep: 'cut into 1cm pieces', scale: 'weight', ref: 'chicken' },
       { id: 'carrot', qty: 1, name: 'carrot', plural: 'carrots', prep: 'cut into 1cm pieces', scale: 'halve', ref: 'carrot' },
-      { id: 'pepper', qty: 1, name: 'red pepper', plural: 'red peppers', prep: 'cut into 1cm pieces', scale: 'halve', ref: 'red pepper' },
+      { id: 'courgette', qty: 1, name: 'courgette', plural: 'courgettes', prep: 'cut into 1cm pieces', scale: 'halve', ref: 'courgette' },
       { id: 'beans', qty: 100, unit: 'g', name: 'green beans', prep: 'cut into 1cm pieces', scale: 'weight', ref: 'green beans' },
       { id: 'garlic', qty: 3, name: 'garlic clove', plural: 'garlic cloves', prep: 'crushed', scale: 'whole', ref: 'garlic' },
       { id: 'oil', qty: 2, unit: 'tbsp', name: 'vegetable oil', scale: 'spoon', liquid: true, ref: 'oil' }
@@ -968,13 +968,14 @@ module.exports = [
   steps: [
     { text: 'Put the rice and cold water in the rice cooker, fit both lids and microwave on full power for 10 minutes. Fluff the rice with a fork, spread it on a tray and leave it to cool while you prepare everything else.', uses: ['rice', 'water'] },
     { text: 'Whisk the soy sauce, rice vinegar and sesame oil together in a small bowl.', uses: ['soy', 'vinegar', 'sesame'] },
-    { text: 'Cut the chicken, carrot, red pepper and green beans into pieces of the same size, about 1cm, so they cook at the same speed. Crush the garlic.', uses: ['chicken', 'carrot', 'pepper', 'beans'] },
+    { text: 'Cut the chicken, carrot, courgette and green beans into pieces of the same size, about 1cm, so they cook at the same speed. Crush the garlic.', uses: ['chicken', 'carrot', 'courgette', 'beans'] },
     { text: 'Beat the eggs in a bowl. Heat the oil in a wok or large frying pan over a medium-high heat, scramble the eggs for 1 to 2 minutes, until just set, then tip them onto a plate.', uses: ['egg', 'eggoil'] },
-    { text: 'Heat the oil in the wok over the highest heat you can get. Stir-fry the chicken, carrot, red pepper and green beans for 5 to 6 minutes, until the chicken is white all the way through and the vegetables are tender with a little bite.', uses: ['oil'] },
+    { text: 'Heat the oil in the wok over the highest heat you can get. Stir-fry the chicken, carrot, courgette and green beans for 5 to 6 minutes, until the chicken is white all the way through and the vegetables are tender with a little bite.', uses: ['oil'] },
     { text: 'Add the garlic and stir for 30 seconds, until fragrant.', uses: ['garlic'] },
     { text: 'Add the rice and the eggs, then pour the sauce down the curved side of the wok so it sizzles and cooks quickly. Toss everything together for 2 minutes, until the rice is piping hot, then serve straight away.', uses: [] }
   ],
   notes: [
+    { title: 'Other Vegetables', text: 'Swap the courgette for any vegetable you like, cut to about 1cm. Add 100g of frozen peas or sweetcorn with the rice in step 7. Add 150g of broccoli florets, mushrooms or a red or yellow pepper in step 5 with the carrot.' },
     { title: 'Preparing First', text: 'The frying takes under 10 minutes, so have the rice, eggs, sauce, chicken and vegetables ready before you light the heat.' },
     { title: 'Cold Rice', text: 'Rice cooked the day before and chilled fries into drier grains. Cool it within an hour, keep it in the fridge and reheat it only once, until piping hot.' },
     { title: 'Leftover Chicken', text: 'Cooked chicken works in place of the raw chicken. Cut it into 1cm pieces and add it with the rice in step 7, instead of frying it in step 5.' },
