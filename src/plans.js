@@ -199,9 +199,9 @@ const NOV16 = {
       rows: [
         ['Monday', YOG, t('Chilli con carne', Object.assign({ note: 'From the freezer, reheated in the oven.' }, k(720, 580, '350g chilli, 230g cooked rice from 75g dry'))), TOM_FRUIT[0], { jobs: ['Move a tub of carnitas to the fridge.'] }],
         ['Tuesday', PORRIDGE, withK(r('carnitas-tacos', { note: 'From the freezer.' })), TOM_FRUIT[1], { jobs: ['Move chicken 1\'s breasts to the fridge.'] }],
-        ['Wednesday', YOG, withK(r('chicken-vegetable-egg-fried-rice', { note: 'Use the 2 breasts from chicken 1. Cook and cool the rice in the morning, with 40g extra for Ted.' })), TOM_FRUIT[2], { jobs: ['Cook the rice and cool it.', 'Make Ted\'s chicken sweet potato mash and tomato fusilli for Granny.', 'Move chicken 1\'s legs to the fridge.'] }],
-        ['Thursday', PORRIDGE, withK(r('crispy-chicken-thighs-butter-beans', { note: 'Use the 2 thighs from chicken 1, straight into the oven. Keep the drumsticks for Ted.' })), TOM_FRUIT[3], { jobs: ['Move chicken 2\'s legs to the fridge.'] }],
-        ['Friday', YOG, withK(r('curried-coconut-chicken-rice', { note: 'Use the legs from chicken 2, boned. Set aside Ted\'s portion before the chilli oil goes on.', serves: 2 })), TOM_FRUIT[4], { jobs: [] }]
+        ['Wednesday', YOG, withK(r('chicken-vegetable-egg-fried-rice', { note: 'Use the 2 breasts from chicken 1. Cook and cool the rice in the morning.' })), TOM_FRUIT[2], { jobs: ['Cook the rice and cool it.', 'Move chicken 1\'s legs to the fridge.'] }],
+        ['Thursday', PORRIDGE, withK(r('crispy-chicken-thighs-butter-beans', { note: 'Use the 2 thighs from chicken 1, straight into the oven.' })), TOM_FRUIT[3], { jobs: ['Move chicken 2\'s legs to the fridge.'] }],
+        ['Friday', YOG, withK(r('curried-coconut-chicken-rice', { note: 'Use the legs from chicken 2, boned.', serves: 2 })), TOM_FRUIT[4], { jobs: [] }]
       ],
       boxes: [Object.assign({}, TOM_BOXES[0], { list: TOM_BOXES[0].list.slice(0, 2) }), TOM_BOXES[1], TOM_BOXES[3]]
     }
