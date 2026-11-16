@@ -188,25 +188,10 @@ const TED_NOV = {
   }]
 };
 
-// Weekdays only. Tom and Sophie and Ted for Monday to Friday.
+// Weekdays only. Tom and Sophie, Monday to Friday.
 const NOV16 = {
   id: '2026-11-16', start: '2026-11-16', weekdays: true, title: 'Week of 16 November',
   people: [
-    {
-      name: 'Ted', serves: 1,
-      columns: ['Lunch', 'Dinner or Supper', 'Fruit'],
-      intro: 'Nursery on Monday to Wednesday, so a small supper at home. Granny on Thursday.',
-      rows: [
-        ['Monday', t('At nursery'), t('A little chilli con carne with rice', { note: 'From your tub. Stir in plain yoghurt to cool it.' }), t(FRUIT[0][0])],
-        ['Tuesday', t('At nursery'), t('A little carnitas pork with a soft tortilla, avocado and cucumber', { note: 'From your tub.' }), t(FRUIT[0][1])],
-        ['Wednesday', t('At nursery'), r('egg-fried-rice', { note: 'Cook 40g of dry rice with your rice. Leave out the soy sauce.' }), t(FRUIT[0][2])],
-        ['Thursday', r('chicken-sweet-potato-mash', { note: 'With Granny. Made on Wednesday evening.' }), r('tomato-fusilli', { note: 'With Granny. Made on Wednesday evening.' }), t(FRUIT[0][3])],
-        ['Friday', r('eggy-crumpet'), t('A little curried coconut chicken and rice', { note: 'Take his portion before the chilli oil goes on.' }), t(FRUIT[0][4])]
-      ],
-      boxes: [
-        { title: 'Thursday with Granny', text: 'Reheat the chicken mash and the fusilli until piping hot, then let them cool. Pack a yoghurt and the fruit.' }
-      ]
-    },
     {
       name: 'Tom & Sophie', serves: 2,
       columns: ['Breakfast', 'Dinner', 'Fruit and Nuts', 'Jobs'],
