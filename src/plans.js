@@ -194,14 +194,14 @@ const NOV16 = {
   people: [
     {
       name: 'Tom & Sophie', serves: 2,
-      columns: ['Dinner', 'Jobs'],
-      intro: 'Dinners for Monday to Friday. Buy 2 whole chickens. On Sunday, joint chicken 1 into 2 breasts and 2 legs and freeze them. Joint chicken 2 into a crown and 2 legs, roast the crown with Sunday\'s dinner and freeze the legs. Also move a tub of chilli to the fridge.',
+      columns: ['Dinner'],
+      intro: 'Dinners for Monday to Friday, from 2 whole chickens.',
       rows: [
-        ['Monday', t('Chilli con carne', Object.assign({ note: 'From the freezer, reheated in the oven.' }, k(720, 580, '350g chilli, 230g cooked rice from 75g dry'))), { jobs: ['Move a tub of carnitas to the fridge.'] }],
-        ['Tuesday', withK(r('carnitas-tacos', { note: 'From the freezer.' })), { jobs: ['Move chicken 1\'s breasts to the fridge.'] }],
-        ['Wednesday', withK(r('chicken-vegetable-egg-fried-rice', { note: 'Use the 2 breasts from chicken 1. Cook and cool the rice in the morning.' })), { jobs: ['Cook the rice and cool it.', 'Move chicken 1\'s legs to the fridge.'] }],
-        ['Thursday', withK(r('crispy-chicken-thighs-butter-beans', { note: 'Use the 2 thighs from chicken 1, straight into the oven.' })), { jobs: ['Move chicken 2\'s legs to the fridge.'] }],
-        ['Friday', withK(r('curried-coconut-chicken-rice', { note: 'Use the legs from chicken 2, boned.', serves: 2 })), { jobs: [] }]
+        ['Monday', t('Chilli con carne', Object.assign({ note: 'From the freezer, reheated in the oven.' }, k(720, 580, '350g chilli, 230g cooked rice from 75g dry')))],
+        ['Tuesday', withK(r('carnitas-tacos', { note: 'From the freezer.' }))],
+        ['Wednesday', withK(r('chicken-vegetable-egg-fried-rice', { note: 'Use the 2 breasts from chicken 1. Cook and cool the rice in the morning.' }))],
+        ['Thursday', withK(r('crispy-chicken-thighs-butter-beans', { note: 'Use the 2 thighs from chicken 1, straight into the oven.' }))],
+        ['Friday', withK(r('curried-coconut-chicken-rice', { note: 'Use the legs from chicken 2, boned.', serves: 2 }))]
       ]
     }
   ]
@@ -213,13 +213,13 @@ const NOV23 = {
   people: [
     {
       name: 'Tom & Sophie', serves: 2,
-      columns: ['Dinner', 'Jobs'],
-      intro: 'Dinners for Monday to Thursday, from 2 whole chickens. On Sunday, joint each chicken into 2 breasts, 2 legs and a carcass. Keep chicken 1 in the fridge and freeze chicken 2.',
+      columns: ['Dinner'],
+      intro: 'Dinners for Monday to Thursday, from 2 whole chickens.',
       rows: [
-        ['Monday', withK(r('curried-coconut-chicken-rice', { note: 'Use the 2 legs of chicken 1, boned. Cook 300g of dry rice, one half for the curry and one half for Tuesday.', serves: 2 })), { jobs: ['Cool half the rice within an hour and put it in the fridge.'] }],
-        ['Tuesday', withK(r('chicken-vegetable-egg-fried-rice', { note: 'Use the 2 breasts of chicken 1 and Monday\'s cold rice.' })), { jobs: ['Move the legs of chicken 2 to the fridge.'] }],
-        ['Wednesday', withK(r('crispy-chicken-thighs-butter-beans', { note: 'Use the 2 legs of chicken 2, straight into the oven.' })), { jobs: ['Move the breasts of chicken 2 to the fridge.'] }],
-        ['Thursday', t('Stir-fried chicken with cashews and broccoli', { note: 'Use the 2 breasts of chicken 2. From Eat by Nigel Slater, page 343. Serve with rice.' }), { jobs: [] }]
+        ['Monday', withK(r('curried-coconut-chicken-rice', { note: 'Use the 2 legs of chicken 1, boned. Cook 300g of dry rice, one half for the curry and one half for Tuesday.', serves: 2 }))],
+        ['Tuesday', withK(r('chicken-vegetable-egg-fried-rice', { note: 'Use the 2 breasts of chicken 1 and Monday\'s cold rice.' }))],
+        ['Wednesday', withK(r('crispy-chicken-thighs-butter-beans', { note: 'Use the 2 legs of chicken 2, straight into the oven.' }))],
+        ['Thursday', t('Stir-fried chicken with cashews and broccoli', { note: 'Use the 2 breasts of chicken 2. From Eat by Nigel Slater, page 343. Serve with rice.' })]
       ]
     }
   ]
