@@ -207,6 +207,24 @@ const NOV16 = {
   ]
 };
 
+// Monday to Thursday, built around 2 whole chickens. Dinners only.
+const NOV23 = {
+  id: '2026-11-23', start: '2026-11-23', weekdays: true, days: 4, title: 'Week of 23 November',
+  people: [
+    {
+      name: 'Tom & Sophie', serves: 2,
+      columns: ['Dinner', 'Jobs'],
+      intro: 'Dinners for Monday to Thursday, from 2 whole chickens. On Sunday, joint each chicken into 2 breasts, 2 legs and a carcass. Keep chicken 1 in the fridge and freeze chicken 2.',
+      rows: [
+        ['Monday', withK(r('curried-coconut-chicken-rice', { note: 'Use the 2 legs of chicken 1, boned. Cook 300g of dry rice, one half for the curry and one half for Tuesday.', serves: 2 })), { jobs: ['Cool half the rice within an hour and put it in the fridge.'] }],
+        ['Tuesday', withK(r('chicken-vegetable-egg-fried-rice', { note: 'Use the 2 breasts of chicken 1 and Monday\'s cold rice.' })), { jobs: ['Move the legs of chicken 2 to the fridge.'] }],
+        ['Wednesday', withK(r('crispy-chicken-thighs-butter-beans', { note: 'Use the 2 legs of chicken 2, straight into the oven.' })), { jobs: ['Move the breasts of chicken 2 to the fridge.'] }],
+        ['Thursday', t('Stir-fried chicken with cashews and broccoli', { note: 'Use the 2 breasts of chicken 2. From Eat by Nigel Slater, page 343. Serve with rice.' }), { jobs: [] }]
+      ]
+    }
+  ]
+};
+
 module.exports = [
   week({
     n: 0, id: '2026-10-05', title: 'Week of 5 October',
@@ -261,5 +279,6 @@ module.exports = [
     saturday: r('sausage-mash-gravy-cabbage'), saturdayMeat: 'sausages'
   }),
   TED_NOV,
-  NOV16
+  NOV16,
+  NOV23
 ];
