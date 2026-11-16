@@ -194,16 +194,15 @@ const NOV16 = {
   people: [
     {
       name: 'Tom & Sophie', serves: 2,
-      columns: ['Breakfast', 'Dinner', 'Fruit and Nuts', 'Jobs'],
+      columns: ['Dinner', 'Jobs'],
       intro: 'Dinners for Monday to Friday. Buy 2 whole chickens. On Sunday, joint chicken 1 into 2 breasts and 2 legs and freeze them. Joint chicken 2 into a crown and 2 legs, roast the crown with Sunday\'s dinner and freeze the legs. Also move a tub of chilli to the fridge.',
       rows: [
-        ['Monday', YOG, t('Chilli con carne', Object.assign({ note: 'From the freezer, reheated in the oven.' }, k(720, 580, '350g chilli, 230g cooked rice from 75g dry'))), TOM_FRUIT[0], { jobs: ['Move a tub of carnitas to the fridge.'] }],
-        ['Tuesday', PORRIDGE, withK(r('carnitas-tacos', { note: 'From the freezer.' })), TOM_FRUIT[1], { jobs: ['Move chicken 1\'s breasts to the fridge.'] }],
-        ['Wednesday', YOG, withK(r('chicken-vegetable-egg-fried-rice', { note: 'Use the 2 breasts from chicken 1. Cook and cool the rice in the morning.' })), TOM_FRUIT[2], { jobs: ['Cook the rice and cool it.', 'Move chicken 1\'s legs to the fridge.'] }],
-        ['Thursday', PORRIDGE, withK(r('crispy-chicken-thighs-butter-beans', { note: 'Use the 2 thighs from chicken 1, straight into the oven.' })), TOM_FRUIT[3], { jobs: ['Move chicken 2\'s legs to the fridge.'] }],
-        ['Friday', YOG, withK(r('curried-coconut-chicken-rice', { note: 'Use the legs from chicken 2, boned.', serves: 2 })), TOM_FRUIT[4], { jobs: [] }]
-      ],
-      boxes: [Object.assign({}, TOM_BOXES[0], { list: TOM_BOXES[0].list.slice(0, 2) }), TOM_BOXES[1], TOM_BOXES[3]]
+        ['Monday', t('Chilli con carne', Object.assign({ note: 'From the freezer, reheated in the oven.' }, k(720, 580, '350g chilli, 230g cooked rice from 75g dry'))), { jobs: ['Move a tub of carnitas to the fridge.'] }],
+        ['Tuesday', withK(r('carnitas-tacos', { note: 'From the freezer.' })), { jobs: ['Move chicken 1\'s breasts to the fridge.'] }],
+        ['Wednesday', withK(r('chicken-vegetable-egg-fried-rice', { note: 'Use the 2 breasts from chicken 1. Cook and cool the rice in the morning.' })), { jobs: ['Cook the rice and cool it.', 'Move chicken 1\'s legs to the fridge.'] }],
+        ['Thursday', withK(r('crispy-chicken-thighs-butter-beans', { note: 'Use the 2 thighs from chicken 1, straight into the oven.' })), { jobs: ['Move chicken 2\'s legs to the fridge.'] }],
+        ['Friday', withK(r('curried-coconut-chicken-rice', { note: 'Use the legs from chicken 2, boned.', serves: 2 })), { jobs: [] }]
+      ]
     }
   ]
 };
