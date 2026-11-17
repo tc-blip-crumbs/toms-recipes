@@ -6,7 +6,7 @@ const t = (text, extra) => Object.assign({ t: text }, extra || {});
 const k = (kcal, g, parts) => ({ kcal, g, parts });
 const KCAL = {
   'red-wine-burnt-onion-beef': k(900, 640, '550g beef stew, 90g butter beans'),
-  'carnitas-tacos': k(720, 290, '150g pork, 3 small tortillas weighing 90g, 50g onion, coriander and lime'),
+  'carnitas-tacos': k(800, 350, '150g pork, 3 small tortillas weighing 90g, 60g black beans, 50g onion, coriander and lime'),
   'red-lentil-curry': k(770, 580, '350g curry, 230g cooked rice from 75g dry'),
   'batalis-bolognese': k(950, 530, '320g sauce, 200g cooked pasta from 80g dry, 7g Parmesan'),
   'pork-larb': k(700, 500, '170g cooked pork, 230g cooked rice from 75g dry, 100g lettuce and herbs'),

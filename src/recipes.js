@@ -131,6 +131,7 @@ module.exports = [
     ]},
     { name: 'For the Tacos', serve: true, serves: 8, items: [
       { id: 'tortillas', qty: 24, name: 'small flour or corn tortilla', plural: 'small flour or corn tortillas', scale: 'wholeUp', ref: 'tortillas', chip: 'tortillas' },
+      { id: 'blackbeans', qty: 2, unit: 'tin', tinSize: 400, name: 'black beans', prep: 'drained and rinsed', scale: 'tin', ref: 'black beans' },
       { id: 'redonion', qty: 2, name: 'red onion', plural: 'red onions', prep: 'finely chopped', scale: 'halve', ref: 'red onion' },
       { id: 'coriander', qty: 30, unit: 'g', name: 'fresh coriander', prep: 'chopped', scale: 'weight', ref: 'coriander', chip: 'coriander' },
       { id: 'limes', qty: 4, name: 'lime', plural: 'limes', prep: 'cut into wedges', scale: 'halve', ref: 'limes' }
@@ -142,8 +143,9 @@ module.exports = [
     { text: 'Add the onion, garlic, jalapeño and orange juice. Cover and cook on low for 9 to 10 hours, or on high for 6 hours, until the pork falls apart.', uses: ['onion', 'garlic', 'jalapeno', 'orange'] },
     { text: 'Lift the pork onto a board and shred it with two forks, keeping all the liquid in the slow cooker. If it resists, cook it for another 30 minutes.', uses: [] },
     { text: 'Heat the air fryer to 200°C. Toss the pork with a few spoonfuls of the cooking liquid and spread it over the baking pan and cook for 8 to 10 minutes, stirring halfway, until browned at the edges. Drizzle over more of the liquid before serving.', uses: [] },
+    { text: 'Put the black beans in a small pan with 4 tablespoons of the cooking liquid. Warm over a medium heat for 5 minutes, pressing a few beans against the side of the pan with a spoon.', uses: ['blackbeans'] },
     { text: 'Warm the tortillas in a dry frying pan for 20 seconds on each side.', uses: ['tortillas'] },
-    { text: 'Fill the tortillas with the pork and top with the red onion and coriander. Serve with the limes for squeezing.', uses: ['redonion', 'coriander', 'limes'] }
+    { text: 'Fill the tortillas with the pork and the black beans and top with the red onion and coriander. Serve with the limes for squeezing.', uses: ['redonion', 'coriander', 'limes'] }
   ],
   notes: [
     { title: 'Joint Size', text: 'One batch is a 2.5kg joint, which makes about 10 servings. Use the Batch buttons for other joints, such as ½× for about 1.25kg. A joint of 1 to 1.5kg needs about 8 hours on low.' },
