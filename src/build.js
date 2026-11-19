@@ -363,6 +363,25 @@ ${foot}<script src="/assets/cookbooks-page.js"></script>
 `;
 }
 
+// Puts the meal plan pages behind the diary password. The page keeps its content, which the script reveals after the password is entered.
+function gate(html) {
+  const enc = fs.readFileSync(path.join(__dirname, 'diary.enc.json'), 'utf8').trim();
+  const form = `<form class="diary-form gate-form" id="gate-form" hidden>
+    <h1>Meal Plans</h1>
+    <label for="gate-pw">Password</label>
+    <input id="gate-pw" name="password" type="password" autocomplete="current-password" required>
+    <button type="submit">Unlock</button>
+    <p class="diary-msg" aria-live="polite"></p>
+  </form>
+<script type="application/json" id="gate-data">${enc}</script>
+`;
+  return html
+    .replace('<head>', '<head>\n<meta name="robots" content="noindex">')
+    .replace(/<div class="appbar">/, '<div class="appbar gate-hide">')
+    .replace(/<main id="main" class="/, form + '<main id="main" class="gate-hide ')
+    .replace('</body>', '<script src="/assets/plan-gate.js"></script>\n</body>');
+}
+
 function diaryPage() {
   const enc = fs.readFileSync(path.join(__dirname, 'diary.enc.json'), 'utf8').trim();
   return head({ title: `Food Diary | ${NAME}`, description: 'Food diary.', canonical: `${SITE}/diary/`, nav: 'diary', extra: '<meta name="robots" content="noindex">\n' }) + `
@@ -424,7 +443,7 @@ ${foot}</body>
 // Write the site
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.mkdirSync(path.join(DIST, 'assets'), { recursive: true });
-['site.css', 'scale.js', 'render.js', 'recipe-page.js', 'index-page.js', 'plan-page.js', 'diary-page.js', 'cookbooks-page.js', 'cookbooks.json'].forEach(f => fs.copyFileSync(path.join(__dirname, f), path.join(DIST, 'assets', f)));
+['site.css', 'scale.js', 'render.js', 'recipe-page.js', 'index-page.js', 'plan-page.js', 'diary-page.js', 'plan-gate.js', 'cookbooks-page.js', 'cookbooks.json'].forEach(f => fs.copyFileSync(path.join(__dirname, f), path.join(DIST, 'assets', f)));
 fs.mkdirSync(path.join(DIST, 'assets', 'illustrations'), { recursive: true });
 fs.readdirSync(ART_DIR).forEach(f => fs.copyFileSync(path.join(ART_DIR, f), path.join(DIST, 'assets', 'illustrations', f)));
 fs.writeFileSync(path.join(DIST, 'index.html'), indexPage());
@@ -433,22 +452,22 @@ recipes.forEach(r => {
   fs.writeFileSync(path.join(DIST, 'recipes', r.slug, 'index.html'), recipePage(r));
 });
 fs.mkdirSync(path.join(DIST, 'plans', 'teds-food-guide'), { recursive: true });
-fs.writeFileSync(path.join(DIST, 'plans', 'index.html'), plansIndex());
-fs.writeFileSync(path.join(DIST, 'plans', 'teds-food-guide', 'index.html'), guidePage());
+fs.writeFileSync(path.join(DIST, 'plans', 'index.html'), gate(plansIndex()));
+fs.writeFileSync(path.join(DIST, 'plans', 'teds-food-guide', 'index.html'), gate(guidePage()));
 fs.mkdirSync(path.join(DIST, 'cookbooks'), { recursive: true });
 fs.writeFileSync(path.join(DIST, 'cookbooks', 'index.html'), cookbooksPage());
 fs.mkdirSync(path.join(DIST, 'diary'), { recursive: true });
 fs.writeFileSync(path.join(DIST, 'diary', 'index.html'), diaryPage());
 fs.mkdirSync(path.join(DIST, 'shop'), { recursive: true });
-fs.writeFileSync(path.join(DIST, 'shop', 'index.html'), shopPage());
-plans.forEach(p => { fs.mkdirSync(path.join(DIST, 'plans', p.id), { recursive: true }); fs.writeFileSync(path.join(DIST, 'plans', p.id, 'index.html'), planPage(p)); });
+fs.writeFileSync(path.join(DIST, 'shop', 'index.html'), gate(shopPage()));
+plans.forEach(p => { fs.mkdirSync(path.join(DIST, 'plans', p.id), { recursive: true }); fs.writeFileSync(path.join(DIST, 'plans', p.id, 'index.html'), gate(planPage(p))); });
 fs.readdirSync(path.join(__dirname, '..', 'icons')).forEach(f => fs.copyFileSync(path.join(__dirname, '..', 'icons', f), path.join(DIST, f)));
 fs.writeFileSync(path.join(DIST, 'manifest.webmanifest'), JSON.stringify({ name: NAME, short_name: 'Recipes', start_url: BASE + '/', scope: BASE + '/', display: 'browser', background_color: '#f4f3ef', theme_color: '#f4f3ef',
   icons: [{ src: BASE + '/icon-192.png', sizes: '192x192', type: 'image/png' }, { src: BASE + '/icon-512.png', sizes: '512x512', type: 'image/png' }, { src: BASE + '/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }] }));
 fs.writeFileSync(path.join(DIST, 'favicon.svg'), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#a3321c"/><text x="32" y="44" font-family="Georgia,serif" font-size="34" text-anchor="middle" fill="#fff">T</text></svg>');
 fs.writeFileSync(path.join(DIST, '_redirects'), '/plans/2026-09-28/*  /plans/  301\n/recipes/hainanese-chicken-rice/*  /recipes/hainanish-soy-poached-chicken/  301\n/recipes/sausage-potato-traybake/*  /recipes/sausage-mash-gravy-cabbage/  301\n');
 fs.writeFileSync(path.join(DIST, 'robots.txt'), `User-agent: *\n${INDEXABLE ? 'Allow: /' : 'Allow: /'}\nSitemap: ${SITE}/sitemap.xml\n`);
-fs.writeFileSync(path.join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>${SITE}/</loc></url>\n${recipes.map(r => `<url><loc>${SITE}/recipes/${r.slug}/</loc></url>`).join('\n')}\n<url><loc>${SITE}/plans/</loc></url>\n${plans.map(p => `<url><loc>${SITE}/plans/${p.id}/</loc></url>`).join('\n')}\n</urlset>\n`);
+fs.writeFileSync(path.join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>${SITE}/</loc></url>\n${recipes.map(r => `<url><loc>${SITE}/recipes/${r.slug}/</loc></url>`).join('\n')}\n</urlset>\n`);
 fs.writeFileSync(path.join(DIST, '404.html'), head({ title: 'Page not found | ' + NAME, description: 'Page not found', canonical: SITE + '/' }) +
   `<main id="main" class="wrap intro"><h1>That page isn't here</h1><p>The recipe may have moved. <a href="/">See all recipes</a>.</p></main>${foot}</body></html>`);
 // Old addresses that now live elsewhere.
