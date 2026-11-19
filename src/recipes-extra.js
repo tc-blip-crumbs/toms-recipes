@@ -871,7 +871,7 @@ module.exports = [
   source: { name: 'Copied from the Renourish + Thrive Chicken and Vegetable Soup at Sainsbury\'s', url: 'https://www.sainsburys.co.uk/gol-ui/product/renourish-thrive-500g-chicken-and-vegetable-high-protein-high-fibre-soup' },
   groups: [
     { name: 'For the Soup', items: [
-      { id: 'oil', qty: 2, unit: 'tsp', name: 'olive oil', scale: 'spoon', liquid: true, ref: 'olive oil' },
+      { id: 'oil', qty: 1, unit: 'tsp', name: 'olive oil', scale: 'spoon', liquid: true, ref: 'olive oil' },
       { id: 'onion', qty: 50, unit: 'g', name: 'onion', prep: 'finely chopped', scale: 'weight', ref: 'onion' },
       { id: 'carrot', qty: 80, unit: 'g', name: 'carrot', prep: 'finely chopped', scale: 'weight', ref: 'carrot' },
       { id: 'leek', qty: 30, unit: 'g', name: 'leek', prep: 'finely sliced', scale: 'weight', ref: 'leek' },
@@ -883,12 +883,12 @@ module.exports = [
       { id: 'cumin', qty: 0.25, unit: 'tsp', name: 'ground cumin', scale: 'spoon', ref: 'cumin' },
       { id: 'pepper', qty: 0.25, unit: 'tsp', name: 'black pepper', scale: 'spoon', ref: 'pepper' },
       { id: 'mace', phrase: 'A pinch of ground mace', scale: 'fixed', ref: 'mace', chip: 'mace' },
-      { id: 'lentils', qty: 60, unit: 'g', name: 'red lentils', prep: 'rinsed', scale: 'weight', ref: 'red lentils' },
+      { id: 'lentils', qty: 90, unit: 'g', name: 'red lentils', prep: 'rinsed', scale: 'weight', ref: 'red lentils' },
       { id: 'tomatoes', qty: 120, unit: 'g', name: 'tomatoes', prep: 'chopped', scale: 'weight', ref: 'tomatoes' },
-      { id: 'bay', qty: 1, name: 'bay leaf', plural: 'bay leaves', scale: 'whole', ref: 'bay leaf' },
+      { id: 'bay', phrase: 'A bay leaf', scale: 'fixed', ref: 'bay leaf', chip: 'bay leaf' },
       { id: 'water', qty: 600, unit: 'ml', name: 'cold water', scale: 'weight', ref: 'water' },
       { id: 'stock', qty: 100, unit: 'ml', name: 'low-salt chicken stock', scale: 'weight', ref: 'chicken stock' },
-      { id: 'salt', qty: 0.75, unit: 'tsp', name: 'sea salt', scale: 'spoon', ref: 'salt' },
+      { id: 'salt', qty: 0.5, unit: 'tsp', name: 'sea salt', scale: 'spoon', ref: 'salt' },
       { id: 'chicken', qty: 75, unit: 'g', name: 'cooked chicken meat from a whole chicken', prep: 'skin removed, shredded', scale: 'weight', ref: 'chicken' },
       { id: 'cornflour', qty: 1, unit: 'tbsp', name: 'cornflour', scale: 'spoon', ref: 'cornflour' },
       { id: 'cold', qty: 2, unit: 'tbsp', name: 'cold water', scale: 'spoon', liquid: true, ref: 'water', chip: 'cold water' },
@@ -905,8 +905,8 @@ module.exports = [
   ],
   notes: [
     { title: 'More Chicken', text: 'The shop-bought soup is 5% chicken. This version has twice as much, about 40g of cooked chicken a serving. Take the meat from a roast or poached whole chicken, from the breast, legs and thighs, and use the carcass for the low-salt chicken stock.' },
-    { title: 'Storing', text: 'Cool the soup within an hour and keep it in the fridge for up to 2 days or in the freezer for 3 months. Reheat it once, until piping hot.' },
-    { title: 'Calories', text: 'About 240 calories a serving.' }
+    { title: 'Storing', text: 'Use chicken that was cooked and chilled within the last 2 days. Cool the soup within an hour and keep it in the fridge for up to 2 days or in the freezer for 3 months. Thaw frozen soup in the fridge and reheat each portion once, until piping hot.' },
+    { title: 'Calories', text: 'About 285 calories a serving.' }
   ]
 },
 {
