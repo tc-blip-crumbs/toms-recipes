@@ -200,8 +200,8 @@ const NOV16 = {
         ['Monday', t('Chilli con carne', Object.assign({ note: 'From the freezer, reheated in the oven.' }, k(720, 580, '350g chilli, 230g cooked rice from 75g dry')))],
         ['Tuesday', withK(r('chicken-vegetable-egg-fried-rice', { note: 'Use the 2 breasts from chicken 1. Cook the rice and let it cool before frying.' }))],
         ['Wednesday', withK(r('carnitas-tacos', { note: 'From the freezer.' }))],
-        ['Thursday', withK(r('crispy-chicken-thighs-butter-beans', { note: 'Use the 2 thighs from chicken 1, straight into the oven.' }))],
-        ['Friday', withK(r('curried-coconut-chicken-rice', { note: 'Use the legs from chicken 2, boned.', serves: 2 }))]
+        ['Thursday', withK(r('curried-coconut-chicken-rice', { note: 'Use the legs from chicken 2, boned.', serves: 2 }))],
+        ['Friday', withK(r('crispy-chicken-thighs-butter-beans', { note: 'Use the 2 thighs from chicken 1, straight into the oven.' }))]
       ]
     }
   ]
