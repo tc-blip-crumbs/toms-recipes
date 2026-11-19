@@ -497,5 +497,4 @@ body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 
 
 /* Meal plan pages stay hidden until the password is entered. */
 html:not(.unlocked) .gate-hide { display: none !important; }
-.gate-form { margin-top: 24px; }
-.gate-form[hidden] { display: none; }
+.gate-wrap[hidden] { display: none; }

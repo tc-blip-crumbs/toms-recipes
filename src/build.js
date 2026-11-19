@@ -366,13 +366,15 @@ ${foot}<script src="/assets/cookbooks-page.js"></script>
 // Puts the meal plan pages behind the diary password. The page keeps its content, which the script reveals after the password is entered.
 function gate(html) {
   const enc = fs.readFileSync(path.join(__dirname, 'diary.enc.json'), 'utf8').trim();
-  const form = `<form class="diary-form gate-form" id="gate-form" hidden>
-    <h1>Meal Plans</h1>
+  const form = `<div class="wrap gate-wrap" id="gate-box" hidden>
+  <div class="intro"><h1>Meal Plans</h1></div>
+  <form class="diary-form" id="gate-form">
     <label for="gate-pw">Password</label>
     <input id="gate-pw" name="password" type="password" autocomplete="current-password" required>
     <button type="submit">Unlock</button>
     <p class="diary-msg" aria-live="polite"></p>
   </form>
+</div>
 <script type="application/json" id="gate-data">${enc}</script>
 `;
   return html

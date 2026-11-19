@@ -1,7 +1,7 @@
 // Shows the meal plan pages only after the diary password has been entered.
 // The password check decrypts the diary data held in the page, so both pages share one password.
 (function () {
-  var root = document.documentElement, form = document.getElementById('gate-form');
+  var root = document.documentElement, box = document.getElementById('gate-box'), form = document.getElementById('gate-form');
   var enc = JSON.parse(document.getElementById('gate-data').textContent);
   var STORE = 'diary-key-' + enc.salt.slice(0, 8);
   function bytes(s) { var b = atob(s), a = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) a[i] = b.charCodeAt(i); return a; }
@@ -13,11 +13,11 @@
     });
   }
   function open(key) { return crypto.subtle.decrypt({ name: 'AES-GCM', iv: bytes(enc.iv) }, key, bytes(enc.data)); }
-  function unlock() { root.classList.add('unlocked'); form.hidden = true; }
+  function unlock() { root.classList.add('unlocked'); box.hidden = true; }
   var saved = load();
   if (saved) {
-    crypto.subtle.importKey('raw', bytes(saved), { name: 'AES-GCM' }, true, ['decrypt']).then(open).then(unlock).catch(function () { save(null); form.hidden = false; });
-  } else form.hidden = false;
+    crypto.subtle.importKey('raw', bytes(saved), { name: 'AES-GCM' }, true, ['decrypt']).then(open).then(unlock).catch(function () { save(null); box.hidden = false; });
+  } else box.hidden = false;
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
     var msg = form.querySelector('.diary-msg'), btn = form.querySelector('button');
