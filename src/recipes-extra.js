@@ -889,7 +889,7 @@ module.exports = [
       { id: 'water', qty: 600, unit: 'ml', name: 'cold water', scale: 'weight', ref: 'water' },
       { id: 'stock', qty: 100, unit: 'ml', name: 'low-salt chicken stock', scale: 'weight', ref: 'chicken stock' },
       { id: 'salt', qty: 0.75, unit: 'tsp', name: 'sea salt', scale: 'spoon', ref: 'salt' },
-      { id: 'chicken', qty: 100, unit: 'g', name: 'chicken breast', prep: 'cut into 1cm pieces', scale: 'weight', ref: 'chicken' },
+      { id: 'chicken', qty: 75, unit: 'g', name: 'cooked chicken meat from a whole chicken', prep: 'skin removed, shredded', scale: 'weight', ref: 'chicken' },
       { id: 'cornflour', qty: 1, unit: 'tbsp', name: 'cornflour', scale: 'spoon', ref: 'cornflour' },
       { id: 'cold', qty: 2, unit: 'tbsp', name: 'cold water', scale: 'spoon', liquid: true, ref: 'water', chip: 'cold water' },
       { id: 'parsley', qty: 1, unit: 'tbsp', name: 'fresh parsley', prep: 'finely chopped', scale: 'spoon', ref: 'parsley' }
@@ -899,14 +899,14 @@ module.exports = [
     { text: 'Heat the olive oil in a large saucepan over a medium heat. Fry the onion, carrot and leek for 5 minutes, until soft.', uses: ['oil', 'onion', 'carrot', 'leek'] },
     { text: 'Stir in the garlic, tomato purée, paprika, herbes de Provence, dried oregano, ground cumin, black pepper and ground mace. Cook for 1 minute, until fragrant.', uses: ['garlic', 'puree', 'paprika', 'herbes', 'oregano', 'cumin', 'pepper', 'mace'] },
     { text: 'Add the red lentils, tomatoes, bay leaf, cold water, low-salt chicken stock and sea salt. Bring to the boil, then simmer over a medium-low heat with the lid half on for 15 minutes, until the lentils are soft.', uses: ['lentils', 'tomatoes', 'bay', 'water', 'stock', 'salt'] },
-    { text: 'Add the chicken breast and simmer over a medium-low heat for 8 minutes, until the chicken is white all the way through.', uses: ['chicken'] },
+    { text: 'Add the cooked chicken meat from a whole chicken and simmer over a medium-low heat for 3 minutes, until piping hot.', uses: ['chicken'] },
     { text: 'Mix the cornflour with the cold water to a smooth paste. Stir it into the soup and simmer for 2 minutes, until the soup thickens, then take out the bay leaf.', uses: ['cornflour', 'cold'] },
     { text: 'Stir in the fresh parsley and serve straight away.', uses: ['parsley'] }
   ],
   notes: [
-    { title: 'More Chicken', text: 'The shop-bought soup is 5% chicken. This version has twice as much, about 50g of chicken breast a serving.' },
+    { title: 'More Chicken', text: 'The shop-bought soup is 5% chicken. This version has twice as much, about 40g of cooked chicken a serving. Take the meat from a roast or poached whole chicken, from the breast, legs and thighs, and use the carcass for the low-salt chicken stock.' },
     { title: 'Storing', text: 'Cool the soup within an hour and keep it in the fridge for up to 2 days or in the freezer for 3 months. Reheat it once, until piping hot.' },
-    { title: 'Calories', text: 'About 230 calories a serving.' }
+    { title: 'Calories', text: 'About 240 calories a serving.' }
   ]
 },
 {
