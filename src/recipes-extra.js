@@ -865,6 +865,51 @@ module.exports = [
   ]
 },
 {
+  slug: 'chicken-vegetable-lentil-soup', title: 'Chicken, Vegetable and Lentil Soup', short: 'Chicken and lentil soup',
+  description: 'Red lentils, chicken, tomato, carrot, onion and leek simmered in a herby chicken broth, with twice the chicken of the shop-bought soup it copies.',
+  serves: 2, prep: 15, cook: 35, course: 'Lunches', cuisine: 'British', main: 'Chicken', labels: ['Weeknight', 'Freezes well'],
+  source: { name: 'Copied from the Renourish + Thrive Chicken and Vegetable Soup at Sainsbury\'s', url: 'https://www.sainsburys.co.uk/gol-ui/product/renourish-thrive-500g-chicken-and-vegetable-high-protein-high-fibre-soup' },
+  groups: [
+    { name: 'For the Soup', items: [
+      { id: 'oil', qty: 2, unit: 'tsp', name: 'olive oil', scale: 'spoon', liquid: true, ref: 'olive oil' },
+      { id: 'onion', qty: 50, unit: 'g', name: 'onion', prep: 'finely chopped', scale: 'weight', ref: 'onion' },
+      { id: 'carrot', qty: 80, unit: 'g', name: 'carrot', prep: 'finely chopped', scale: 'weight', ref: 'carrot' },
+      { id: 'leek', qty: 30, unit: 'g', name: 'leek', prep: 'finely sliced', scale: 'weight', ref: 'leek' },
+      { id: 'garlic', qty: 2, name: 'garlic clove', plural: 'garlic cloves', prep: 'crushed', scale: 'whole', ref: 'garlic' },
+      { id: 'puree', qty: 1, unit: 'tbsp', name: 'tomato purée', scale: 'spoon', ref: 'tomato purée' },
+      { id: 'paprika', qty: 0.5, unit: 'tsp', name: 'paprika', scale: 'spoon', ref: 'paprika' },
+      { id: 'herbes', qty: 0.5, unit: 'tsp', name: 'herbes de Provence', scale: 'spoon', ref: 'herbes de Provence' },
+      { id: 'oregano', qty: 0.25, unit: 'tsp', name: 'dried oregano', scale: 'spoon', ref: 'oregano' },
+      { id: 'cumin', qty: 0.25, unit: 'tsp', name: 'ground cumin', scale: 'spoon', ref: 'cumin' },
+      { id: 'pepper', qty: 0.25, unit: 'tsp', name: 'black pepper', scale: 'spoon', ref: 'pepper' },
+      { id: 'mace', phrase: 'A pinch of ground mace', scale: 'fixed', ref: 'mace', chip: 'mace' },
+      { id: 'lentils', qty: 60, unit: 'g', name: 'red lentils', prep: 'rinsed', scale: 'weight', ref: 'red lentils' },
+      { id: 'tomatoes', qty: 120, unit: 'g', name: 'tomatoes', prep: 'chopped', scale: 'weight', ref: 'tomatoes' },
+      { id: 'bay', qty: 1, name: 'bay leaf', plural: 'bay leaves', scale: 'whole', ref: 'bay leaf' },
+      { id: 'water', qty: 600, unit: 'ml', name: 'cold water', scale: 'weight', ref: 'water' },
+      { id: 'stock', qty: 100, unit: 'ml', name: 'low-salt chicken stock', scale: 'weight', ref: 'chicken stock' },
+      { id: 'salt', qty: 0.75, unit: 'tsp', name: 'sea salt', scale: 'spoon', ref: 'salt' },
+      { id: 'chicken', qty: 100, unit: 'g', name: 'chicken breast', prep: 'cut into 1cm pieces', scale: 'weight', ref: 'chicken' },
+      { id: 'cornflour', qty: 1, unit: 'tbsp', name: 'cornflour', scale: 'spoon', ref: 'cornflour' },
+      { id: 'cold', qty: 2, unit: 'tbsp', name: 'cold water', scale: 'spoon', liquid: true, ref: 'water', chip: 'cold water' },
+      { id: 'parsley', qty: 1, unit: 'tbsp', name: 'fresh parsley', prep: 'finely chopped', scale: 'spoon', ref: 'parsley' }
+    ]}
+  ],
+  steps: [
+    { text: 'Heat the olive oil in a large saucepan over a medium heat. Fry the onion, carrot and leek for 5 minutes, until soft.', uses: ['oil', 'onion', 'carrot', 'leek'] },
+    { text: 'Stir in the garlic, tomato purée, paprika, herbes de Provence, dried oregano, ground cumin, black pepper and ground mace. Cook for 1 minute, until fragrant.', uses: ['garlic', 'puree', 'paprika', 'herbes', 'oregano', 'cumin', 'pepper', 'mace'] },
+    { text: 'Add the red lentils, tomatoes, bay leaf, cold water, low-salt chicken stock and sea salt. Bring to the boil, then simmer over a medium-low heat with the lid half on for 15 minutes, until the lentils are soft.', uses: ['lentils', 'tomatoes', 'bay', 'water', 'stock', 'salt'] },
+    { text: 'Add the chicken breast and simmer over a medium-low heat for 8 minutes, until the chicken is white all the way through.', uses: ['chicken'] },
+    { text: 'Mix the cornflour with the cold water to a smooth paste. Stir it into the soup and simmer for 2 minutes, until the soup thickens, then take out the bay leaf.', uses: ['cornflour', 'cold'] },
+    { text: 'Stir in the fresh parsley and serve straight away.', uses: ['parsley'] }
+  ],
+  notes: [
+    { title: 'More Chicken', text: 'The shop-bought soup is 5% chicken. This version has twice as much, about 50g of chicken breast a serving.' },
+    { title: 'Storing', text: 'Cool the soup within an hour and keep it in the fridge for up to 2 days or in the freezer for 3 months. Reheat it once, until piping hot.' },
+    { title: 'Calories', text: 'About 230 calories a serving.' }
+  ]
+},
+{
   slug: 'pesto-tagliatelle-lime-garlic-chicken', title: 'Pesto Tagliatelle with Lime and Garlic Chicken', short: 'Pesto tagliatelle',
   description: 'Chicken marinated in lime, garlic and chilli, stir-fried and tossed with fresh tagliatelle in double cream and green pesto.',
   serves: 4, prep: 35, cook: 10, course: 'Dinners', cuisine: 'Italian', main: 'Chicken', labels: ['Weeknight'],
