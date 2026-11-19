@@ -866,7 +866,7 @@ module.exports = [
 },
 {
   slug: 'chicken-vegetable-lentil-soup', title: 'Chicken, Vegetable and Lentil Soup', short: 'Chicken and lentil soup',
-  description: 'Red lentils, chicken, tomato, carrot, onion and leek simmered in a herby chicken broth, with twice the chicken of the shop-bought soup it copies.',
+  description: 'Red lentils, chicken, tomato, carrot, onion, leek and spinach simmered in a herby chicken broth, with twice the chicken of the shop-bought soup it copies.',
   serves: 2, prep: 15, cook: 35, course: 'Lunches', cuisine: 'British', main: 'Chicken', labels: ['Weeknight', 'Freezes well'],
   source: { name: 'Copied from the Renourish + Thrive Chicken and Vegetable Soup at Sainsbury\'s', url: 'https://www.sainsburys.co.uk/gol-ui/product/renourish-thrive-500g-chicken-and-vegetable-high-protein-high-fibre-soup' },
   groups: [
@@ -892,6 +892,7 @@ module.exports = [
       { id: 'chicken', qty: 75, unit: 'g', name: 'cooked chicken meat from a whole chicken', prep: 'skin removed, shredded', scale: 'weight', ref: 'chicken' },
       { id: 'cornflour', qty: 1, unit: 'tbsp', name: 'cornflour', scale: 'spoon', ref: 'cornflour' },
       { id: 'cold', qty: 2, unit: 'tbsp', name: 'cold water', scale: 'spoon', liquid: true, ref: 'water', chip: 'cold water' },
+      { id: 'spinach', qty: 60, unit: 'g', name: 'baby spinach', scale: 'weight', ref: 'spinach' },
       { id: 'parsley', qty: 1, unit: 'tbsp', name: 'fresh parsley', prep: 'finely chopped', scale: 'spoon', ref: 'parsley' }
     ]}
   ],
@@ -901,12 +902,12 @@ module.exports = [
     { text: 'Add the red lentils, tomatoes, bay leaf, cold water, low-salt chicken stock and sea salt. Bring to the boil, then simmer over a medium-low heat with the lid half on for 15 minutes, until the lentils are soft.', uses: ['lentils', 'tomatoes', 'bay', 'water', 'stock', 'salt'] },
     { text: 'Add the cooked chicken meat from a whole chicken and simmer over a medium-low heat for 3 minutes, until piping hot.', uses: ['chicken'] },
     { text: 'Mix the cornflour with the cold water to a smooth paste. Stir it into the soup and simmer for 2 minutes, until the soup thickens, then take out the bay leaf.', uses: ['cornflour', 'cold'] },
-    { text: 'Stir in the fresh parsley and serve straight away.', uses: ['parsley'] }
+    { text: 'Stir in the baby spinach and fresh parsley. Simmer for 1 minute, until the spinach has wilted, then serve straight away.', uses: ['spinach', 'parsley'] }
   ],
   notes: [
     { title: 'More Chicken', text: 'The shop-bought soup is 5% chicken. This version has twice as much, about 40g of cooked chicken a serving. Take the meat from a roast or poached whole chicken, from the breast, legs and thighs, and use the carcass for the low-salt chicken stock.' },
     { title: 'Storing', text: 'Use chicken that was cooked and chilled within the last 2 days. Cool the soup within an hour and keep it in the fridge for up to 2 days or in the freezer for 3 months. Thaw frozen soup in the fridge and reheat each portion once, until piping hot.' },
-    { title: 'Calories', text: 'About 285 calories a serving.' }
+    { title: 'Calories', text: 'About 290 calories a serving.' }
   ]
 },
 {
